@@ -64,8 +64,14 @@ class Client
      * @param string $oauthConsumerKey
      * @param string $oauthConsumerSecret
      */
-    public function __construct(RequestGenerator $requestGenerator, $apiUrl, $oauthAccessToken, $oauthAccessTokenSecret, $oauthConsumerKey, $oauthConsumerSecret)
-    {
+    public function __construct(
+        RequestGenerator $requestGenerator,
+        $apiUrl='',
+        $oauthAccessToken='',
+        $oauthAccessTokenSecret='',
+        $oauthConsumerKey='',
+        $oauthConsumerSecret=''
+    ) {
         $this->requestGenerator = $requestGenerator;
         $this->apiUrl = $apiUrl;
         $this->oauthAccessToken = $oauthAccessToken;
