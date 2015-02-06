@@ -75,6 +75,126 @@ class Client
     }
 
     /**
+     * Update the api url
+     * @param string $apiUrl
+     * @return $this
+     */
+    public function setApiUrl($apiUrl)
+    {
+        $this->apiUrl = $apiUrl;
+
+        //Clean header to rebuild them
+        $this->header = null;
+
+        return $this;
+    }
+
+    /**
+     * Get the api url
+     * @return string
+     */
+    public function getApiUrl()
+    {
+        return $this->apiUrl;
+    }
+
+    /**
+     * Update the OAuth access token
+     * @param string $oauthAccessToken
+     * @return $this
+     */
+    public function setOAuthAccessToken($oauthAccessToken)
+    {
+        $this->oauthAccessToken = $oauthAccessToken;
+
+        //Clean header to rebuild them
+        $this->header = null;
+
+        return $this;
+    }
+
+    /**
+     * Get the OAuth access token
+     * @return string
+     */
+    public function getOAuthAccessToken()
+    {
+        return $this->oauthAccessToken;
+    }
+
+    /**
+     * Update the OAuth access secret token
+     * @param string $oauthConsumerSecret
+     * @return $this
+     */
+    public function setOAuthAccessTokenSecret($oauthConsumerSecret)
+    {
+        $this->oauthConsumerSecret = $oauthConsumerSecret;
+
+        //Clean header to rebuild them
+        $this->header = null;
+
+        return $this;
+    }
+
+    /**
+     * Get the OAuth access secret token
+     * @return string
+     */
+    public function getOAuthAccessTokenSecret()
+    {
+        return $this->oauthConsumerSecret;
+    }
+
+    /**
+     * Update the OAuth consumer key
+     * @param string $oauthConsumerKey
+     * @return $this
+     */
+    public function setOAuthConsumerKey($oauthConsumerKey)
+    {
+        $this->oauthConsumerKey = $oauthConsumerKey;
+
+        //Clean header to rebuild them
+        $this->header = null;
+
+        return $this;
+    }
+
+    /**
+     * Get the OAuth consumer key
+     * @return string
+     */
+    public function getOAuthConsumerKey()
+    {
+        return $this->oauthConsumerKey;
+    }
+
+    /**
+     * Update the OAuth consumer secret
+     * @param string $oauthConsumerSecret
+     * @return $this
+     */
+    public function setOAuthConsumerSecret($oauthConsumerSecret)
+    {
+        $this->oauthConsumerSecret = $oauthConsumerSecret;
+
+        //Clean header to rebuild them
+        $this->header = null;
+
+        return $this;
+    }
+
+    /**
+     * Get the OAuth consumer secret
+     * @return string
+     */
+    public function getOAuthConsumerSecret()
+    {
+        return $this->oauthConsumerSecret;
+    }
+
+    /**
      * Transform an array to HTTP headers OAuth string
      * @param array $oauth
      * @return string
