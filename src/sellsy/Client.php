@@ -252,7 +252,7 @@ class Client
 
     /**
      * Method to perform a request to the api
-     * @param string $requestSettings
+     * @param array $requestSettings
      * @return \stdClass
      */
     public function requestApi($requestSettings)
@@ -260,7 +260,7 @@ class Client
         //Arguments for the Sellsy API
         $this->lastRequest = [
             'request' => 1,
-            'io_mode' =>  'json',
+            'io_mode' => 'json',
             'do_in' => json_encode($requestSettings)
         ];
 
@@ -305,5 +305,194 @@ class Client
         ];
 
         return $this->requestApi($requestSettings);
+    }
+
+    /**
+     * Return collection methods of the api for Accountdatas
+     * @return Collection
+     */
+    public function accountdatas()
+    {
+        return new Collection($this, 'Accountdatas');
+    }
+
+    /**
+     * Return collection methods of the api for AccountPrefs
+     * @return Collection
+     */
+    public function accountPrefs()
+    {
+        return new Collection($this, 'AccountPrefs');
+    }
+
+    /**
+     * Return collection methods of the api for Purchase
+     * @return Collection
+     */
+    public function purchase()
+    {
+        return new Collection($this, 'Purchase');
+    }
+
+    /**
+     * Return collection methods of the api for Agenda
+     * @return Collection
+     */
+    public function agenda()
+    {
+        return new Collection($this, 'Agenda');
+    }
+
+    /**
+     * Return collection methods of the api for Annotations
+     * @return Collection
+     */
+    public function annotations()
+    {
+        return new Collection($this, 'Annotations');
+    }
+
+    /**
+     * Return collection methods of the api for Catalogue
+     * @return Collection
+     */
+    public function catalogue()
+    {
+        return new Collection($this, 'Catalogue');
+    }
+
+    /**
+     * Return collection methods of the api for CustomFields
+     * @return Collection
+     */
+    public function customFields()
+    {
+        return new Collection($this, 'CustomFields');
+    }
+
+    /**
+     * Return collection methods of the api for Client
+     * @return Collection
+     */
+    public function client()
+    {
+        return new Collection($this, 'Client');
+    }
+
+    /**
+     * Return collection methods of the api for Staffs
+     * @return Collection
+     */
+    public function staffs()
+    {
+        return new Collection($this, 'Staffs');
+    }
+
+    /**
+     * Return collection methods of the api for Peoples
+     * @return Collection
+     */
+    public function peoples()
+    {
+        return new Collection($this, 'Peoples');
+    }
+
+    /**
+     * Return collection methods of the api for Document
+     * @return Collection
+     */
+    public function document()
+    {
+        return new Collection($this, 'Document');
+    }
+
+    /**
+     * Return collection methods of the api for Mails
+     * @return Collection
+     */
+    public function mails()
+    {
+        return new Collection($this, 'Mails');
+    }
+
+    /**
+     * Return collection methods of the api for Event
+     * @return Collection
+     */
+    public function event()
+    {
+        return new Collection($this, 'Event');
+    }
+
+    /**
+     * Return collection methods of the api for Expense
+     * @return Collection
+     */
+    public function expense()
+    {
+        return new Collection($this, 'Expense');
+    }
+
+    /**
+     * Return collection methods of the api for Opportunities
+     * @return Collection
+     */
+    public function opportunities()
+    {
+        return new Collection($this, 'Opportunities');
+    }
+
+    /**
+     * Return collection methods of the api for Prospects
+     * @return Collection
+     */
+    public function prospects()
+    {
+        return new Collection($this, 'Prospects');
+    }
+
+    /**
+     * Return collection methods of the api for SmartTags
+     * @return Collection
+     */
+    public function smartTags()
+    {
+        return new Collection($this, 'SmartTags');
+    }
+
+    /**
+     * Return collection methods of the api for Stat
+     * @return Collection
+     */
+    public function stat()
+    {
+        return new Collection($this, 'Stat');
+    }
+
+    /**
+     * Return collection methods of the api for Stock
+     * @return Collection
+     */
+    public function stock()
+    {
+        return new Collection($this, 'Stock');
+    }
+
+    /**
+     * Return collection methods of the api for Support
+     * @return Collection
+     */
+    public function support()
+    {
+        return new Collection($this, 'Support');
+    }
+
+    /**
+     * Return collection methods of the api for Timetracking
+     * @return Collection
+     */
+    public function timetracking()
+    {
+        return new Collection($this, 'Timetracking');
     }
 }
