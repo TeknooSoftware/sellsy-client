@@ -279,7 +279,17 @@ class Client
             ]
         );
 
-        $this->lastAnswer = json_decode($request->execute());
+        $result = $request->execute();
+
+        if (false !== strpos($result, 'oauth_problem')){
+            throw new \RuntimeException($result);
+        }
+
+        $this->lastAnswer = json_decode($result);
+
+        if (!empty($this->lastAnswer) && 'error' == $this->lastAnswer) {
+            throw new \RuntimeException($this->lastAnswer->error);
+        }
 
         return $this->lastAnswer;
     }

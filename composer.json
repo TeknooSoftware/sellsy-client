@@ -3,7 +3,6 @@
     "type": "library",
     "description": "PHP library to use Sellsy API",
     "keywords": ["sellsy", "client", "api", "library", "curl"],
-    "time": "2015-02-01",
     "homepage": "http://teknoo.it/sellsy-client",
     "license": ["MIT","GPL-3.0+"],
     "authors": [
