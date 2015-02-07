@@ -293,7 +293,7 @@ class Client
 
         $this->lastAnswer = json_decode($result);
 
-        if (!empty($this->lastAnswer) && 'error' == $this->lastAnswer) {
+        if (!empty($this->lastAnswer->status) && 'error' == $this->lastAnswer->status) {
             throw new \RuntimeException($this->lastAnswer->error);
         }
 
