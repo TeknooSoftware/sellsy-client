@@ -209,7 +209,7 @@ class Client
     {
         $values = [];
         foreach ($oauth as $key => &$value) {
-            $values[] = '$key="'.rawurlencode($value).'"';
+            $values[] = $key.'="'.rawurlencode($value).'"';
         }
 
         return 'Authorization: OAuth '.implode(', ', $values);
@@ -273,12 +273,12 @@ class Client
         //Generate client request
         $request = $this->requestGenerator->getRequest();
 
+        $request->setMethod('POST');
         //Arguments for the HTTP Client
         $request->setOptionArray(
             [
                 CURLOPT_HTTPHEADER => $this->computeHeaders(),
                 CURLOPT_URL => $this->apiUrl,
-                CURLOPT_POST => true,
                 CURLOPT_POSTFIELDS => $this->lastRequest,
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_SSL_VERIFYPEER => !preg_match("!^https!i",$this->apiUrl)
