@@ -278,7 +278,7 @@ class Client
             [
                 CURLOPT_HTTPHEADER => $this->computeHeaders(),
                 CURLOPT_URL => $this->apiUrl,
-                CURLOPT_POST => 1,
+                CURLOPT_POST => true,
                 CURLOPT_POSTFIELDS => $this->lastRequest,
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_SSL_VERIFYPEER => !preg_match("!^https!i",$this->apiUrl)
