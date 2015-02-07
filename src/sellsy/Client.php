@@ -130,12 +130,12 @@ class Client
 
     /**
      * Update the OAuth access secret token
-     * @param string $oauthConsumerSecret
+     * @param string $oauthAccessTokenSecret
      * @return $this
      */
-    public function setOAuthAccessTokenSecret($oauthConsumerSecret)
+    public function setOAuthAccessTokenSecret($oauthAccessTokenSecret)
     {
-        $this->oauthConsumerSecret = $oauthConsumerSecret;
+        $this->oauthAccessTokenSecret = $oauthAccessTokenSecret;
 
         //Clean header to rebuild them
         $this->header = null;
@@ -149,7 +149,7 @@ class Client
      */
     public function getOAuthAccessTokenSecret()
     {
-        return $this->oauthConsumerSecret;
+        return $this->$oauthAccessTokenSecret;
     }
 
     /**
@@ -222,7 +222,7 @@ class Client
     {
         if (empty($this->header)) {
             //Generate HTTP headers
-            $encodedKey = rawurlencode($this->oauthConsumerSecret) . '&' . rawurlencode($this->oauthAccessTokenSecret);
+            $encodedKey = rawurlencode($this->oauthConsumerSecret).'&'.rawurlencode($this->oauthAccessTokenSecret);
             $oauthParams = [
                 'oauth_consumer_key' => $this->oauthConsumerKey,
                 'oauth_token' => $this->oauthAccessToken,
