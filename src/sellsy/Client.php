@@ -43,11 +43,6 @@ class Client
     /**
      * @var array
      */
-    protected $header;
-
-    /**
-     * @var array
-     */
     protected $lastRequest;
 
     /**
@@ -89,9 +84,6 @@ class Client
     {
         $this->apiUrl = $apiUrl;
 
-        //Clean header to rebuild them
-        $this->header = null;
-
         return $this;
     }
 
@@ -112,9 +104,6 @@ class Client
     public function setOAuthAccessToken($oauthAccessToken)
     {
         $this->oauthAccessToken = $oauthAccessToken;
-
-        //Clean header to rebuild them
-        $this->header = null;
 
         return $this;
     }
@@ -137,9 +126,6 @@ class Client
     {
         $this->oauthAccessTokenSecret = $oauthAccessTokenSecret;
 
-        //Clean header to rebuild them
-        $this->header = null;
-
         return $this;
     }
 
@@ -161,9 +147,6 @@ class Client
     {
         $this->oauthConsumerKey = $oauthConsumerKey;
 
-        //Clean header to rebuild them
-        $this->header = null;
-
         return $this;
     }
 
@@ -184,9 +167,6 @@ class Client
     public function setOAuthConsumerSecret($oauthConsumerSecret)
     {
         $this->oauthConsumerSecret = $oauthConsumerSecret;
-
-        //Clean header to rebuild them
-        $this->header = null;
 
         return $this;
     }
@@ -220,24 +200,20 @@ class Client
      */
     protected function computeHeaders()
     {
-        if (empty($this->header)) {
-            //Generate HTTP headers
-            $encodedKey = rawurlencode($this->oauthConsumerSecret).'&'.rawurlencode($this->oauthAccessTokenSecret);
-            $oauthParams = [
-                'oauth_consumer_key' => $this->oauthConsumerKey,
-                'oauth_token' => $this->oauthAccessToken,
-                'oauth_nonce' => md5(time() + rand(0, 1000)),
-                'oauth_timestamp' => time(),
-                'oauth_signature_method' => 'PLAINTEXT',
-                'oauth_version' => '1.0',
-                'oauth_signature' => $encodedKey
-            ];
+        //Generate HTTP headers
+        $encodedKey = rawurlencode($this->oauthConsumerSecret).'&'.rawurlencode($this->oauthAccessTokenSecret);
+        $oauthParams = [
+            'oauth_consumer_key' => $this->oauthConsumerKey,
+            'oauth_token' => $this->oauthAccessToken,
+            'oauth_nonce' => md5(time() + rand(0, 1000)),
+            'oauth_timestamp' => time(),
+            'oauth_signature_method' => 'PLAINTEXT',
+            'oauth_version' => '1.0',
+            'oauth_signature' => $encodedKey
+        ];
 
-            //Generate header
-            $this->header = [$this->encodeHeaders($oauthParams), 'Expect:'];
-        }
-
-        return $this->header;
+        //Generate header
+        return [$this->encodeHeaders($oauthParams), 'Expect:'];
     }
 
     /**
