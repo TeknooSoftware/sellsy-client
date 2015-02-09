@@ -187,7 +187,7 @@ class Client
      */
     protected function encodeHeaders(&$oauth)
     {
-        $values = [];
+        $values = array();
         foreach ($oauth as $key => &$value) {
             $values[] = $key.'="'.rawurlencode($value).'"';
         }
@@ -202,7 +202,7 @@ class Client
     {
         //Generate HTTP headers
         $encodedKey = rawurlencode($this->oauthConsumerSecret).'&'.rawurlencode($this->oauthAccessTokenSecret);
-        $oauthParams = [
+        $oauthParams = array(
             'oauth_consumer_key' => $this->oauthConsumerKey,
             'oauth_token' => $this->oauthAccessToken,
             'oauth_nonce' => md5(time() + rand(0, 1000)),
@@ -210,10 +210,10 @@ class Client
             'oauth_signature_method' => 'PLAINTEXT',
             'oauth_version' => '1.0',
             'oauth_signature' => $encodedKey
-        ];
+        );
 
         //Generate header
-        return [$this->encodeHeaders($oauthParams), 'Expect:'];
+        return array($this->encodeHeaders($oauthParams), 'Expect:');
     }
 
     /**
@@ -240,11 +240,11 @@ class Client
     public function requestApi($requestSettings)
     {
         //Arguments for the Sellsy API
-        $this->lastRequest = [
+        $this->lastRequest = array(
             'request' => 1,
             'io_mode' => 'json',
             'do_in' => json_encode($requestSettings)
-        ];
+        );
 
         //Generate client request
         $request = $this->requestGenerator->getRequest();
@@ -252,13 +252,13 @@ class Client
         $request->setMethod('POST');
         //Arguments for the HTTP Client
         $request->setOptionArray(
-            [
+            array(
                 CURLOPT_HTTPHEADER => $this->computeHeaders(),
                 CURLOPT_URL => $this->apiUrl,
                 CURLOPT_POSTFIELDS => $this->lastRequest,
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_SSL_VERIFYPEER => !preg_match("!^https!i",$this->apiUrl)
-            ]
+            )
         );
 
         $result = $request->execute();
@@ -281,10 +281,10 @@ class Client
      */
     public function getInfos()
     {
-        $requestSettings = [
+        $requestSettings = array(
             'method' => 'Infos.getInfos',
-            'params' => []
-        ];
+            'params' => array()
+        );
 
         return $this->requestApi($requestSettings);
     }

@@ -51,15 +51,15 @@ class Collection
     public function __call($name, $arguments)
     {
         if (empty($arguments) || !is_array($arguments)) {
-            $arguments = [];
+            $arguments = array();
         } else {
             $arguments = (array) array_pop($arguments);
         }
         return $this->client->requestApi(
-            [
+            array(
                 'method' => $this->collectionName.'.'.$name,
                 'params' => $arguments
-            ]
+            )
         );
     }
 }
