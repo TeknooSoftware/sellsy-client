@@ -29,7 +29,7 @@
     "minimum-stability": "beta",
     "autoload": {
         "psr-4": {
-            "UniAlteri\\Sellsy\\Client\\": ["src/sellsy/"]
+            "UniAlteri\\Sellsy\\Client\\": ["src/Sellsy/"]
         }
     },
     "archive": {

@@ -3,17 +3,26 @@
 namespace UniAlteri\Sellsy\Client;
 
 use UniAlteri\Curl\RequestGenerator;
+use UniAlteri\Sellsy\Client\Collection\CollectionGeneratorInterface;
+use UniAlteri\Sellsy\Client\Collection\CollectionInterface;
+use UniAlteri\Sellsy\Client\Exception\ErrorException;
+use UniAlteri\Sellsy\Client\Exception\RequestFailureException;
 
 /**
  * Class Client
  * @package UniAlteri\Sellsy\Client
  */
-class Client
+class Client implements ClientInterface
 {
     /**
      * @var RequestGenerator $requestGenerator
      */
     protected $requestGenerator;
+
+    /**
+     * @var CollectionGeneratorInterface
+     */
+    protected $collectionGenerator;
 
     /**
      * @var string
@@ -53,6 +62,7 @@ class Client
     /**
      * Constructor
      * @param RequestGenerator $requestGenerator
+     * @param CollectionGeneratorInterface $collectionGenerator
      * @param string $apiUrl
      * @param string $oauthAccessToken
      * @param string $oauthAccessTokenSecret
@@ -61,6 +71,7 @@ class Client
      */
     public function __construct(
         RequestGenerator $requestGenerator,
+        CollectionGeneratorInterface $collectionGenerator,
         $apiUrl='',
         $oauthAccessToken='',
         $oauthAccessTokenSecret='',
@@ -236,6 +247,8 @@ class Client
      * Method to perform a request to the api
      * @param array $requestSettings
      * @return \stdClass
+     * @throws RequestFailureException is the request can not be performed on the server
+     * @throws ErrorException if the server returned an error for this request
      */
     public function requestApi($requestSettings)
     {
@@ -249,28 +262,35 @@ class Client
         //Generate client request
         $request = $this->requestGenerator->getRequest();
 
-        $request->setMethod('POST');
-        //Arguments for the HTTP Client
-        $request->setOptionArray(
-            array(
-                CURLOPT_HTTPHEADER => $this->computeHeaders(),
-                CURLOPT_URL => $this->apiUrl,
-                CURLOPT_POSTFIELDS => $this->lastRequest,
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_SSL_VERIFYPEER => !preg_match("!^https!i",$this->apiUrl)
-            )
-        );
+        //Configure to contact the api with POST request and return value
+        $request->setMethod('POST')
+            ->setUrl($this->apiUrl)
+            ->setReturnValue(true)
+            ->setOptionArray(//Add custom headers and post values
+                array(
+                    CURLOPT_HTTPHEADER => $this->computeHeaders(),
+                    CURLOPT_POSTFIELDS => $this->lastRequest,
+                    CURLOPT_SSL_VERIFYPEER => !preg_match("!^https!i",$this->apiUrl)
+                )
+            );
 
-        $result = $request->execute();
+        //Execute the request
+        try {
+            $result = $request->execute();
+        } catch (\Exception $e) {
+            throw new RequestFailureException($e->getMessage(), $e->getCode(), $e);
+        }
 
+        //OAuth issue, throw an exception
         if (false !== strpos($result, 'oauth_problem')){
-            throw new \RuntimeException($result);
+            throw new RequestFailureException($result);
         }
 
         $this->lastAnswer = json_decode($result);
 
+        //Bad request, error returned by the api, throw an error
         if (!empty($this->lastAnswer->status) && 'error' == $this->lastAnswer->status) {
-            throw new \RuntimeException($this->lastAnswer->error);
+            throw new ErrorException($this->lastAnswer->error);
         }
 
         return $this->lastAnswer;
@@ -291,190 +311,190 @@ class Client
 
     /**
      * Return collection methods of the api for Accountdatas
-     * @return Collection
+     * @return CollectionInterface
      */
-    public function accountdatas()
+    public function accountData()
     {
-        return new Collection($this, 'Accountdatas');
+        return $this->collectionGenerator->getCollection($this, 'Accountdatas');
     }
 
     /**
      * Return collection methods of the api for AccountPrefs
-     * @return Collection
+     * @return CollectionInterface
      */
     public function accountPrefs()
     {
-        return new Collection($this, 'AccountPrefs');
+        return $this->collectionGenerator->getCollection($this, 'AccountPrefs');
     }
 
     /**
      * Return collection methods of the api for Purchase
-     * @return Collection
+     * @return CollectionInterface
      */
     public function purchase()
     {
-        return new Collection($this, 'Purchase');
+        return $this->collectionGenerator->getCollection($this, 'Purchase');
     }
 
     /**
      * Return collection methods of the api for Agenda
-     * @return Collection
+     * @return CollectionInterface
      */
     public function agenda()
     {
-        return new Collection($this, 'Agenda');
+        return $this->collectionGenerator->getCollection($this, 'Agenda');
     }
 
     /**
      * Return collection methods of the api for Annotations
-     * @return Collection
+     * @return CollectionInterface
      */
     public function annotations()
     {
-        return new Collection($this, 'Annotations');
+        return $this->collectionGenerator->getCollection($this, 'Annotations');
     }
 
     /**
      * Return collection methods of the api for Catalogue
-     * @return Collection
+     * @return CollectionInterface
      */
     public function catalogue()
     {
-        return new Collection($this, 'Catalogue');
+        return $this->collectionGenerator->getCollection($this, 'Catalogue');
     }
 
     /**
      * Return collection methods of the api for CustomFields
-     * @return Collection
+     * @return CollectionInterface
      */
     public function customFields()
     {
-        return new Collection($this, 'CustomFields');
+        return $this->collectionGenerator->getCollection($this, 'CustomFields');
     }
 
     /**
      * Return collection methods of the api for Client
-     * @return Collection
+     * @return CollectionInterface
      */
     public function client()
     {
-        return new Collection($this, 'Client');
+        return $this->collectionGenerator->getCollection($this, 'Client');
     }
 
     /**
      * Return collection methods of the api for Staffs
-     * @return Collection
+     * @return CollectionInterface
      */
     public function staffs()
     {
-        return new Collection($this, 'Staffs');
+        return $this->collectionGenerator->getCollection($this, 'Staffs');
     }
 
     /**
      * Return collection methods of the api for Peoples
-     * @return Collection
+     * @return CollectionInterface
      */
     public function peoples()
     {
-        return new Collection($this, 'Peoples');
+        return $this->collectionGenerator->getCollection($this, 'Peoples');
     }
 
     /**
      * Return collection methods of the api for Document
-     * @return Collection
+     * @return CollectionInterface
      */
     public function document()
     {
-        return new Collection($this, 'Document');
+        return $this->collectionGenerator->getCollection($this, 'Document');
     }
 
     /**
      * Return collection methods of the api for Mails
-     * @return Collection
+     * @return CollectionInterface
      */
     public function mails()
     {
-        return new Collection($this, 'Mails');
+        return $this->collectionGenerator->getCollection($this, 'Mails');
     }
 
     /**
      * Return collection methods of the api for Event
-     * @return Collection
+     * @return CollectionInterface
      */
     public function event()
     {
-        return new Collection($this, 'Event');
+        return $this->collectionGenerator->getCollection($this, 'Event');
     }
 
     /**
      * Return collection methods of the api for Expense
-     * @return Collection
+     * @return CollectionInterface
      */
     public function expense()
     {
-        return new Collection($this, 'Expense');
+        return $this->collectionGenerator->getCollection($this, 'Expense');
     }
 
     /**
      * Return collection methods of the api for Opportunities
-     * @return Collection
+     * @return CollectionInterface
      */
     public function opportunities()
     {
-        return new Collection($this, 'Opportunities');
+        return $this->collectionGenerator->getCollection($this, 'Opportunities');
     }
 
     /**
      * Return collection methods of the api for Prospects
-     * @return Collection
+     * @return CollectionInterface
      */
     public function prospects()
     {
-        return new Collection($this, 'Prospects');
+        return $this->collectionGenerator->getCollection($this, 'Prospects');
     }
 
     /**
      * Return collection methods of the api for SmartTags
-     * @return Collection
+     * @return CollectionInterface
      */
     public function smartTags()
     {
-        return new Collection($this, 'SmartTags');
+        return $this->collectionGenerator->getCollection($this, 'SmartTags');
     }
 
     /**
      * Return collection methods of the api for Stat
-     * @return Collection
+     * @return CollectionInterface
      */
     public function stat()
     {
-        return new Collection($this, 'Stat');
+        return $this->collectionGenerator->getCollection($this, 'Stat');
     }
 
     /**
      * Return collection methods of the api for Stock
-     * @return Collection
+     * @return CollectionInterface
      */
     public function stock()
     {
-        return new Collection($this, 'Stock');
+        return $this->collectionGenerator->getCollection($this, 'Stock');
     }
 
     /**
      * Return collection methods of the api for Support
-     * @return Collection
+     * @return CollectionInterface
      */
     public function support()
     {
-        return new Collection($this, 'Support');
+        return $this->collectionGenerator->getCollection($this, 'Support');
     }
 
     /**
      * Return collection methods of the api for Timetracking
-     * @return Collection
+     * @return CollectionInterface
      */
-    public function timetracking()
+    public function timeTracking()
     {
-        return new Collection($this, 'Timetracking');
+        return $this->collectionGenerator->getCollection($this, 'Timetracking');
     }
 }

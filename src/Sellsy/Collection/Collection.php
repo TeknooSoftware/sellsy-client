@@ -1,8 +1,10 @@
 <?php
 
-namespace UniAlteri\Sellsy\Client;
+namespace UniAlteri\Sellsy\Client\Collection;
 
-class Collection
+use UniAlteri\Sellsy\Client\Client;
+
+class Collection implements CollectionInterface
 {
     /**
      * @var Client
@@ -18,10 +20,22 @@ class Collection
      * @param Client $client
      * @param string $collectionName
      */
-    public function __construct($client, $collectionName)
+    public function __construct(Client $client=null, $collectionName=null)
+    {
+        $this->setClient($client);
+        $this->setCollectionName($collectionName);
+    }
+
+    /**
+     * To update the client to use with this collection
+     * @param Client $client
+     * @return $this
+     */
+    public function setClient(Client $client)
     {
         $this->client = $client;
-        $this->collectionName = $collectionName;
+
+        return $this;
     }
 
     /**
@@ -31,6 +45,18 @@ class Collection
     public function getClient()
     {
         return $this->client;
+    }
+
+    /**
+     * To update the name of this collection
+     * @param string $collectionName
+     * @return $this
+     */
+    public function setCollectionName($collectionName)
+    {
+        $this->collectionName = $collectionName;
+
+        return $this;
     }
 
     /**
