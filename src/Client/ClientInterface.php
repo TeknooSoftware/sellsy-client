@@ -3,6 +3,8 @@
 namespace UniAlteri\Sellsy\Client;
 
 use UniAlteri\Sellsy\Client\Collection\CollectionInterface;
+use UniAlteri\Sellsy\Client\Exception\ErrorException;
+use UniAlteri\Sellsy\Client\Exception\RequestFailureException;
 
 interface ClientInterface
 {

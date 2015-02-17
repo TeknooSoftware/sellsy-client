@@ -3,6 +3,7 @@
 namespace UniAlteri\Sellsy\Client\Collection;
 
 use UniAlteri\Sellsy\Client\Client;
+use UniAlteri\Sellsy\Client\ClientInterface;
 
 class Collection implements CollectionInterface
 {
@@ -22,8 +23,13 @@ class Collection implements CollectionInterface
      */
     public function __construct(Client $client=null, $collectionName=null)
     {
-        $this->setClient($client);
-        $this->setCollectionName($collectionName);
+        if ($client instanceof ClientInterface) {
+            $this->setClient($client);
+        }
+
+        if (!empty($collectionName)) {
+            $this->setCollectionName($collectionName);
+        }
     }
 
     /**
