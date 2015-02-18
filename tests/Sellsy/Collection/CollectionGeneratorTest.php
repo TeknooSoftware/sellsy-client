@@ -3,7 +3,6 @@
 namespace UniAlteri\Tests\Sellsy\Client\Collection;
 
 use UniAlteri\Sellsy\Client\Collection\CollectionGenerator;
-use UniAlteri\Sellsy\Client\Collection\CollectionInterface;
 
 class CollectionGeneratorTest extends \PHPUnit_Framework_TestCase
 {

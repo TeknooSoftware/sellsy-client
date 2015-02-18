@@ -60,6 +60,11 @@ class Client implements ClientInterface
     protected $lastAnswer;
 
     /**
+     * @var \DateTime
+     */
+    protected $now;
+
+    /**
      * Constructor
      * @param RequestGenerator $requestGenerator
      * @param CollectionGeneratorInterface $collectionGenerator
@@ -68,6 +73,7 @@ class Client implements ClientInterface
      * @param string $oauthAccessTokenSecret
      * @param string $oauthConsumerKey
      * @param string $oauthConsumerSecret
+     * @param \DateTime $now To allow developer to specify date to use to compute header. By default use now
      */
     public function __construct(
         RequestGenerator $requestGenerator,
@@ -76,14 +82,17 @@ class Client implements ClientInterface
         $oauthAccessToken='',
         $oauthAccessTokenSecret='',
         $oauthConsumerKey='',
-        $oauthConsumerSecret=''
+        $oauthConsumerSecret='',
+        \DateTime $now = null
     ) {
         $this->requestGenerator = $requestGenerator;
+        $this->collectionGenerator = $collectionGenerator;
         $this->apiUrl = $apiUrl;
         $this->oauthAccessToken = $oauthAccessToken;
         $this->oauthAccessTokenSecret = $oauthAccessTokenSecret;
         $this->oauthConsumerKey = $oauthConsumerKey;
         $this->oauthConsumerSecret = $oauthConsumerSecret;
+        $this->now = $now;
     }
 
     /**
@@ -146,7 +155,7 @@ class Client implements ClientInterface
      */
     public function getOAuthAccessTokenSecret()
     {
-        return $this->$oauthAccessTokenSecret;
+        return $this->oauthAccessTokenSecret;
     }
 
     /**
@@ -211,13 +220,19 @@ class Client implements ClientInterface
      */
     protected function computeHeaders()
     {
+        if ($this->now instanceof \DateTime) {
+            $now = clone $this->now;
+        } else {
+            $now = new \DateTime();
+        }
+
         //Generate HTTP headers
         $encodedKey = rawurlencode($this->oauthConsumerSecret).'&'.rawurlencode($this->oauthAccessTokenSecret);
         $oauthParams = array(
             'oauth_consumer_key' => $this->oauthConsumerKey,
             'oauth_token' => $this->oauthAccessToken,
-            'oauth_nonce' => md5(time() + rand(0, 1000)),
-            'oauth_timestamp' => time(),
+            'oauth_nonce' => md5($now->getTimestamp() + rand(0, 1000)),
+            'oauth_timestamp' => $now->getTimestamp(),
             'oauth_signature_method' => 'PLAINTEXT',
             'oauth_version' => '1.0',
             'oauth_signature' => $encodedKey
