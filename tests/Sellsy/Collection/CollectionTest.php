@@ -5,8 +5,8 @@ namespace UniAlteri\Tests\Sellsy\Client\Collection;
 use UniAlteri\Sellsy\Client\Collection\Collection;
 
 /**
- * Class CollectionTest
- * @package UniAlteri\Tests\Sellsy\Client\Collection
+ * Class CollectionTest.
+ *
  * @covers UniAlteri\Sellsy\Client\Collection\Collection
  */
 class CollectionTest extends \PHPUnit_Framework_TestCase
@@ -47,7 +47,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
                 $this->equalTo(
                     array(
                         'method' => 'fooBar.callMethod',
-                        'params' => array()
+                        'params' => array(),
                     )
                 )
             )
@@ -67,12 +67,12 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
                 $this->equalTo(
                     array(
                         'method' => 'fooBar.callMethod',
-                        'params' => array('foo'=>'bar')
+                        'params' => array('foo' => 'bar'),
                     )
                 )
             )
             ->willReturn(new \stdClass());
 
-        $this->assertEquals(new \stdClass(), $collection->callMethod(array('foo'=>'bar')));
+        $this->assertEquals(new \stdClass(), $collection->callMethod(array('foo' => 'bar')));
     }
 }

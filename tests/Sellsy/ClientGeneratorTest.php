@@ -7,8 +7,8 @@ use UniAlteri\Sellsy\Client\ClientGenerator;
 use UniAlteri\Sellsy\Client\Collection\CollectionGeneratorInterface;
 
 /**
- * Class ClientGeneratorTest
- * @package UniAlteri\Tests\Sellsy\Client
+ * Class ClientGeneratorTest.
+ *
  * @covers UniAlteri\Sellsy\Client\ClientGenerator
  */
 class ClientGeneratorTest extends \PHPUnit_Framework_TestCase
@@ -47,7 +47,6 @@ class ClientGeneratorTest extends \PHPUnit_Framework_TestCase
 
     public function testConstructorWithParams()
     {
-
         $clientGenerator = new ClientGenerator(
             $this->buildRequestGeneratorMock(),
             $this->buildCollectionGeneratorMock(),

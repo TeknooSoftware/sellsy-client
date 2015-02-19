@@ -9,8 +9,8 @@ use UniAlteri\Sellsy\Client\Collection\CollectionGeneratorInterface;
 use UniAlteri\Sellsy\Client\Exception\RequestFailureException;
 
 /**
- * Class ClientTest
- * @package UniAlteri\Tests\Sellsy\Client
+ * Class ClientTest.
+ *
  * @covers UniAlteri\Sellsy\Client\Client
  */
 class ClientTest extends \PHPUnit_Framework_TestCase
@@ -170,17 +170,18 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                         array(
                             CURLOPT_HTTPHEADER => array(
                                 'Authorization: OAuth oauth_consumer_key="key", oauth_token="token", oauth_timestamp="1424260800", oauth_signature_method="PLAINTEXT", oauth_version="1.0", oauth_signature="cSecret%26secret"',
-                                'Expect:'
+                                'Expect:',
                             ),
                             CURLOPT_POSTFIELDS => array(
                                 'request' => 1,
                                 'io_mode' => 'json',
-                                'do_in' => '{"method":"collectionName.methodName","params":{"foo":"bar"}}'
+                                'do_in' => '{"method":"collectionName.methodName","params":{"foo":"bar"}}',
                             ),
-                            CURLOPT_SSL_VERIFYPEER => false
+                            CURLOPT_SSL_VERIFYPEER => false,
                         ),
                         $args
                     );
+
                     return $request;
                 }
             )
@@ -201,14 +202,13 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             new \DateTime('2015-02-18 12:00:00', new \DateTimeZone('UTC'))
         );
 
-
         try {
             $client->requestApi(
                 array(
                     'method' => 'collectionName.methodName',
                     'params' => array(
-                        'foo' => 'bar'
-                    )
+                        'foo' => 'bar',
+                    ),
                 )
             );
         } catch (RequestFailureException $e) {
@@ -257,17 +257,18 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                         array(
                             CURLOPT_HTTPHEADER => array(
                                 'Authorization: OAuth oauth_consumer_key="key", oauth_token="token", oauth_timestamp="1424260800", oauth_signature_method="PLAINTEXT", oauth_version="1.0", oauth_signature="cSecret%26secret"',
-                                'Expect:'
+                                'Expect:',
                             ),
                             CURLOPT_POSTFIELDS => array(
                                 'request' => 1,
                                 'io_mode' => 'json',
-                                'do_in' => '{"method":"collectionName.methodName","params":{"foo":"bar"}}'
+                                'do_in' => '{"method":"collectionName.methodName","params":{"foo":"bar"}}',
                             ),
-                            CURLOPT_SSL_VERIFYPEER => false
+                            CURLOPT_SSL_VERIFYPEER => false,
                         ),
                         $args
                     );
+
                     return $request;
                 }
             )
@@ -288,14 +289,13 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             new \DateTime('2015-02-18 12:00:00', new \DateTimeZone('UTC'))
         );
 
-
         try {
             $client->requestApi(
                 array(
                     'method' => 'collectionName.methodName',
                     'params' => array(
-                        'foo' => 'bar'
-                    )
+                        'foo' => 'bar',
+                    ),
                 )
             );
         } catch (RequestFailureException $e) {
@@ -344,17 +344,18 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                         array(
                             CURLOPT_HTTPHEADER => array(
                                 'Authorization: OAuth oauth_consumer_key="key", oauth_token="token", oauth_timestamp="1424260800", oauth_signature_method="PLAINTEXT", oauth_version="1.0", oauth_signature="cSecret%26secret"',
-                                'Expect:'
+                                'Expect:',
                             ),
                             CURLOPT_POSTFIELDS => array(
                                 'request' => 1,
                                 'io_mode' => 'json',
-                                'do_in' => '{"method":"collectionName.methodName","params":{"foo":"bar"}}'
+                                'do_in' => '{"method":"collectionName.methodName","params":{"foo":"bar"}}',
                             ),
-                            CURLOPT_SSL_VERIFYPEER => false
+                            CURLOPT_SSL_VERIFYPEER => false,
                         ),
                         $args
                     );
+
                     return $request;
                 }
             )
@@ -366,7 +367,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                 json_encode(
                     array(
                         'status' => 'error',
-                        'error' => 'message error'
+                        'error' => 'message error',
                     )
                 )
             );
@@ -382,14 +383,13 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             new \DateTime('2015-02-18 12:00:00', new \DateTimeZone('UTC'))
         );
 
-
         try {
             $client->requestApi(
                 array(
                     'method' => 'collectionName.methodName',
                     'params' => array(
-                        'foo' => 'bar'
-                    )
+                        'foo' => 'bar',
+                    ),
                 )
             );
         } catch (\UniAlteri\Sellsy\Client\Exception\ErrorException $e) {
@@ -438,17 +438,18 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                         array(
                             CURLOPT_HTTPHEADER => array(
                                 'Authorization: OAuth oauth_consumer_key="key", oauth_token="token", oauth_timestamp="1424260800", oauth_signature_method="PLAINTEXT", oauth_version="1.0", oauth_signature="cSecret%26secret"',
-                                'Expect:'
+                                'Expect:',
                             ),
                             CURLOPT_POSTFIELDS => array(
                                 'request' => 1,
                                 'io_mode' => 'json',
-                                'do_in' => '{"method":"collectionName.methodName","params":{"foo":"bar"}}'
+                                'do_in' => '{"method":"collectionName.methodName","params":{"foo":"bar"}}',
                             ),
-                            CURLOPT_SSL_VERIFYPEER => false
+                            CURLOPT_SSL_VERIFYPEER => false,
                         ),
                         $args
                     );
+
                     return $request;
                 }
             )
@@ -460,7 +461,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                 json_encode(
                     array(
                         'status' => 'success',
-                        'result' => 'ok'
+                        'result' => 'ok',
                     )
                 )
             );
@@ -476,18 +477,17 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             new \DateTime('2015-02-18 12:00:00', new \DateTimeZone('UTC'))
         );
 
-
         $this->assertEquals(
             (object) array(
                 'status' => 'success',
-                'result' => 'ok'
+                'result' => 'ok',
             ),
             $client->requestApi(
                 array(
                     'method' => 'collectionName.methodName',
                     'params' => array(
-                        'foo' => 'bar'
-                    )
+                        'foo' => 'bar',
+                    ),
                 )
             )
         );
@@ -532,17 +532,18 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                         array(
                             CURLOPT_HTTPHEADER => array(
                                 'Authorization: OAuth oauth_consumer_key="key", oauth_token="token", oauth_timestamp="1424260800", oauth_signature_method="PLAINTEXT", oauth_version="1.0", oauth_signature="cSecret%26secret"',
-                                'Expect:'
+                                'Expect:',
                             ),
                             CURLOPT_POSTFIELDS => array(
                                 'request' => 1,
                                 'io_mode' => 'json',
-                                'do_in' => '{"method":"collectionName.methodName","params":{"foo":"bar"}}'
+                                'do_in' => '{"method":"collectionName.methodName","params":{"foo":"bar"}}',
                             ),
-                            CURLOPT_SSL_VERIFYPEER => false
+                            CURLOPT_SSL_VERIFYPEER => false,
                         ),
                         $args
                     );
+
                     return $request;
                 }
             )
@@ -554,7 +555,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                 json_encode(
                     array(
                         'status' => 'success',
-                        'result' => 'ok'
+                        'result' => 'ok',
                     )
                 )
             );
@@ -569,18 +570,17 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             'cSecret'
         );
 
-
         $this->assertEquals(
             (object) array(
                 'status' => 'success',
-                'result' => 'ok'
+                'result' => 'ok',
             ),
             $client->requestApi(
                 array(
                     'method' => 'collectionName.methodName',
                     'params' => array(
-                        'foo' => 'bar'
-                    )
+                        'foo' => 'bar',
+                    ),
                 )
             )
         );
@@ -625,17 +625,18 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                         array(
                             CURLOPT_HTTPHEADER => array(
                                 'Authorization: OAuth oauth_consumer_key="key", oauth_token="token", oauth_timestamp="1424260800", oauth_signature_method="PLAINTEXT", oauth_version="1.0", oauth_signature="cSecret%26secret"',
-                                'Expect:'
+                                'Expect:',
                             ),
                             CURLOPT_POSTFIELDS => array(
                                 'request' => 1,
                                 'io_mode' => 'json',
-                                'do_in' => '{"method":"collectionName.methodName","params":{"foo":"bar"}}'
+                                'do_in' => '{"method":"collectionName.methodName","params":{"foo":"bar"}}',
                             ),
-                            CURLOPT_SSL_VERIFYPEER => true
+                            CURLOPT_SSL_VERIFYPEER => true,
                         ),
                         $args
                     );
+
                     return $request;
                 }
             )
@@ -647,7 +648,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                 json_encode(
                     array(
                         'status' => 'success',
-                        'result' => 'ok'
+                        'result' => 'ok',
                     )
                 )
             );
@@ -663,18 +664,17 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             new \DateTime('2015-02-18 12:00:00', new \DateTimeZone('UTC'))
         );
 
-
         $this->assertEquals(
             (object) array(
                 'status' => 'success',
-                'result' => 'ok'
+                'result' => 'ok',
             ),
             $client->requestApi(
                 array(
                     'method' => 'collectionName.methodName',
                     'params' => array(
-                        'foo' => 'bar'
-                    )
+                        'foo' => 'bar',
+                    ),
                 )
             )
         );
@@ -719,17 +719,18 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                         array(
                             CURLOPT_HTTPHEADER => array(
                                 'Authorization: OAuth oauth_consumer_key="key", oauth_token="token", oauth_timestamp="1424260800", oauth_signature_method="PLAINTEXT", oauth_version="1.0", oauth_signature="cSecret%26secret"',
-                                'Expect:'
+                                'Expect:',
                             ),
                             CURLOPT_POSTFIELDS => array(
                                 'request' => 1,
                                 'io_mode' => 'json',
-                                'do_in' => '{"method":"collectionName.methodName","params":{"foo":"bar"}}'
+                                'do_in' => '{"method":"collectionName.methodName","params":{"foo":"bar"}}',
                             ),
-                            CURLOPT_SSL_VERIFYPEER => false
+                            CURLOPT_SSL_VERIFYPEER => false,
                         ),
                         $args
                     );
+
                     return $request;
                 }
             )
@@ -741,7 +742,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                 json_encode(
                     array(
                         'status' => 'error',
-                        'error' => 'message error'
+                        'error' => 'message error',
                     )
                 )
             );
@@ -757,14 +758,13 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             new \DateTime('2015-02-18 12:00:00', new \DateTimeZone('UTC'))
         );
 
-
         try {
             $client->requestApi(
                 array(
                     'method' => 'collectionName.methodName',
                     'params' => array(
-                        'foo' => 'bar'
-                    )
+                        'foo' => 'bar',
+                    ),
                 )
             );
         } catch (\Exception $e) {
@@ -775,8 +775,8 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             array(
                 'method' => 'collectionName.methodName',
                 'params' => array(
-                    'foo' => 'bar'
-                )
+                    'foo' => 'bar',
+                ),
             ),
             $client->getLastRequest()
         );
@@ -821,17 +821,18 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                         array(
                             CURLOPT_HTTPHEADER => array(
                                 'Authorization: OAuth oauth_consumer_key="key", oauth_token="token", oauth_timestamp="1424260800", oauth_signature_method="PLAINTEXT", oauth_version="1.0", oauth_signature="cSecret%26secret"',
-                                'Expect:'
+                                'Expect:',
                             ),
                             CURLOPT_POSTFIELDS => array(
                                 'request' => 1,
                                 'io_mode' => 'json',
-                                'do_in' => '{"method":"collectionName.methodName","params":{"foo":"bar"}}'
+                                'do_in' => '{"method":"collectionName.methodName","params":{"foo":"bar"}}',
                             ),
-                            CURLOPT_SSL_VERIFYPEER => true
+                            CURLOPT_SSL_VERIFYPEER => true,
                         ),
                         $args
                     );
+
                     return $request;
                 }
             )
@@ -843,7 +844,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                 json_encode(
                     array(
                         'status' => 'success',
-                        'result' => 'ok'
+                        'result' => 'ok',
                     )
                 )
             );
@@ -863,8 +864,8 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             array(
                 'method' => 'collectionName.methodName',
                 'params' => array(
-                    'foo' => 'bar'
-                )
+                    'foo' => 'bar',
+                ),
             )
         );
 
@@ -872,8 +873,8 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             array(
                 'method' => 'collectionName.methodName',
                 'params' => array(
-                    'foo' => 'bar'
-                )
+                    'foo' => 'bar',
+                ),
             ),
             $client->getLastRequest()
         );
@@ -918,17 +919,18 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                         array(
                             CURLOPT_HTTPHEADER => array(
                                 'Authorization: OAuth oauth_consumer_key="key", oauth_token="token", oauth_timestamp="1424260800", oauth_signature_method="PLAINTEXT", oauth_version="1.0", oauth_signature="cSecret%26secret"',
-                                'Expect:'
+                                'Expect:',
                             ),
                             CURLOPT_POSTFIELDS => array(
                                 'request' => 1,
                                 'io_mode' => 'json',
-                                'do_in' => '{"method":"collectionName.methodName","params":{"foo":"bar"}}'
+                                'do_in' => '{"method":"collectionName.methodName","params":{"foo":"bar"}}',
                             ),
-                            CURLOPT_SSL_VERIFYPEER => false
+                            CURLOPT_SSL_VERIFYPEER => false,
                         ),
                         $args
                     );
+
                     return $request;
                 }
             )
@@ -940,7 +942,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                 json_encode(
                     array(
                         'status' => 'error',
-                        'error' => 'message error'
+                        'error' => 'message error',
                     )
                 )
             );
@@ -956,14 +958,13 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             new \DateTime('2015-02-18 12:00:00', new \DateTimeZone('UTC'))
         );
 
-
         try {
             $client->requestApi(
                 array(
                     'method' => 'collectionName.methodName',
                     'params' => array(
-                        'foo' => 'bar'
-                    )
+                        'foo' => 'bar',
+                    ),
                 )
             );
         } catch (\Exception $e) {
@@ -1012,17 +1013,18 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                         array(
                             CURLOPT_HTTPHEADER => array(
                                 'Authorization: OAuth oauth_consumer_key="key", oauth_token="token", oauth_timestamp="1424260800", oauth_signature_method="PLAINTEXT", oauth_version="1.0", oauth_signature="cSecret%26secret"',
-                                'Expect:'
+                                'Expect:',
                             ),
                             CURLOPT_POSTFIELDS => array(
                                 'request' => 1,
                                 'io_mode' => 'json',
-                                'do_in' => '{"method":"collectionName.methodName","params":{"foo":"bar"}}'
+                                'do_in' => '{"method":"collectionName.methodName","params":{"foo":"bar"}}',
                             ),
-                            CURLOPT_SSL_VERIFYPEER => true
+                            CURLOPT_SSL_VERIFYPEER => true,
                         ),
                         $args
                     );
+
                     return $request;
                 }
             )
@@ -1034,7 +1036,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                 json_encode(
                     array(
                         'status' => 'success',
-                        'result' => 'ok'
+                        'result' => 'ok',
                     )
                 )
             );
@@ -1054,15 +1056,15 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             array(
                 'method' => 'collectionName.methodName',
                 'params' => array(
-                    'foo' => 'bar'
-                )
+                    'foo' => 'bar',
+                ),
             )
         );
 
         $this->assertEquals(
             (object) array(
                 'status' => 'success',
-                'result' => 'ok'
+                'result' => 'ok',
             ),
             $client->getLastAnswer()
         );
@@ -1107,17 +1109,18 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                         array(
                             CURLOPT_HTTPHEADER => array(
                                 'Authorization: OAuth oauth_consumer_key="key", oauth_token="token", oauth_timestamp="1424260800", oauth_signature_method="PLAINTEXT", oauth_version="1.0", oauth_signature="cSecret%26secret"',
-                                'Expect:'
+                                'Expect:',
                             ),
                             CURLOPT_POSTFIELDS => array(
                                 'request' => 1,
                                 'io_mode' => 'json',
-                                'do_in' => '{"method":"collectionName.methodName","params":{"foo":"bar"}}'
+                                'do_in' => '{"method":"collectionName.methodName","params":{"foo":"bar"}}',
                             ),
-                            CURLOPT_SSL_VERIFYPEER => true
+                            CURLOPT_SSL_VERIFYPEER => true,
                         ),
                         $args
                     );
+
                     return $request;
                 }
             )
@@ -1127,12 +1130,12 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $request->expects($this->atLeastOnce())
             ->method('execute')
             ->willReturnCallback(
-                function() use (&$counter) {
+                function () use (&$counter) {
                     if (0 == $counter++) {
                         return json_encode(
                             array(
                                 'status' => 'success',
-                                'result' => 'ok'
+                                'result' => 'ok',
                             )
                         );
                     } else {
@@ -1156,15 +1159,15 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             array(
                 'method' => 'collectionName.methodName',
                 'params' => array(
-                    'foo' => 'bar'
-                )
+                    'foo' => 'bar',
+                ),
             )
         );
 
         $this->assertEquals(
             (object) array(
                 'status' => 'success',
-                'result' => 'ok'
+                'result' => 'ok',
             ),
             $client->getLastAnswer()
         );
@@ -1174,8 +1177,8 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                 array(
                     'method' => 'collectionName.methodName',
                     'params' => array(
-                        'foo' => 'bar'
-                    )
+                        'foo' => 'bar',
+                    ),
                 )
             );
         } catch (\Exception $e) {
@@ -1224,17 +1227,18 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                         array(
                             CURLOPT_HTTPHEADER => array(
                                 'Authorization: OAuth oauth_consumer_key="key", oauth_token="token", oauth_timestamp="1424260800", oauth_signature_method="PLAINTEXT", oauth_version="1.0", oauth_signature="cSecret%26secret"',
-                                'Expect:'
+                                'Expect:',
                             ),
                             CURLOPT_POSTFIELDS => array(
                                 'request' => 1,
                                 'io_mode' => 'json',
-                                'do_in' => '{"method":"collectionName.methodName","params":{"foo":"bar"}}'
+                                'do_in' => '{"method":"collectionName.methodName","params":{"foo":"bar"}}',
                             ),
-                            CURLOPT_SSL_VERIFYPEER => true
+                            CURLOPT_SSL_VERIFYPEER => true,
                         ),
                         $args
                     );
+
                     return $request;
                 }
             )
@@ -1246,7 +1250,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                 json_encode(
                     array(
                         'status' => 'success',
-                        'result' => 'ok'
+                        'result' => 'ok',
                     )
                 )
             );
@@ -1265,7 +1269,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             (object) array(
                 'status' => 'success',
-                'result' => 'ok'
+                'result' => 'ok',
             ),
             $client->getInfos()
         );

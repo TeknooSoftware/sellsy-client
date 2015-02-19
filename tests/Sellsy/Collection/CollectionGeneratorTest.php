@@ -5,8 +5,8 @@ namespace UniAlteri\Tests\Sellsy\Client\Collection;
 use UniAlteri\Sellsy\Client\Collection\CollectionGenerator;
 
 /**
- * Class CollectionGeneratorTest
- * @package UniAlteri\Tests\Sellsy\Client\Collection
+ * Class CollectionGeneratorTest.
+ *
  * @covers UniAlteri\Sellsy\Client\Collection\CollectionGenerator
  */
 class CollectionGeneratorTest extends \PHPUnit_Framework_TestCase
