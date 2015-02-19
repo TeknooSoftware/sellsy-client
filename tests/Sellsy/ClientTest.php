@@ -488,6 +488,99 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function testRequestApiGoodAutoDateTime()
+    {
+        $request = $this->getMock('UniAlteri\Curl\RequestInterface');
+
+        $collectionGenerator = $this->buildCollectionGeneratorMock();
+        $requestGenerator = $this->buildRequestGeneratorMock();
+        $requestGenerator->expects($this->atLeastOnce())
+            ->method('getRequest')
+            ->willReturn($request);
+
+        $request->expects($this->once())
+            ->method('setMethod')
+            ->with($this->equalTo('POST'))
+            ->willReturn($request);
+
+        $request->expects($this->once())
+            ->method('setUrl')
+            ->with($this->equalTo('http://fooBar'))
+            ->willReturn($request);
+
+        $request->expects($this->once())
+            ->method('setReturnValue')
+            ->with($this->equalTo(true))
+            ->willReturn($request);
+
+        //Need for PHP 5.3
+        $that = $this;
+        $request->expects($this->once())
+            ->method('setOptionArray')
+            ->withAnyParameters()
+            ->willReturnCallback(
+                function ($args) use ($request, $that) {
+                    $oAuth = explode(', ', $args[CURLOPT_HTTPHEADER][0]);
+                    unset($oAuth[2]);
+                    $args[CURLOPT_HTTPHEADER][0] = implode(', ', $oAuth);
+                    $that->assertEquals(
+                        array(
+                            CURLOPT_HTTPHEADER => array(
+                                'Authorization: OAuth oauth_consumer_key="key", oauth_token="token", oauth_timestamp="1424260800", oauth_signature_method="PLAINTEXT", oauth_version="1.0", oauth_signature="cSecret%26secret"',
+                                'Expect:'
+                            ),
+                            CURLOPT_POSTFIELDS => array(
+                                'request' => 1,
+                                'io_mode' => 'json',
+                                'do_in' => '{"method":"collectionName.methodName","params":{"foo":"bar"}}'
+                            ),
+                            CURLOPT_SSL_VERIFYPEER => false
+                        ),
+                        $args
+                    );
+                    return $request;
+                }
+            )
+            ->willReturn($request);
+
+        $request->expects($this->once())
+            ->method('execute')
+            ->willReturn(
+                json_encode(
+                    array(
+                        'status' => 'success',
+                        'result' => 'ok'
+                    )
+                )
+            );
+
+        $client = new Client(
+            $requestGenerator,
+            $collectionGenerator,
+            'http://fooBar',
+            'token',
+            'secret',
+            'key',
+            'cSecret'
+        );
+
+
+        $this->assertEquals(
+            (object) array(
+                'status' => 'success',
+                'result' => 'ok'
+            ),
+            $client->requestApi(
+                array(
+                    'method' => 'collectionName.methodName',
+                    'params' => array(
+                        'foo' => 'bar'
+                    )
+                )
+            )
+        );
+    }
+
     public function testRequestApiGoodSsl()
     {
         $request = $this->getMock('UniAlteri\Curl\RequestInterface');
@@ -584,27 +677,593 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     public function testGetLastRequestNotExec()
     {
+        $request = $this->getMock('UniAlteri\Curl\RequestInterface');
 
+        $collectionGenerator = $this->buildCollectionGeneratorMock();
+        $requestGenerator = $this->buildRequestGeneratorMock();
+        $requestGenerator->expects($this->atLeastOnce())
+            ->method('getRequest')
+            ->willReturn($request);
+
+        $request->expects($this->once())
+            ->method('setMethod')
+            ->with($this->equalTo('POST'))
+            ->willReturn($request);
+
+        $request->expects($this->once())
+            ->method('setUrl')
+            ->with($this->equalTo('http://fooBar'))
+            ->willReturn($request);
+
+        $request->expects($this->once())
+            ->method('setReturnValue')
+            ->with($this->equalTo(true))
+            ->willReturn($request);
+
+        //Need for PHP 5.3
+        $that = $this;
+        $request->expects($this->once())
+            ->method('setOptionArray')
+            ->withAnyParameters()
+            ->willReturnCallback(
+                function ($args) use ($request, $that) {
+                    $oAuth = explode(', ', $args[CURLOPT_HTTPHEADER][0]);
+                    unset($oAuth[2]);
+                    $args[CURLOPT_HTTPHEADER][0] = implode(', ', $oAuth);
+                    $that->assertEquals(
+                        array(
+                            CURLOPT_HTTPHEADER => array(
+                                'Authorization: OAuth oauth_consumer_key="key", oauth_token="token", oauth_timestamp="1424260800", oauth_signature_method="PLAINTEXT", oauth_version="1.0", oauth_signature="cSecret%26secret"',
+                                'Expect:'
+                            ),
+                            CURLOPT_POSTFIELDS => array(
+                                'request' => 1,
+                                'io_mode' => 'json',
+                                'do_in' => '{"method":"collectionName.methodName","params":{"foo":"bar"}}'
+                            ),
+                            CURLOPT_SSL_VERIFYPEER => false
+                        ),
+                        $args
+                    );
+                    return $request;
+                }
+            )
+            ->willReturn($request);
+
+        $request->expects($this->once())
+            ->method('execute')
+            ->willReturn(
+                json_encode(
+                    array(
+                        'status' => 'error',
+                        'error' => 'message error'
+                    )
+                )
+            );
+
+        $client = new Client(
+            $requestGenerator,
+            $collectionGenerator,
+            'http://fooBar',
+            'token',
+            'secret',
+            'key',
+            'cSecret',
+            new \DateTime('2015-02-18 12:00:00', new \DateTimeZone('UTC'))
+        );
+
+
+        try {
+            $client->requestApi(
+                array(
+                    'method' => 'collectionName.methodName',
+                    'params' => array(
+                        'foo' => 'bar'
+                    )
+                )
+            );
+        } catch (\Exception $e) {
+            //Do nothing
+        }
+
+        $this->assertEquals(
+            array(
+                'method' => 'collectionName.methodName',
+                'params' => array(
+                    'foo' => 'bar'
+                )
+            ),
+            $client->getLastRequest()
+        );
     }
 
     public function testGetLastRequestExec()
     {
+        $request = $this->getMock('UniAlteri\Curl\RequestInterface');
 
+        $collectionGenerator = $this->buildCollectionGeneratorMock();
+        $requestGenerator = $this->buildRequestGeneratorMock();
+        $requestGenerator->expects($this->atLeastOnce())
+            ->method('getRequest')
+            ->willReturn($request);
+
+        $request->expects($this->once())
+            ->method('setMethod')
+            ->with($this->equalTo('POST'))
+            ->willReturn($request);
+
+        $request->expects($this->once())
+            ->method('setUrl')
+            ->with($this->equalTo('https://fooBar'))
+            ->willReturn($request);
+
+        $request->expects($this->once())
+            ->method('setReturnValue')
+            ->with($this->equalTo(true))
+            ->willReturn($request);
+
+        //Need for PHP 5.3
+        $that = $this;
+        $request->expects($this->once())
+            ->method('setOptionArray')
+            ->withAnyParameters()
+            ->willReturnCallback(
+                function ($args) use ($request, $that) {
+                    $oAuth = explode(', ', $args[CURLOPT_HTTPHEADER][0]);
+                    unset($oAuth[2]);
+                    $args[CURLOPT_HTTPHEADER][0] = implode(', ', $oAuth);
+                    $that->assertEquals(
+                        array(
+                            CURLOPT_HTTPHEADER => array(
+                                'Authorization: OAuth oauth_consumer_key="key", oauth_token="token", oauth_timestamp="1424260800", oauth_signature_method="PLAINTEXT", oauth_version="1.0", oauth_signature="cSecret%26secret"',
+                                'Expect:'
+                            ),
+                            CURLOPT_POSTFIELDS => array(
+                                'request' => 1,
+                                'io_mode' => 'json',
+                                'do_in' => '{"method":"collectionName.methodName","params":{"foo":"bar"}}'
+                            ),
+                            CURLOPT_SSL_VERIFYPEER => true
+                        ),
+                        $args
+                    );
+                    return $request;
+                }
+            )
+            ->willReturn($request);
+
+        $request->expects($this->once())
+            ->method('execute')
+            ->willReturn(
+                json_encode(
+                    array(
+                        'status' => 'success',
+                        'result' => 'ok'
+                    )
+                )
+            );
+
+        $client = new Client(
+            $requestGenerator,
+            $collectionGenerator,
+            'https://fooBar',
+            'token',
+            'secret',
+            'key',
+            'cSecret',
+            new \DateTime('2015-02-18 12:00:00', new \DateTimeZone('UTC'))
+        );
+
+        $client->requestApi(
+            array(
+                'method' => 'collectionName.methodName',
+                'params' => array(
+                    'foo' => 'bar'
+                )
+            )
+        );
+
+        $this->assertEquals(
+            array(
+                'method' => 'collectionName.methodName',
+                'params' => array(
+                    'foo' => 'bar'
+                )
+            ),
+            $client->getLastRequest()
+        );
     }
 
     public function testGetLastAnswerNotExec()
     {
+        $request = $this->getMock('UniAlteri\Curl\RequestInterface');
 
+        $collectionGenerator = $this->buildCollectionGeneratorMock();
+        $requestGenerator = $this->buildRequestGeneratorMock();
+        $requestGenerator->expects($this->atLeastOnce())
+            ->method('getRequest')
+            ->willReturn($request);
+
+        $request->expects($this->once())
+            ->method('setMethod')
+            ->with($this->equalTo('POST'))
+            ->willReturn($request);
+
+        $request->expects($this->once())
+            ->method('setUrl')
+            ->with($this->equalTo('http://fooBar'))
+            ->willReturn($request);
+
+        $request->expects($this->once())
+            ->method('setReturnValue')
+            ->with($this->equalTo(true))
+            ->willReturn($request);
+
+        //Need for PHP 5.3
+        $that = $this;
+        $request->expects($this->once())
+            ->method('setOptionArray')
+            ->withAnyParameters()
+            ->willReturnCallback(
+                function ($args) use ($request, $that) {
+                    $oAuth = explode(', ', $args[CURLOPT_HTTPHEADER][0]);
+                    unset($oAuth[2]);
+                    $args[CURLOPT_HTTPHEADER][0] = implode(', ', $oAuth);
+                    $that->assertEquals(
+                        array(
+                            CURLOPT_HTTPHEADER => array(
+                                'Authorization: OAuth oauth_consumer_key="key", oauth_token="token", oauth_timestamp="1424260800", oauth_signature_method="PLAINTEXT", oauth_version="1.0", oauth_signature="cSecret%26secret"',
+                                'Expect:'
+                            ),
+                            CURLOPT_POSTFIELDS => array(
+                                'request' => 1,
+                                'io_mode' => 'json',
+                                'do_in' => '{"method":"collectionName.methodName","params":{"foo":"bar"}}'
+                            ),
+                            CURLOPT_SSL_VERIFYPEER => false
+                        ),
+                        $args
+                    );
+                    return $request;
+                }
+            )
+            ->willReturn($request);
+
+        $request->expects($this->once())
+            ->method('execute')
+            ->willReturn(
+                json_encode(
+                    array(
+                        'status' => 'error',
+                        'error' => 'message error'
+                    )
+                )
+            );
+
+        $client = new Client(
+            $requestGenerator,
+            $collectionGenerator,
+            'http://fooBar',
+            'token',
+            'secret',
+            'key',
+            'cSecret',
+            new \DateTime('2015-02-18 12:00:00', new \DateTimeZone('UTC'))
+        );
+
+
+        try {
+            $client->requestApi(
+                array(
+                    'method' => 'collectionName.methodName',
+                    'params' => array(
+                        'foo' => 'bar'
+                    )
+                )
+            );
+        } catch (\Exception $e) {
+            //Do nothing
+        }
+
+        $this->assertEmpty($client->getLastAnswer());
     }
 
     public function testGetLastAnswerExec()
     {
+        $request = $this->getMock('UniAlteri\Curl\RequestInterface');
 
+        $collectionGenerator = $this->buildCollectionGeneratorMock();
+        $requestGenerator = $this->buildRequestGeneratorMock();
+        $requestGenerator->expects($this->atLeastOnce())
+            ->method('getRequest')
+            ->willReturn($request);
+
+        $request->expects($this->once())
+            ->method('setMethod')
+            ->with($this->equalTo('POST'))
+            ->willReturn($request);
+
+        $request->expects($this->once())
+            ->method('setUrl')
+            ->with($this->equalTo('https://fooBar'))
+            ->willReturn($request);
+
+        $request->expects($this->once())
+            ->method('setReturnValue')
+            ->with($this->equalTo(true))
+            ->willReturn($request);
+
+        //Need for PHP 5.3
+        $that = $this;
+        $request->expects($this->once())
+            ->method('setOptionArray')
+            ->withAnyParameters()
+            ->willReturnCallback(
+                function ($args) use ($request, $that) {
+                    $oAuth = explode(', ', $args[CURLOPT_HTTPHEADER][0]);
+                    unset($oAuth[2]);
+                    $args[CURLOPT_HTTPHEADER][0] = implode(', ', $oAuth);
+                    $that->assertEquals(
+                        array(
+                            CURLOPT_HTTPHEADER => array(
+                                'Authorization: OAuth oauth_consumer_key="key", oauth_token="token", oauth_timestamp="1424260800", oauth_signature_method="PLAINTEXT", oauth_version="1.0", oauth_signature="cSecret%26secret"',
+                                'Expect:'
+                            ),
+                            CURLOPT_POSTFIELDS => array(
+                                'request' => 1,
+                                'io_mode' => 'json',
+                                'do_in' => '{"method":"collectionName.methodName","params":{"foo":"bar"}}'
+                            ),
+                            CURLOPT_SSL_VERIFYPEER => true
+                        ),
+                        $args
+                    );
+                    return $request;
+                }
+            )
+            ->willReturn($request);
+
+        $request->expects($this->once())
+            ->method('execute')
+            ->willReturn(
+                json_encode(
+                    array(
+                        'status' => 'success',
+                        'result' => 'ok'
+                    )
+                )
+            );
+
+        $client = new Client(
+            $requestGenerator,
+            $collectionGenerator,
+            'https://fooBar',
+            'token',
+            'secret',
+            'key',
+            'cSecret',
+            new \DateTime('2015-02-18 12:00:00', new \DateTimeZone('UTC'))
+        );
+
+        $client->requestApi(
+            array(
+                'method' => 'collectionName.methodName',
+                'params' => array(
+                    'foo' => 'bar'
+                )
+            )
+        );
+
+        $this->assertEquals(
+            (object) array(
+                'status' => 'success',
+                'result' => 'ok'
+            ),
+            $client->getLastAnswer()
+        );
+    }
+
+    public function testGetLastAnswerErrorAfterSuccess()
+    {
+        $request = $this->getMock('UniAlteri\Curl\RequestInterface');
+
+        $collectionGenerator = $this->buildCollectionGeneratorMock();
+        $requestGenerator = $this->buildRequestGeneratorMock();
+        $requestGenerator->expects($this->atLeastOnce())
+            ->method('getRequest')
+            ->willReturn($request);
+
+        $request->expects($this->atLeastOnce())
+            ->method('setMethod')
+            ->with($this->equalTo('POST'))
+            ->willReturn($request);
+
+        $request->expects($this->atLeastOnce())
+            ->method('setUrl')
+            ->with($this->equalTo('https://fooBar'))
+            ->willReturn($request);
+
+        $request->expects($this->atLeastOnce())
+            ->method('setReturnValue')
+            ->with($this->equalTo(true))
+            ->willReturn($request);
+
+        //Need for PHP 5.3
+        $that = $this;
+        $request->expects($this->atLeastOnce())
+            ->method('setOptionArray')
+            ->withAnyParameters()
+            ->willReturnCallback(
+                function ($args) use ($request, $that) {
+                    $oAuth = explode(', ', $args[CURLOPT_HTTPHEADER][0]);
+                    unset($oAuth[2]);
+                    $args[CURLOPT_HTTPHEADER][0] = implode(', ', $oAuth);
+                    $that->assertEquals(
+                        array(
+                            CURLOPT_HTTPHEADER => array(
+                                'Authorization: OAuth oauth_consumer_key="key", oauth_token="token", oauth_timestamp="1424260800", oauth_signature_method="PLAINTEXT", oauth_version="1.0", oauth_signature="cSecret%26secret"',
+                                'Expect:'
+                            ),
+                            CURLOPT_POSTFIELDS => array(
+                                'request' => 1,
+                                'io_mode' => 'json',
+                                'do_in' => '{"method":"collectionName.methodName","params":{"foo":"bar"}}'
+                            ),
+                            CURLOPT_SSL_VERIFYPEER => true
+                        ),
+                        $args
+                    );
+                    return $request;
+                }
+            )
+            ->willReturn($request);
+
+        $counter = 0;
+        $request->expects($this->atLeastOnce())
+            ->method('execute')
+            ->willReturnCallback(
+                function() use (&$counter) {
+                    if (0 == $counter++) {
+                        return json_encode(
+                            array(
+                                'status' => 'success',
+                                'result' => 'ok'
+                            )
+                        );
+                    } else {
+                        return 'oauth_problem error';
+                    }
+                }
+            );
+
+        $client = new Client(
+            $requestGenerator,
+            $collectionGenerator,
+            'https://fooBar',
+            'token',
+            'secret',
+            'key',
+            'cSecret',
+            new \DateTime('2015-02-18 12:00:00', new \DateTimeZone('UTC'))
+        );
+
+        $client->requestApi(
+            array(
+                'method' => 'collectionName.methodName',
+                'params' => array(
+                    'foo' => 'bar'
+                )
+            )
+        );
+
+        $this->assertEquals(
+            (object) array(
+                'status' => 'success',
+                'result' => 'ok'
+            ),
+            $client->getLastAnswer()
+        );
+
+        try {
+            $client->requestApi(
+                array(
+                    'method' => 'collectionName.methodName',
+                    'params' => array(
+                        'foo' => 'bar'
+                    )
+                )
+            );
+        } catch (\Exception $e) {
+            //do nothing
+        }
+
+        $this->assertEmpty($client->getLastAnswer());
     }
 
     public function testGetInfos()
     {
+        $request = $this->getMock('UniAlteri\Curl\RequestInterface');
 
+        $collectionGenerator = $this->buildCollectionGeneratorMock();
+        $requestGenerator = $this->buildRequestGeneratorMock();
+        $requestGenerator->expects($this->atLeastOnce())
+            ->method('getRequest')
+            ->willReturn($request);
+
+        $request->expects($this->once())
+            ->method('setMethod')
+            ->with($this->equalTo('POST'))
+            ->willReturn($request);
+
+        $request->expects($this->once())
+            ->method('setUrl')
+            ->with($this->equalTo('https://fooBar'))
+            ->willReturn($request);
+
+        $request->expects($this->once())
+            ->method('setReturnValue')
+            ->with($this->equalTo(true))
+            ->willReturn($request);
+
+        //Need for PHP 5.3
+        $that = $this;
+        $request->expects($this->once())
+            ->method('setOptionArray')
+            ->withAnyParameters()
+            ->willReturnCallback(
+                function ($args) use ($request, $that) {
+                    $oAuth = explode(', ', $args[CURLOPT_HTTPHEADER][0]);
+                    unset($oAuth[2]);
+                    $args[CURLOPT_HTTPHEADER][0] = implode(', ', $oAuth);
+                    $that->assertEquals(
+                        array(
+                            CURLOPT_HTTPHEADER => array(
+                                'Authorization: OAuth oauth_consumer_key="key", oauth_token="token", oauth_timestamp="1424260800", oauth_signature_method="PLAINTEXT", oauth_version="1.0", oauth_signature="cSecret%26secret"',
+                                'Expect:'
+                            ),
+                            CURLOPT_POSTFIELDS => array(
+                                'request' => 1,
+                                'io_mode' => 'json',
+                                'do_in' => '{"method":"collectionName.methodName","params":{"foo":"bar"}}'
+                            ),
+                            CURLOPT_SSL_VERIFYPEER => true
+                        ),
+                        $args
+                    );
+                    return $request;
+                }
+            )
+            ->willReturn($request);
+
+        $request->expects($this->once())
+            ->method('execute')
+            ->willReturn(
+                json_encode(
+                    array(
+                        'status' => 'success',
+                        'result' => 'ok'
+                    )
+                )
+            );
+
+        $client = new Client(
+            $requestGenerator,
+            $collectionGenerator,
+            'https://fooBar',
+            'token',
+            'secret',
+            'key',
+            'cSecret',
+            new \DateTime('2015-02-18 12:00:00', new \DateTimeZone('UTC'))
+        );
+
+        $this->assertEquals(
+            (object) array(
+                'status' => 'success',
+                'result' => 'ok'
+            ),
+            $client->getInfos()
+        );
     }
 
     public function testAccountData()

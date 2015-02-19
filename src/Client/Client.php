@@ -268,7 +268,9 @@ class Client implements ClientInterface
     public function requestApi($requestSettings)
     {
         //Arguments for the Sellsy API
-        $this->lastRequest = array(
+        $this->lastRequest = $requestSettings;
+        $this->lastAnswer = null;
+        $encodedRequest = array(
             'request' => 1,
             'io_mode' => 'json',
             'do_in' => json_encode($requestSettings)
@@ -284,7 +286,7 @@ class Client implements ClientInterface
             ->setOptionArray(//Add custom headers and post values
                 array(
                     CURLOPT_HTTPHEADER => $this->computeHeaders(),
-                    CURLOPT_POSTFIELDS => $this->lastRequest,
+                    CURLOPT_POSTFIELDS => $encodedRequest,
                     CURLOPT_SSL_VERIFYPEER => !preg_match("!^https!i",$this->apiUrl)
                 )
             );
@@ -301,13 +303,14 @@ class Client implements ClientInterface
             throw new RequestFailureException($result);
         }
 
-        $this->lastAnswer = json_decode($result);
+        $answer = json_decode($result);
 
         //Bad request, error returned by the api, throw an error
-        if (!empty($this->lastAnswer->status) && 'error' == $this->lastAnswer->status) {
-            throw new ErrorException($this->lastAnswer->error);
+        if (!empty($answer->status) && 'error' == $answer->status) {
+            throw new ErrorException($answer->error);
         }
 
+        $this->lastAnswer = $answer;
         return $this->lastAnswer;
     }
 
