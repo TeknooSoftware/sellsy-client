@@ -1,6 +1,6 @@
 <?php
 /**
- * Sellsy Client
+ * Sellsy Client.
  *
  * LICENSE
  *
@@ -11,10 +11,13 @@
  * to contact@uni-alteri.com so we can send you a copy immediately.
  *
  * @copyright   Copyright (c) 2009-2015 Uni Alteri (http://agence.net.ua)
+ *
  * @link        http://teknoo.it/sellsy-client Project website
+ *
  * @license     http://teknoo.it/sellsy-client/license/mit         MIT License
  * @license     http://teknoo.it/sellsy-client/license/gpl-3.0     GPL v3 License
  * @author      Richard Déloge <r.deloge@uni-alteri.com>
+ *
  * @version     0.8.0
  */
 
@@ -23,9 +26,11 @@ namespace UniAlteri\Sellsy\Client\Exception;
 /**
  * Class RequestFailureException
  * Exception threw when an error has occurred during request to the API.
- * @package UniAlteri\Sellsy\Client\Exception
+ *
  * @copyright   Copyright (c) 2009-2015 Uni Alteri (http://agence.net.ua)
+ *
  * @link        http://teknoo.it/sellsy-client Project website
+ *
  * @license     http://teknoo.it/sellsy-client/license/mit         MIT License
  * @license     http://teknoo.it/sellsy-client/license/gpl-3.0     GPL v3 License
  * @author      Richard Déloge <r.deloge@uni-alteri.com>

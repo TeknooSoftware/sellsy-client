@@ -1,6 +1,6 @@
 <?php
 /**
- * Sellsy Client
+ * Sellsy Client.
  *
  * LICENSE
  *
@@ -11,10 +11,13 @@
  * to contact@uni-alteri.com so we can send you a copy immediately.
  *
  * @copyright   Copyright (c) 2009-2015 Uni Alteri (http://agence.net.ua)
+ *
  * @link        http://teknoo.it/sellsy-client Project website
+ *
  * @license     http://teknoo.it/sellsy-client/license/mit         MIT License
  * @license     http://teknoo.it/sellsy-client/license/gpl-3.0     GPL v3 License
  * @author      Richard Déloge <r.deloge@uni-alteri.com>
+ *
  * @version     0.8.0
  */
 
@@ -26,10 +29,12 @@ use UniAlteri\Sellsy\Client\Collection\CollectionGeneratorInterface;
 
 /**
  * Class ClientGenerator
- * Class to use ase service to generate new Sellsy client to use the Sellsy API
- * @package UniAlteri\Sellsy\Client
+ * Class to use ase service to generate new Sellsy client to use the Sellsy API.
+ *
  * @copyright   Copyright (c) 2009-2015 Uni Alteri (http://agence.net.ua)
+ *
  * @link        http://teknoo.it/sellsy-client Project website
+ *
  * @license     http://teknoo.it/sellsy-client/license/mit         MIT License
  * @license     http://teknoo.it/sellsy-client/license/gpl-3.0     GPL v3 License
  * @author      Richard Déloge <r.deloge@uni-alteri.com>
@@ -42,23 +47,24 @@ class ClientGenerator
     protected $originalClient;
 
     /**
-     * Contructor to initialize the generator
+     * Contructor to initialize the generator.
+     *
      * @param RequestGenerator|ClientInterface $requestGenerator
-     * @param CollectionGeneratorInterface $collectionGenerator
-     * @param string $apiUrl
-     * @param string $oauthAccessToken
-     * @param string $oauthAccessTokenSecret
-     * @param string $oauthConsumerKey
-     * @param string $oauthConsumerSecret
+     * @param CollectionGeneratorInterface     $collectionGenerator
+     * @param string                           $apiUrl
+     * @param string                           $oauthAccessToken
+     * @param string                           $oauthAccessTokenSecret
+     * @param string                           $oauthConsumerKey
+     * @param string                           $oauthConsumerSecret
      */
     public function __construct(
-        $requestGenerator=null,
-        $collectionGenerator=null,
-        $apiUrl='',
-        $oauthAccessToken='',
-        $oauthAccessTokenSecret='',
-        $oauthConsumerKey='',
-        $oauthConsumerSecret=''
+        $requestGenerator = null,
+        $collectionGenerator = null,
+        $apiUrl = '',
+        $oauthAccessToken = '',
+        $oauthAccessTokenSecret = '',
+        $oauthConsumerKey = '',
+        $oauthConsumerSecret = ''
     ) {
         if ($requestGenerator instanceof ClientInterface) {
             //Clone next clients from an existant model
@@ -88,7 +94,8 @@ class ClientGenerator
     }
 
     /**
-     * Return a new instance of the client
+     * Return a new instance of the client.
+     *
      * @return ClientInterface
      */
     public function getClient()

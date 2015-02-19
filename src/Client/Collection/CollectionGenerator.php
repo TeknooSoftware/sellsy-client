@@ -1,6 +1,6 @@
 <?php
 /**
- * Sellsy Client
+ * Sellsy Client.
  *
  * LICENSE
  *
@@ -11,10 +11,13 @@
  * to contact@uni-alteri.com so we can send you a copy immediately.
  *
  * @copyright   Copyright (c) 2009-2015 Uni Alteri (http://agence.net.ua)
+ *
  * @link        http://teknoo.it/sellsy-client Project website
+ *
  * @license     http://teknoo.it/sellsy-client/license/mit         MIT License
  * @license     http://teknoo.it/sellsy-client/license/gpl-3.0     GPL v3 License
  * @author      Richard Déloge <r.deloge@uni-alteri.com>
+ *
  * @version     0.8.0
  */
 
@@ -24,10 +27,12 @@ use UniAlteri\Sellsy\Client\Client;
 
 /**
  * Class CollectionGenerator
- * Collection generator, to use as service, used by Sellsy Client to build collection of method
- * @package UniAlteri\Sellsy\Client\Collection
+ * Collection generator, to use as service, used by Sellsy Client to build collection of method.
+ *
  * @copyright   Copyright (c) 2009-2015 Uni Alteri (http://agence.net.ua)
+ *
  * @link        http://teknoo.it/sellsy-client Project website
+ *
  * @license     http://teknoo.it/sellsy-client/license/mit         MIT License
  * @license     http://teknoo.it/sellsy-client/license/gpl-3.0     GPL v3 License
  * @author      Richard Déloge <r.deloge@uni-alteri.com>
@@ -42,13 +47,14 @@ class CollectionGenerator implements CollectionGeneratorInterface
     /**
      * @param CollectionInterface|null $originalCollection
      */
-    public function __construct($originalCollection=null)
+    public function __construct($originalCollection = null)
     {
         $this->originalCollection = $originalCollection;
     }
 
     /**
-     * Return a new instance of a CollectionInterface instance
+     * Return a new instance of a CollectionInterface instance.
+     *
      * @return null|CollectionInterface
      */
     protected function prepareNewCollectionInstance()
@@ -61,9 +67,11 @@ class CollectionGenerator implements CollectionGeneratorInterface
     }
 
     /**
-     * Generate a new collection object to manage the Sellsy api's methods
+     * Generate a new collection object to manage the Sellsy api's methods.
+     *
      * @param Client $client
      * @param string $collectionName
+     *
      * @return Collection
      */
     public function getCollection(Client $client, $collectionName)

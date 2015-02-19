@@ -1,6 +1,6 @@
 <?php
 /**
- * Sellsy Client
+ * Sellsy Client.
  *
  * LICENSE
  *
@@ -11,10 +11,13 @@
  * to contact@uni-alteri.com so we can send you a copy immediately.
  *
  * @copyright   Copyright (c) 2009-2015 Uni Alteri (http://agence.net.ua)
+ *
  * @link        http://teknoo.it/sellsy-client Project website
+ *
  * @license     http://teknoo.it/sellsy-client/license/mit         MIT License
  * @license     http://teknoo.it/sellsy-client/license/gpl-3.0     GPL v3 License
  * @author      Richard Déloge <r.deloge@uni-alteri.com>
+ *
  * @version     0.8.0
  */
 
@@ -28,10 +31,12 @@ use UniAlteri\Sellsy\Client\Exception\RequestFailureException;
 
 /**
  * Class Client
- * Main implementation of ClientInterface to perform Sellsy API requests as a local methods
- * @package UniAlteri\Sellsy\Client
+ * Main implementation of ClientInterface to perform Sellsy API requests as a local methods.
+ *
  * @copyright   Copyright (c) 2009-2015 Uni Alteri (http://agence.net.ua)
+ *
  * @link        http://teknoo.it/sellsy-client Project website
+ *
  * @license     http://teknoo.it/sellsy-client/license/mit         MIT License
  * @license     http://teknoo.it/sellsy-client/license/gpl-3.0     GPL v3 License
  * @author      Richard Déloge <r.deloge@uni-alteri.com>
@@ -39,55 +44,64 @@ use UniAlteri\Sellsy\Client\Exception\RequestFailureException;
 class Client implements ClientInterface
 {
     /**
-     * cUrl generator used to communicate with Sellsy API
-     * @var RequestGenerator $requestGenerator
+     * cUrl generator used to communicate with Sellsy API.
+     *
+     * @var RequestGenerator
      */
     protected $requestGenerator;
 
     /**
-     * Sellsy collections of methods generator
+     * Sellsy collections of methods generator.
+     *
      * @var CollectionGeneratorInterface
      */
     protected $collectionGenerator;
 
     /**
-     * API End point
+     * API End point.
+     *
      * @var string
      */
     protected $apiUrl;
 
     /**
-     * OAuth access token (provided by Sellsy)
+     * OAuth access token (provided by Sellsy).
+     *
      * @var string
      */
     protected $oauthAccessToken;
 
     /**
-     * OAuth secret (provided by Sellsy)
+     * OAuth secret (provided by Sellsy).
+     *
      * @var string
      */
     private $oauthAccessTokenSecret;
 
     /**
-     * OAuth consumer token (provided by Sellsy)
+     * OAuth consumer token (provided by Sellsy).
+     *
      * @var string
      */
     protected $oauthConsumerKey;
 
     /**
-     * OAuth consumer secret  (provided by Sellsy)
+     * OAuth consumer secret  (provided by Sellsy).
+     *
      * @var string
      */
     private $oauthConsumerSecret;
 
     /**
-     * Var to store the last request to facility debugging
+     * Var to store the last request to facility debugging.
+     *
      * @var array
      */
     protected $lastRequest;
 
     /**
-     * Var to store the last answer of Sellsy API to facility debugging
+     * Var to store the last answer of Sellsy API to facility debugging.
+     *
      * @var mixed|\stdClass
      */
     protected $lastAnswer;
@@ -98,24 +112,25 @@ class Client implements ClientInterface
     protected $now;
 
     /**
-     * Constructor
-     * @param RequestGenerator $requestGenerator
+     * Constructor.
+     *
+     * @param RequestGenerator             $requestGenerator
      * @param CollectionGeneratorInterface $collectionGenerator
-     * @param string $apiUrl
-     * @param string $oauthAccessToken
-     * @param string $oauthAccessTokenSecret
-     * @param string $oauthConsumerKey
-     * @param string $oauthConsumerSecret
-     * @param \DateTime $now To allow developer to specify date to use to compute header. By default use now
+     * @param string                       $apiUrl
+     * @param string                       $oauthAccessToken
+     * @param string                       $oauthAccessTokenSecret
+     * @param string                       $oauthConsumerKey
+     * @param string                       $oauthConsumerSecret
+     * @param \DateTime                    $now                    To allow developer to specify date to use to compute header. By default use now
      */
     public function __construct(
         RequestGenerator $requestGenerator,
         CollectionGeneratorInterface $collectionGenerator,
-        $apiUrl='',
-        $oauthAccessToken='',
-        $oauthAccessTokenSecret='',
-        $oauthConsumerKey='',
-        $oauthConsumerSecret='',
+        $apiUrl = '',
+        $oauthAccessToken = '',
+        $oauthAccessTokenSecret = '',
+        $oauthConsumerKey = '',
+        $oauthConsumerSecret = '',
         \DateTime $now = null
     ) {
         $this->requestGenerator = $requestGenerator;
@@ -129,8 +144,10 @@ class Client implements ClientInterface
     }
 
     /**
-     * Update the api url
+     * Update the api url.
+     *
      * @param string $apiUrl
+     *
      * @return $this
      */
     public function setApiUrl($apiUrl)
@@ -141,7 +158,8 @@ class Client implements ClientInterface
     }
 
     /**
-     * Get the api url
+     * Get the api url.
+     *
      * @return string
      */
     public function getApiUrl()
@@ -150,8 +168,10 @@ class Client implements ClientInterface
     }
 
     /**
-     * Update the OAuth access token
+     * Update the OAuth access token.
+     *
      * @param string $oauthAccessToken
+     *
      * @return $this
      */
     public function setOAuthAccessToken($oauthAccessToken)
@@ -162,7 +182,8 @@ class Client implements ClientInterface
     }
 
     /**
-     * Get the OAuth access token
+     * Get the OAuth access token.
+     *
      * @return string
      */
     public function getOAuthAccessToken()
@@ -171,8 +192,10 @@ class Client implements ClientInterface
     }
 
     /**
-     * Update the OAuth access secret token
+     * Update the OAuth access secret token.
+     *
      * @param string $oauthAccessTokenSecret
+     *
      * @return $this
      */
     public function setOAuthAccessTokenSecret($oauthAccessTokenSecret)
@@ -183,7 +206,8 @@ class Client implements ClientInterface
     }
 
     /**
-     * Get the OAuth access secret token
+     * Get the OAuth access secret token.
+     *
      * @return string
      */
     public function getOAuthAccessTokenSecret()
@@ -192,8 +216,10 @@ class Client implements ClientInterface
     }
 
     /**
-     * Update the OAuth consumer key
+     * Update the OAuth consumer key.
+     *
      * @param string $oauthConsumerKey
+     *
      * @return $this
      */
     public function setOAuthConsumerKey($oauthConsumerKey)
@@ -204,7 +230,8 @@ class Client implements ClientInterface
     }
 
     /**
-     * Get the OAuth consumer key
+     * Get the OAuth consumer key.
+     *
      * @return string
      */
     public function getOAuthConsumerKey()
@@ -213,8 +240,10 @@ class Client implements ClientInterface
     }
 
     /**
-     * Update the OAuth consumer secret
+     * Update the OAuth consumer secret.
+     *
      * @param string $oauthConsumerSecret
+     *
      * @return $this
      */
     public function setOAuthConsumerSecret($oauthConsumerSecret)
@@ -225,7 +254,8 @@ class Client implements ClientInterface
     }
 
     /**
-     * Get the OAuth consumer secret
+     * Get the OAuth consumer secret.
+     *
      * @return string
      */
     public function getOAuthConsumerSecret()
@@ -234,8 +264,10 @@ class Client implements ClientInterface
     }
 
     /**
-     * Transform an array to HTTP headers OAuth string
+     * Transform an array to HTTP headers OAuth string.
+     *
      * @param array $oauth
+     *
      * @return string
      */
     protected function encodeHeaders(&$oauth)
@@ -249,7 +281,7 @@ class Client implements ClientInterface
     }
 
     /**
-     * Internal method to generate HTTP headers to use for the API authentication with OAuth protocol
+     * Internal method to generate HTTP headers to use for the API authentication with OAuth protocol.
      */
     protected function computeHeaders()
     {
@@ -268,7 +300,7 @@ class Client implements ClientInterface
             'oauth_timestamp' => $now->getTimestamp(),
             'oauth_signature_method' => 'PLAINTEXT',
             'oauth_version' => '1.0',
-            'oauth_signature' => $encodedKey
+            'oauth_signature' => $encodedKey,
         );
 
         //Generate header
@@ -292,11 +324,14 @@ class Client implements ClientInterface
     }
 
     /**
-     * Method to perform a request to the api
+     * Method to perform a request to the api.
+     *
      * @param array $requestSettings
+     *
      * @return \stdClass
+     *
      * @throws RequestFailureException is the request can not be performed on the server
-     * @throws ErrorException if the server returned an error for this request
+     * @throws ErrorException          if the server returned an error for this request
      */
     public function requestApi($requestSettings)
     {
@@ -306,7 +341,7 @@ class Client implements ClientInterface
         $encodedRequest = array(
             'request' => 1,
             'io_mode' => 'json',
-            'do_in' => json_encode($requestSettings)
+            'do_in' => json_encode($requestSettings),
         );
 
         //Generate client request
@@ -320,7 +355,7 @@ class Client implements ClientInterface
                 array(
                     CURLOPT_HTTPHEADER => $this->computeHeaders(),
                     CURLOPT_POSTFIELDS => $encodedRequest,
-                    CURLOPT_SSL_VERIFYPEER => !preg_match("!^https!i",$this->apiUrl)
+                    CURLOPT_SSL_VERIFYPEER => !preg_match("!^https!i", $this->apiUrl),
                 )
             );
 
@@ -332,7 +367,7 @@ class Client implements ClientInterface
         }
 
         //OAuth issue, throw an exception
-        if (false !== strpos($result, 'oauth_problem')){
+        if (false !== strpos($result, 'oauth_problem')) {
             throw new RequestFailureException($result);
         }
 
@@ -344,6 +379,7 @@ class Client implements ClientInterface
         }
 
         $this->lastAnswer = $answer;
+
         return $this->lastAnswer;
     }
 
@@ -354,14 +390,15 @@ class Client implements ClientInterface
     {
         $requestSettings = array(
             'method' => 'Infos.getInfos',
-            'params' => array()
+            'params' => array(),
         );
 
         return $this->requestApi($requestSettings);
     }
 
     /**
-     * Return collection methods of the api for Accountdatas
+     * Return collection methods of the api for Accountdatas.
+     *
      * @return CollectionInterface
      */
     public function accountData()
@@ -370,7 +407,8 @@ class Client implements ClientInterface
     }
 
     /**
-     * Return collection methods of the api for AccountPrefs
+     * Return collection methods of the api for AccountPrefs.
+     *
      * @return CollectionInterface
      */
     public function accountPrefs()
@@ -379,7 +417,8 @@ class Client implements ClientInterface
     }
 
     /**
-     * Return collection methods of the api for Purchase
+     * Return collection methods of the api for Purchase.
+     *
      * @return CollectionInterface
      */
     public function purchase()
@@ -388,7 +427,8 @@ class Client implements ClientInterface
     }
 
     /**
-     * Return collection methods of the api for Agenda
+     * Return collection methods of the api for Agenda.
+     *
      * @return CollectionInterface
      */
     public function agenda()
@@ -397,7 +437,8 @@ class Client implements ClientInterface
     }
 
     /**
-     * Return collection methods of the api for Annotations
+     * Return collection methods of the api for Annotations.
+     *
      * @return CollectionInterface
      */
     public function annotations()
@@ -406,7 +447,8 @@ class Client implements ClientInterface
     }
 
     /**
-     * Return collection methods of the api for Catalogue
+     * Return collection methods of the api for Catalogue.
+     *
      * @return CollectionInterface
      */
     public function catalogue()
@@ -415,7 +457,8 @@ class Client implements ClientInterface
     }
 
     /**
-     * Return collection methods of the api for CustomFields
+     * Return collection methods of the api for CustomFields.
+     *
      * @return CollectionInterface
      */
     public function customFields()
@@ -424,7 +467,8 @@ class Client implements ClientInterface
     }
 
     /**
-     * Return collection methods of the api for Client
+     * Return collection methods of the api for Client.
+     *
      * @return CollectionInterface
      */
     public function client()
@@ -433,7 +477,8 @@ class Client implements ClientInterface
     }
 
     /**
-     * Return collection methods of the api for Staffs
+     * Return collection methods of the api for Staffs.
+     *
      * @return CollectionInterface
      */
     public function staffs()
@@ -442,7 +487,8 @@ class Client implements ClientInterface
     }
 
     /**
-     * Return collection methods of the api for Peoples
+     * Return collection methods of the api for Peoples.
+     *
      * @return CollectionInterface
      */
     public function peoples()
@@ -451,7 +497,8 @@ class Client implements ClientInterface
     }
 
     /**
-     * Return collection methods of the api for Document
+     * Return collection methods of the api for Document.
+     *
      * @return CollectionInterface
      */
     public function document()
@@ -460,7 +507,8 @@ class Client implements ClientInterface
     }
 
     /**
-     * Return collection methods of the api for Mails
+     * Return collection methods of the api for Mails.
+     *
      * @return CollectionInterface
      */
     public function mails()
@@ -469,7 +517,8 @@ class Client implements ClientInterface
     }
 
     /**
-     * Return collection methods of the api for Event
+     * Return collection methods of the api for Event.
+     *
      * @return CollectionInterface
      */
     public function event()
@@ -478,7 +527,8 @@ class Client implements ClientInterface
     }
 
     /**
-     * Return collection methods of the api for Expense
+     * Return collection methods of the api for Expense.
+     *
      * @return CollectionInterface
      */
     public function expense()
@@ -487,7 +537,8 @@ class Client implements ClientInterface
     }
 
     /**
-     * Return collection methods of the api for Opportunities
+     * Return collection methods of the api for Opportunities.
+     *
      * @return CollectionInterface
      */
     public function opportunities()
@@ -496,7 +547,8 @@ class Client implements ClientInterface
     }
 
     /**
-     * Return collection methods of the api for Prospects
+     * Return collection methods of the api for Prospects.
+     *
      * @return CollectionInterface
      */
     public function prospects()
@@ -505,7 +557,8 @@ class Client implements ClientInterface
     }
 
     /**
-     * Return collection methods of the api for SmartTags
+     * Return collection methods of the api for SmartTags.
+     *
      * @return CollectionInterface
      */
     public function smartTags()
@@ -514,7 +567,8 @@ class Client implements ClientInterface
     }
 
     /**
-     * Return collection methods of the api for Stat
+     * Return collection methods of the api for Stat.
+     *
      * @return CollectionInterface
      */
     public function stat()
@@ -523,7 +577,8 @@ class Client implements ClientInterface
     }
 
     /**
-     * Return collection methods of the api for Stock
+     * Return collection methods of the api for Stock.
+     *
      * @return CollectionInterface
      */
     public function stock()
@@ -532,7 +587,8 @@ class Client implements ClientInterface
     }
 
     /**
-     * Return collection methods of the api for Support
+     * Return collection methods of the api for Support.
+     *
      * @return CollectionInterface
      */
     public function support()
@@ -541,7 +597,8 @@ class Client implements ClientInterface
     }
 
     /**
-     * Return collection methods of the api for Timetracking
+     * Return collection methods of the api for Timetracking.
+     *
      * @return CollectionInterface
      */
     public function timeTracking()

@@ -1,6 +1,6 @@
 <?php
 /**
- * Sellsy Client
+ * Sellsy Client.
  *
  * LICENSE
  *
@@ -11,10 +11,13 @@
  * to contact@uni-alteri.com so we can send you a copy immediately.
  *
  * @copyright   Copyright (c) 2009-2015 Uni Alteri (http://agence.net.ua)
+ *
  * @link        http://teknoo.it/sellsy-client Project website
+ *
  * @license     http://teknoo.it/sellsy-client/license/mit         MIT License
  * @license     http://teknoo.it/sellsy-client/license/gpl-3.0     GPL v3 License
  * @author      Richard Déloge <r.deloge@uni-alteri.com>
+ *
  * @version     0.8.0
  */
 
@@ -25,10 +28,12 @@ use UniAlteri\Sellsy\Client\ClientInterface;
 
 /**
  * Class Collection
- * Class to create collection of methods, like on the Sellsy API
- * @package UniAlteri\Sellsy\Client\Collection
+ * Class to create collection of methods, like on the Sellsy API.
+ *
  * @copyright   Copyright (c) 2009-2015 Uni Alteri (http://agence.net.ua)
+ *
  * @link        http://teknoo.it/sellsy-client Project website
+ *
  * @license     http://teknoo.it/sellsy-client/license/mit         MIT License
  * @license     http://teknoo.it/sellsy-client/license/gpl-3.0     GPL v3 License
  * @author      Richard Déloge <r.deloge@uni-alteri.com>
@@ -46,11 +51,12 @@ class Collection implements CollectionInterface
     protected $collectionName;
 
     /**
-     * Constructor
+     * Constructor.
+     *
      * @param Client $client
      * @param string $collectionName
      */
-    public function __construct(Client $client=null, $collectionName=null)
+    public function __construct(Client $client = null, $collectionName = null)
     {
         if ($client instanceof ClientInterface) {
             $this->setClient($client);
@@ -62,8 +68,10 @@ class Collection implements CollectionInterface
     }
 
     /**
-     * To update the client to use with this collection
+     * To update the client to use with this collection.
+     *
      * @param Client $client
+     *
      * @return $this
      */
     public function setClient(Client $client)
@@ -74,7 +82,8 @@ class Collection implements CollectionInterface
     }
 
     /**
-     * Return the current client
+     * Return the current client.
+     *
      * @return Client
      */
     public function getClient()
@@ -83,8 +92,10 @@ class Collection implements CollectionInterface
     }
 
     /**
-     * To update the name of this collection
+     * To update the name of this collection.
+     *
      * @param string $collectionName
+     *
      * @return $this
      */
     public function setCollectionName($collectionName)
@@ -95,7 +106,8 @@ class Collection implements CollectionInterface
     }
 
     /**
-     * Return the current collection name
+     * Return the current collection name.
+     *
      * @return string
      */
     public function getCollectionName()
@@ -104,9 +116,11 @@ class Collection implements CollectionInterface
     }
 
     /**
-     * Magic call to API
+     * Magic call to API.
+     *
      * @param string $name
-     * @param array $arguments
+     * @param array  $arguments
+     *
      * @return \stdClass
      */
     public function __call($name, $arguments)
@@ -116,10 +130,11 @@ class Collection implements CollectionInterface
         } else {
             $arguments = (array) array_pop($arguments);
         }
+
         return $this->client->requestApi(
             array(
                 'method' => $this->collectionName.'.'.$name,
-                'params' => $arguments
+                'params' => $arguments,
             )
         );
     }
