@@ -8,6 +8,11 @@ use UniAlteri\Sellsy\Client\Client;
 use UniAlteri\Sellsy\Client\Collection\CollectionGeneratorInterface;
 use UniAlteri\Sellsy\Client\Exception\RequestFailureException;
 
+/**
+ * Class ClientTest
+ * @package UniAlteri\Tests\Sellsy\Client
+ * @covers UniAlteri\Sellsy\Client\Client
+ */
 class ClientTest extends \PHPUnit_Framework_TestCase
 {
     /**

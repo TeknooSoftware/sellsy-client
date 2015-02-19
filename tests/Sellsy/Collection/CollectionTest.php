@@ -4,6 +4,11 @@ namespace UniAlteri\Tests\Sellsy\Client\Collection;
 
 use UniAlteri\Sellsy\Client\Collection\Collection;
 
+/**
+ * Class CollectionTest
+ * @package UniAlteri\Tests\Sellsy\Client\Collection
+ * @covers UniAlteri\Sellsy\Client\Collection\Collection
+ */
 class CollectionTest extends \PHPUnit_Framework_TestCase
 {
     public function testGetSetClient()
