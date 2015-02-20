@@ -1,2 +1,0 @@
-Uni Alteri - Sellsy client
-==========================
