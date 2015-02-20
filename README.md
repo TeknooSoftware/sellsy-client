@@ -7,7 +7,7 @@ your [Sellsy account](http://sellsy.com/).
 
 Quick startup
 -------------
-Quick How-to to learn how use this library : [Startup](docs/howto/quick-startup.md).
+Quick How-to to learn how use this library : [Startup](docs/quick-startup.md).
 
 Installation
 ------------
