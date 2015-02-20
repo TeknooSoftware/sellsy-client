@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>API Documentation</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+    <link href="../css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/prism.css" rel="stylesheet" media="all"/>
+    <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+    <!--[if lt IE 9]>
+    <script src="../js/html5.js"></script>
+    <![endif]-->
+    <script src="../js/jquery-1.11.0.min.js"></script>
+    <script src="../js/ui/1.10.4/jquery-ui.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.smooth-scroll.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
+        <script type="text/javascript">
+        function loadExternalCodeSnippets() {
+            Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+                var src = pre.getAttribute('data-src');
+                var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+                var language = 'php';
+
+                var code = document.createElement('code');
+                code.className = 'language-' + language;
+
+                pre.textContent = '';
+
+                code.textContent = 'Loading…';
+
+                pre.appendChild(code);
+
+                var xhr = new XMLHttpRequest();
+
+                xhr.open('GET', src, true);
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4) {
+
+                        if (xhr.status < 400 && xhr.responseText) {
+                            code.textContent = xhr.responseText;
+
+                            Prism.highlightElement(code);
+                        }
+                        else if (xhr.status >= 400) {
+                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                        }
+                        else {
+                            code.textContent = '✖ Error: File does not exist or is empty';
+                        }
+                    }
+                };
+
+                xhr.send(null);
+            });
+        }
+
+        $(document).ready(function(){
+            loadExternalCodeSnippets();
+        });
+        $('#source-view').on('shown', function () {
+            loadExternalCodeSnippets();
+        })
+    </script>
+
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png"/>
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-ellipsis-vertical"></i>
+            </a>
+            <a class="brand" href="../index.html">API Documentation</a>
+
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                                        <li class="dropdown">
+                        <a href="../index.html" class="dropdown-toggle" data-toggle="dropdown">
+                            API Documentation <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                                                        <li><a href="../namespaces/UniAlteri.html">\UniAlteri</a></li>
+                                                    </ul>
+                    </li>
+                                        <li class="dropdown" id="charts-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Charts <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../graphs/class.html">
+                                    <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" id="reports-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Reports <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../reports/errors.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">36</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/markers.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/deprecated.html">
+                                                                                                            <i class="icon-list-alt"></i>&#160;Deprecated <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="go_to_top">-->
+    <!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
+    <!--</div>-->
+</div>
+
+<div id="___" class="container-fluid">
+        <section class="row-fluid">
+        <div class="span2 sidebar">
+                                <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-146370162"></a>
+                                <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
+            </div>
+            <div id="namespace-146370162" class="accordion-body collapse in">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1059252945"></a>
+                                <a href="../namespaces/UniAlteri.html" style="margin-left: 30px; padding-left: 0">UniAlteri</a>
+            </div>
+            <div id="namespace-1059252945" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-274330793"></a>
+                                <a href="../namespaces/UniAlteri.Sellsy.html" style="margin-left: 30px; padding-left: 0">Sellsy</a>
+            </div>
+            <div id="namespace-274330793" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-508483840"></a>
+                                <a href="../namespaces/UniAlteri.Sellsy.Client.html" style="margin-left: 30px; padding-left: 0">Client</a>
+            </div>
+            <div id="namespace-508483840" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-485899742"></a>
+                                <a href="../namespaces/UniAlteri.Sellsy.Client.Collection.html" style="margin-left: 30px; padding-left: 0">Collection</a>
+            </div>
+            <div id="namespace-485899742" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                    <li class="interface"><a href="../classes/UniAlteri.Sellsy.Client.Collection.CollectionGeneratorInterface.html">CollectionGeneratorInterface</a></li>
+                                                    <li class="interface"><a href="../classes/UniAlteri.Sellsy.Client.Collection.CollectionInterface.html">CollectionInterface</a></li>
+                                                                                                    <li class="class"><a href="../classes/UniAlteri.Sellsy.Client.Collection.Collection.html">Collection</a></li>
+                                                    <li class="class"><a href="../classes/UniAlteri.Sellsy.Client.Collection.CollectionGenerator.html">CollectionGenerator</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1423017625"></a>
+                                <a href="../namespaces/UniAlteri.Sellsy.Client.Exception.html" style="margin-left: 30px; padding-left: 0">Exception</a>
+            </div>
+            <div id="namespace-1423017625" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/UniAlteri.Sellsy.Client.Exception.ErrorException.html">ErrorException</a></li>
+                                                    <li class="class"><a href="../classes/UniAlteri.Sellsy.Client.Exception.RequestFailureException.html">RequestFailureException</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                    <li class="interface"><a href="../classes/UniAlteri.Sellsy.Client.ClientInterface.html">ClientInterface</a></li>
+                                                                                                    <li class="class"><a href="../classes/UniAlteri.Sellsy.Client.Client.html">Client</a></li>
+                                                    <li class="class"><a href="../classes/UniAlteri.Sellsy.Client.ClientGenerator.html">ClientGenerator</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+    </section>
+    <section class="row-fluid">
+        <div class="span10 offset2">
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <nav>
+                                                <a href="../namespaces/UniAlteri.Sellsy.Client.html">\UniAlteri\Sellsy\Client</a>
+                                            </nav>
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+
+                    <h1><small>\UniAlteri\Sellsy\Client</small>ClientInterface</h1>
+                    <p><em>Interface ClientInterface
+Interface to define client implementing the Sellsy API.</em></p>
+                    
+
+                    <section id="summary">
+                        <h2>Summary</h2>
+                        <section class="row-fluid heading">
+                            <section class="span6">
+                                <a href="#methods">Methods</a>
+                            </section>
+                            <section class="span6">
+                                <a href="#constants">Constants</a>
+                            </section>
+                        </section>
+                        <section class="row-fluid public">
+                            <section class="span6">
+                                                                    <a href="../classes/UniAlteri.Sellsy.Client.ClientInterface.html#method_setApiUrl">setApiUrl()</a><br />
+                                                                    <a href="../classes/UniAlteri.Sellsy.Client.ClientInterface.html#method_getApiUrl">getApiUrl()</a><br />
+                                                                    <a href="../classes/UniAlteri.Sellsy.Client.ClientInterface.html#method_setOAuthAccessToken">setOAuthAccessToken()</a><br />
+                                                                    <a href="../classes/UniAlteri.Sellsy.Client.ClientInterface.html#method_getOAuthAccessToken">getOAuthAccessToken()</a><br />
+                                                                    <a href="../classes/UniAlteri.Sellsy.Client.ClientInterface.html#method_setOAuthAccessTokenSecret">setOAuthAccessTokenSecret()</a><br />
+                                                                    <a href="../classes/UniAlteri.Sellsy.Client.ClientInterface.html#method_getOAuthAccessTokenSecret">getOAuthAccessTokenSecret()</a><br />
+                                                                    <a href="../classes/UniAlteri.Sellsy.Client.ClientInterface.html#method_setOAuthConsumerKey">setOAuthConsumerKey()</a><br />
+                                                                    <a href="../classes/UniAlteri.Sellsy.Client.ClientInterface.html#method_getOAuthConsumerKey">getOAuthConsumerKey()</a><br />
+                                                                    <a href="../classes/UniAlteri.Sellsy.Client.ClientInterface.html#method_setOAuthConsumerSecret">setOAuthConsumerSecret()</a><br />
+                                                                    <a href="../classes/UniAlteri.Sellsy.Client.ClientInterface.html#method_getOAuthConsumerSecret">getOAuthConsumerSecret()</a><br />
+                                                                    <a href="../classes/UniAlteri.Sellsy.Client.ClientInterface.html#method_getLastRequest">getLastRequest()</a><br />
+                                                                    <a href="../classes/UniAlteri.Sellsy.Client.ClientInterface.html#method_getLastAnswer">getLastAnswer()</a><br />
+                                                                    <a href="../classes/UniAlteri.Sellsy.Client.ClientInterface.html#method_requestApi">requestApi()</a><br />
+                                                                    <a href="../classes/UniAlteri.Sellsy.Client.ClientInterface.html#method_getInfos">getInfos()</a><br />
+                                                                    <a href="../classes/UniAlteri.Sellsy.Client.ClientInterface.html#method_accountData">accountData()</a><br />
+                                                                    <a href="../classes/UniAlteri.Sellsy.Client.ClientInterface.html#method_accountPrefs">accountPrefs()</a><br />
+                                                                    <a href="../classes/UniAlteri.Sellsy.Client.ClientInterface.html#method_purchase">purchase()</a><br />
+                                                                    <a href="../classes/UniAlteri.Sellsy.Client.ClientInterface.html#method_agenda">agenda()</a><br />
+                                                                    <a href="../classes/UniAlteri.Sellsy.Client.ClientInterface.html#method_annotations">annotations()</a><br />
+                                                                    <a href="../classes/UniAlteri.Sellsy.Client.ClientInterface.html#method_catalogue">catalogue()</a><br />
+                                                                    <a href="../classes/UniAlteri.Sellsy.Client.ClientInterface.html#method_customFields">customFields()</a><br />
+                                                                    <a href="../classes/UniAlteri.Sellsy.Client.ClientInterface.html#method_client">client()</a><br />
+                                                                    <a href="../classes/UniAlteri.Sellsy.Client.ClientInterface.html#method_staffs">staffs()</a><br />
+                                                                    <a href="../classes/UniAlteri.Sellsy.Client.ClientInterface.html#method_peoples">peoples()</a><br />
+                                                                    <a href="../classes/UniAlteri.Sellsy.Client.ClientInterface.html#method_document">document()</a><br />
+                                                                    <a href="../classes/UniAlteri.Sellsy.Client.ClientInterface.html#method_mails">mails()</a><br />
+                                                                    <a href="../classes/UniAlteri.Sellsy.Client.ClientInterface.html#method_event">event()</a><br />
+                                                                    <a href="../classes/UniAlteri.Sellsy.Client.ClientInterface.html#method_expense">expense()</a><br />
+                                                                    <a href="../classes/UniAlteri.Sellsy.Client.ClientInterface.html#method_opportunities">opportunities()</a><br />
+                                                                    <a href="../classes/UniAlteri.Sellsy.Client.ClientInterface.html#method_prospects">prospects()</a><br />
+                                                                    <a href="../classes/UniAlteri.Sellsy.Client.ClientInterface.html#method_smartTags">smartTags()</a><br />
+                                                                    <a href="../classes/UniAlteri.Sellsy.Client.ClientInterface.html#method_stat">stat()</a><br />
+                                                                    <a href="../classes/UniAlteri.Sellsy.Client.ClientInterface.html#method_stock">stock()</a><br />
+                                                                    <a href="../classes/UniAlteri.Sellsy.Client.ClientInterface.html#method_support">support()</a><br />
+                                                                    <a href="../classes/UniAlteri.Sellsy.Client.ClientInterface.html#method_timeTracking">timeTracking()</a><br />
+                                                            </section>
+                            <section class="span6">
+                                                                    <em>No constants found</em>
+                                                            </section>
+                        </section>
+                        <section class="row-fluid protected">
+                            <section class="span6">
+                                                                    <em>No protected methods found</em>
+                                                            </section>
+                            <section class="span6">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                        <section class="row-fluid private">
+                            <section class="span6">
+                                                                    <em>No private methods found</em>
+                                                            </section>
+                            <section class="span6">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                    </section>
+                </div>
+                <aside class="span4 detailsbar">
+                                        <dl>
+                        <dt>File</dt>
+                            <dd>
+                                <a href="../files/ClientInterface.html"><div class="path-wrapper">ClientInterface.php</div></a>
+                            </dd>
+                                                <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">\Default</div></dd>
+                                                
+                                                                            <dt>See also</dt>
+                                                                                    <dd><a href="http://teknoo.it/sellsy-client"><div class="namespace-wrapper">Project website</div></a></dd>
+                                                                        </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                            <tr>
+                            <th>copyright</th>
+                            <td>
+                                                                    <p>Copyright (c) 2009-2015 Uni Alteri (<a href="http://agence.net.ua">http://agence.net.ua</a>)</p>
+                                                            </td>
+                        </tr>
+                                            <tr>
+                            <th>license</th>
+                            <td>
+                                                                    <p><a href="http://teknoo.it/sellsy-client/license/mit">http://teknoo.it/sellsy-client/license/mit</a>         MIT License</p>
+                                                                    <p><a href="http://teknoo.it/sellsy-client/license/gpl-3.0">http://teknoo.it/sellsy-client/license/gpl-3.0</a>     GPL v3 License</p>
+                                                            </td>
+                        </tr>
+                                            <tr>
+                            <th>author</th>
+                            <td>
+                                                                    <p>Richard Déloge <a href="mailto:r.deloge@uni-alteri.com">r.deloge@uni-alteri.com</a></p>
+                                                            </td>
+                        </tr>
+                                        </table>
+                </aside>
+            </div>
+
+            
+                        <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Methods</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setApiUrl" name="method_setApiUrl" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setApiUrl()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setApiUrl(string  <span class="argument">$apiUrl</span>) : $this</pre>
+                <p><em>Update the api url.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$apiUrl </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getApiUrl" name="method_getApiUrl" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getApiUrl()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getApiUrl() : string</pre>
+                <p><em>Get the api url.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setOAuthAccessToken" name="method_setOAuthAccessToken" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setOAuthAccessToken()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setOAuthAccessToken(string  <span class="argument">$oauthAccessToken</span>) : $this</pre>
+                <p><em>Update the OAuth access token.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$oauthAccessToken </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getOAuthAccessToken" name="method_getOAuthAccessToken" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getOAuthAccessToken()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getOAuthAccessToken() : string</pre>
+                <p><em>Get the OAuth access token.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setOAuthAccessTokenSecret" name="method_setOAuthAccessTokenSecret" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setOAuthAccessTokenSecret()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setOAuthAccessTokenSecret(string  <span class="argument">$oauthAccessTokenSecret</span>) : $this</pre>
+                <p><em>Update the OAuth access secret token.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$oauthAccessTokenSecret </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getOAuthAccessTokenSecret" name="method_getOAuthAccessTokenSecret" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getOAuthAccessTokenSecret()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getOAuthAccessTokenSecret() : string</pre>
+                <p><em>Get the OAuth access secret token.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setOAuthConsumerKey" name="method_setOAuthConsumerKey" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setOAuthConsumerKey()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setOAuthConsumerKey(string  <span class="argument">$oauthConsumerKey</span>) : $this</pre>
+                <p><em>Update the OAuth consumer key.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$oauthConsumerKey </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getOAuthConsumerKey" name="method_getOAuthConsumerKey" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getOAuthConsumerKey()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getOAuthConsumerKey() : string</pre>
+                <p><em>Get the OAuth consumer key.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setOAuthConsumerSecret" name="method_setOAuthConsumerSecret" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setOAuthConsumerSecret()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setOAuthConsumerSecret(string  <span class="argument">$oauthConsumerSecret</span>) : $this</pre>
+                <p><em>Update the OAuth consumer secret.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$oauthConsumerSecret </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getOAuthConsumerSecret" name="method_getOAuthConsumerSecret" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getOAuthConsumerSecret()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getOAuthConsumerSecret() : string</pre>
+                <p><em>Get the OAuth consumer secret.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getLastRequest" name="method_getLastRequest" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getLastRequest()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getLastRequest() : array</pre>
+                <p><em></em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getLastAnswer" name="method_getLastAnswer" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getLastAnswer()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getLastAnswer() : mixed|\stdClass</pre>
+                <p><em></em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    mixed|\stdClass
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_requestApi" name="method_requestApi" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">requestApi()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">requestApi(array  <span class="argument">$requestSettings</span>) : \stdClass</pre>
+                <p><em>Method to perform a request to the api.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$requestSettings </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\UniAlteri\Sellsy\Client\Exception\RequestFailureException</dt>
+                            <dd><p>is the request can not be performed on the server</p></dd>
+                                                    <dt>\UniAlteri\Sellsy\Client\Exception\ErrorException</dt>
+                            <dd><p>if the server returned an error for this request</p></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    \stdClass
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getInfos" name="method_getInfos" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getInfos()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getInfos() : \stdClass</pre>
+                <p><em></em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    \stdClass
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_accountData" name="method_accountData" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">accountData()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">accountData() : \UniAlteri\Sellsy\Client\Collection\CollectionInterface</pre>
+                <p><em>Return collection methods of the api for Accountdatas.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/UniAlteri.Sellsy.Client.Collection.CollectionInterface.html">\UniAlteri\Sellsy\Client\Collection\CollectionInterface</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_accountPrefs" name="method_accountPrefs" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">accountPrefs()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">accountPrefs() : \UniAlteri\Sellsy\Client\Collection\CollectionInterface</pre>
+                <p><em>Return collection methods of the api for AccountPrefs.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/UniAlteri.Sellsy.Client.Collection.CollectionInterface.html">\UniAlteri\Sellsy\Client\Collection\CollectionInterface</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_purchase" name="method_purchase" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">purchase()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">purchase() : \UniAlteri\Sellsy\Client\Collection\CollectionInterface</pre>
+                <p><em>Return collection methods of the api for Purchase.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/UniAlteri.Sellsy.Client.Collection.CollectionInterface.html">\UniAlteri\Sellsy\Client\Collection\CollectionInterface</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_agenda" name="method_agenda" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">agenda()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">agenda() : \UniAlteri\Sellsy\Client\Collection\CollectionInterface</pre>
+                <p><em>Return collection methods of the api for Agenda.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/UniAlteri.Sellsy.Client.Collection.CollectionInterface.html">\UniAlteri\Sellsy\Client\Collection\CollectionInterface</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_annotations" name="method_annotations" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">annotations()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">annotations() : \UniAlteri\Sellsy\Client\Collection\CollectionInterface</pre>
+                <p><em>Return collection methods of the api for Annotations.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/UniAlteri.Sellsy.Client.Collection.CollectionInterface.html">\UniAlteri\Sellsy\Client\Collection\CollectionInterface</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_catalogue" name="method_catalogue" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">catalogue()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">catalogue() : \UniAlteri\Sellsy\Client\Collection\CollectionInterface</pre>
+                <p><em>Return collection methods of the api for Catalogue.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/UniAlteri.Sellsy.Client.Collection.CollectionInterface.html">\UniAlteri\Sellsy\Client\Collection\CollectionInterface</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_customFields" name="method_customFields" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">customFields()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">customFields() : \UniAlteri\Sellsy\Client\Collection\CollectionInterface</pre>
+                <p><em>Return collection methods of the api for CustomFields.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/UniAlteri.Sellsy.Client.Collection.CollectionInterface.html">\UniAlteri\Sellsy\Client\Collection\CollectionInterface</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_client" name="method_client" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">client()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">client() : \UniAlteri\Sellsy\Client\Collection\CollectionInterface</pre>
+                <p><em>Return collection methods of the api for Client.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/UniAlteri.Sellsy.Client.Collection.CollectionInterface.html">\UniAlteri\Sellsy\Client\Collection\CollectionInterface</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_staffs" name="method_staffs" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">staffs()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">staffs() : \UniAlteri\Sellsy\Client\Collection\CollectionInterface</pre>
+                <p><em>Return collection methods of the api for Staffs.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/UniAlteri.Sellsy.Client.Collection.CollectionInterface.html">\UniAlteri\Sellsy\Client\Collection\CollectionInterface</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_peoples" name="method_peoples" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">peoples()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">peoples() : \UniAlteri\Sellsy\Client\Collection\CollectionInterface</pre>
+                <p><em>Return collection methods of the api for Peoples.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/UniAlteri.Sellsy.Client.Collection.CollectionInterface.html">\UniAlteri\Sellsy\Client\Collection\CollectionInterface</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_document" name="method_document" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">document()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">document() : \UniAlteri\Sellsy\Client\Collection\CollectionInterface</pre>
+                <p><em>Return collection methods of the api for Document.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/UniAlteri.Sellsy.Client.Collection.CollectionInterface.html">\UniAlteri\Sellsy\Client\Collection\CollectionInterface</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_mails" name="method_mails" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">mails()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">mails() : \UniAlteri\Sellsy\Client\Collection\CollectionInterface</pre>
+                <p><em>Return collection methods of the api for Mails.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/UniAlteri.Sellsy.Client.Collection.CollectionInterface.html">\UniAlteri\Sellsy\Client\Collection\CollectionInterface</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_event" name="method_event" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">event()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">event() : \UniAlteri\Sellsy\Client\Collection\CollectionInterface</pre>
+                <p><em>Return collection methods of the api for Event.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/UniAlteri.Sellsy.Client.Collection.CollectionInterface.html">\UniAlteri\Sellsy\Client\Collection\CollectionInterface</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_expense" name="method_expense" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">expense()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">expense() : \UniAlteri\Sellsy\Client\Collection\CollectionInterface</pre>
+                <p><em>Return collection methods of the api for Expense.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/UniAlteri.Sellsy.Client.Collection.CollectionInterface.html">\UniAlteri\Sellsy\Client\Collection\CollectionInterface</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_opportunities" name="method_opportunities" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">opportunities()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">opportunities() : \UniAlteri\Sellsy\Client\Collection\CollectionInterface</pre>
+                <p><em>Return collection methods of the api for Opportunities.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/UniAlteri.Sellsy.Client.Collection.CollectionInterface.html">\UniAlteri\Sellsy\Client\Collection\CollectionInterface</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_prospects" name="method_prospects" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">prospects()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">prospects() : \UniAlteri\Sellsy\Client\Collection\CollectionInterface</pre>
+                <p><em>Return collection methods of the api for Prospects.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/UniAlteri.Sellsy.Client.Collection.CollectionInterface.html">\UniAlteri\Sellsy\Client\Collection\CollectionInterface</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_smartTags" name="method_smartTags" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">smartTags()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">smartTags() : \UniAlteri\Sellsy\Client\Collection\CollectionInterface</pre>
+                <p><em>Return collection methods of the api for SmartTags.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/UniAlteri.Sellsy.Client.Collection.CollectionInterface.html">\UniAlteri\Sellsy\Client\Collection\CollectionInterface</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_stat" name="method_stat" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">stat()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">stat() : \UniAlteri\Sellsy\Client\Collection\CollectionInterface</pre>
+                <p><em>Return collection methods of the api for Stat.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/UniAlteri.Sellsy.Client.Collection.CollectionInterface.html">\UniAlteri\Sellsy\Client\Collection\CollectionInterface</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_stock" name="method_stock" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">stock()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">stock() : \UniAlteri\Sellsy\Client\Collection\CollectionInterface</pre>
+                <p><em>Return collection methods of the api for Stock.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/UniAlteri.Sellsy.Client.Collection.CollectionInterface.html">\UniAlteri\Sellsy\Client\Collection\CollectionInterface</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_support" name="method_support" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">support()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">support() : \UniAlteri\Sellsy\Client\Collection\CollectionInterface</pre>
+                <p><em>Return collection methods of the api for Support.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/UniAlteri.Sellsy.Client.Collection.CollectionInterface.html">\UniAlteri\Sellsy\Client\Collection\CollectionInterface</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_timeTracking" name="method_timeTracking" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">timeTracking()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">timeTracking() : \UniAlteri\Sellsy\Client\Collection\CollectionInterface</pre>
+                <p><em>Return collection methods of the api for Timetracking.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/UniAlteri.Sellsy.Client.Collection.CollectionInterface.html">\UniAlteri\Sellsy\Client\Collection\CollectionInterface</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                                    </div>
+    </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label">ClientInterface.php</h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/ClientInterface.php.txt" class="language-php"></pre>
+        </div>
+    </div>
+
+    <footer class="row-fluid">
+        <section class="span10 offset2">
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <section class="row-fluid footer-sections">
+                        <section class="span4">
+                                                        <h1><i class="icon-code"></i></h1>
+                            <div>
+                                <ul>
+                                                                            <li><a href="../namespaces/UniAlteri.html">\UniAlteri</a></li>
+                                                                    </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-bar-chart"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../graphs/class.html">Class Hierarchy Diagram</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-pushpin"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../reports/errors.html">Errors</a></li>
+                                    <li><a href="../reports/markers.html">Markers</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <hr />
+                    Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
+                    on February 20th, 2015 at 10:23.
+                </section>
+            </section>
+        </section>
+    </footer>
+</div>
+
+</body>
+</html>
