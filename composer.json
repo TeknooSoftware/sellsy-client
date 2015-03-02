@@ -22,9 +22,9 @@
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0",
-        "phpunit/phpunit-mock-objects": "*",
-        "phpunit/phpunit-selenium": "*",
-        "phpunit/phpunit-story": "*"
+        "phpunit/phpunit-mock-objects": "~2.3",
+        "phpunit/phpunit-selenium": "~1.4",
+        "phpunit/phpunit-story": "~1.0"
     },
     "minimum-stability": "beta",
     "autoload": {
