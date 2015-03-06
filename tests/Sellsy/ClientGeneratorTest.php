@@ -81,6 +81,29 @@ class ClientGeneratorTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('UniAlteri\Sellsy\Client\Client', $client2);
     }
 
+    public function testConstructorEmptyWithScalarArgs()
+    {
+        $clientGenerator = new ClientGenerator(null, null, 'url1', 'token1', 'token2', 'token3', 'token4');
+
+        $client1 = $clientGenerator->getClient();
+        $client2 = $clientGenerator->getClient();
+        $this->assertNotSame($client2, $client1);
+        $this->assertInstanceOf('UniAlteri\Sellsy\Client\ClientInterface', $client1);
+        $this->assertInstanceOf('UniAlteri\Sellsy\Client\ClientInterface', $client2);
+        $this->assertInstanceOf('UniAlteri\Sellsy\Client\Client', $client1);
+        $this->assertInstanceOf('UniAlteri\Sellsy\Client\Client', $client2);
+        $this->assertEquals('url1', $client1->getApiUrl());
+        $this->assertEquals('token1', $client1->getOAuthAccessToken());
+        $this->assertEquals('token2', $client1->getOAuthAccessTokenSecret());
+        $this->assertEquals('token3', $client1->getOAuthConsumerKey());
+        $this->assertEquals('token4', $client1->getOAuthConsumerSecret());
+        $this->assertEquals('url1', $client2->getApiUrl());
+        $this->assertEquals('token1', $client2->getOAuthAccessToken());
+        $this->assertEquals('token2', $client2->getOAuthAccessTokenSecret());
+        $this->assertEquals('token3', $client2->getOAuthConsumerKey());
+        $this->assertEquals('token4', $client2->getOAuthConsumerSecret());
+    }
+
     /**
      * @expectedException \InvalidArgumentException
      */

@@ -86,7 +86,12 @@ class ClientGenerator
             //Clone next clients with default request generator and collection generator
             $this->originalClient = new Client(
                 new RequestGenerator(),
-                new CollectionGenerator()
+                new CollectionGenerator(),
+                $apiUrl,
+                $oauthAccessToken,
+                $oauthAccessTokenSecret,
+                $oauthConsumerKey,
+                $oauthConsumerSecret
             );
         } else {
             throw new \InvalidArgumentException('Error, invalid arguments passed to the Sellsy client generator');
