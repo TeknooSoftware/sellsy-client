@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Sellsy Client.
  *
@@ -355,7 +356,7 @@ class Client implements ClientInterface
                 array(
                     CURLOPT_HTTPHEADER => $this->computeHeaders(),
                     CURLOPT_POSTFIELDS => $encodedRequest,
-                    CURLOPT_SSL_VERIFYPEER => !preg_match("!^https!i", $this->apiUrl),
+                    CURLOPT_SSL_VERIFYPEER => !preg_match('!^https!i', $this->apiUrl),
                 )
             );
 

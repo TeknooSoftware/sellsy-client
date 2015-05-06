@@ -1,4 +1,5 @@
 <?php
+
 defined('RUN_CLI_MODE')
     || define('RUN_CLI_MODE', true);
 
