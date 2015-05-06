@@ -376,7 +376,16 @@ class Client implements ClientInterface
 
         //Bad request, error returned by the api, throw an error
         if (!empty($answer->status) && 'error' == $answer->status) {
-            throw new ErrorException($answer->error);
+            if (!empty($answer->error->message)) {
+                //Retrieve error message like it's defined in Sellsy API documentation
+                throw new ErrorException($answer->error->message);
+            } elseif(is_string($answer->error)) {
+                //Retrieve error message (sometime, error is not an object...)
+                throw new ErrorException($answer->error);
+            } else {
+                //Other case, return directly the answer
+                throw new ErrorException($result);
+            }
         }
 
         $this->lastAnswer = $answer;
