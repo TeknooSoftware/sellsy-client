@@ -1,7 +1,7 @@
 Uni Alteri - Sellsy client
 ==========================
 
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/1289caed-a0a8-4610-b3f2-8577bdc81153/big.png)](https://insight.sensiolabs.com/projects/1289caed-a0a8-4610-b3f2-8577bdc81153)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/1289caed-a0a8-4610-b3f2-8577bdc81153/big.png)](https://insight.sensiolabs.com/projects/1289caed-a0a8-4610-b3f2-8577bdc81153) [![Build Status](https://travis-ci.org/UniAlteri/sellsy-client.svg?branch=master)](https://travis-ci.org/UniAlteri/sellsy-client)
 
 Welcome and thank you to having downloaded this library.  This is a library for you to use 
 [Sellsy API](http://api.sellsy.com/) and enable your applications and websites to communicate with 
