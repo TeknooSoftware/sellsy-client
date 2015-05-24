@@ -11,3 +11,5 @@ ini_set('memory_limit', '32M');
 date_default_timezone_set('UTC');
 
 error_reporting(E_ALL | E_STRICT);
+
+require_once(__DIR__.'/../vendor/autoload.php');
