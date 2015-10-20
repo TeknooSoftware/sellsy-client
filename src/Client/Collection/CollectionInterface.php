@@ -11,7 +11,8 @@
  * obtain it through the world-wide-web, please send an email
  * to contact@uni-alteri.com so we can send you a copy immediately.
  *
- * @copyright   Copyright (c) 2009-2015 Uni Alteri (http://uni-alteri.com)
+ * @copyright   Copyright (c) 2009-2016 Uni Alteri (http://uni-alteri.com)
+ * @copyright   Copyright (c) 2009-2016 Richard Déloge (r.deloge@uni-alteri.com)
  *
  * @link        http://teknoo.it/sellsy-client Project website
  *
@@ -30,7 +31,8 @@ use UniAlteri\Sellsy\Client\Client;
  * Interface CollectionInterface
  * Interface to implement class to create collection of methods, like on the Sellsy API.
  *
- * @copyright   Copyright (c) 2009-2015 Uni Alteri (http://uni-alteri.com)
+ * @copyright   Copyright (c) 2009-2016 Uni Alteri (http://uni-alteri.com)
+ * @copyright   Copyright (c) 2009-2016 Richard Déloge (r.deloge@uni-alteri.com)
  *
  * @link        http://teknoo.it/sellsy-client Project website
  *
