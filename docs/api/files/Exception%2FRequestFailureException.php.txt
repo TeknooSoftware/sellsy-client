@@ -14,10 +14,10 @@
  * @copyright   Copyright (c) 2009-2016 Uni Alteri (http://uni-alteri.com)
  * @copyright   Copyright (c) 2009-2016 Richard Déloge (r.deloge@uni-alteri.com)
  *
- * @link        http://teknoo.it/sellsy-client Project website
+ * @link        http://teknoo.software/sellsy-client Project website
  *
- * @license     http://teknoo.it/sellsy-client/license/mit         MIT License
- * @license     http://teknoo.it/sellsy-client/license/gpl-3.0     GPL v3 License
+ * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
+ * @license     http://teknoo.software/sellsy-client/license/gpl-3.0     GPL v3 License
  * @author      Richard Déloge <r.deloge@uni-alteri.com>
  *
  * @version     0.8.0
@@ -32,10 +32,10 @@ namespace Teknoo\Sellsy\Client\Exception;
  * @copyright   Copyright (c) 2009-2016 Uni Alteri (http://uni-alteri.com)
  * @copyright   Copyright (c) 2009-2016 Richard Déloge (r.deloge@uni-alteri.com)
  *
- * @link        http://teknoo.it/sellsy-client Project website
+ * @link        http://teknoo.software/sellsy-client Project website
  *
- * @license     http://teknoo.it/sellsy-client/license/mit         MIT License
- * @license     http://teknoo.it/sellsy-client/license/gpl-3.0     GPL v3 License
+ * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
+ * @license     http://teknoo.software/sellsy-client/license/gpl-3.0     GPL v3 License
  * @author      Richard Déloge <r.deloge@uni-alteri.com>
  */
 class RequestFailureException extends \RuntimeException
