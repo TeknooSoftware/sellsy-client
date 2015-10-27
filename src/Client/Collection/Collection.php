@@ -23,10 +23,10 @@
  * @version     0.8.0
  */
 
-namespace UniAlteri\Sellsy\Client\Collection;
+namespace Teknoo\Sellsy\Client\Collection;
 
-use UniAlteri\Sellsy\Client\Client;
-use UniAlteri\Sellsy\Client\ClientInterface;
+use Teknoo\Sellsy\Client\Client;
+use Teknoo\Sellsy\Client\ClientInterface;
 
 /**
  * Class Collection

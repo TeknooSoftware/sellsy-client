@@ -1,7 +1,7 @@
-Uni Alteri - Sellsy client
+Teknoo Software - Sellsy client
 ==========================
 
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/1289caed-a0a8-4610-b3f2-8577bdc81153/big.png)](https://insight.sensiolabs.com/projects/1289caed-a0a8-4610-b3f2-8577bdc81153) [![Build Status](https://travis-ci.org/UniAlteri/sellsy-client.svg?branch=master)](https://travis-ci.org/UniAlteri/sellsy-client)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/1289caed-a0a8-4610-b3f2-8577bdc81153/big.png)](https://insight.sensiolabs.com/projects/1289caed-a0a8-4610-b3f2-8577bdc81153) [![Build Status](https://travis-ci.org/TeknooSoftware/sellsy-client.svg?branch=master)](https://travis-ci.org/TeknooSoftware/sellsy-client)
 
 Welcome and thank you to having downloaded this library.  This is a library for you to use 
 [Sellsy API](http://api.sellsy.com/) and enable your applications and websites to communicate with 
@@ -15,24 +15,30 @@ Installation
 ------------
 To install this library with composer, run this command :
 
-    composer require unialteri/sellsy-client
+    composer require teknoo/sellsy-client
 
 Requirements
 ------------
 This library requires :
 
     * PHP 5.4+
-    * Uni Alteri Curl Request library
+    * Teknoo Software Curl Request library
     * cUrl extension
 
 API Documentation
 -----------------
-Generated documentation from the library with PhpDocumentor : [Open](https://cdn.rawgit.com/UniAlteri/sellsy-client/master/docs/api/index.html).
+Generated documentation from the library with PhpDocumentor : [Open](https://cdn.rawgit.com/TeknooSoftware/sellsy-client/master/docs/api/index.html).
 
 Credits
 -------
 Richard Déloge - <r.deloge@uni-alteri.com> - Lead developer.
-Uni Alteri - <http://uni-alteri.com> - <http://teknoo.it>
+Teknoo Software - <http://teknoo.software>
+Uni Alteri - <http://uni-alteri.com>
+
+About Teknoo Software
+---------------------
+**Teknoo Software** is the [Uni Alteri](http://uni-alteri.com)'s PHP software editor, founded by Richard Déloge, also co-founder of the web agency Uni Alteri. 
+Teknoo Software shares the same DNA as Uni Alteri : Provide to our partners and to the community a set of high quality services or software, sharing knowledge and skills.
 
 License
 -------

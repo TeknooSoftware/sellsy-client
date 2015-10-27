@@ -1,15 +1,15 @@
 <?php
 
-namespace UniAlteri\Tests\Sellsy\Client;
+namespace Teknoo\Tests\Sellsy\Client;
 
-use UniAlteri\Curl\RequestGenerator;
-use UniAlteri\Sellsy\Client\ClientGenerator;
-use UniAlteri\Sellsy\Client\Collection\CollectionGeneratorInterface;
+use Teknoo\Curl\RequestGenerator;
+use Teknoo\Sellsy\Client\ClientGenerator;
+use Teknoo\Sellsy\Client\Collection\CollectionGeneratorInterface;
 
 /**
  * Class ClientGeneratorTest.
  *
- * @covers UniAlteri\Sellsy\Client\ClientGenerator
+ * @covers Teknoo\Sellsy\Client\ClientGenerator
  */
 class ClientGeneratorTest extends \PHPUnit_Framework_TestCase
 {
@@ -18,7 +18,7 @@ class ClientGeneratorTest extends \PHPUnit_Framework_TestCase
      */
     protected function buildCollectionGeneratorMock()
     {
-        return $this->getMock('UniAlteri\Sellsy\Client\Collection\CollectionGeneratorInterface');
+        return $this->getMock('Teknoo\Sellsy\Client\Collection\CollectionGeneratorInterface');
     }
 
     /**
@@ -26,12 +26,12 @@ class ClientGeneratorTest extends \PHPUnit_Framework_TestCase
      */
     protected function buildRequestGeneratorMock()
     {
-        return $this->getMock('UniAlteri\Curl\RequestGenerator');
+        return $this->getMock('Teknoo\Curl\RequestGenerator');
     }
 
     public function testConstructorWithOriginal()
     {
-        $originalClient = $this->getMock('UniAlteri\Sellsy\Client\ClientInterface', array(), array(), '', false);
+        $originalClient = $this->getMock('Teknoo\Sellsy\Client\ClientInterface', array(), array(), '', false);
         $clientGenerator = new ClientGenerator($originalClient);
 
         $client1 = $clientGenerator->getClient();
@@ -39,10 +39,10 @@ class ClientGeneratorTest extends \PHPUnit_Framework_TestCase
         $this->assertNotSame($originalClient, $client1);
         $this->assertNotSame($originalClient, $client2);
         $this->assertNotSame($client2, $client1);
-        $this->assertInstanceOf('UniAlteri\Sellsy\Client\ClientInterface', $client1);
-        $this->assertInstanceOf('UniAlteri\Sellsy\Client\ClientInterface', $client2);
-        $this->assertNotInstanceOf('UniAlteri\Sellsy\Client\Client', $client1);
-        $this->assertNotInstanceOf('UniAlteri\Sellsy\Client\Client', $client2);
+        $this->assertInstanceOf('Teknoo\Sellsy\Client\ClientInterface', $client1);
+        $this->assertInstanceOf('Teknoo\Sellsy\Client\ClientInterface', $client2);
+        $this->assertNotInstanceOf('Teknoo\Sellsy\Client\Client', $client1);
+        $this->assertNotInstanceOf('Teknoo\Sellsy\Client\Client', $client2);
     }
 
     public function testConstructorWithParams()
@@ -60,10 +60,10 @@ class ClientGeneratorTest extends \PHPUnit_Framework_TestCase
         $client1 = $clientGenerator->getClient();
         $client2 = $clientGenerator->getClient();
         $this->assertNotSame($client2, $client1);
-        $this->assertInstanceOf('UniAlteri\Sellsy\Client\ClientInterface', $client1);
-        $this->assertInstanceOf('UniAlteri\Sellsy\Client\ClientInterface', $client2);
-        $this->assertInstanceOf('UniAlteri\Sellsy\Client\Client', $client1);
-        $this->assertInstanceOf('UniAlteri\Sellsy\Client\Client', $client2);
+        $this->assertInstanceOf('Teknoo\Sellsy\Client\ClientInterface', $client1);
+        $this->assertInstanceOf('Teknoo\Sellsy\Client\ClientInterface', $client2);
+        $this->assertInstanceOf('Teknoo\Sellsy\Client\Client', $client1);
+        $this->assertInstanceOf('Teknoo\Sellsy\Client\Client', $client2);
         $this->assertEquals('http://fooBar', $client1->getApiUrl());
         $this->assertEquals('http://fooBar', $client1->getApiUrl());
     }
@@ -75,10 +75,10 @@ class ClientGeneratorTest extends \PHPUnit_Framework_TestCase
         $client1 = $clientGenerator->getClient();
         $client2 = $clientGenerator->getClient();
         $this->assertNotSame($client2, $client1);
-        $this->assertInstanceOf('UniAlteri\Sellsy\Client\ClientInterface', $client1);
-        $this->assertInstanceOf('UniAlteri\Sellsy\Client\ClientInterface', $client2);
-        $this->assertInstanceOf('UniAlteri\Sellsy\Client\Client', $client1);
-        $this->assertInstanceOf('UniAlteri\Sellsy\Client\Client', $client2);
+        $this->assertInstanceOf('Teknoo\Sellsy\Client\ClientInterface', $client1);
+        $this->assertInstanceOf('Teknoo\Sellsy\Client\ClientInterface', $client2);
+        $this->assertInstanceOf('Teknoo\Sellsy\Client\Client', $client1);
+        $this->assertInstanceOf('Teknoo\Sellsy\Client\Client', $client2);
     }
 
     public function testConstructorEmptyWithScalarArgs()
@@ -88,10 +88,10 @@ class ClientGeneratorTest extends \PHPUnit_Framework_TestCase
         $client1 = $clientGenerator->getClient();
         $client2 = $clientGenerator->getClient();
         $this->assertNotSame($client2, $client1);
-        $this->assertInstanceOf('UniAlteri\Sellsy\Client\ClientInterface', $client1);
-        $this->assertInstanceOf('UniAlteri\Sellsy\Client\ClientInterface', $client2);
-        $this->assertInstanceOf('UniAlteri\Sellsy\Client\Client', $client1);
-        $this->assertInstanceOf('UniAlteri\Sellsy\Client\Client', $client2);
+        $this->assertInstanceOf('Teknoo\Sellsy\Client\ClientInterface', $client1);
+        $this->assertInstanceOf('Teknoo\Sellsy\Client\ClientInterface', $client2);
+        $this->assertInstanceOf('Teknoo\Sellsy\Client\Client', $client1);
+        $this->assertInstanceOf('Teknoo\Sellsy\Client\Client', $client2);
         $this->assertEquals('url1', $client1->getApiUrl());
         $this->assertEquals('token1', $client1->getOAuthAccessToken());
         $this->assertEquals('token2', $client1->getOAuthAccessTokenSecret());

@@ -1,10 +1,10 @@
-#Uni Alteri - Sellsy client - Quick startup
+#Teknoo Software - Sellsy client - Quick startup
 
 ##Installation
 
 To install this library with composer, run this command: 
 
-    composer require unialteri/sellsy-client
+    composer require teknoo/sellsy-client
     
 ##Get from your Sellsy account your API credentials
 
@@ -25,7 +25,7 @@ To identify clients, the Sellsy API use the standard protocol OAuth.
 All clients are instantiated by the generator :
      
      //Create the generator
-     $clientGenerator = new UniAlteri\Sellsy\Client\ClientGenerator();
+     $clientGenerator = new Teknoo\Sellsy\Client\ClientGenerator();
      //Get a new client
      $client = $clientGenerator->getClient();
      //Configure the client to use the API
@@ -54,9 +54,9 @@ To call a method with arguments, you need pass them in an array
     
 On errors, the client can throw two types of exceptions :
     
-    - `UniAlteri\Sellsy\Client\Exception\RequestFailureException` 
+    - `Teknoo\Sellsy\Client\Exception\RequestFailureException` 
     when the request fails (bad url, unavailable server, bad formed HTTP request, bad OAuth credentials)
-    - `UniAlteri\Sellsy\Client\Exception\ErrorException`
+    - `Teknoo\Sellsy\Client\Exception\ErrorException`
     when the API return an error, unknown method or bad arguments
     
 Enjoy !

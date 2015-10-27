@@ -23,13 +23,13 @@
  * @version     0.8.0
  */
 
-namespace UniAlteri\Sellsy\Client;
+namespace Teknoo\Sellsy\Client;
 
-use UniAlteri\Curl\RequestGenerator;
-use UniAlteri\Sellsy\Client\Collection\CollectionGeneratorInterface;
-use UniAlteri\Sellsy\Client\Collection\CollectionInterface;
-use UniAlteri\Sellsy\Client\Exception\ErrorException;
-use UniAlteri\Sellsy\Client\Exception\RequestFailureException;
+use Teknoo\Curl\RequestGenerator;
+use Teknoo\Sellsy\Client\Collection\CollectionGeneratorInterface;
+use Teknoo\Sellsy\Client\Collection\CollectionInterface;
+use Teknoo\Sellsy\Client\Exception\ErrorException;
+use Teknoo\Sellsy\Client\Exception\RequestFailureException;
 
 /**
  * Class Client
@@ -381,7 +381,7 @@ class Client implements ClientInterface
             if (!empty($answer->error->message)) {
                 //Retrieve error message like it's defined in Sellsy API documentation
                 throw new ErrorException($answer->error->message);
-            } elseif(is_string($answer->error)) {
+            } elseif (is_string($answer->error)) {
                 //Retrieve error message (sometime, error is not an object...)
                 throw new ErrorException($answer->error);
             } else {

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Sellsy Client.
  *
@@ -22,11 +23,11 @@
  * @version     0.8.0
  */
 
-namespace UniAlteri\Sellsy\Client;
+namespace Teknoo\Sellsy\Client;
 
-use UniAlteri\Curl\RequestGenerator;
-use UniAlteri\Sellsy\Client\Collection\CollectionGenerator;
-use UniAlteri\Sellsy\Client\Collection\CollectionGeneratorInterface;
+use Teknoo\Curl\RequestGenerator;
+use Teknoo\Sellsy\Client\Collection\CollectionGenerator;
+use Teknoo\Sellsy\Client\Collection\CollectionGeneratorInterface;
 
 /**
  * Class ClientGenerator
@@ -88,7 +89,12 @@ class ClientGenerator
             //Clone next clients with default request generator and collection generator
             $this->originalClient = new Client(
                 new RequestGenerator(),
-                new CollectionGenerator()
+                new CollectionGenerator(),
+                $apiUrl,
+                $oauthAccessToken,
+                $oauthAccessTokenSecret,
+                $oauthConsumerKey,
+                $oauthConsumerSecret
             );
         } else {
             throw new \InvalidArgumentException('Error, invalid arguments passed to the Sellsy client generator');

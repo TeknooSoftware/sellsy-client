@@ -23,11 +23,11 @@
  * @version     0.8.0
  */
 
-namespace UniAlteri\Sellsy\Client;
+namespace Teknoo\Sellsy\Client;
 
-use UniAlteri\Sellsy\Client\Collection\CollectionInterface;
-use UniAlteri\Sellsy\Client\Exception\ErrorException;
-use UniAlteri\Sellsy\Client\Exception\RequestFailureException;
+use Teknoo\Sellsy\Client\Collection\CollectionInterface;
+use Teknoo\Sellsy\Client\Exception\ErrorException;
+use Teknoo\Sellsy\Client\Exception\RequestFailureException;
 
 /**
  * Interface ClientInterface

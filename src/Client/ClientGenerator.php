@@ -23,11 +23,11 @@
  * @version     0.8.0
  */
 
-namespace UniAlteri\Sellsy\Client;
+namespace Teknoo\Sellsy\Client;
 
-use UniAlteri\Curl\RequestGenerator;
-use UniAlteri\Sellsy\Client\Collection\CollectionGenerator;
-use UniAlteri\Sellsy\Client\Collection\CollectionGeneratorInterface;
+use Teknoo\Curl\RequestGenerator;
+use Teknoo\Sellsy\Client\Collection\CollectionGenerator;
+use Teknoo\Sellsy\Client\Collection\CollectionGeneratorInterface;
 
 /**
  * Class ClientGenerator

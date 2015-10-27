@@ -1,19 +1,19 @@
 <?php
 
-namespace UniAlteri\Tests\Sellsy\Client\Collection;
+namespace Teknoo\Tests\Sellsy\Client\Collection;
 
-use UniAlteri\Sellsy\Client\Collection\Collection;
+use Teknoo\Sellsy\Client\Collection\Collection;
 
 /**
  * Class CollectionTest.
  *
- * @covers UniAlteri\Sellsy\Client\Collection\Collection
+ * @covers Teknoo\Sellsy\Client\Collection\Collection
  */
 class CollectionTest extends \PHPUnit_Framework_TestCase
 {
     public function testGetSetClient()
     {
-        $client = $this->getMock('UniAlteri\Sellsy\Client\Client', [], [], '', false);
+        $client = $this->getMock('Teknoo\Sellsy\Client\Client', [], [], '', false);
         $collection = new Collection();
         $this->assertNull($collection->getClient());
         $this->assertSame($collection, $collection->setClient($client));
@@ -30,7 +30,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     public function testConstructor()
     {
-        $client = $this->getMock('UniAlteri\Sellsy\Client\Client', [], [], '', false);
+        $client = $this->getMock('Teknoo\Sellsy\Client\Client', [], [], '', false);
         $collection = new Collection($client, 'fooBar');
         $this->assertSame($client, $collection->getClient());
         $this->assertSame('fooBar', $collection->getCollectionName());
@@ -38,7 +38,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     public function testCallNotArgs()
     {
-        $client = $this->getMock('UniAlteri\Sellsy\Client\Client', [], [], '', false);
+        $client = $this->getMock('Teknoo\Sellsy\Client\Client', [], [], '', false);
         $collection = new Collection($client, 'fooBar');
 
         $client->expects($this->once())
@@ -58,7 +58,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     public function testCallWithArgs()
     {
-        $client = $this->getMock('UniAlteri\Sellsy\Client\Client', [], [], '', false);
+        $client = $this->getMock('Teknoo\Sellsy\Client\Client', [], [], '', false);
         $collection = new Collection($client, 'fooBar');
 
         $client->expects($this->once())

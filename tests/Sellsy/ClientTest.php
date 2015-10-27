@@ -1,17 +1,17 @@
 <?php
 
-namespace UniAlteri\Tests\Sellsy\Client;
+namespace Teknoo\Tests\Sellsy\Client;
 
-use UniAlteri\Curl\ErrorException;
-use UniAlteri\Curl\RequestGenerator;
-use UniAlteri\Sellsy\Client\Client;
-use UniAlteri\Sellsy\Client\Collection\CollectionGeneratorInterface;
-use UniAlteri\Sellsy\Client\Exception\RequestFailureException;
+use Teknoo\Curl\ErrorException;
+use Teknoo\Curl\RequestGenerator;
+use Teknoo\Sellsy\Client\Client;
+use Teknoo\Sellsy\Client\Collection\CollectionGeneratorInterface;
+use Teknoo\Sellsy\Client\Exception\RequestFailureException;
 
 /**
  * Class ClientTest.
  *
- * @covers UniAlteri\Sellsy\Client\Client
+ * @covers Teknoo\Sellsy\Client\Client
  */
 class ClientTest extends \PHPUnit_Framework_TestCase
 {
@@ -20,7 +20,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     protected function buildCollectionGeneratorMock()
     {
-        return $this->getMock('UniAlteri\Sellsy\Client\Collection\CollectionGeneratorInterface');
+        return $this->getMock('Teknoo\Sellsy\Client\Collection\CollectionGeneratorInterface');
     }
 
     /**
@@ -28,7 +28,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     protected function buildRequestGeneratorMock()
     {
-        return $this->getMock('UniAlteri\Curl\RequestGenerator');
+        return $this->getMock('Teknoo\Curl\RequestGenerator');
     }
 
     public function testSetApiUrl()
@@ -133,7 +133,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     public function testRequestApiBadCall()
     {
-        $request = $this->getMock('UniAlteri\Curl\RequestInterface');
+        $request = $this->getMock('Teknoo\Curl\RequestInterface');
 
         $collectionGenerator = $this->buildCollectionGeneratorMock();
         $requestGenerator = $this->buildRequestGeneratorMock();
@@ -212,7 +212,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                 )
             );
         } catch (RequestFailureException $e) {
-            $this->assertInstanceOf('UniAlteri\Curl\ErrorException', $e->getPrevious());
+            $this->assertInstanceOf('Teknoo\Curl\ErrorException', $e->getPrevious());
         } catch (\Exception $e) {
             $this->fail('Error, on request error, the client must throw an RequestFailureException exception');
         }
@@ -220,7 +220,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     public function testRequestApiOAuthError()
     {
-        $request = $this->getMock('UniAlteri\Curl\RequestInterface');
+        $request = $this->getMock('Teknoo\Curl\RequestInterface');
 
         $collectionGenerator = $this->buildCollectionGeneratorMock();
         $requestGenerator = $this->buildRequestGeneratorMock();
@@ -307,7 +307,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     public function testRequestApiServerError()
     {
-        $request = $this->getMock('UniAlteri\Curl\RequestInterface');
+        $request = $this->getMock('Teknoo\Curl\RequestInterface');
 
         $collectionGenerator = $this->buildCollectionGeneratorMock();
         $requestGenerator = $this->buildRequestGeneratorMock();
@@ -392,7 +392,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                     ),
                 )
             );
-        } catch (\UniAlteri\Sellsy\Client\Exception\ErrorException $e) {
+        } catch (\Teknoo\Sellsy\Client\Exception\ErrorException $e) {
             $this->assertEquals('message error', $e->getMessage());
         } catch (\Exception $e) {
             $this->fail('Error, on bad request, the client must throw an ErrorException exception');
@@ -401,7 +401,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     public function testRequestApiServerError2()
     {
-        $request = $this->getMock('UniAlteri\Curl\RequestInterface');
+        $request = $this->getMock('Teknoo\Curl\RequestInterface');
 
         $collectionGenerator = $this->buildCollectionGeneratorMock();
         $requestGenerator = $this->buildRequestGeneratorMock();
@@ -463,7 +463,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                         'status' => 'error',
                         'error' => array(
                             'code' => 'code',
-                            'message' => 'message error object'
+                            'message' => 'message error object',
                         ),
                     )
                 )
@@ -489,7 +489,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                     ),
                 )
             );
-        } catch (\UniAlteri\Sellsy\Client\Exception\ErrorException $e) {
+        } catch (\Teknoo\Sellsy\Client\Exception\ErrorException $e) {
             $this->assertEquals('message error object', $e->getMessage());
         } catch (\Exception $e) {
             $this->fail('Error, on bad request, the client must throw an ErrorException exception');
@@ -498,7 +498,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     public function testRequestApiServerError3()
     {
-        $request = $this->getMock('UniAlteri\Curl\RequestInterface');
+        $request = $this->getMock('Teknoo\Curl\RequestInterface');
 
         $collectionGenerator = $this->buildCollectionGeneratorMock();
         $requestGenerator = $this->buildRequestGeneratorMock();
@@ -560,7 +560,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                         'status' => 'error',
                         'error' => array(
                             'code' => 'code',
-                            'fooBar' => 'message error object'
+                            'fooBar' => 'message error object',
                         ),
                     )
                 )
@@ -586,14 +586,14 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                     ),
                 )
             );
-        } catch (\UniAlteri\Sellsy\Client\Exception\ErrorException $e) {
+        } catch (\Teknoo\Sellsy\Client\Exception\ErrorException $e) {
             $this->assertEquals(
                 json_encode(
                     array(
                         'status' => 'error',
                         'error' => array(
                             'code' => 'code',
-                            'fooBar' => 'message error object'
+                            'fooBar' => 'message error object',
                         ),
                     )
                 ),
@@ -606,7 +606,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     public function testRequestApiGood()
     {
-        $request = $this->getMock('UniAlteri\Curl\RequestInterface');
+        $request = $this->getMock('Teknoo\Curl\RequestInterface');
 
         $collectionGenerator = $this->buildCollectionGeneratorMock();
         $requestGenerator = $this->buildRequestGeneratorMock();
@@ -700,7 +700,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     public function testRequestApiGoodAutoDateTime()
     {
-        $request = $this->getMock('UniAlteri\Curl\RequestInterface');
+        $request = $this->getMock('Teknoo\Curl\RequestInterface');
 
         $collectionGenerator = $this->buildCollectionGeneratorMock();
         $requestGenerator = $this->buildRequestGeneratorMock();
@@ -793,7 +793,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     public function testRequestApiGoodSsl()
     {
-        $request = $this->getMock('UniAlteri\Curl\RequestInterface');
+        $request = $this->getMock('Teknoo\Curl\RequestInterface');
 
         $collectionGenerator = $this->buildCollectionGeneratorMock();
         $requestGenerator = $this->buildRequestGeneratorMock();
@@ -887,7 +887,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     public function testGetLastRequestNotExec()
     {
-        $request = $this->getMock('UniAlteri\Curl\RequestInterface');
+        $request = $this->getMock('Teknoo\Curl\RequestInterface');
 
         $collectionGenerator = $this->buildCollectionGeneratorMock();
         $requestGenerator = $this->buildRequestGeneratorMock();
@@ -989,7 +989,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     public function testGetLastRequestExec()
     {
-        $request = $this->getMock('UniAlteri\Curl\RequestInterface');
+        $request = $this->getMock('Teknoo\Curl\RequestInterface');
 
         $collectionGenerator = $this->buildCollectionGeneratorMock();
         $requestGenerator = $this->buildRequestGeneratorMock();
@@ -1087,7 +1087,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     public function testGetLastAnswerNotExec()
     {
-        $request = $this->getMock('UniAlteri\Curl\RequestInterface');
+        $request = $this->getMock('Teknoo\Curl\RequestInterface');
 
         $collectionGenerator = $this->buildCollectionGeneratorMock();
         $requestGenerator = $this->buildRequestGeneratorMock();
@@ -1181,7 +1181,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     public function testGetLastAnswerExec()
     {
-        $request = $this->getMock('UniAlteri\Curl\RequestInterface');
+        $request = $this->getMock('Teknoo\Curl\RequestInterface');
 
         $collectionGenerator = $this->buildCollectionGeneratorMock();
         $requestGenerator = $this->buildRequestGeneratorMock();
@@ -1277,7 +1277,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     public function testGetLastAnswerErrorAfterSuccess()
     {
-        $request = $this->getMock('UniAlteri\Curl\RequestInterface');
+        $request = $this->getMock('Teknoo\Curl\RequestInterface');
 
         $collectionGenerator = $this->buildCollectionGeneratorMock();
         $requestGenerator = $this->buildRequestGeneratorMock();
@@ -1395,7 +1395,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     public function testGetInfos()
     {
-        $request = $this->getMock('UniAlteri\Curl\RequestInterface');
+        $request = $this->getMock('Teknoo\Curl\RequestInterface');
 
         $collectionGenerator = $this->buildCollectionGeneratorMock();
         $requestGenerator = $this->buildRequestGeneratorMock();
@@ -1486,7 +1486,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $requestGenerator = $this->buildRequestGeneratorMock();
         $client = new Client($requestGenerator, $collectionGenerator);
 
-        $collection = $this->getMock('UniAlteri\Sellsy\Client\Collection\CollectionInterface');
+        $collection = $this->getMock('Teknoo\Sellsy\Client\Collection\CollectionInterface');
         $collectionGenerator->expects($this->once())
             ->method('getCollection')
             ->with(
@@ -1504,7 +1504,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $requestGenerator = $this->buildRequestGeneratorMock();
         $client = new Client($requestGenerator, $collectionGenerator);
 
-        $collection = $this->getMock('UniAlteri\Sellsy\Client\Collection\CollectionInterface');
+        $collection = $this->getMock('Teknoo\Sellsy\Client\Collection\CollectionInterface');
         $collectionGenerator->expects($this->once())
             ->method('getCollection')
             ->with(
@@ -1522,7 +1522,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $requestGenerator = $this->buildRequestGeneratorMock();
         $client = new Client($requestGenerator, $collectionGenerator);
 
-        $collection = $this->getMock('UniAlteri\Sellsy\Client\Collection\CollectionInterface');
+        $collection = $this->getMock('Teknoo\Sellsy\Client\Collection\CollectionInterface');
         $collectionGenerator->expects($this->once())
             ->method('getCollection')
             ->with(
@@ -1540,7 +1540,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $requestGenerator = $this->buildRequestGeneratorMock();
         $client = new Client($requestGenerator, $collectionGenerator);
 
-        $collection = $this->getMock('UniAlteri\Sellsy\Client\Collection\CollectionInterface');
+        $collection = $this->getMock('Teknoo\Sellsy\Client\Collection\CollectionInterface');
         $collectionGenerator->expects($this->once())
             ->method('getCollection')
             ->with(
@@ -1558,7 +1558,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $requestGenerator = $this->buildRequestGeneratorMock();
         $client = new Client($requestGenerator, $collectionGenerator);
 
-        $collection = $this->getMock('UniAlteri\Sellsy\Client\Collection\CollectionInterface');
+        $collection = $this->getMock('Teknoo\Sellsy\Client\Collection\CollectionInterface');
         $collectionGenerator->expects($this->once())
             ->method('getCollection')
             ->with(
@@ -1576,7 +1576,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $requestGenerator = $this->buildRequestGeneratorMock();
         $client = new Client($requestGenerator, $collectionGenerator);
 
-        $collection = $this->getMock('UniAlteri\Sellsy\Client\Collection\CollectionInterface');
+        $collection = $this->getMock('Teknoo\Sellsy\Client\Collection\CollectionInterface');
         $collectionGenerator->expects($this->once())
             ->method('getCollection')
             ->with(
@@ -1594,7 +1594,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $requestGenerator = $this->buildRequestGeneratorMock();
         $client = new Client($requestGenerator, $collectionGenerator);
 
-        $collection = $this->getMock('UniAlteri\Sellsy\Client\Collection\CollectionInterface');
+        $collection = $this->getMock('Teknoo\Sellsy\Client\Collection\CollectionInterface');
         $collectionGenerator->expects($this->once())
             ->method('getCollection')
             ->with(
@@ -1612,7 +1612,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $requestGenerator = $this->buildRequestGeneratorMock();
         $client = new Client($requestGenerator, $collectionGenerator);
 
-        $collection = $this->getMock('UniAlteri\Sellsy\Client\Collection\CollectionInterface');
+        $collection = $this->getMock('Teknoo\Sellsy\Client\Collection\CollectionInterface');
         $collectionGenerator->expects($this->once())
             ->method('getCollection')
             ->with(
@@ -1630,7 +1630,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $requestGenerator = $this->buildRequestGeneratorMock();
         $client = new Client($requestGenerator, $collectionGenerator);
 
-        $collection = $this->getMock('UniAlteri\Sellsy\Client\Collection\CollectionInterface');
+        $collection = $this->getMock('Teknoo\Sellsy\Client\Collection\CollectionInterface');
         $collectionGenerator->expects($this->once())
             ->method('getCollection')
             ->with(
@@ -1648,7 +1648,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $requestGenerator = $this->buildRequestGeneratorMock();
         $client = new Client($requestGenerator, $collectionGenerator);
 
-        $collection = $this->getMock('UniAlteri\Sellsy\Client\Collection\CollectionInterface');
+        $collection = $this->getMock('Teknoo\Sellsy\Client\Collection\CollectionInterface');
         $collectionGenerator->expects($this->once())
             ->method('getCollection')
             ->with(
@@ -1666,7 +1666,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $requestGenerator = $this->buildRequestGeneratorMock();
         $client = new Client($requestGenerator, $collectionGenerator);
 
-        $collection = $this->getMock('UniAlteri\Sellsy\Client\Collection\CollectionInterface');
+        $collection = $this->getMock('Teknoo\Sellsy\Client\Collection\CollectionInterface');
         $collectionGenerator->expects($this->once())
             ->method('getCollection')
             ->with(
@@ -1684,7 +1684,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $requestGenerator = $this->buildRequestGeneratorMock();
         $client = new Client($requestGenerator, $collectionGenerator);
 
-        $collection = $this->getMock('UniAlteri\Sellsy\Client\Collection\CollectionInterface');
+        $collection = $this->getMock('Teknoo\Sellsy\Client\Collection\CollectionInterface');
         $collectionGenerator->expects($this->once())
             ->method('getCollection')
             ->with(
@@ -1702,7 +1702,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $requestGenerator = $this->buildRequestGeneratorMock();
         $client = new Client($requestGenerator, $collectionGenerator);
 
-        $collection = $this->getMock('UniAlteri\Sellsy\Client\Collection\CollectionInterface');
+        $collection = $this->getMock('Teknoo\Sellsy\Client\Collection\CollectionInterface');
         $collectionGenerator->expects($this->once())
             ->method('getCollection')
             ->with(
@@ -1720,7 +1720,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $requestGenerator = $this->buildRequestGeneratorMock();
         $client = new Client($requestGenerator, $collectionGenerator);
 
-        $collection = $this->getMock('UniAlteri\Sellsy\Client\Collection\CollectionInterface');
+        $collection = $this->getMock('Teknoo\Sellsy\Client\Collection\CollectionInterface');
         $collectionGenerator->expects($this->once())
             ->method('getCollection')
             ->with(
@@ -1738,7 +1738,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $requestGenerator = $this->buildRequestGeneratorMock();
         $client = new Client($requestGenerator, $collectionGenerator);
 
-        $collection = $this->getMock('UniAlteri\Sellsy\Client\Collection\CollectionInterface');
+        $collection = $this->getMock('Teknoo\Sellsy\Client\Collection\CollectionInterface');
         $collectionGenerator->expects($this->once())
             ->method('getCollection')
             ->with(
@@ -1756,7 +1756,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $requestGenerator = $this->buildRequestGeneratorMock();
         $client = new Client($requestGenerator, $collectionGenerator);
 
-        $collection = $this->getMock('UniAlteri\Sellsy\Client\Collection\CollectionInterface');
+        $collection = $this->getMock('Teknoo\Sellsy\Client\Collection\CollectionInterface');
         $collectionGenerator->expects($this->once())
             ->method('getCollection')
             ->with(
@@ -1774,7 +1774,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $requestGenerator = $this->buildRequestGeneratorMock();
         $client = new Client($requestGenerator, $collectionGenerator);
 
-        $collection = $this->getMock('UniAlteri\Sellsy\Client\Collection\CollectionInterface');
+        $collection = $this->getMock('Teknoo\Sellsy\Client\Collection\CollectionInterface');
         $collectionGenerator->expects($this->once())
             ->method('getCollection')
             ->with(
@@ -1792,7 +1792,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $requestGenerator = $this->buildRequestGeneratorMock();
         $client = new Client($requestGenerator, $collectionGenerator);
 
-        $collection = $this->getMock('UniAlteri\Sellsy\Client\Collection\CollectionInterface');
+        $collection = $this->getMock('Teknoo\Sellsy\Client\Collection\CollectionInterface');
         $collectionGenerator->expects($this->once())
             ->method('getCollection')
             ->with(
@@ -1810,7 +1810,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $requestGenerator = $this->buildRequestGeneratorMock();
         $client = new Client($requestGenerator, $collectionGenerator);
 
-        $collection = $this->getMock('UniAlteri\Sellsy\Client\Collection\CollectionInterface');
+        $collection = $this->getMock('Teknoo\Sellsy\Client\Collection\CollectionInterface');
         $collectionGenerator->expects($this->once())
             ->method('getCollection')
             ->with(
@@ -1828,7 +1828,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $requestGenerator = $this->buildRequestGeneratorMock();
         $client = new Client($requestGenerator, $collectionGenerator);
 
-        $collection = $this->getMock('UniAlteri\Sellsy\Client\Collection\CollectionInterface');
+        $collection = $this->getMock('Teknoo\Sellsy\Client\Collection\CollectionInterface');
         $collectionGenerator->expects($this->once())
             ->method('getCollection')
             ->with(
@@ -1846,7 +1846,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $requestGenerator = $this->buildRequestGeneratorMock();
         $client = new Client($requestGenerator, $collectionGenerator);
 
-        $collection = $this->getMock('UniAlteri\Sellsy\Client\Collection\CollectionInterface');
+        $collection = $this->getMock('Teknoo\Sellsy\Client\Collection\CollectionInterface');
         $collectionGenerator->expects($this->once())
             ->method('getCollection')
             ->with(

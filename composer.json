@@ -1,5 +1,5 @@
 {
-    "name": "unialteri/sellsy-client",
+    "name": "teknoo/sellsy-client",
     "type": "library",
     "description": "PHP library to use Sellsy API",
     "keywords": ["sellsy", "client", "api", "library", "curl"],
@@ -13,12 +13,12 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/UniAlteri/sellsy-client/issues",
-        "source": "https://github.com/UniAlteri/sellsy-client"
+        "issues": "https://github.com/TeknooSoftware/sellsy-client/issues",
+        "source": "https://github.com/TeknooSoftware/sellsy-client"
     },
     "require":{
         "php": ">=5.4.0",
-        "unialteri/curl-request": ">=0.8.0-beta,<2.0"
+        "teknoo/curl-request": ">=0.8.0-beta,<2.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0",
@@ -29,8 +29,8 @@
     "minimum-stability": "beta",
     "autoload": {
         "psr-4": {
-            "UniAlteri\\Sellsy\\Client\\": ["src/Client/"],
-            "UniAlteri\\Tests\\Sellsy\\Client\\": ["tests/Sellsy/"]
+            "Teknoo\\Sellsy\\Client\\": ["src/Client/"],
+            "Teknoo\\Tests\\Sellsy\\Client\\": ["tests/Sellsy/"]
         }
     },
     "archive": {

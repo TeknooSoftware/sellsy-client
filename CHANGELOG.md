@@ -1,4 +1,8 @@
-#Uni Alteri - Sellsy client library - Change Log
+#Teknoo Software - Sellsy client library - Change Log
+
+##[1.0.1] - 2015-10-27
+###Changed
+- Migrate from Uni Alteri Organization to Teknoo Software
 
 ##[1.0.0] - 2015-08-23
 ###Fixed
