@@ -11,14 +11,14 @@
  * obtain it through the world-wide-web, please send an email
  * to contact@uni-alteri.com so we can send you a copy immediately.
  *
- * @copyright   Copyright (c) 2009-2016 Uni Alteri (http://uni-alteri.com)
- * @copyright   Copyright (c) 2009-2016 Richard Déloge (r.deloge@uni-alteri.com)
+ *
+ * @copyright   Copyright (c) 2009-2016 Richard Déloge (richarddeloge@gmail.com)
  *
  * @link        http://teknoo.software/sellsy-client Project website
  *
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
  * @license     http://teknoo.software/sellsy-client/license/gpl-3.0     GPL v3 License
- * @author      Richard Déloge <r.deloge@uni-alteri.com>
+ * @author      Richard Déloge <richarddeloge@gmail.com>
  *
  * @version     0.8.0
  */
@@ -32,14 +32,14 @@ use Teknoo\Sellsy\Client\ClientInterface;
  * Class Collection
  * Class to create collection of methods, like on the Sellsy API.
  *
- * @copyright   Copyright (c) 2009-2016 Uni Alteri (http://uni-alteri.com)
- * @copyright   Copyright (c) 2009-2016 Richard Déloge (r.deloge@uni-alteri.com)
+ *
+ * @copyright   Copyright (c) 2009-2016 Richard Déloge (richarddeloge@gmail.com)
  *
  * @link        http://teknoo.software/sellsy-client Project website
  *
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
  * @license     http://teknoo.software/sellsy-client/license/gpl-3.0     GPL v3 License
- * @author      Richard Déloge <r.deloge@uni-alteri.com>
+ * @author      Richard Déloge <richarddeloge@gmail.com>
  */
 class Collection implements CollectionInterface
 {
