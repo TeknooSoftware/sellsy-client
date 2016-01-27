@@ -30,10 +30,10 @@ All clients are instantiated by the generator :
      $client = $clientGenerator->getClient();
      //Configure the client to use the API
      $client->setApiUrl('https://apifeed.sellsy.com/0/')
-        ->setOAuthAccessToken('Consumer Token')
-        ->sellsyClient->setOAuthAccessTokenSecret('Consumer Secret')
-        ->sellsyClient->setOAuthConsumerKey('User Token')
-        ->sellsyClient->setOAuthConsumerSecret('User Secret');
+        ->setOAuthAccessToken('User Token')
+        ->setOAuthAccessTokenSecret('User Secret')
+        ->setOAuthConsumerKey('Consumer Token')
+        ->setOAuthConsumerSecret('Consumer Secret');
         
 ##Perform a request
         
