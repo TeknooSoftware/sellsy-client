@@ -1,5 +1,9 @@
 #Teknoo Software - Sellsy client library - Change Log
 
+##[1.0.2] - 2016-01-27
+###Fixed
+- Clean .gitignore
+
 ##[1.0.1] - 2015-10-27
 ###Changed
 - Migrate from Uni Alteri Organization to Teknoo Software
