@@ -21,7 +21,7 @@
     },
     "require":{
         "php": ">=5.4.0",
-        "teknoo/curl-request": ">=0.8.0-beta,<2.0",
+        "teknoo/curl-request": "~1.0,>=1.0.1",
         "typo3/class-alias-loader":"~1.0"
     },
     "require-dev": {

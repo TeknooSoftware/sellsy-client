@@ -1,5 +1,9 @@
 #Teknoo Software - Sellsy client library - Change Log
 
+##[1.0.3] - 2016-02-02
+###Fixed
+- Fix composer minimum requirements
+
 ##[1.0.2] - 2016-01-27
 ###Fixed
 - Clean .gitignore
