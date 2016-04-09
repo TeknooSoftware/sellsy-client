@@ -1,5 +1,9 @@
 #Teknoo Software - Sellsy client library - Change Log
 
+##[1.0.4] - 2016-04-09
+###Fixed
+- Fix code style with cs-fixer
+
 ##[1.0.3] - 2016-02-02
 ###Fixed
 - Fix composer minimum requirements

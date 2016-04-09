@@ -22,7 +22,6 @@
  *
  * @version     0.8.0
  */
-
 namespace Teknoo\Sellsy\Client\Collection;
 
 use Teknoo\Sellsy\Client\Client;

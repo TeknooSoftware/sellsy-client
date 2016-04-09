@@ -22,7 +22,6 @@
  *
  * @version     0.8.0
  */
-
 namespace Teknoo\Sellsy\Client;
 
 use Teknoo\Curl\RequestGenerator;
