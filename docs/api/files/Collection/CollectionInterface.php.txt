@@ -22,11 +22,13 @@
  *
  * @version     0.8.0
  */
-namespace Teknoo\Sellsy\Client\Exception;
+namespace Teknoo\Sellsy\Client\Collection;
+
+use Teknoo\Sellsy\Client\Client;
 
 /**
- * Class RequestFailureException
- * Exception threw when an error has occurred during request to the API.
+ * Interface CollectionInterface
+ * Interface to implement class to create collection of methods, like on the Sellsy API.
  *
  *
  * @copyright   Copyright (c) 2009-2016 Richard Déloge (richarddeloge@gmail.com)
@@ -37,6 +39,38 @@ namespace Teknoo\Sellsy\Client\Exception;
  * @license     http://teknoo.software/sellsy-client/license/gpl-3.0     GPL v3 License
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
-class RequestFailureException extends \RuntimeException
+interface CollectionInterface
 {
+    /**
+     * To update the client to use with this collection.
+     *
+     * @param Client $client
+     *
+     * @return $this
+     */
+    public function setClient(Client $client);
+
+    /**
+     * Return the current client.
+     *
+     * @return Client
+     */
+    public function getClient();
+
+    /**
+     * To update the name of this collection.
+     *
+     * @param string $collectionName
+     *
+     * @return $this
+     */
+    public function setCollectionName($collectionName);
+
+    /**
+     * Return the current collection name.
+     *
+     * @return string
+     */
+    public function getCollectionName();
 }
+

@@ -11,14 +11,12 @@ Quick startup
 -------------
 Quick How-to to learn how use this library : [Startup](docs/quick-startup.md).
 
-Installation
-------------
+Installation & Requirements
+---------------------------
 To install this library with composer, run this command :
 
     composer require teknoo/sellsy-client
 
-Requirements
-------------
 This library requires :
 
     * PHP 5.4+
@@ -36,9 +34,10 @@ Teknoo Software - <http://teknoo.software>
 
 About Teknoo Software
 ---------------------
-is a PHP software editor, founded by Richard Déloge, also co-founder of the web agency Uni Alteri. 
-Teknoo Software shares the same DNA as Uni Alteri : Provide to our partners and to the community a set of high quality services or software, sharing knowledge and skills.
-
+**Teknoo Software** is a PHP software editor, founded by Richard Déloge. 
+Teknoo Software's DNA is simple : Provide to our partners and to the community a set of high quality services or software,
+ sharing knowledge and skills.
+ 
 License
 -------
 States is licensed under the MIT and GPL3+ Licenses - see the licenses folder for details

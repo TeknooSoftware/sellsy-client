@@ -40,3 +40,4 @@ namespace Teknoo\Sellsy\Client\Exception;
 class RequestFailureException extends \RuntimeException
 {
 }
+

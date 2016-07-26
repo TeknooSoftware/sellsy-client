@@ -25,8 +25,8 @@
 namespace Teknoo\Sellsy\Client\Exception;
 
 /**
- * Class RequestFailureException
- * Exception threw when an error has occurred during request to the API.
+ * Class ErrorException
+ * Exception threw when the Sellsy API has been returned an error.
  *
  *
  * @copyright   Copyright (c) 2009-2016 Richard Déloge (richarddeloge@gmail.com)
@@ -37,6 +37,7 @@ namespace Teknoo\Sellsy\Client\Exception;
  * @license     http://teknoo.software/sellsy-client/license/gpl-3.0     GPL v3 License
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
-class RequestFailureException extends \RuntimeException
+class ErrorException extends \RuntimeException
 {
 }
+
