@@ -7,8 +7,26 @@ Welcome and thank you to having downloaded this library.  This is a library for 
 [Sellsy API](http://api.sellsy.com/) and enable your applications and websites to communicate with 
 your [Sellsy account](http://sellsy.com/).
 
-Quick startup
--------------
+Simple Example
+--------------
+
+    //Create the generator
+     $clientGenerator = new Teknoo\Sellsy\Client\ClientGenerator();
+     //Get a new client
+     $client = $clientGenerator->getClient();
+     //Configure the client to use the API
+     $client->setApiUrl('https://apifeed.sellsy.com/0/')
+        ->setOAuthAccessToken('User Token')
+        ->setOAuthAccessTokenSecret('User Secret')
+        ->setOAuthConsumerKey('Consumer Token')
+        ->setOAuthConsumerSecret('Consumer Secret');
+        
+     //Example of request, follow the API documentation of Sellsy API.   
+     print_r($client->getInfos());
+     print_r($client->accountPrefs()->getCorpInfos());
+
+How-to
+------
 Quick How-to to learn how use this library : [Startup](docs/quick-startup.md).
 
 Installation & Requirements
