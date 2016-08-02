@@ -276,10 +276,10 @@ class Client implements ClientInterface
     {
         $values = array();
         foreach ($oauth as $key => &$value) {
-            $values[] = $key.'="'.rawurlencode($value).'"';
+            $values[] = $key.'="'.\rawurlencode($value).'"';
         }
 
-        return 'Authorization: OAuth '.implode(', ', $values);
+        return 'Authorization: OAuth '.\implode(', ', $values);
     }
 
     /**
@@ -294,11 +294,11 @@ class Client implements ClientInterface
         }
 
         //Generate HTTP headers
-        $encodedKey = rawurlencode($this->oauthConsumerSecret).'&'.rawurlencode($this->oauthAccessTokenSecret);
+        $encodedKey = \rawurlencode($this->oauthConsumerSecret).'&'.\rawurlencode($this->oauthAccessTokenSecret);
         $oauthParams = array(
             'oauth_consumer_key' => $this->oauthConsumerKey,
             'oauth_token' => $this->oauthAccessToken,
-            'oauth_nonce' => md5($now->getTimestamp() + rand(0, 1000)),
+            'oauth_nonce' => \md5($now->getTimestamp() + \rand(0, 1000)),
             'oauth_timestamp' => $now->getTimestamp(),
             'oauth_signature_method' => 'PLAINTEXT',
             'oauth_version' => '1.0',
@@ -343,7 +343,7 @@ class Client implements ClientInterface
         $encodedRequest = array(
             'request' => 1,
             'io_mode' => 'json',
-            'do_in' => json_encode($requestSettings),
+            'do_in' => \json_encode($requestSettings),
         );
 
         //Generate client request
@@ -357,7 +357,7 @@ class Client implements ClientInterface
                 array(
                     CURLOPT_HTTPHEADER => $this->computeHeaders(),
                     CURLOPT_POSTFIELDS => $encodedRequest,
-                    CURLOPT_SSL_VERIFYPEER => !preg_match('!^https!i', $this->apiUrl),
+                    CURLOPT_SSL_VERIFYPEER => !\preg_match('!^https!i', $this->apiUrl),
                 )
             );
 
@@ -369,18 +369,18 @@ class Client implements ClientInterface
         }
 
         //OAuth issue, throw an exception
-        if (false !== strpos($result, 'oauth_problem')) {
+        if (false !== \strpos($result, 'oauth_problem')) {
             throw new RequestFailureException($result);
         }
 
-        $answer = json_decode($result);
+        $answer = \json_decode($result);
 
         //Bad request, error returned by the api, throw an error
         if (!empty($answer->status) && 'error' == $answer->status) {
             if (!empty($answer->error->message)) {
                 //Retrieve error message like it's defined in Sellsy API documentation
                 throw new ErrorException($answer->error->message);
-            } elseif (is_string($answer->error)) {
+            } elseif (\is_string($answer->error)) {
                 //Retrieve error message (sometime, error is not an object...)
                 throw new ErrorException($answer->error);
             } else {

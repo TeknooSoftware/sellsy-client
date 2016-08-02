@@ -127,10 +127,10 @@ class Collection implements CollectionInterface
      */
     public function __call($name, $arguments)
     {
-        if (empty($arguments) || !is_array($arguments)) {
+        if (empty($arguments) || !\is_array($arguments)) {
             $arguments = array();
         } else {
-            $arguments = (array) array_pop($arguments);
+            $arguments = (array) \array_pop($arguments);
         }
 
         return $this->client->requestApi(
