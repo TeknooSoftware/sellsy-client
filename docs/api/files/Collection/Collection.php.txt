@@ -17,7 +17,7 @@
  * @link        http://teknoo.software/sellsy-client Project website
  *
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
- * @license     http://teknoo.software/sellsy-client/license/gpl-3.0     GPL v3 License
+ *
  * @author      Richard Déloge <richarddeloge@gmail.com>
  *
  * @version     0.8.0
@@ -37,7 +37,7 @@ use Teknoo\Sellsy\Client\ClientInterface;
  * @link        http://teknoo.software/sellsy-client Project website
  *
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
- * @license     http://teknoo.software/sellsy-client/license/gpl-3.0     GPL v3 License
+ *
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
 class Collection implements CollectionInterface

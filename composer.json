@@ -4,7 +4,7 @@
     "description": "PHP library to use Sellsy API",
     "keywords": ["sellsy", "client", "api", "library", "curl"],
     "homepage": "http://teknoo.software/sellsy-client",
-    "license": ["MIT","GPL-3.0+"],
+    "license": ["MIT"],
     "authors": [
         {
             "name": "Richard Déloge",
