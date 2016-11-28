@@ -23,13 +23,11 @@
  * @version     0.8.0
  */
 namespace Teknoo\Sellsy\Client\Collection;
-
-use Teknoo\Sellsy\Client\Client;
+use Teknoo\Sellsy\Client\ClientInterface;
 
 /**
  * Interface CollectionGeneratorInterface
- * Interface to implement Collection generator used by Sellsy Client to build collection of method.
- *
+ * Interface to implement Collection generator used by Sellsy Client to build collection of methods.
  *
  * @copyright   Copyright (c) 2009-2016 Richard Déloge (richarddeloge@gmail.com)
  *
@@ -44,10 +42,10 @@ interface CollectionGeneratorInterface
     /**
      * Generate a new collection object to manage the Sellsy api's methods.
      *
-     * @param Client $client
+     * @param ClientInterface $client
      * @param string $collectionName
      *
-     * @return Collection
+     * @return CollectionInterface
      */
-    public function getCollection(Client $client, $collectionName);
+    public function getCollection(ClientInterface $client, string $collectionName): CollectionInterface;
 }

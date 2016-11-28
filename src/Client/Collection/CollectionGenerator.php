@@ -25,6 +25,7 @@
 namespace Teknoo\Sellsy\Client\Collection;
 
 use Teknoo\Sellsy\Client\Client;
+use Teknoo\Sellsy\Client\ClientInterface;
 
 /**
  * Class CollectionGenerator
@@ -44,12 +45,12 @@ class CollectionGenerator implements CollectionGeneratorInterface
     /**
      * @var CollectionInterface
      */
-    protected $originalCollection;
+    private $originalCollection;
 
     /**
      * @param CollectionInterface|null $originalCollection
      */
-    public function __construct($originalCollection = null)
+    public function __construct(CollectionInterface $originalCollection = null)
     {
         $this->originalCollection = $originalCollection;
     }
@@ -59,7 +60,7 @@ class CollectionGenerator implements CollectionGeneratorInterface
      *
      * @return null|CollectionInterface
      */
-    protected function prepareNewCollectionInstance()
+    private function prepareNewCollectionInstance()
     {
         if (!$this->originalCollection instanceof CollectionInterface) {
             $this->originalCollection = new Collection();
@@ -69,14 +70,9 @@ class CollectionGenerator implements CollectionGeneratorInterface
     }
 
     /**
-     * Generate a new collection object to manage the Sellsy api's methods.
-     *
-     * @param Client $client
-     * @param string $collectionName
-     *
-     * @return Collection
+     * {@inheritdoc}
      */
-    public function getCollection(Client $client, $collectionName)
+    public function getCollection(ClientInterface $client, string $collectionName): CollectionInterface
     {
         $newCollection = $this->prepareNewCollectionInstance();
         $newCollection->setClient($client);

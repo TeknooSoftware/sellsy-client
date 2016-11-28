@@ -24,7 +24,9 @@
  */
 namespace Teknoo\Sellsy\Client;
 
-use Teknoo\Curl\RequestGenerator;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\StreamInterface;
+use Psr\Http\Message\UriInterface;
 use Teknoo\Sellsy\Client\Collection\CollectionGeneratorInterface;
 use Teknoo\Sellsy\Client\Collection\CollectionInterface;
 use Teknoo\Sellsy\Client\Exception\ErrorException;
@@ -46,32 +48,45 @@ use Teknoo\Sellsy\Client\Exception\RequestFailureException;
 class Client implements ClientInterface
 {
     /**
-     * cUrl generator used to communicate with Sellsy API.
-     *
-     * @var RequestGenerator
-     */
-    protected $requestGenerator;
-
-    /**
      * Sellsy collections of methods generator.
      *
      * @var CollectionGeneratorInterface
      */
-    protected $collectionGenerator;
+    private $collectionGenerator;
+
+    /**
+     * @var RequestInterface
+     */
+    private $uri;
+
+    /**
+     * @var RequestInterface
+     */
+    private $request;
+
+    /**
+     * @var callable
+     */
+    private $streamGenerator;
+
+    /**
+     * @var HttpClientBridgeInterface
+     */
+    private $httpClientBridge;
 
     /**
      * API End point.
      *
-     * @var string
+     * @var array
      */
-    protected $apiUrl;
+    private $apiUrl;
 
     /**
      * OAuth access token (provided by Sellsy).
      *
      * @var string
      */
-    protected $oauthAccessToken;
+    private $oauthAccessToken;
 
     /**
      * OAuth secret (provided by Sellsy).
@@ -85,7 +100,7 @@ class Client implements ClientInterface
      *
      * @var string
      */
-    protected $oauthConsumerKey;
+    private $oauthConsumerKey;
 
     /**
      * OAuth consumer secret  (provided by Sellsy).
@@ -99,84 +114,74 @@ class Client implements ClientInterface
      *
      * @var array
      */
-    protected $lastRequest;
+    private $lastRequest;
 
     /**
      * Var to store the last answer of Sellsy API to facility debugging.
      *
      * @var mixed|\stdClass
      */
-    protected $lastAnswer;
+    private $lastResponse;
 
     /**
      * @var \DateTime
      */
-    protected $now;
+    private $now;
 
     /**
-     * Constructor.
-     *
-     * @param RequestGenerator             $requestGenerator
+     * Client constructor.
+     * @param UriInterface $uri
+     * @param RequestInterface $request
+     * @param callable $streamGenerator
+     * @param HttpClientBridgeInterface $httpClientBridge
      * @param CollectionGeneratorInterface $collectionGenerator
-     * @param string                       $apiUrl
-     * @param string                       $oauthAccessToken
-     * @param string                       $oauthAccessTokenSecret
-     * @param string                       $oauthConsumerKey
-     * @param string                       $oauthConsumerSecret
-     * @param \DateTime                    $now                    To allow developer to specify date to use to compute header. By default use now
+     * @param string $apiUrl
+     * @param string $oauthAccessToken
+     * @param string $oauthAccessTokenSecret
+     * @param string $oauthConsumerKey
+     * @param string $oauthConsumerSecret
+     * @param \DateTime|null $now
      */
     public function __construct(
-        RequestGenerator $requestGenerator,
+        UriInterface $uri,
+        RequestInterface $request,
+        callable $streamGenerator,
+        HttpClientBridgeInterface $httpClientBridge,
         CollectionGeneratorInterface $collectionGenerator,
-        $apiUrl = '',
-        $oauthAccessToken = '',
-        $oauthAccessTokenSecret = '',
-        $oauthConsumerKey = '',
-        $oauthConsumerSecret = '',
+        string $apiUrl = '',
+        string $oauthAccessToken = '',
+        string $oauthAccessTokenSecret = '',
+        string $oauthConsumerKey = '',
+        string $oauthConsumerSecret = '',
         \DateTime $now = null
     ) {
-        $this->requestGenerator = $requestGenerator;
+        $this->uri = $uri;
+        $this->request = $request;
+        $this->streamGenerator = $streamGenerator;
+        $this->httpClientBridge = $httpClientBridge;
         $this->collectionGenerator = $collectionGenerator;
-        $this->apiUrl = $apiUrl;
-        $this->oauthAccessToken = $oauthAccessToken;
-        $this->oauthAccessTokenSecret = $oauthAccessTokenSecret;
-        $this->oauthConsumerKey = $oauthConsumerKey;
-        $this->oauthConsumerSecret = $oauthConsumerSecret;
+        $this->setApiUrl($apiUrl);
+        $this->setOAuthAccessToken($oauthAccessToken);
+        $this->setOAuthAccessTokenSecret($oauthAccessTokenSecret);
+        $this->setOAuthConsumerKey($oauthConsumerKey);
+        $this->setOAuthConsumerSecret($oauthConsumerSecret);
         $this->now = $now;
     }
 
     /**
-     * Update the api url.
-     *
-     * @param string $apiUrl
-     *
-     * @return $this
+     * {@inheritdoc}
      */
-    public function setApiUrl($apiUrl)
+    public function setApiUrl(string $apiUrl): ClientInterface
     {
-        $this->apiUrl = $apiUrl;
+        $this->apiUrl = \parse_url($apiUrl);
 
         return $this;
     }
 
     /**
-     * Get the api url.
-     *
-     * @return string
+     * {@inheritdoc}
      */
-    public function getApiUrl()
-    {
-        return $this->apiUrl;
-    }
-
-    /**
-     * Update the OAuth access token.
-     *
-     * @param string $oauthAccessToken
-     *
-     * @return $this
-     */
-    public function setOAuthAccessToken($oauthAccessToken)
+    public function setOAuthAccessToken(string $oauthAccessToken): ClientInterface
     {
         $this->oauthAccessToken = $oauthAccessToken;
 
@@ -184,23 +189,9 @@ class Client implements ClientInterface
     }
 
     /**
-     * Get the OAuth access token.
-     *
-     * @return string
+     * {@inheritdoc}
      */
-    public function getOAuthAccessToken()
-    {
-        return $this->oauthAccessToken;
-    }
-
-    /**
-     * Update the OAuth access secret token.
-     *
-     * @param string $oauthAccessTokenSecret
-     *
-     * @return $this
-     */
-    public function setOAuthAccessTokenSecret($oauthAccessTokenSecret)
+    public function setOAuthAccessTokenSecret(string $oauthAccessTokenSecret): ClientInterface
     {
         $this->oauthAccessTokenSecret = $oauthAccessTokenSecret;
 
@@ -208,23 +199,9 @@ class Client implements ClientInterface
     }
 
     /**
-     * Get the OAuth access secret token.
-     *
-     * @return string
+     * {@inheritdoc}
      */
-    public function getOAuthAccessTokenSecret()
-    {
-        return $this->oauthAccessTokenSecret;
-    }
-
-    /**
-     * Update the OAuth consumer key.
-     *
-     * @param string $oauthConsumerKey
-     *
-     * @return $this
-     */
-    public function setOAuthConsumerKey($oauthConsumerKey)
+    public function setOAuthConsumerKey(string $oauthConsumerKey): ClientInterface
     {
         $this->oauthConsumerKey = $oauthConsumerKey;
 
@@ -232,23 +209,9 @@ class Client implements ClientInterface
     }
 
     /**
-     * Get the OAuth consumer key.
-     *
-     * @return string
+     * {@inheritdoc}
      */
-    public function getOAuthConsumerKey()
-    {
-        return $this->oauthConsumerKey;
-    }
-
-    /**
-     * Update the OAuth consumer secret.
-     *
-     * @param string $oauthConsumerSecret
-     *
-     * @return $this
-     */
-    public function setOAuthConsumerSecret($oauthConsumerSecret)
+    public function setOAuthConsumerSecret(string $oauthConsumerSecret): ClientInterface
     {
         $this->oauthConsumerSecret = $oauthConsumerSecret;
 
@@ -256,13 +219,11 @@ class Client implements ClientInterface
     }
 
     /**
-     * Get the OAuth consumer secret.
-     *
-     * @return string
+     * @return RequestInterface
      */
-    public function getOAuthConsumerSecret()
+    private function getNewRequest(): RequestInterface
     {
-        return $this->oauthConsumerSecret;
+        return clone $this->request;
     }
 
     /**
@@ -272,20 +233,21 @@ class Client implements ClientInterface
      *
      * @return string
      */
-    protected function encodeHeaders(&$oauth)
+    private function encodeOAuthHeaders(&$oauth)
     {
         $values = array();
         foreach ($oauth as $key => &$value) {
             $values[] = $key.'="'.\rawurlencode($value).'"';
         }
 
-        return 'Authorization: OAuth '.\implode(', ', $values);
+        return 'OAuth '.\implode(', ', $values);
     }
 
     /**
      * Internal method to generate HTTP headers to use for the API authentication with OAuth protocol.
+     * @param RequestInterface $request
      */
-    protected function computeHeaders()
+    private function setOAuthHeaders(RequestInterface $request)
     {
         if ($this->now instanceof \DateTime) {
             $now = clone $this->now;
@@ -305,24 +267,71 @@ class Client implements ClientInterface
             'oauth_signature' => $encodedKey,
         );
 
-        //Generate header
-        return array($this->encodeHeaders($oauthParams), 'Expect:');
+        $request->withHeader('Authorization', $this->encodeOAuthHeaders($oauthParams));
+        $request->withHeader('Expect', '');
     }
 
     /**
-     * @return array
+     * @return UriInterface
      */
-    public function getLastRequest()
+    private function getNewUri(): UriInterface
     {
-        return $this->lastRequest;
+        return clone $this->uri;
     }
 
     /**
-     * @return mixed|\stdClass
+     * @param RequestInterface $request
      */
-    public function getLastAnswer()
+    private function setUri(RequestInterface $request)
     {
-        return $this->lastAnswer;
+        $uri = $this->getNewUri();
+
+        if (!empty($this->apiUrl['scheme'])) {
+            $uri->withScheme($this->apiUrl['scheme']);
+        }
+
+        if (!empty($this->apiUrl['host'])) {
+            $uri->withHost($this->apiUrl['host']);
+        }
+
+        if (!empty($this->apiUrl['port'])) {
+            $uri->withPort($this->apiUrl['port']);
+        }
+
+        if (!empty($this->apiUrl['path'])) {
+            $uri->withPath($this->apiUrl['path']);
+        }
+
+        if (!empty($this->apiUrl['query'])) {
+            $uri->withQuery($this->apiUrl['query']);
+        }
+
+        if (!empty($this->apiUrl['fragment'])) {
+            $uri->withFragment($this->apiUrl['fragment']);
+        }
+
+        $request->withUri($uri);
+    }
+
+    /**
+     * @return StreamInterface
+     */
+    private function getNewStream(): StreamInterface
+    {
+        return ($this->streamGenerator)();
+    }
+
+    /**
+     * @param RequestInterface $request
+     * @param array $requestSettings
+     */
+    private function setBodyRequest(RequestInterface $request, array &$requestSettings)
+    {
+        $stream = $this->getNewStream();
+        $stream->rewind();
+        $stream->write(\http_build_query($requestSettings));
+
+        $request->withBody($stream);
     }
 
     /**
@@ -335,11 +344,11 @@ class Client implements ClientInterface
      * @throws RequestFailureException is the request can not be performed on the server
      * @throws ErrorException          if the server returned an error for this request
      */
-    public function requestApi($requestSettings)
+    public function requestApi(array $requestSettings)
     {
         //Arguments for the Sellsy API
         $this->lastRequest = $requestSettings;
-        $this->lastAnswer = null;
+        $this->lastResponse = null;
         $encodedRequest = array(
             'request' => 1,
             'io_mode' => 'json',
@@ -347,28 +356,29 @@ class Client implements ClientInterface
         );
 
         //Generate client request
-        $request = $this->requestGenerator->getRequest();
+        $request = $this->getNewRequest();
 
         //Configure to contact the api with POST request and return value
-        $request->setMethod('POST')
-            ->setUrl($this->apiUrl)
-            ->setReturnValue(true)
-            ->setOptionArray(//Add custom headers and post values
-                array(
-                    CURLOPT_HTTPHEADER => $this->computeHeaders(),
-                    CURLOPT_POSTFIELDS => $encodedRequest,
-                    CURLOPT_SSL_VERIFYPEER => !\preg_match('!^https!i', $this->apiUrl),
-                )
-            );
+        $request->withMethod('POST');
+
+        $this->setUri($request);
+        $this->setOAuthHeaders($request);
+        $this->setBodyRequest($request, $encodedRequest);
 
         //Execute the request
         try {
-            $result = $request->execute();
+            $this->lastResponse = $this->httpClientBridge->execute($request);
         } catch (\Exception $e) {
             throw new RequestFailureException($e->getMessage(), $e->getCode(), $e);
         }
 
+        $body = $this->lastResponse->getBody();
+        if (!$body instanceof StreamInterface) {
+            throw new ErrorException("Bad body response");
+        }
+
         //OAuth issue, throw an exception
+        $result = (string) $body->getContents();
         if (false !== \strpos($result, 'oauth_problem')) {
             throw new RequestFailureException($result);
         }
@@ -389,230 +399,198 @@ class Client implements ClientInterface
             }
         }
 
-        $this->lastAnswer = $answer;
+        $this->lastResponse = $answer;
 
-        return $this->lastAnswer;
+        return $this->lastResponse;
+    }
+
+    public function getLastRequest()
+    {
+        return $this->lastRequest;
+    }
+
+    public function getLastResponse()
+    {
+        return $this->lastResponse;
     }
 
     /**
-     * @return \stdClass
+     * {@inheritdoc}
      */
     public function getInfos()
     {
-        $requestSettings = array(
+        $requestSettings = [
             'method' => 'Infos.getInfos',
-            'params' => array(),
-        );
+            'params' => [],
+        ];
 
         return $this->requestApi($requestSettings);
     }
 
     /**
-     * Return collection methods of the api for Accountdatas.
-     *
-     * @return CollectionInterface
+     * {@inheritdoc}
      */
-    public function accountData()
+    public function accountData(): CollectionInterface
     {
         return $this->collectionGenerator->getCollection($this, 'Accountdatas');
     }
 
     /**
-     * Return collection methods of the api for AccountPrefs.
-     *
-     * @return CollectionInterface
+     * {@inheritdoc}
      */
-    public function accountPrefs()
+    public function accountPrefs(): CollectionInterface
     {
         return $this->collectionGenerator->getCollection($this, 'AccountPrefs');
     }
 
     /**
-     * Return collection methods of the api for Purchase.
-     *
-     * @return CollectionInterface
+     * {@inheritdoc}
      */
-    public function purchase()
+    public function purchase(): CollectionInterface
     {
         return $this->collectionGenerator->getCollection($this, 'Purchase');
     }
 
     /**
-     * Return collection methods of the api for Agenda.
-     *
-     * @return CollectionInterface
+     * {@inheritdoc}
      */
-    public function agenda()
+    public function agenda(): CollectionInterface
     {
         return $this->collectionGenerator->getCollection($this, 'Agenda');
     }
 
     /**
-     * Return collection methods of the api for Annotations.
-     *
-     * @return CollectionInterface
+     * {@inheritdoc}
      */
-    public function annotations()
+    public function annotations(): CollectionInterface
     {
         return $this->collectionGenerator->getCollection($this, 'Annotations');
     }
 
     /**
-     * Return collection methods of the api for Catalogue.
-     *
-     * @return CollectionInterface
+     * {@inheritdoc}
      */
-    public function catalogue()
+    public function catalogue(): CollectionInterface
     {
         return $this->collectionGenerator->getCollection($this, 'Catalogue');
     }
 
     /**
-     * Return collection methods of the api for CustomFields.
-     *
-     * @return CollectionInterface
+     * {@inheritdoc}
      */
-    public function customFields()
+    public function customFields(): CollectionInterface
     {
         return $this->collectionGenerator->getCollection($this, 'CustomFields');
     }
 
     /**
-     * Return collection methods of the api for Client.
-     *
-     * @return CollectionInterface
+     * {@inheritdoc}
      */
-    public function client()
+    public function client(): CollectionInterface
     {
         return $this->collectionGenerator->getCollection($this, 'Client');
     }
 
     /**
-     * Return collection methods of the api for Staffs.
-     *
-     * @return CollectionInterface
+     * {@inheritdoc}
      */
-    public function staffs()
+    public function staffs(): CollectionInterface
     {
         return $this->collectionGenerator->getCollection($this, 'Staffs');
     }
 
     /**
-     * Return collection methods of the api for Peoples.
-     *
-     * @return CollectionInterface
+     * {@inheritdoc}
      */
-    public function peoples()
+    public function peoples(): CollectionInterface
     {
         return $this->collectionGenerator->getCollection($this, 'Peoples');
     }
 
     /**
-     * Return collection methods of the api for Document.
-     *
-     * @return CollectionInterface
+     * {@inheritdoc}
      */
-    public function document()
+    public function document(): CollectionInterface
     {
         return $this->collectionGenerator->getCollection($this, 'Document');
     }
 
     /**
-     * Return collection methods of the api for Mails.
-     *
-     * @return CollectionInterface
+     * {@inheritdoc}
      */
-    public function mails()
+    public function mails(): CollectionInterface
     {
         return $this->collectionGenerator->getCollection($this, 'Mails');
     }
 
     /**
-     * Return collection methods of the api for Event.
-     *
-     * @return CollectionInterface
+     * {@inheritdoc}
      */
-    public function event()
+    public function event(): CollectionInterface
     {
         return $this->collectionGenerator->getCollection($this, 'Event');
     }
 
     /**
-     * Return collection methods of the api for Expense.
-     *
-     * @return CollectionInterface
+     * {@inheritdoc}
      */
-    public function expense()
+    public function expense(): CollectionInterface
     {
         return $this->collectionGenerator->getCollection($this, 'Expense');
     }
 
     /**
-     * Return collection methods of the api for Opportunities.
-     *
-     * @return CollectionInterface
+     * {@inheritdoc}
      */
-    public function opportunities()
+    public function opportunities(): CollectionInterface
     {
         return $this->collectionGenerator->getCollection($this, 'Opportunities');
     }
 
     /**
-     * Return collection methods of the api for Prospects.
-     *
-     * @return CollectionInterface
+     * {@inheritdoc}
      */
-    public function prospects()
+    public function prospects(): CollectionInterface
     {
         return $this->collectionGenerator->getCollection($this, 'Prospects');
     }
 
     /**
-     * Return collection methods of the api for SmartTags.
-     *
-     * @return CollectionInterface
+     * {@inheritdoc}
      */
-    public function smartTags()
+    public function smartTags(): CollectionInterface
     {
         return $this->collectionGenerator->getCollection($this, 'SmartTags');
     }
 
     /**
-     * Return collection methods of the api for Stat.
-     *
-     * @return CollectionInterface
+     * {@inheritdoc}
      */
-    public function stat()
+    public function stat(): CollectionInterface
     {
         return $this->collectionGenerator->getCollection($this, 'Stat');
     }
 
     /**
-     * Return collection methods of the api for Stock.
-     *
-     * @return CollectionInterface
+     * {@inheritdoc}
      */
-    public function stock()
+    public function stock(): CollectionInterface
     {
         return $this->collectionGenerator->getCollection($this, 'Stock');
     }
 
     /**
-     * Return collection methods of the api for Support.
-     *
-     * @return CollectionInterface
+     * {@inheritdoc}
      */
-    public function support()
+    public function support(): CollectionInterface
     {
         return $this->collectionGenerator->getCollection($this, 'Support');
     }
 
     /**
-     * Return collection methods of the api for Timetracking.
-     *
-     * @return CollectionInterface
+     * {@inheritdoc}
      */
-    public function timeTracking()
+    public function timeTracking(): CollectionInterface
     {
         return $this->collectionGenerator->getCollection($this, 'Timetracking');
     }

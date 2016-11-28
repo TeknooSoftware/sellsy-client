@@ -24,6 +24,8 @@
  */
 namespace Teknoo\Sellsy\Client;
 
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use Teknoo\Sellsy\Client\Collection\CollectionInterface;
 use Teknoo\Sellsy\Client\Exception\ErrorException;
 use Teknoo\Sellsy\Client\Exception\RequestFailureException;
@@ -48,90 +50,55 @@ interface ClientInterface
      *
      * @param string $apiUrl
      *
-     * @return $this
+     * @return ClientInterface
      */
-    public function setApiUrl($apiUrl);
-
-    /**
-     * Get the api url.
-     *
-     * @return string
-     */
-    public function getApiUrl();
+    public function setApiUrl(string $apiUrl): ClientInterface;
 
     /**
      * Update the OAuth access token.
      *
      * @param string $oauthAccessToken
      *
-     * @return $this
+     * @return ClientInterface
      */
-    public function setOAuthAccessToken($oauthAccessToken);
-
-    /**
-     * Get the OAuth access token.
-     *
-     * @return string
-     */
-    public function getOAuthAccessToken();
+    public function setOAuthAccessToken(string $oauthAccessToken): ClientInterface;
 
     /**
      * Update the OAuth access secret token.
      *
      * @param string $oauthAccessTokenSecret
      *
-     * @return $this
+     * @return ClientInterface
      */
-    public function setOAuthAccessTokenSecret($oauthAccessTokenSecret);
-
-    /**
-     * Get the OAuth access secret token.
-     *
-     * @return string
-     */
-    public function getOAuthAccessTokenSecret();
+    public function setOAuthAccessTokenSecret(string $oauthAccessTokenSecret): ClientInterface;
 
     /**
      * Update the OAuth consumer key.
      *
      * @param string $oauthConsumerKey
      *
-     * @return $this
+     * @return ClientInterface
      */
-    public function setOAuthConsumerKey($oauthConsumerKey);
-
-    /**
-     * Get the OAuth consumer key.
-     *
-     * @return string
-     */
-    public function getOAuthConsumerKey();
+    public function setOAuthConsumerKey(string $oauthConsumerKey): ClientInterface;
 
     /**
      * Update the OAuth consumer secret.
      *
      * @param string $oauthConsumerSecret
      *
-     * @return $this
+     * @return ClientInterface
      */
-    public function setOAuthConsumerSecret($oauthConsumerSecret);
+    public function setOAuthConsumerSecret(string $oauthConsumerSecret): ClientInterface;
 
     /**
-     * Get the OAuth consumer secret.
-     *
-     * @return string
-     */
-    public function getOAuthConsumerSecret();
-
-    /**
-     * @return array
+     * @return RequestInterface
      */
     public function getLastRequest();
 
     /**
-     * @return mixed|\stdClass
+     * @return ResponseInterface
      */
-    public function getLastAnswer();
+    public function getLastResponse();
 
     /**
      * Method to perform a request to the api.
@@ -143,7 +110,7 @@ interface ClientInterface
      * @throws RequestFailureException is the request can not be performed on the server
      * @throws ErrorException          if the server returned an error for this request
      */
-    public function requestApi($requestSettings);
+    public function requestApi(array $requestSettings);
 
     /**
      * @return \stdClass
@@ -155,145 +122,145 @@ interface ClientInterface
      *
      * @return CollectionInterface
      */
-    public function accountData();
+    public function accountData(): CollectionInterface;
 
     /**
      * Return collection methods of the api for AccountPrefs.
      *
      * @return CollectionInterface
      */
-    public function accountPrefs();
+    public function accountPrefs(): CollectionInterface;
 
     /**
      * Return collection methods of the api for Purchase.
      *
      * @return CollectionInterface
      */
-    public function purchase();
+    public function purchase(): CollectionInterface;
 
     /**
      * Return collection methods of the api for Agenda.
      *
      * @return CollectionInterface
      */
-    public function agenda();
+    public function agenda(): CollectionInterface;
 
     /**
      * Return collection methods of the api for Annotations.
      *
      * @return CollectionInterface
      */
-    public function annotations();
+    public function annotations(): CollectionInterface;
 
     /**
      * Return collection methods of the api for Catalogue.
      *
      * @return CollectionInterface
      */
-    public function catalogue();
+    public function catalogue(): CollectionInterface;
 
     /**
      * Return collection methods of the api for CustomFields.
      *
      * @return CollectionInterface
      */
-    public function customFields();
+    public function customFields(): CollectionInterface;
 
     /**
      * Return collection methods of the api for Client.
      *
      * @return CollectionInterface
      */
-    public function client();
+    public function client(): CollectionInterface;
 
     /**
      * Return collection methods of the api for Staffs.
      *
      * @return CollectionInterface
      */
-    public function staffs();
+    public function staffs(): CollectionInterface;
 
     /**
      * Return collection methods of the api for Peoples.
      *
      * @return CollectionInterface
      */
-    public function peoples();
+    public function peoples(): CollectionInterface;
 
     /**
      * Return collection methods of the api for Document.
      *
      * @return CollectionInterface
      */
-    public function document();
+    public function document(): CollectionInterface;
 
     /**
      * Return collection methods of the api for Mails.
      *
      * @return CollectionInterface
      */
-    public function mails();
+    public function mails(): CollectionInterface;
 
     /**
      * Return collection methods of the api for Event.
      *
      * @return CollectionInterface
      */
-    public function event();
+    public function event(): CollectionInterface;
 
     /**
      * Return collection methods of the api for Expense.
      *
      * @return CollectionInterface
      */
-    public function expense();
+    public function expense(): CollectionInterface;
 
     /**
      * Return collection methods of the api for Opportunities.
      *
      * @return CollectionInterface
      */
-    public function opportunities();
+    public function opportunities(): CollectionInterface;
 
     /**
      * Return collection methods of the api for Prospects.
      *
      * @return CollectionInterface
      */
-    public function prospects();
+    public function prospects(): CollectionInterface;
 
     /**
      * Return collection methods of the api for SmartTags.
      *
      * @return CollectionInterface
      */
-    public function smartTags();
+    public function smartTags(): CollectionInterface;
 
     /**
      * Return collection methods of the api for Stat.
      *
      * @return CollectionInterface
      */
-    public function stat();
+    public function stat(): CollectionInterface;
 
     /**
      * Return collection methods of the api for Stock.
      *
      * @return CollectionInterface
      */
-    public function stock();
+    public function stock(): CollectionInterface;
 
     /**
      * Return collection methods of the api for Support.
      *
      * @return CollectionInterface
      */
-    public function support();
+    public function support(): CollectionInterface;
 
     /**
      * Return collection methods of the api for Timetracking.
      *
      * @return CollectionInterface
      */
-    public function timeTracking();
+    public function timeTracking(): CollectionInterface;
 }

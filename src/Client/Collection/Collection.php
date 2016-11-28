@@ -45,12 +45,12 @@ class Collection implements CollectionInterface
     /**
      * @var Client
      */
-    protected $client;
+    private $client;
 
     /**
      * @var string
      */
-    protected $collectionName;
+    private $collectionName;
 
     /**
      * Constructor.
@@ -58,7 +58,7 @@ class Collection implements CollectionInterface
      * @param Client $client
      * @param string $collectionName
      */
-    public function __construct(Client $client = null, $collectionName = null)
+    public function __construct(Client $client = null, string $collectionName = null)
     {
         if ($client instanceof ClientInterface) {
             $this->setClient($client);
@@ -70,13 +70,9 @@ class Collection implements CollectionInterface
     }
 
     /**
-     * To update the client to use with this collection.
-     *
-     * @param Client $client
-     *
-     * @return $this
+     * {@inheritdoc}
      */
-    public function setClient(Client $client)
+    public function setClient(ClientInterface $client): CollectionInterface
     {
         $this->client = $client;
 
@@ -84,23 +80,17 @@ class Collection implements CollectionInterface
     }
 
     /**
-     * Return the current client.
-     *
-     * @return Client
+     * {@inheritdoc}
      */
-    public function getClient()
+    public function getClient(): ClientInterface
     {
         return $this->client;
     }
 
     /**
-     * To update the name of this collection.
-     *
-     * @param string $collectionName
-     *
-     * @return $this
+     * {@inheritdoc}
      */
-    public function setCollectionName($collectionName)
+    public function setCollectionName(string $collectionName): CollectionInterface
     {
         $this->collectionName = $collectionName;
 
@@ -108,11 +98,9 @@ class Collection implements CollectionInterface
     }
 
     /**
-     * Return the current collection name.
-     *
-     * @return string
+     * {@inheritdoc}
      */
-    public function getCollectionName()
+    public function getCollectionName(): string
     {
         return $this->collectionName;
     }
