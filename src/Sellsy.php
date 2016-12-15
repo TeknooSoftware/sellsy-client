@@ -22,16 +22,9 @@
  *
  * @version     0.8.0
  */
-namespace Teknoo\Sellsy\Client;
+namespace Teknoo\Sellsy;
 
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
-
-interface HttpClientBridgeInterface
+class Sellsy
 {
-    /**
-     * @param RequestInterface $request
-     * @return ResponseInterface
-     */
-    public function execute(RequestInterface $request): ResponseInterface;
+
 }

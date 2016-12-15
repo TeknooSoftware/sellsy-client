@@ -22,13 +22,13 @@
  *
  * @version     0.8.0
  */
-namespace Teknoo\Sellsy\Client\Collection;
+namespace Teknoo\Sellsy\Collection;
 
 use Teknoo\Sellsy\Client\ClientInterface;
+use Teknoo\Sellsy\Method\MethodInterface;
 
 /**
  * Interface CollectionInterface
- * Interface to implement class to create collection of methods, like on the Sellsy API.
  *
  * @copyright   Copyright (c) 2009-2016 Richard Déloge (richarddeloge@gmail.com)
  *
@@ -41,34 +41,31 @@ use Teknoo\Sellsy\Client\ClientInterface;
 interface CollectionInterface
 {
     /**
-     * To update the client to use with this collection.
+     * Return the current collection name.
      *
-     * @param ClientInterface $client
-     *
-     * @return CollectionInterface
+     * @return string
      */
-    public function setClient(ClientInterface $client): CollectionInterface;
+    public function getName(): string;
 
     /**
-     * Return the current client.
-     *
      * @return ClientInterface
      */
     public function getClient(): ClientInterface;
 
     /**
-     * To update the name of this collection.
-     *
-     * @param string $collectionName
-     *
+     * @param MethodInterface $method
      * @return CollectionInterface
      */
-    public function setCollectionName(string $collectionName): CollectionInterface;
+    public function registerMethod(MethodInterface $method): CollectionInterface;
 
     /**
-     * Return the current collection name.
-     *
-     * @return string
+     * @return MethodInterface[]
      */
-    public function getCollectionName(): string;
+    public function listMethods(): array;
+
+    /**
+     * @param string $methodName
+     * @return MethodInterface
+     */
+    public function __get(string $methodName): MethodInterface;
 }

@@ -1,78 +1,18 @@
 <?php
 
-namespace Teknoo\Tests\Sellsy\Client\Collection;
+namespace Teknoo\Tests\Sellsy\Collection;
 
-use Teknoo\Sellsy\Client\Collection\Collection;
+use Teknoo\Sellsy\Client\ClientInterface;
+use Teknoo\Sellsy\Collection\Collection;
+use Teknoo\Sellsy\Collection\CollectionInterface;
 
-/**
- * Class CollectionTest.
- *
- * @covers Teknoo\Sellsy\Client\Collection\Collection
- */
-class CollectionTest extends \PHPUnit_Framework_TestCase
+class CollectionTest extends AbstractCollectionTest
 {
-    public function testGetSetClient()
+    public function buildCollection(): CollectionInterface
     {
-        $client = $this->getMock('Teknoo\Sellsy\Client\Client', [], [], '', false);
-        $collection = new Collection();
-        $this->assertNull($collection->getClient());
-        $this->assertSame($collection, $collection->setClient($client));
-        $this->assertSame($client, $collection->getClient());
-    }
-
-    public function testGetSetCollectionName()
-    {
-        $collection = new Collection();
-        $this->assertNull($collection->getCollectionName());
-        $this->assertSame($collection, $collection->setCollectionName('fooBar'));
-        $this->assertSame('fooBar', $collection->getCollectionName());
-    }
-
-    public function testConstructor()
-    {
-        $client = $this->getMock('Teknoo\Sellsy\Client\Client', [], [], '', false);
-        $collection = new Collection($client, 'fooBar');
-        $this->assertSame($client, $collection->getClient());
-        $this->assertSame('fooBar', $collection->getCollectionName());
-    }
-
-    public function testCallNotArgs()
-    {
-        $client = $this->getMock('Teknoo\Sellsy\Client\Client', [], [], '', false);
-        $collection = new Collection($client, 'fooBar');
-
-        $client->expects($this->once())
-            ->method('requestApi')
-            ->with(
-                $this->equalTo(
-                    array(
-                        'method' => 'fooBar.callMethod',
-                        'params' => array(),
-                    )
-                )
-            )
-            ->willReturn(new \stdClass());
-
-        $this->assertEquals(new \stdClass(), $collection->callMethod());
-    }
-
-    public function testCallWithArgs()
-    {
-        $client = $this->getMock('Teknoo\Sellsy\Client\Client', [], [], '', false);
-        $collection = new Collection($client, 'fooBar');
-
-        $client->expects($this->once())
-            ->method('requestApi')
-            ->with(
-                $this->equalTo(
-                    array(
-                        'method' => 'fooBar.callMethod',
-                        'params' => array('foo' => 'bar'),
-                    )
-                )
-            )
-            ->willReturn(new \stdClass());
-
-        $this->assertEquals(new \stdClass(), $collection->callMethod(array('foo' => 'bar')));
+        return new Collection(
+            $this->createMock(ClientInterface::class),
+            'fooBar'
+        );
     }
 }

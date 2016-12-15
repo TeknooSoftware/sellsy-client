@@ -27,10 +27,10 @@ namespace Teknoo\Sellsy\Client;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
-use Teknoo\Sellsy\Client\Collection\CollectionGeneratorInterface;
-use Teknoo\Sellsy\Client\Collection\CollectionInterface;
 use Teknoo\Sellsy\Client\Exception\ErrorException;
 use Teknoo\Sellsy\Client\Exception\RequestFailureException;
+use Teknoo\Sellsy\Method\MethodInterface;
+use Teknoo\Sellsy\Transport\TransportInterface;
 
 /**
  * Class Client
@@ -48,31 +48,9 @@ use Teknoo\Sellsy\Client\Exception\RequestFailureException;
 class Client implements ClientInterface
 {
     /**
-     * Sellsy collections of methods generator.
-     *
-     * @var CollectionGeneratorInterface
+     * @var TransportInterface
      */
-    private $collectionGenerator;
-
-    /**
-     * @var RequestInterface
-     */
-    private $uri;
-
-    /**
-     * @var RequestInterface
-     */
-    private $request;
-
-    /**
-     * @var callable
-     */
-    private $streamGenerator;
-
-    /**
-     * @var HttpClientBridgeInterface
-     */
-    private $httpClientBridge;
+    private $transport;
 
     /**
      * API End point.
@@ -130,11 +108,7 @@ class Client implements ClientInterface
 
     /**
      * Client constructor.
-     * @param UriInterface $uri
-     * @param RequestInterface $request
-     * @param callable $streamGenerator
-     * @param HttpClientBridgeInterface $httpClientBridge
-     * @param CollectionGeneratorInterface $collectionGenerator
+     * @param TransportInterface $transport
      * @param string $apiUrl
      * @param string $oauthAccessToken
      * @param string $oauthAccessTokenSecret
@@ -143,11 +117,7 @@ class Client implements ClientInterface
      * @param \DateTime|null $now
      */
     public function __construct(
-        UriInterface $uri,
-        RequestInterface $request,
-        callable $streamGenerator,
-        HttpClientBridgeInterface $httpClientBridge,
-        CollectionGeneratorInterface $collectionGenerator,
+        TransportInterface $transport,
         string $apiUrl = '',
         string $oauthAccessToken = '',
         string $oauthAccessTokenSecret = '',
@@ -155,11 +125,7 @@ class Client implements ClientInterface
         string $oauthConsumerSecret = '',
         \DateTime $now = null
     ) {
-        $this->uri = $uri;
-        $this->request = $request;
-        $this->streamGenerator = $streamGenerator;
-        $this->httpClientBridge = $httpClientBridge;
-        $this->collectionGenerator = $collectionGenerator;
+        $this->transport = $transport;
         $this->setApiUrl($apiUrl);
         $this->setOAuthAccessToken($oauthAccessToken);
         $this->setOAuthAccessTokenSecret($oauthAccessTokenSecret);
@@ -219,11 +185,13 @@ class Client implements ClientInterface
     }
 
     /**
+     * @param string $method
+     * @param UriInterface $uri
      * @return RequestInterface
      */
-    private function getNewRequest(): RequestInterface
+    private function getNewRequest(string $method, UriInterface $uri): RequestInterface
     {
-        return clone $this->request;
+        return $this->transport->createRequest($method, $uri);
     }
 
     /**
@@ -235,7 +203,7 @@ class Client implements ClientInterface
      */
     private function encodeOAuthHeaders(&$oauth)
     {
-        $values = array();
+        $values = [];
         foreach ($oauth as $key => &$value) {
             $values[] = $key.'="'.\rawurlencode($value).'"';
         }
@@ -246,18 +214,18 @@ class Client implements ClientInterface
     /**
      * Internal method to generate HTTP headers to use for the API authentication with OAuth protocol.
      * @param RequestInterface $request
+     * @return RequestInterface
      */
-    private function setOAuthHeaders(RequestInterface $request)
+    private function setOAuthHeaders(RequestInterface $request): RequestInterface
     {
+        $now = new \DateTime();
         if ($this->now instanceof \DateTime) {
             $now = clone $this->now;
-        } else {
-            $now = new \DateTime();
         }
 
         //Generate HTTP headers
         $encodedKey = \rawurlencode($this->oauthConsumerSecret).'&'.\rawurlencode($this->oauthAccessTokenSecret);
-        $oauthParams = array(
+        $oauthParams = [
             'oauth_consumer_key' => $this->oauthConsumerKey,
             'oauth_token' => $this->oauthAccessToken,
             'oauth_nonce' => \md5($now->getTimestamp() + \rand(0, 1000)),
@@ -265,10 +233,10 @@ class Client implements ClientInterface
             'oauth_signature_method' => 'PLAINTEXT',
             'oauth_version' => '1.0',
             'oauth_signature' => $encodedKey,
-        );
+        ];
 
-        $request->withHeader('Authorization', $this->encodeOAuthHeaders($oauthParams));
-        $request->withHeader('Expect', '');
+        $request = $request->withHeader('Authorization', $this->encodeOAuthHeaders($oauthParams));
+        return $request->withHeader('Expect', '');
     }
 
     /**
@@ -276,13 +244,13 @@ class Client implements ClientInterface
      */
     private function getNewUri(): UriInterface
     {
-        return clone $this->uri;
+        return $this->transport->createUri();
     }
 
     /**
-     * @param RequestInterface $request
+     * @return UriInterface
      */
-    private function setUri(RequestInterface $request)
+    private function getUri(): UriInterface
     {
         $uri = $this->getNewUri();
 
@@ -310,7 +278,7 @@ class Client implements ClientInterface
             $uri->withFragment($this->apiUrl['fragment']);
         }
 
-        $request->withUri($uri);
+        return $uri;
     }
 
     /**
@@ -318,63 +286,58 @@ class Client implements ClientInterface
      */
     private function getNewStream(): StreamInterface
     {
-        return ($this->streamGenerator)();
+        return $this->transport->createStream();
     }
 
     /**
      * @param RequestInterface $request
      * @param array $requestSettings
+     * @return RequestInterface
      */
-    private function setBodyRequest(RequestInterface $request, array &$requestSettings)
+    private function setBodyRequest(RequestInterface $request, array &$requestSettings): RequestInterface
     {
         $stream = $this->getNewStream();
         $stream->rewind();
         $stream->write(\http_build_query($requestSettings));
 
-        $request->withBody($stream);
+        return $request->withBody($stream);
     }
 
     /**
-     * Method to perform a request to the api.
-     *
-     * @param array $requestSettings
-     *
-     * @return \stdClass
-     *
-     * @throws RequestFailureException is the request can not be performed on the server
-     * @throws ErrorException          if the server returned an error for this request
+     * {@inheritdoc}
      */
-    public function requestApi(array $requestSettings)
+        public function run(MethodInterface $method, array $params = []): ResultInterface
     {
         //Arguments for the Sellsy API
-        $this->lastRequest = $requestSettings;
         $this->lastResponse = null;
-        $encodedRequest = array(
+        $encodedRequest = [
             'request' => 1,
             'io_mode' => 'json',
-            'do_in' => \json_encode($requestSettings),
-        );
-
-        //Generate client request
-        $request = $this->getNewRequest();
+            'do_in' => \json_encode([
+                'method' => (string) $method,
+                'params' => $params,
+            ])
+        ];
 
         //Configure to contact the api with POST request and return value
-        $request->withMethod('POST');
+        //Generate client request
+        $request = $this->getNewRequest('POST', $this->getUri());
 
-        $this->setUri($request);
-        $this->setOAuthHeaders($request);
-        $this->setBodyRequest($request, $encodedRequest);
+        $request = $this->setOAuthHeaders($request);
+        $request = $this->setBodyRequest($request, $encodedRequest);
+
+        $this->lastRequest = $request;
 
         //Execute the request
         try {
-            $this->lastResponse = $this->httpClientBridge->execute($request);
+            $this->lastResponse = $this->transport->execute($request);
         } catch (\Exception $e) {
             throw new RequestFailureException($e->getMessage(), $e->getCode(), $e);
         }
 
         $body = $this->lastResponse->getBody();
         if (!$body instanceof StreamInterface) {
-            throw new ErrorException("Bad body response");
+            throw new RequestFailureException("Bad body response");
         }
 
         //OAuth issue, throw an exception
@@ -383,215 +346,29 @@ class Client implements ClientInterface
             throw new RequestFailureException($result);
         }
 
-        $answer = \json_decode($result);
+        $answer = new Result($result);
 
-        //Bad request, error returned by the api, throw an error
-        if (!empty($answer->status) && 'error' == $answer->status) {
-            if (!empty($answer->error->message)) {
-                //Retrieve error message like it's defined in Sellsy API documentation
-                throw new ErrorException($answer->error->message);
-            } elseif (\is_string($answer->error)) {
-                //Retrieve error message (sometime, error is not an object...)
-                throw new ErrorException($answer->error);
-            } else {
-                //Other case, return directly the answer
-                throw new ErrorException($result);
-            }
+        if ($answer->isError()) {
+            //Bad request, error returned by the api, throw an error
+            throw new ErrorException($answer->getErrorMessage());
         }
 
-        $this->lastResponse = $answer;
-
-        return $this->lastResponse;
+        return $answer;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getLastRequest()
     {
         return $this->lastRequest;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getLastResponse()
     {
         return $this->lastResponse;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getInfos()
-    {
-        $requestSettings = [
-            'method' => 'Infos.getInfos',
-            'params' => [],
-        ];
-
-        return $this->requestApi($requestSettings);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function accountData(): CollectionInterface
-    {
-        return $this->collectionGenerator->getCollection($this, 'Accountdatas');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function accountPrefs(): CollectionInterface
-    {
-        return $this->collectionGenerator->getCollection($this, 'AccountPrefs');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function purchase(): CollectionInterface
-    {
-        return $this->collectionGenerator->getCollection($this, 'Purchase');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function agenda(): CollectionInterface
-    {
-        return $this->collectionGenerator->getCollection($this, 'Agenda');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function annotations(): CollectionInterface
-    {
-        return $this->collectionGenerator->getCollection($this, 'Annotations');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function catalogue(): CollectionInterface
-    {
-        return $this->collectionGenerator->getCollection($this, 'Catalogue');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function customFields(): CollectionInterface
-    {
-        return $this->collectionGenerator->getCollection($this, 'CustomFields');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function client(): CollectionInterface
-    {
-        return $this->collectionGenerator->getCollection($this, 'Client');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function staffs(): CollectionInterface
-    {
-        return $this->collectionGenerator->getCollection($this, 'Staffs');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function peoples(): CollectionInterface
-    {
-        return $this->collectionGenerator->getCollection($this, 'Peoples');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function document(): CollectionInterface
-    {
-        return $this->collectionGenerator->getCollection($this, 'Document');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function mails(): CollectionInterface
-    {
-        return $this->collectionGenerator->getCollection($this, 'Mails');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function event(): CollectionInterface
-    {
-        return $this->collectionGenerator->getCollection($this, 'Event');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function expense(): CollectionInterface
-    {
-        return $this->collectionGenerator->getCollection($this, 'Expense');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function opportunities(): CollectionInterface
-    {
-        return $this->collectionGenerator->getCollection($this, 'Opportunities');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function prospects(): CollectionInterface
-    {
-        return $this->collectionGenerator->getCollection($this, 'Prospects');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function smartTags(): CollectionInterface
-    {
-        return $this->collectionGenerator->getCollection($this, 'SmartTags');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function stat(): CollectionInterface
-    {
-        return $this->collectionGenerator->getCollection($this, 'Stat');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function stock(): CollectionInterface
-    {
-        return $this->collectionGenerator->getCollection($this, 'Stock');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function support(): CollectionInterface
-    {
-        return $this->collectionGenerator->getCollection($this, 'Support');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function timeTracking(): CollectionInterface
-    {
-        return $this->collectionGenerator->getCollection($this, 'Timetracking');
     }
 }

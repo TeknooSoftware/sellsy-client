@@ -22,10 +22,10 @@
  *
  * @version     0.8.0
  */
-namespace Teknoo\Sellsy\Client\Collection;
+namespace Teknoo\Sellsy\Collection;
 
-use Teknoo\Sellsy\Client\Client;
 use Teknoo\Sellsy\Client\ClientInterface;
+use Teknoo\Sellsy\Method\MethodInterface;
 
 /**
  * Class Collection
@@ -43,40 +43,37 @@ use Teknoo\Sellsy\Client\ClientInterface;
 class Collection implements CollectionInterface
 {
     /**
-     * @var Client
+     * @var ClientInterface
      */
     private $client;
 
     /**
      * @var string
      */
-    private $collectionName;
+    private $name;
 
     /**
-     * Constructor.
-     *
-     * @param Client $client
-     * @param string $collectionName
+     * @var MethodInterface[]
      */
-    public function __construct(Client $client = null, string $collectionName = null)
-    {
-        if ($client instanceof ClientInterface) {
-            $this->setClient($client);
-        }
+    private $methods = [];
 
-        if (!empty($collectionName)) {
-            $this->setCollectionName($collectionName);
-        }
+    /**
+     * Collection constructor.
+     * @param ClientInterface $client
+     * @param string $name
+     */
+    public function __construct(ClientInterface $client, string $name)
+    {
+        $this->client = $client;
+        $this->name = $name;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setClient(ClientInterface $client): CollectionInterface
+    public function getName(): string
     {
-        $this->client = $client;
-
-        return $this;
+        return $this->name;
     }
 
     /**
@@ -90,9 +87,9 @@ class Collection implements CollectionInterface
     /**
      * {@inheritdoc}
      */
-    public function setCollectionName(string $collectionName): CollectionInterface
+    public function registerMethod(MethodInterface $method): CollectionInterface
     {
-        $this->collectionName = $collectionName;
+        $this->methods[$method->getName()] = $method;
 
         return $this;
     }
@@ -100,32 +97,20 @@ class Collection implements CollectionInterface
     /**
      * {@inheritdoc}
      */
-    public function getCollectionName(): string
+    public function listMethods(): array
     {
-        return $this->collectionName;
+        return $this->methods;
     }
 
     /**
-     * Magic call to API.
-     *
-     * @param string $name
-     * @param array  $arguments
-     *
-     * @return \stdClass
+     * {@inheritdoc}
      */
-    public function __call($name, $arguments)
+    public function __get(string $methodName): MethodInterface
     {
-        if (empty($arguments) || !\is_array($arguments)) {
-            $arguments = array();
-        } else {
-            $arguments = (array) \array_pop($arguments);
+        if (!isset($this->methods[$methodName])) {
+            throw new \DomainException("Error the method $methodName is not available for this collection");
         }
 
-        return $this->client->requestApi(
-            array(
-                'method' => $this->collectionName.'.'.$name,
-                'params' => $arguments,
-            )
-        );
+        return $this->methods[$methodName];
     }
 }
