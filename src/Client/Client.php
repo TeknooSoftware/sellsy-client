@@ -306,7 +306,7 @@ class Client implements ClientInterface
     /**
      * {@inheritdoc}
      */
-        public function run(MethodInterface $method, array $params = []): ResultInterface
+    public function run(MethodInterface $method, array $params = []): ResultInterface
     {
         //Arguments for the Sellsy API
         $this->lastResponse = null;

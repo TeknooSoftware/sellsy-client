@@ -247,4 +247,468 @@ abstract class AbstractClientTest extends \PHPUnit_Framework_TestCase
         self::assertInstanceOf(RequestInterface::class, $client->getLastRequest());
         self::assertInstanceOf(ResponseInterface::class, $client->getLastResponse());
     }
+
+    /**
+     * @expectedException \Teknoo\Sellsy\Client\Exception\ErrorException
+     */
+    public function testRunReturnError()
+    {
+        $uri = $this->uriString;
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withScheme')
+            ->with('https')
+            ->willReturnSelf();
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withHost')
+            ->with('foo.bar')
+            ->willReturnSelf();
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withPort')
+            ->with('8080')
+            ->willReturnSelf();
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withPath')
+            ->with('/path/api')
+            ->willReturnSelf();
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withQuery')
+            ->with('method=toCall')
+            ->willReturnSelf();
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withFragment')
+            ->with('archor=true')
+            ->willReturnSelf();
+
+        $now = $this->getDate();
+        $oauth = [
+            'oauth_consumer_key' => 'consumerKey',
+            'oauth_token' => 'token',
+            'oauth_nonce' => \md5($now->getTimestamp() + \rand(0, 1000)),
+            'oauth_timestamp' => $now->getTimestamp(),
+            'oauth_signature_method' => 'PLAINTEXT',
+            'oauth_version' => '1.0',
+            'oauth_signature' => 'consumerSecret&tokenSecret',
+        ];
+
+        $values = [];
+        foreach ($oauth as $key => &$value) {
+            $values[] = $key.'="'.\rawurlencode($value).'"';
+        }
+
+        $this->buildRequest()
+            ->expects(self::exactly(2))
+            ->method('withHeader')
+            ->withConsecutive(
+                ['Authorization', ],
+                ['Expect', '']
+            )->willReturnSelf();
+
+        $this->buildStream()
+            ->expects(self::once())
+            ->method('rewind')
+            ->willReturnSelf();
+
+        $this->buildStream()
+            ->expects(self::once())
+            ->method('write')
+            ->with(\http_build_query([
+                'request' => 1,
+                'io_mode' => 'json',
+                'do_in' => \json_encode([
+                    'method' => 'collection.method',
+                    'params' => ['foo'=>'bar'],
+                ])
+            ]))
+            ->willReturnSelf();
+
+        $this->buildRequest()
+            ->expects(self::once())
+            ->method('withBody')
+            ->with($this->buildStream())
+            ->willReturnSelf();
+
+
+        $method = $this->createMock(MethodInterface::class);
+        $method->expects(self::any())
+            ->method('__toString')
+            ->willReturn('collection.method');
+
+        $stream = $this->createMock(StreamInterface::class);
+        $stream->expects(self::any())->method('getContents')->willReturn(\json_encode(['status'=>'error', 'error'=>'fooBar']));
+
+        $response = $this->createMock(ResponseInterface::class);
+        $response->expects(self::any())->method('getBody')->willReturn($stream);
+
+        $this->buildTransport()
+            ->expects(self::once())
+            ->method('execute')
+            ->with($this->buildRequest())
+            ->willReturn($response);
+
+        $client = $this->buildClient();
+
+        $client->setApiUrl($uri);
+        $client->setOAuthConsumerKey('consumerKey');
+        $client->setOAuthConsumerSecret('consumerSecret');
+        $client->setOAuthAccessToken('token');
+        $client->setOAuthAccessTokenSecret('tokenSecret');
+        $client->run($method, ['foo'=>'bar']);
+    }
+
+    /**
+     * @expectedException \Teknoo\Sellsy\Client\Exception\RequestFailureException
+     */
+    public function testRunWithExceptionOnExecute()
+    {
+        $uri = $this->uriString;
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withScheme')
+            ->with('https')
+            ->willReturnSelf();
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withHost')
+            ->with('foo.bar')
+            ->willReturnSelf();
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withPort')
+            ->with('8080')
+            ->willReturnSelf();
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withPath')
+            ->with('/path/api')
+            ->willReturnSelf();
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withQuery')
+            ->with('method=toCall')
+            ->willReturnSelf();
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withFragment')
+            ->with('archor=true')
+            ->willReturnSelf();
+
+        $now = $this->getDate();
+        $oauth = [
+            'oauth_consumer_key' => 'consumerKey',
+            'oauth_token' => 'token',
+            'oauth_nonce' => \md5($now->getTimestamp() + \rand(0, 1000)),
+            'oauth_timestamp' => $now->getTimestamp(),
+            'oauth_signature_method' => 'PLAINTEXT',
+            'oauth_version' => '1.0',
+            'oauth_signature' => 'consumerSecret&tokenSecret',
+        ];
+
+        $values = [];
+        foreach ($oauth as $key => &$value) {
+            $values[] = $key.'="'.\rawurlencode($value).'"';
+        }
+
+        $this->buildRequest()
+            ->expects(self::exactly(2))
+            ->method('withHeader')
+            ->withConsecutive(
+                ['Authorization', ],
+                ['Expect', '']
+            )->willReturnSelf();
+
+        $this->buildStream()
+            ->expects(self::once())
+            ->method('rewind')
+            ->willReturnSelf();
+
+        $this->buildStream()
+            ->expects(self::once())
+            ->method('write')
+            ->with(\http_build_query([
+                'request' => 1,
+                'io_mode' => 'json',
+                'do_in' => \json_encode([
+                    'method' => 'collection.method',
+                    'params' => ['foo'=>'bar'],
+                ])
+            ]))
+            ->willReturnSelf();
+
+        $this->buildRequest()
+            ->expects(self::once())
+            ->method('withBody')
+            ->with($this->buildStream())
+            ->willReturnSelf();
+
+        $method = $this->createMock(MethodInterface::class);
+        $method->expects(self::any())
+            ->method('__toString')
+            ->willReturn('collection.method');
+
+        $this->buildTransport()
+            ->expects(self::once())
+            ->method('execute')
+            ->with($this->buildRequest())
+            ->willThrowException(new \Exception('fooBar'));
+
+        $client = $this->buildClient();
+
+        $client->setApiUrl($uri);
+        $client->setOAuthConsumerKey('consumerKey');
+        $client->setOAuthConsumerSecret('consumerSecret');
+        $client->setOAuthAccessToken('token');
+        $client->setOAuthAccessTokenSecret('tokenSecret');
+        $client->run($method, ['foo'=>'bar']);
+    }
+
+    /**
+     * @expectedException \Teknoo\Sellsy\Client\Exception\RequestFailureException
+     */
+    public function testRunWithWithNoResponseStream()
+    {
+        $uri = $this->uriString;
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withScheme')
+            ->with('https')
+            ->willReturnSelf();
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withHost')
+            ->with('foo.bar')
+            ->willReturnSelf();
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withPort')
+            ->with('8080')
+            ->willReturnSelf();
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withPath')
+            ->with('/path/api')
+            ->willReturnSelf();
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withQuery')
+            ->with('method=toCall')
+            ->willReturnSelf();
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withFragment')
+            ->with('archor=true')
+            ->willReturnSelf();
+
+        $now = $this->getDate();
+        $oauth = [
+            'oauth_consumer_key' => 'consumerKey',
+            'oauth_token' => 'token',
+            'oauth_nonce' => \md5($now->getTimestamp() + \rand(0, 1000)),
+            'oauth_timestamp' => $now->getTimestamp(),
+            'oauth_signature_method' => 'PLAINTEXT',
+            'oauth_version' => '1.0',
+            'oauth_signature' => 'consumerSecret&tokenSecret',
+        ];
+
+        $values = [];
+        foreach ($oauth as $key => &$value) {
+            $values[] = $key.'="'.\rawurlencode($value).'"';
+        }
+
+        $this->buildRequest()
+            ->expects(self::exactly(2))
+            ->method('withHeader')
+            ->withConsecutive(
+                ['Authorization', ],
+                ['Expect', '']
+            )->willReturnSelf();
+
+        $this->buildStream()
+            ->expects(self::once())
+            ->method('rewind')
+            ->willReturnSelf();
+
+        $this->buildStream()
+            ->expects(self::once())
+            ->method('write')
+            ->with(\http_build_query([
+                'request' => 1,
+                'io_mode' => 'json',
+                'do_in' => \json_encode([
+                    'method' => 'collection.method',
+                    'params' => ['foo'=>'bar'],
+                ])
+            ]))
+            ->willReturnSelf();
+
+        $this->buildRequest()
+            ->expects(self::once())
+            ->method('withBody')
+            ->with($this->buildStream())
+            ->willReturnSelf();
+
+        $method = $this->createMock(MethodInterface::class);
+        $method->expects(self::any())
+            ->method('__toString')
+            ->willReturn('collection.method');
+
+        $response = $this->createMock(ResponseInterface::class);
+        $response->expects(self::any())->method('getBody')->willReturn(null);
+
+        $this->buildTransport()
+            ->expects(self::once())
+            ->method('execute')
+            ->with($this->buildRequest())
+            ->willReturn($response);
+
+        $client = $this->buildClient();
+
+        $client->setApiUrl($uri);
+        $client->setOAuthConsumerKey('consumerKey');
+        $client->setOAuthConsumerSecret('consumerSecret');
+        $client->setOAuthAccessToken('token');
+        $client->setOAuthAccessTokenSecret('tokenSecret');
+        $client->run($method, ['foo'=>'bar']);
+    }
+
+    /**
+    * @expectedException \Teknoo\Sellsy\Client\Exception\RequestFailureException
+    */
+    public function testRunWithWithOAUthIssue()
+    {
+        $uri = $this->uriString;
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withScheme')
+            ->with('https')
+            ->willReturnSelf();
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withHost')
+            ->with('foo.bar')
+            ->willReturnSelf();
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withPort')
+            ->with('8080')
+            ->willReturnSelf();
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withPath')
+            ->with('/path/api')
+            ->willReturnSelf();
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withQuery')
+            ->with('method=toCall')
+            ->willReturnSelf();
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withFragment')
+            ->with('archor=true')
+            ->willReturnSelf();
+
+        $now = $this->getDate();
+        $oauth = [
+            'oauth_consumer_key' => 'consumerKey',
+            'oauth_token' => 'token',
+            'oauth_nonce' => \md5($now->getTimestamp() + \rand(0, 1000)),
+            'oauth_timestamp' => $now->getTimestamp(),
+            'oauth_signature_method' => 'PLAINTEXT',
+            'oauth_version' => '1.0',
+            'oauth_signature' => 'consumerSecret&tokenSecret',
+        ];
+
+        $values = [];
+        foreach ($oauth as $key => &$value) {
+            $values[] = $key.'="'.\rawurlencode($value).'"';
+        }
+
+        $this->buildRequest()
+            ->expects(self::exactly(2))
+            ->method('withHeader')
+            ->withConsecutive(
+                ['Authorization', ],
+                ['Expect', '']
+            )->willReturnSelf();
+
+        $this->buildStream()
+            ->expects(self::once())
+            ->method('rewind')
+            ->willReturnSelf();
+
+        $this->buildStream()
+            ->expects(self::once())
+            ->method('write')
+            ->with(\http_build_query([
+                'request' => 1,
+                'io_mode' => 'json',
+                'do_in' => \json_encode([
+                    'method' => 'collection.method',
+                    'params' => ['foo'=>'bar'],
+                ])
+            ]))
+            ->willReturnSelf();
+
+        $this->buildRequest()
+            ->expects(self::once())
+            ->method('withBody')
+            ->with($this->buildStream())
+            ->willReturnSelf();
+
+        $method = $this->createMock(MethodInterface::class);
+        $method->expects(self::any())
+            ->method('__toString')
+            ->willReturn('collection.method');
+
+        $stream = $this->createMock(StreamInterface::class);
+        $stream->expects(self::any())->method('getContents')->willReturn('oauth_problem=true');
+
+        $response = $this->createMock(ResponseInterface::class);
+        $response->expects(self::any())->method('getBody')->willReturn($stream);
+
+        $this->buildTransport()
+            ->expects(self::once())
+            ->method('execute')
+            ->with($this->buildRequest())
+            ->willReturn($response);
+
+        $client = $this->buildClient();
+
+        $client->setApiUrl($uri);
+        $client->setOAuthConsumerKey('consumerKey');
+        $client->setOAuthConsumerSecret('consumerSecret');
+        $client->setOAuthAccessToken('token');
+        $client->setOAuthAccessTokenSecret('tokenSecret');
+        $client->run($method, ['foo'=>'bar']);
+    }
 }

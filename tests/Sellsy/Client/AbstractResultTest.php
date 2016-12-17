@@ -10,6 +10,8 @@ abstract class AbstractResultTest extends \PHPUnit_Framework_TestCase
 
     abstract public function buildResultWithError(): ResultInterface;
 
+    abstract public function buildResultWithNoResponse(): ResultInterface;
+
     public function testIsSuccess()
     {
         $result = $this->buildResultWithSuccess();
@@ -55,5 +57,14 @@ abstract class AbstractResultTest extends \PHPUnit_Framework_TestCase
         $result = $this->buildResultWithError();
         self::assertInternalType('array', $result->getResponse());
         self::assertNotEmpty($result->getResponse());
+    }
+
+    /**
+     * @expectedException \RuntimeException
+     */
+    public function testGetResponseException()
+    {
+        $result = $this->buildResultWithNoResponse();
+        $result->getResponse();
     }
 }
