@@ -28,25 +28,44 @@ use Teknoo\Immutable\ImmutableInterface;
 use Teknoo\Sellsy\Collection\CollectionInterface;
 use Teknoo\Sellsy\Client\ResultInterface;
 
+/**
+ * Interface to define entity able to represent an available method in the Sellsy Api/
+ * Instance are directly invokable, but parameters must passed into an array and not been passed like a normal PHP method.
+ *
+ * @copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
+ *
+ * @link        http://teknoo.software/sellsy-client Project website
+ *
+ * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
+ *
+ * @author      Richard Déloge <richarddeloge@gmail.com>
+ */
 interface MethodInterface extends ImmutableInterface
 {
     /**
+     * To know the collection attached to this method.
+     *
      * @return CollectionInterface
      */
     public function getCollection(): CollectionInterface;
 
     /**
+     * To know the name of the method in the Sellsy API
+     *
      * @return string
      */
     public function getName(): string;
 
     /**
+     * To execute the method on the Sellsy API
+     *
      * @param array $params
      * @return ResultInterface
      */
     public function __invoke(array $params = []): ResultInterface;
 
     /**
+     * To know the name of the method in the Sellsy api, accompanied with the collection name
      * @return string
      */
     public function __toString(): string;

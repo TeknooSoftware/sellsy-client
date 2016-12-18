@@ -24,24 +24,47 @@
  */
 namespace Teknoo\Sellsy\Client;
 
+use Teknoo\Immutable\ImmutableTrait;
+
+/**
+ * Implementation immutable value object encapsuling result/response about a Sellsy operation.
+ *
+ * @copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
+ *
+ * @link        http://teknoo.software/sellsy-client Project website
+ *
+ * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
+ *
+ * @author      Richard Déloge <richarddeloge@gmail.com>
+ */
 class Result implements ResultInterface
 {
+    use ImmutableTrait;
+
     /**
-     * @var mixed
+     * Raw result from the Sellsy API
+     *
+     * @var string
      */
     private $result;
 
     /**
+     * Decoded result from Sellsy API
+     *
      * @var array
      */
     private $decodedResult;
 
     /**
+     * To know if the method has been correctly executed.
+     *
      * @var bool
      */
     private $isSuccess;
 
     /**
+     * To know the reason of the error
+     *
      * @var string
      */
     private $errorMessage = '';
@@ -50,7 +73,7 @@ class Result implements ResultInterface
      * Result constructor.
      * @param string $result
      */
-    public function __construct($result)
+    public function __construct(string $result)
     {
         $this->result = $result;
         $this->decodedResult = \json_decode($result, true);
@@ -71,6 +94,8 @@ class Result implements ResultInterface
         } else {
             $this->isSuccess = true;
         }
+
+        $this->uniqueConstructorCheck();
     }
 
     /**

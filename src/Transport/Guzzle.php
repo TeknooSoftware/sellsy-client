@@ -33,9 +33,23 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
 
+/**
+ * Define a transporter, using Guzzle, able to initialize a PSR7 request for the client and send it to the Sellsy API
+ * and return PSR7 response.
+ *
+ * @copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
+ *
+ * @link        http://teknoo.software/sellsy-client Project website
+ *
+ * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
+ *
+ * @author      Richard Déloge <richarddeloge@gmail.com>
+ */
 class Guzzle implements TransportInterface
 {
     /**
+     * Guzzle instance
+     *
      * @var Client
      */
     private $guzzleClient;

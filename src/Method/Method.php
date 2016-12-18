@@ -28,16 +28,32 @@ use Teknoo\Immutable\ImmutableTrait;
 use Teknoo\Sellsy\Collection\CollectionInterface;
 use Teknoo\Sellsy\Client\ResultInterface;
 
+/**
+ * Implementation to define entity able to represent an available method in the Sellsy Api/
+ * Instance are directly invokable, but parameters must passed into an array and not been passed like a normal PHP method.
+ *
+ * @copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
+ *
+ * @link        http://teknoo.software/sellsy-client Project website
+ *
+ * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
+ *
+ * @author      Richard Déloge <richarddeloge@gmail.com>
+ */
 class Method implements MethodInterface
 {
     use ImmutableTrait;
 
     /**
+     * Collection owning this method
+     *
      * @var CollectionInterface
      */
     private $collection;
 
     /**
+     * Name of this method on the Sellsy API
+     *
      * @var string
      */
     private $name;

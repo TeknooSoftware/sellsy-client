@@ -30,10 +30,10 @@ use Teknoo\Sellsy\Method\MethodInterface;
 
 /**
  * Interface ClientInterface
- * Interface to define client implementing the Sellsy API.
+ * Interface to define an HTTP+OAuth client to use the Sellsy API with your credentials to execute some operations on
+ * your account.
  *
- *
- * @copyright   Copyright (c) 2009-2016 Richard Déloge (richarddeloge@gmail.com)
+ * @copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
  *
  * @link        http://teknoo.software/sellsy-client Project website
  *
@@ -44,7 +44,7 @@ use Teknoo\Sellsy\Method\MethodInterface;
 interface ClientInterface
 {
     /**
-     * Update the api url.
+     * Update the api url to use to execute an operation.
      *
      * @param string $apiUrl
      *
@@ -53,7 +53,7 @@ interface ClientInterface
     public function setApiUrl(string $apiUrl): ClientInterface;
 
     /**
-     * Update the OAuth access token.
+     * Update the OAuth access token to use to authenticate with your account.
      *
      * @param string $oauthAccessToken
      *
@@ -62,7 +62,7 @@ interface ClientInterface
     public function setOAuthAccessToken(string $oauthAccessToken): ClientInterface;
 
     /**
-     * Update the OAuth access secret token.
+     * Update the OAuth access secret token to use to authenticate with your account.
      *
      * @param string $oauthAccessTokenSecret
      *
@@ -71,7 +71,7 @@ interface ClientInterface
     public function setOAuthAccessTokenSecret(string $oauthAccessTokenSecret): ClientInterface;
 
     /**
-     * Update the OAuth consumer key.
+     * Update the OAuth consumer key to use to authenticate with your account.
      *
      * @param string $oauthConsumerKey
      *
@@ -80,7 +80,7 @@ interface ClientInterface
     public function setOAuthConsumerKey(string $oauthConsumerKey): ClientInterface;
 
     /**
-     * Update the OAuth consumer secret.
+     * Update the OAuth consumer secret to use to authenticate with your account.
      *
      * @param string $oauthConsumerSecret
      *
@@ -89,16 +89,22 @@ interface ClientInterface
     public function setOAuthConsumerSecret(string $oauthConsumerSecret): ClientInterface;
 
     /**
-     * @return RequestInterface
+     * Get the last PSR7 request sent to the Sellsy server. It's a method to help debug.
+     * @return RequestInterface|null
      */
     public function getLastRequest();
 
     /**
-     * @return ResponseInterface
+     * Get the last PSR7 response sent by the Sellsy server. It's a method to help debug.
+     *
+     * @return ResponseInterface|null
      */
     public function getLastResponse();
 
     /**
+     * To execute a method, referenced by the $method instance on the Sellsy server via it's api, authenticated with
+     * your credentials.
+     *
      * @param MethodInterface $method
      * @param array $params
      * @return ResultInterface

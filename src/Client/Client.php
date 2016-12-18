@@ -34,10 +34,10 @@ use Teknoo\Sellsy\Transport\TransportInterface;
 
 /**
  * Class Client
- * Main implementation of ClientInterface to perform Sellsy API requests as a local methods.
+ * Implementation of an HTTP+OAuth client to use the Sellsy API with your credentials to execute some operations on
+ * your account.
  *
- *
- * @copyright   Copyright (c) 2009-2016 Richard Déloge (richarddeloge@gmail.com)
+ * @copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
  *
  * @link        http://teknoo.software/sellsy-client Project website
  *
@@ -48,12 +48,14 @@ use Teknoo\Sellsy\Transport\TransportInterface;
 class Client implements ClientInterface
 {
     /**
+     * Transport instance to dialog with Sellsy api
+     *
      * @var TransportInterface
      */
     private $transport;
 
     /**
-     * API End point.
+     * Sellsy API End point
      *
      * @var array
      */
@@ -88,14 +90,14 @@ class Client implements ClientInterface
     private $oauthConsumerSecret;
 
     /**
-     * Var to store the last request to facility debugging.
+     * Var to store the last PSR7 request to facility debugging.
      *
      * @var array
      */
     private $lastRequest;
 
     /**
-     * Var to store the last answer of Sellsy API to facility debugging.
+     * Var to store the last PSR7 answer of Sellsy API to facility debugging.
      *
      * @var mixed|\stdClass
      */
@@ -185,6 +187,8 @@ class Client implements ClientInterface
     }
 
     /**
+     * To get a new PSR7 request from transport instance to be able to dialog with Sellsy API
+     *
      * @param string $method
      * @param UriInterface $uri
      * @return RequestInterface
@@ -195,7 +199,7 @@ class Client implements ClientInterface
     }
 
     /**
-     * Transform an array to HTTP headers OAuth string.
+     * Transform an the OAuth array configuration to HTTP headers OAuth string.
      *
      * @param array $oauth
      *
@@ -248,6 +252,7 @@ class Client implements ClientInterface
     }
 
     /**
+     * To get the PSR7 Uri instance to configure the PSR7 request to be able to dialog with the Sellsy API
      * @return UriInterface
      */
     private function getUri(): UriInterface
@@ -282,6 +287,8 @@ class Client implements ClientInterface
     }
 
     /**
+     * To get a new PSR7 stream to inject in the request to pass arguments and methods to call ont the API
+     *
      * @return StreamInterface
      */
     private function getNewStream(): StreamInterface
@@ -290,6 +297,8 @@ class Client implements ClientInterface
     }
 
     /**
+     * To register method's argument in the request for the Sellsy API.
+     *
      * @param RequestInterface $request
      * @param array $requestSettings
      * @return RequestInterface

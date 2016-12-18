@@ -28,11 +28,10 @@ use Teknoo\Sellsy\Client\ClientInterface;
 use Teknoo\Sellsy\Method\MethodInterface;
 
 /**
- * Class Collection
- * Class to create collection of methods, like on the Sellsy API.
+ * Implmentation to define a collection of methods, declared in the sellsy api :
+ * https://api.sellsy.com/documentation/methods
  *
- *
- * @copyright   Copyright (c) 2009-2016 Richard Déloge (richarddeloge@gmail.com)
+ * @copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
  *
  * @link        http://teknoo.software/sellsy-client Project website
  *
