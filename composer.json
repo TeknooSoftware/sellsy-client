@@ -33,6 +33,7 @@
     "autoload": {
         "psr-4": {
             "Teknoo\\Sellsy\\": ["src/"],
+            "Teknoo\\Sellsy\\Definitions\\": ["definitions/"],
             "Teknoo\\Tests\\Sellsy\\": ["tests/"]
         }
     },

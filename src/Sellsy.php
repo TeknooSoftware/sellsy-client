@@ -26,6 +26,14 @@ namespace Teknoo\Sellsy;
 
 use Teknoo\Sellsy\Client\Client as SellsyClient;
 use GuzzleHttp\Client;
+use Teknoo\Sellsy\Collection\CollectionInterface;
+use Teknoo\Sellsy\Collection\DefinitionInterface;
+use Teknoo\Sellsy\Definitions\AccountDatas;
+use Teknoo\Sellsy\Definitions\AccountPrefs;
+use Teknoo\Sellsy\Definitions\Addresses;
+use Teknoo\Sellsy\Definitions\Agenda;
+use Teknoo\Sellsy\Definitions\Infos;
+use Teknoo\Sellsy\Definitions\Purchase;
 use Teknoo\Sellsy\Transport\Guzzle;
 use Teknoo\Sellsy\Transport\TransportInterface;
 
@@ -80,6 +88,11 @@ class Sellsy
      * @var SellsyClient
      */
     private $client;
+
+    /**
+     * @var CollectionInterface[]
+     */
+    private $collections;
 
     /**
      * Sellsy constructor.
@@ -177,5 +190,41 @@ class Sellsy
         $this->client = $client;
 
         return $this;
+    }
+
+    /**
+     * To return the collection instance, initiated by the definition
+     *
+     * @param string $collectionName
+     * @return CollectionInterface
+     * @throws \DomainException if the collection does not exist
+     * @throws \RuntimeException if the collection's definition does not implementing the good interface
+     */
+    public function __call(string $collectionName): CollectionInterface
+    {
+        if (isset($this->collections[$collectionName])) {
+            return $this->collections[$collectionName];
+        }
+
+        $collectionClassName = "Teknoo\\Sellsy\\Definitions\\".$collectionName;
+
+        if (!class_exists($collectionClassName)) {
+            throw new \DomainException("Error, the $collectionName has been not found");
+        }
+
+        $reflectionClass = new \ReflectionClass($collectionName);
+        if (!$reflectionClass->implementsInterface(DefinitionInterface::class)) {
+            throw new \RuntimeException(
+                "Error, the definition of $collectionName must implement ".DefinitionInterface::class
+            );
+        }
+
+        /**
+         * @var callable $definitionInstance
+         */
+        $definitionInstance = $reflectionClass->newInstance();
+        $this->collections[$collectionName] = $definitionInstance($this->getClient());
+
+        return $this->collections[$collectionName];
     }
 }
