@@ -8,6 +8,10 @@ use Teknoo\Sellsy\Sellsy;
 use Teknoo\Sellsy\Transport\TransportInterface;
 use Teknoo\Sellsy\Client\Client as SellsyClient;
 
+/**
+ * Class SellsyTest
+ * @covers \Teknoo\Sellsy\Sellsy
+ */
 class SellsyTest extends \PHPUnit_Framework_TestCase
 {
     public function buildSellsy()
