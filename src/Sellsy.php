@@ -28,12 +28,6 @@ use Teknoo\Sellsy\Client\Client as SellsyClient;
 use GuzzleHttp\Client;
 use Teknoo\Sellsy\Collection\CollectionInterface;
 use Teknoo\Sellsy\Collection\DefinitionInterface;
-use Teknoo\Sellsy\Definitions\AccountDatas;
-use Teknoo\Sellsy\Definitions\AccountPrefs;
-use Teknoo\Sellsy\Definitions\Addresses;
-use Teknoo\Sellsy\Definitions\Agenda;
-use Teknoo\Sellsy\Definitions\Infos;
-use Teknoo\Sellsy\Definitions\Purchase;
 use Teknoo\Sellsy\Transport\Guzzle;
 use Teknoo\Sellsy\Transport\TransportInterface;
 
@@ -196,23 +190,28 @@ class Sellsy
      * To return the collection instance, initiated by the definition
      *
      * @param string $collectionName
+     * @param array $arguments
      * @return CollectionInterface
      * @throws \DomainException if the collection does not exist
      * @throws \RuntimeException if the collection's definition does not implementing the good interface
      */
-    public function __call(string $collectionName): CollectionInterface
+    public function __call(string $collectionName, array $arguments): CollectionInterface
     {
         if (isset($this->collections[$collectionName])) {
             return $this->collections[$collectionName];
         }
 
-        $collectionClassName = "Teknoo\\Sellsy\\Definitions\\".$collectionName;
+        if (!\class_exists($collectionName, true)) {
+            $collectionClassName = "Teknoo\\Sellsy\\Definitions\\" . $collectionName;
 
-        if (!class_exists($collectionClassName)) {
-            throw new \DomainException("Error, the $collectionName has been not found");
+            if (!\class_exists($collectionClassName, true)) {
+                throw new \DomainException("Error, the $collectionName has been not found");
+            }
+        } else {
+            $collectionClassName = $collectionName;
         }
 
-        $reflectionClass = new \ReflectionClass($collectionName);
+        $reflectionClass = new \ReflectionClass($collectionClassName);
         if (!$reflectionClass->implementsInterface(DefinitionInterface::class)) {
             throw new \RuntimeException(
                 "Error, the definition of $collectionName must implement ".DefinitionInterface::class
