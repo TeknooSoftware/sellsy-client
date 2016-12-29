@@ -17,11 +17,9 @@
  * @link        http://teknoo.software/sellsy-client Project website
  *
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
- *
  * @author      Richard Déloge <richarddeloge@gmail.com>
- *
- * @version     0.8.0
  */
+
 namespace Teknoo\Sellsy\Definitions;
 
 use Teknoo\Sellsy\Client\ClientInterface;
@@ -56,7 +54,6 @@ class Prospects implements DefinitionInterface
         $collection->registerMethod(new Method($collection, 'updateContactPicture'));
         $collection->registerMethod(new Method($collection, 'transformToCustomer'));
         $collection->registerMethod(new Method($collection, 'updateThirdPicture'));
-
 
         return $collection;
     }

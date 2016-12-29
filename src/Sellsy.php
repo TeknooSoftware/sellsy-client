@@ -17,11 +17,9 @@
  * @link        http://teknoo.software/sellsy-client Project website
  *
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
- *
  * @author      Richard Déloge <richarddeloge@gmail.com>
- *
- * @version     0.8.0
  */
+
 namespace Teknoo\Sellsy;
 
 use Teknoo\Sellsy\Client\Client as SellsyClient;
@@ -44,7 +42,7 @@ class Sellsy
     private $transport;
 
     /**
-     * Sellsy API End point
+     * Sellsy API End point.
      *
      * @var string
      */
@@ -90,6 +88,7 @@ class Sellsy
 
     /**
      * Sellsy constructor.
+     *
      * @param string $apiUrl
      * @param string $oauthAccessToken
      * @param string $oauthAccessTokenSecret
@@ -155,6 +154,7 @@ class Sellsy
 
     /**
      * @param Client $guzzleClient
+     *
      * @return self
      */
     public function setGuzzleClient(Client $guzzleClient): Sellsy
@@ -166,6 +166,7 @@ class Sellsy
 
     /**
      * @param TransportInterface $transport
+     *
      * @return self
      */
     public function setTransport(TransportInterface $transport): Sellsy
@@ -177,6 +178,7 @@ class Sellsy
 
     /**
      * @param SellsyClient $client
+     *
      * @return self
      */
     public function setClient(SellsyClient $client): Sellsy
@@ -187,12 +189,14 @@ class Sellsy
     }
 
     /**
-     * To return the collection instance, initiated by the definition
+     * To return the collection instance, initiated by the definition.
      *
      * @param string $collectionName
-     * @param array $arguments
+     * @param array  $arguments
+     *
      * @return CollectionInterface
-     * @throws \DomainException if the collection does not exist
+     *
+     * @throws \DomainException  if the collection does not exist
      * @throws \RuntimeException if the collection's definition does not implementing the good interface
      */
     public function __call(string $collectionName, array $arguments): CollectionInterface
@@ -202,7 +206,7 @@ class Sellsy
         }
 
         if (!\class_exists($collectionName, true)) {
-            $collectionClassName = "Teknoo\\Sellsy\\Definitions\\" . $collectionName;
+            $collectionClassName = 'Teknoo\\Sellsy\\Definitions\\'.$collectionName;
 
             if (!\class_exists($collectionClassName, true)) {
                 throw new \DomainException("Error, the $collectionName has been not found");

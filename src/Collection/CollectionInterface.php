@@ -17,11 +17,9 @@
  * @link        http://teknoo.software/sellsy-client Project website
  *
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
- *
  * @author      Richard Déloge <richarddeloge@gmail.com>
- *
- * @version     0.8.0
  */
+
 namespace Teknoo\Sellsy\Collection;
 
 use Teknoo\Sellsy\Client\ClientInterface;
@@ -29,14 +27,13 @@ use Teknoo\Sellsy\Method\MethodInterface;
 
 /**
  * Interface to define a collection of methods, declared in the sellsy api :
- * https://api.sellsy.com/documentation/methods
+ * https://api.sellsy.com/documentation/methods.
  *
  * @copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
  *
  * @link        http://teknoo.software/sellsy-client Project website
  *
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
- *
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
 interface CollectionInterface
@@ -49,7 +46,7 @@ interface CollectionInterface
     public function getName(): string;
 
     /**
-     * To return the Sellsy client attached to this client
+     * To return the Sellsy client attached to this client.
      *
      * @return ClientInterface
      */
@@ -59,6 +56,7 @@ interface CollectionInterface
      * To register a new MethodInterface instance in this collection.
      *
      * @param MethodInterface $method
+     *
      * @return CollectionInterface
      */
     public function registerMethod(MethodInterface $method): CollectionInterface;
@@ -71,9 +69,10 @@ interface CollectionInterface
     public function listMethods(): array;
 
     /**
-     * To get the MethodInterface instance, identified by $methodName
+     * To get the MethodInterface instance, identified by $methodName.
      *
      * @param string $methodName
+     *
      * @return MethodInterface
      */
     public function __get(string $methodName): MethodInterface;

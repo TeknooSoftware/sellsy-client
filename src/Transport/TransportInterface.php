@@ -17,11 +17,9 @@
  * @link        http://teknoo.software/sellsy-client Project website
  *
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
- *
  * @author      Richard Déloge <richarddeloge@gmail.com>
- *
- * @version     0.8.0
  */
+
 namespace Teknoo\Sellsy\Transport;
 
 use Psr\Http\Message\RequestInterface;
@@ -38,13 +36,12 @@ use Psr\Http\Message\UriInterface;
  * @link        http://teknoo.software/sellsy-client Project website
  *
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
- *
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
 interface TransportInterface
 {
     /**
-     * To initiate a PSR7 Uri instance to configure a request
+     * To initiate a PSR7 Uri instance to configure a request.
      *
      * @return UriInterface
      */
@@ -53,23 +50,25 @@ interface TransportInterface
     /**
      * To initialize a PSR7 request for the Sellsy client.
      *
-     * @param string $method
+     * @param string       $method
      * @param UriInterface $uri
+     *
      * @return RequestInterface
      */
     public function createRequest(string $method, UriInterface $uri): RequestInterface;
 
     /**
-     * To initialize a PSR7 Stream, needed by the request
+     * To initialize a PSR7 Stream, needed by the request.
      *
      * @return StreamInterface
      */
     public function createStream(): StreamInterface;
 
     /**
-     * To execute the PSR7 request, from the Sellsy client
+     * To execute the PSR7 request, from the Sellsy client.
      *
      * @param RequestInterface $request
+     *
      * @return ResponseInterface
      */
     public function execute(RequestInterface $request): ResponseInterface;

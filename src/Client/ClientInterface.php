@@ -17,15 +17,13 @@
  * @link        http://teknoo.software/sellsy-client Project website
  *
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
- *
  * @author      Richard Déloge <richarddeloge@gmail.com>
- *
- * @version     0.8.0
  */
+
 namespace Teknoo\Sellsy\Client;
 
 use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;;
+use Psr\Http\Message\ResponseInterface;
 use Teknoo\Sellsy\Method\MethodInterface;
 
 /**
@@ -38,7 +36,6 @@ use Teknoo\Sellsy\Method\MethodInterface;
  * @link        http://teknoo.software/sellsy-client Project website
  *
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
- *
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
 interface ClientInterface
@@ -90,6 +87,7 @@ interface ClientInterface
 
     /**
      * Get the last PSR7 request sent to the Sellsy server. It's a method to help debug.
+     *
      * @return RequestInterface|null
      */
     public function getLastRequest();
@@ -106,7 +104,8 @@ interface ClientInterface
      * your credentials.
      *
      * @param MethodInterface $method
-     * @param array $params
+     * @param array           $params
+     *
      * @return ResultInterface
      */
     public function run(MethodInterface $method, array $params = []): ResultInterface;

@@ -17,11 +17,9 @@
  * @link        http://teknoo.software/sellsy-client Project website
  *
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
- *
  * @author      Richard Déloge <richarddeloge@gmail.com>
- *
- * @version     0.8.0
  */
+
 namespace Teknoo\Sellsy\Client;
 
 use Teknoo\Immutable\ImmutableInterface;
@@ -34,7 +32,6 @@ use Teknoo\Immutable\ImmutableInterface;
  * @link        http://teknoo.software/sellsy-client Project website
  *
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
- *
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
 interface ResultInterface extends ImmutableInterface
@@ -47,28 +44,28 @@ interface ResultInterface extends ImmutableInterface
     public function isSuccess(): bool;
 
     /**
-     * To know if an error has been occurred during the execution
+     * To know if an error has been occurred during the execution.
      *
      * @return bool
      */
     public function isError(): bool;
 
     /**
-     * To know the reason of the error
+     * To know the reason of the error.
      *
      * @return string
      */
     public function getErrorMessage(): string;
 
     /**
-     * To extract the result in original value
+     * To extract the result in original value.
      *
      * @return string
      */
     public function getRaw(): string;
 
     /**
-     * To get the answer, in an usable format (array)
+     * To get the answer, in an usable format (array).
      *
      * @return mixed
      */

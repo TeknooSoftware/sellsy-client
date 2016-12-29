@@ -17,11 +17,9 @@
  * @link        http://teknoo.software/sellsy-client Project website
  *
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
- *
  * @author      Richard Déloge <richarddeloge@gmail.com>
- *
- * @version     0.8.0
  */
+
 namespace Teknoo\Sellsy\Transport;
 
 use GuzzleHttp\Client;
@@ -42,13 +40,12 @@ use Psr\Http\Message\UriInterface;
  * @link        http://teknoo.software/sellsy-client Project website
  *
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
- *
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
 class Guzzle implements TransportInterface
 {
     /**
-     * Guzzle instance
+     * Guzzle instance.
      *
      * @var Client
      */
@@ -56,6 +53,7 @@ class Guzzle implements TransportInterface
 
     /**
      * Guzzle constructor.
+     *
      * @param Client $guzzleClient
      */
     public function __construct(Client $guzzleClient)

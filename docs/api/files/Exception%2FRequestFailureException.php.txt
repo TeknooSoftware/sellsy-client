@@ -20,7 +20,7 @@
  *
  * @author      Richard Déloge <richarddeloge@gmail.com>
  *
- * @version     0.8.0
+ *
  */
 
 namespace Teknoo\Sellsy\Client\Exception;

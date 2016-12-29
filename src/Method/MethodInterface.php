@@ -17,11 +17,9 @@
  * @link        http://teknoo.software/sellsy-client Project website
  *
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
- *
  * @author      Richard Déloge <richarddeloge@gmail.com>
- *
- * @version     0.8.0
  */
+
 namespace Teknoo\Sellsy\Method;
 
 use Teknoo\Immutable\ImmutableInterface;
@@ -37,7 +35,6 @@ use Teknoo\Sellsy\Client\ResultInterface;
  * @link        http://teknoo.software/sellsy-client Project website
  *
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
- *
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
 interface MethodInterface extends ImmutableInterface
@@ -50,22 +47,24 @@ interface MethodInterface extends ImmutableInterface
     public function getCollection(): CollectionInterface;
 
     /**
-     * To know the name of the method in the Sellsy API
+     * To know the name of the method in the Sellsy API.
      *
      * @return string
      */
     public function getName(): string;
 
     /**
-     * To execute the method on the Sellsy API
+     * To execute the method on the Sellsy API.
      *
      * @param array $params
+     *
      * @return ResultInterface
      */
     public function __invoke(array $params = []): ResultInterface;
 
     /**
-     * To know the name of the method in the Sellsy api, accompanied with the collection name
+     * To know the name of the method in the Sellsy api, accompanied with the collection name.
+     *
      * @return string
      */
     public function __toString(): string;

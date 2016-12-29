@@ -17,11 +17,9 @@
  * @link        http://teknoo.software/sellsy-client Project website
  *
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
- *
  * @author      Richard Déloge <richarddeloge@gmail.com>
- *
- * @version     0.8.0
  */
+
 namespace Teknoo\Sellsy\Client;
 
 use Teknoo\Immutable\ImmutableTrait;
@@ -34,7 +32,6 @@ use Teknoo\Immutable\ImmutableTrait;
  * @link        http://teknoo.software/sellsy-client Project website
  *
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
- *
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
 class Result implements ResultInterface
@@ -42,14 +39,14 @@ class Result implements ResultInterface
     use ImmutableTrait;
 
     /**
-     * Raw result from the Sellsy API
+     * Raw result from the Sellsy API.
      *
      * @var string
      */
     private $result;
 
     /**
-     * Decoded result from Sellsy API
+     * Decoded result from Sellsy API.
      *
      * @var array
      */
@@ -63,7 +60,7 @@ class Result implements ResultInterface
     private $isSuccess;
 
     /**
-     * To know the reason of the error
+     * To know the reason of the error.
      *
      * @var string
      */
@@ -71,6 +68,7 @@ class Result implements ResultInterface
 
     /**
      * Result constructor.
+     *
      * @param string $result
      */
     public function __construct(string $result)
@@ -136,7 +134,6 @@ class Result implements ResultInterface
     public function getResponse()
     {
         if (!isset($this->decodedResult['response'])) {
-
             if (isset($this->decodedResult['error'])) {
                 return $this->decodedResult['error'];
             }

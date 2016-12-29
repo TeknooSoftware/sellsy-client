@@ -17,11 +17,9 @@
  * @link        http://teknoo.software/sellsy-client Project website
  *
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
- *
  * @author      Richard Déloge <richarddeloge@gmail.com>
- *
- * @version     0.8.0
  */
+
 namespace Teknoo\Sellsy\Collection;
 
 use Teknoo\Sellsy\Client\ClientInterface;
@@ -29,14 +27,13 @@ use Teknoo\Sellsy\Method\MethodInterface;
 
 /**
  * Implementation to define a collection of methods, declared in the sellsy api :
- * https://api.sellsy.com/documentation/methods
+ * https://api.sellsy.com/documentation/methods.
  *
  * @copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
  *
  * @link        http://teknoo.software/sellsy-client Project website
  *
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
- *
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
 class Collection implements CollectionInterface
@@ -58,8 +55,9 @@ class Collection implements CollectionInterface
 
     /**
      * Collection constructor.
+     *
      * @param ClientInterface $client
-     * @param string $name
+     * @param string          $name
      */
     public function __construct(ClientInterface $client, string $name)
     {

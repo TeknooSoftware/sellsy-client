@@ -17,11 +17,9 @@
  * @link        http://teknoo.software/sellsy-client Project website
  *
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
- *
  * @author      Richard Déloge <richarddeloge@gmail.com>
- *
- * @version     0.8.0
  */
+
 namespace Teknoo\Sellsy\Client;
 
 use Psr\Http\Message\RequestInterface;
@@ -42,20 +40,19 @@ use Teknoo\Sellsy\Transport\TransportInterface;
  * @link        http://teknoo.software/sellsy-client Project website
  *
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
- *
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
 class Client implements ClientInterface
 {
     /**
-     * Transport instance to dialog with Sellsy api
+     * Transport instance to dialog with Sellsy api.
      *
      * @var TransportInterface
      */
     private $transport;
 
     /**
-     * Sellsy API End point
+     * Sellsy API End point.
      *
      * @var array
      */
@@ -110,13 +107,14 @@ class Client implements ClientInterface
 
     /**
      * Client constructor.
+     *
      * @param TransportInterface $transport
-     * @param string $apiUrl
-     * @param string $oauthAccessToken
-     * @param string $oauthAccessTokenSecret
-     * @param string $oauthConsumerKey
-     * @param string $oauthConsumerSecret
-     * @param \DateTime|null $now
+     * @param string             $apiUrl
+     * @param string             $oauthAccessToken
+     * @param string             $oauthAccessTokenSecret
+     * @param string             $oauthConsumerKey
+     * @param string             $oauthConsumerSecret
+     * @param \DateTime|null     $now
      */
     public function __construct(
         TransportInterface $transport,
@@ -187,10 +185,11 @@ class Client implements ClientInterface
     }
 
     /**
-     * To get a new PSR7 request from transport instance to be able to dialog with Sellsy API
+     * To get a new PSR7 request from transport instance to be able to dialog with Sellsy API.
      *
-     * @param string $method
+     * @param string       $method
      * @param UriInterface $uri
+     *
      * @return RequestInterface
      */
     private function getNewRequest(string $method, UriInterface $uri): RequestInterface
@@ -217,7 +216,9 @@ class Client implements ClientInterface
 
     /**
      * Internal method to generate HTTP headers to use for the API authentication with OAuth protocol.
+     *
      * @param RequestInterface $request
+     *
      * @return RequestInterface
      */
     private function setOAuthHeaders(RequestInterface $request): RequestInterface
@@ -240,6 +241,7 @@ class Client implements ClientInterface
         ];
 
         $request = $request->withHeader('Authorization', $this->encodeOAuthHeaders($oauthParams));
+
         return $request->withHeader('Expect', '');
     }
 
@@ -252,7 +254,8 @@ class Client implements ClientInterface
     }
 
     /**
-     * To get the PSR7 Uri instance to configure the PSR7 request to be able to dialog with the Sellsy API
+     * To get the PSR7 Uri instance to configure the PSR7 request to be able to dialog with the Sellsy API.
+     *
      * @return UriInterface
      */
     private function getUri(): UriInterface
@@ -287,7 +290,7 @@ class Client implements ClientInterface
     }
 
     /**
-     * To get a new PSR7 stream to inject in the request to pass arguments and methods to call ont the API
+     * To get a new PSR7 stream to inject in the request to pass arguments and methods to call ont the API.
      *
      * @return StreamInterface
      */
@@ -300,7 +303,8 @@ class Client implements ClientInterface
      * To register method's argument in the request for the Sellsy API.
      *
      * @param RequestInterface $request
-     * @param array $requestSettings
+     * @param array            $requestSettings
+     *
      * @return RequestInterface
      */
     private function setBodyRequest(RequestInterface $request, array &$requestSettings): RequestInterface
@@ -325,7 +329,7 @@ class Client implements ClientInterface
             'do_in' => \json_encode([
                 'method' => (string) $method,
                 'params' => $params,
-            ])
+            ]),
         ];
 
         //Configure to contact the api with POST request and return value
@@ -346,7 +350,7 @@ class Client implements ClientInterface
 
         $body = $this->lastResponse->getBody();
         if (!$body instanceof StreamInterface) {
-            throw new RequestFailureException("Bad body response");
+            throw new RequestFailureException('Bad body response');
         }
 
         //OAuth issue, throw an exception

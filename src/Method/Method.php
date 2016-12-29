@@ -17,11 +17,9 @@
  * @link        http://teknoo.software/sellsy-client Project website
  *
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
- *
  * @author      Richard Déloge <richarddeloge@gmail.com>
- *
- * @version     0.8.0
  */
+
 namespace Teknoo\Sellsy\Method;
 
 use Teknoo\Immutable\ImmutableTrait;
@@ -37,7 +35,6 @@ use Teknoo\Sellsy\Client\ResultInterface;
  * @link        http://teknoo.software/sellsy-client Project website
  *
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
- *
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
 class Method implements MethodInterface
@@ -45,14 +42,14 @@ class Method implements MethodInterface
     use ImmutableTrait;
 
     /**
-     * Collection owning this method
+     * Collection owning this method.
      *
      * @var CollectionInterface
      */
     private $collection;
 
     /**
-     * Name of this method on the Sellsy API
+     * Name of this method on the Sellsy API.
      *
      * @var string
      */
@@ -60,8 +57,9 @@ class Method implements MethodInterface
 
     /**
      * Method constructor.
+     *
      * @param CollectionInterface $collection
-     * @param string $name
+     * @param string              $name
      */
     public function __construct(CollectionInterface $collection, string $name)
     {
