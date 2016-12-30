@@ -1,5 +1,23 @@
 #Teknoo Software - Sellsy client library - Change Log
 
+##[2.0.0-alpha1] - 2016-12-30
+- First release on new version
+
+###Updated
+- New management of Collections and Methods with dedicated class, used as proxy to configure the client.
+- Refactoring client to be simpler and the library architecture to facilitating future developments.
+- Refactoring of tests.
+
+###Added
+- Support of PSR-7 and by default this library is provided with Guzzle.
+- Transport behavior, build on PSR-7, to customize Sellsy's requests.
+- Result interface to encapsulate Sellsy's return.
+- A front class, used to generate automatically client and collections instance to perform naturally requests to Sellsy.
+
+###Removed
+- Dependency to Teknoo/curl-request.
+- Remove Generator.
+
 ##[1.0.6] - 2016-08-04
 ###Fixed
 - Improve optimization on call to native function and optimized
