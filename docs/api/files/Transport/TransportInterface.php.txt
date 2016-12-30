@@ -20,14 +20,16 @@
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
 
-namespace Teknoo\Sellsy\Collection;
+namespace Teknoo\Sellsy\Transport;
 
-use Teknoo\Sellsy\Client\ClientInterface;
-use Teknoo\Sellsy\Method\MethodInterface;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\StreamInterface;
+use Psr\Http\Message\UriInterface;
 
 /**
- * Interface to define a collection of methods, declared in the sellsy api :
- * https://api.sellsy.com/documentation/methods.
+ * Interface to define a transporter, able to initialize a PSR7 request for the client and send it to the Sellsy API
+ * and return PSR7 response.
  *
  * @copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
  *
@@ -36,45 +38,39 @@ use Teknoo\Sellsy\Method\MethodInterface;
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
-interface CollectionInterface
+interface TransportInterface
 {
     /**
-     * Return the current collection name.
+     * To initiate a PSR7 Uri instance to configure a request.
      *
-     * @return string
+     * @return UriInterface
      */
-    public function getName(): string;
+    public function createUri(): UriInterface;
 
     /**
-     * To return the Sellsy client attached to this client.
+     * To initialize a PSR7 request for the Sellsy client.
      *
-     * @return ClientInterface
+     * @param string       $method
+     * @param UriInterface $uri
+     *
+     * @return RequestInterface
      */
-    public function getClient(): ClientInterface;
+    public function createRequest(string $method, UriInterface $uri): RequestInterface;
 
     /**
-     * To register a new MethodInterface instance in this collection.
+     * To initialize a PSR7 Stream, needed by the request.
      *
-     * @param MethodInterface $method
-     *
-     * @return CollectionInterface
+     * @return StreamInterface
      */
-    public function registerMethod(MethodInterface $method): CollectionInterface;
+    public function createStream(): StreamInterface;
 
     /**
-     * To list methods provided by this collection.
+     * To execute the PSR7 request, from the Sellsy client.
      *
-     * @return MethodInterface[]
+     * @param RequestInterface $request
+     *
+     * @return ResponseInterface
      */
-    public function listMethods(): array;
-
-    /**
-     * To get the MethodInterface instance, identified by $methodName.
-     *
-     * @param string $methodName
-     *
-     * @return MethodInterface
-     */
-    public function __get(string $methodName): MethodInterface;
+    public function execute(RequestInterface $request): ResponseInterface;
 }
 

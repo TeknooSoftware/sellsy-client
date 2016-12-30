@@ -20,14 +20,12 @@
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
 
-namespace Teknoo\Sellsy\Collection;
+namespace Teknoo\Sellsy\Client;
 
-use Teknoo\Sellsy\Client\ClientInterface;
-use Teknoo\Sellsy\Method\MethodInterface;
+use Teknoo\Immutable\ImmutableInterface;
 
 /**
- * Interface to define a collection of methods, declared in the sellsy api :
- * https://api.sellsy.com/documentation/methods.
+ * Interface to implement immutable value object encapsuling result/response about a Sellsy operation.
  *
  * @copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
  *
@@ -36,45 +34,41 @@ use Teknoo\Sellsy\Method\MethodInterface;
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
-interface CollectionInterface
+interface ResultInterface extends ImmutableInterface
 {
     /**
-     * Return the current collection name.
+     * To know if the method has been correctly executed.
+     *
+     * @return bool
+     */
+    public function isSuccess(): bool;
+
+    /**
+     * To know if an error has been occurred during the execution.
+     *
+     * @return bool
+     */
+    public function isError(): bool;
+
+    /**
+     * To know the reason of the error.
      *
      * @return string
      */
-    public function getName(): string;
+    public function getErrorMessage(): string;
 
     /**
-     * To return the Sellsy client attached to this client.
+     * To extract the result in original value.
      *
-     * @return ClientInterface
+     * @return string
      */
-    public function getClient(): ClientInterface;
+    public function getRaw(): string;
 
     /**
-     * To register a new MethodInterface instance in this collection.
+     * To get the answer, in an usable format (array).
      *
-     * @param MethodInterface $method
-     *
-     * @return CollectionInterface
+     * @return mixed
      */
-    public function registerMethod(MethodInterface $method): CollectionInterface;
-
-    /**
-     * To list methods provided by this collection.
-     *
-     * @return MethodInterface[]
-     */
-    public function listMethods(): array;
-
-    /**
-     * To get the MethodInterface instance, identified by $methodName.
-     *
-     * @param string $methodName
-     *
-     * @return MethodInterface
-     */
-    public function __get(string $methodName): MethodInterface;
+    public function getResponse();
 }
 
