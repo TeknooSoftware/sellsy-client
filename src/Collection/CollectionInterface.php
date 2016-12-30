@@ -23,6 +23,7 @@
 namespace Teknoo\Sellsy\Collection;
 
 use Teknoo\Sellsy\Client\ClientInterface;
+use Teknoo\Sellsy\Client\ResultInterface;
 use Teknoo\Sellsy\Method\MethodInterface;
 
 /**
@@ -76,4 +77,13 @@ interface CollectionInterface
      * @return MethodInterface
      */
     public function __get(string $methodName): MethodInterface;
+
+    /**
+     * To call directly a method interface
+     *
+     * @param string $methodName
+     * @param array $params
+     * @return ResultInterface
+     */
+    public function __call(string $methodName, array $params): ResultInterface;
 }

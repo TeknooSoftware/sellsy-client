@@ -3,27 +3,24 @@ Teknoo Software - Sellsy client
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/e053f347-f92a-47d9-b8b3-9f415d407889/mini.png)](https://insight.sensiolabs.com/projects/e053f347-f92a-47d9-b8b3-9f415d407889) [![Build Status](https://travis-ci.org/TeknooSoftware/sellsy-client.svg?branch=master)](https://travis-ci.org/TeknooSoftware/sellsy-client)
 
-Welcome and thank you to having downloaded this library.  This is a library for you to use 
-[Sellsy API](http://api.sellsy.com/) and enable your applications and websites to communicate with 
-your [Sellsy account](http://sellsy.com/).
+PHP library to connect your applications to your [Sellsy account](http://sellsy.com/) account using the 
+[Sellsy API](http://api.sellsy.com/) and build your websites and your platforms on the Sellsy technology.
 
 Simple Example
 --------------
 
-    //Create the generator
-     $clientGenerator = new Teknoo\Sellsy\Client\ClientGenerator();
-     //Get a new client
-     $client = $clientGenerator->getClient();
-     //Configure the client to use the API
-     $client->setApiUrl('https://apifeed.sellsy.com/0/')
-        ->setOAuthAccessToken('User Token')
-        ->setOAuthAccessTokenSecret('User Secret')
-        ->setOAuthConsumerKey('Consumer Token')
-        ->setOAuthConsumerSecret('Consumer Secret');
+     //Create the front object
+     $sellsy = new Teknoo\Sellsy\Sellsy(
+        'https://apifeed.sellsy.com/0/',
+        'User Token'
+        'User Secret'
+        'Consumer Token'
+        'Consumer Secret';
+     );
         
-     //Example of request, follow the API documentation of Sellsy API.   
-     print_r($client->getInfos());
-     print_r($client->accountPrefs()->getCorpInfos());
+     //Example of request, follow the API documentation of Sellsy API.
+     print_r($sellsy->Infos()->getInfos());
+     print_r($sellsy->AccountPrefs()->getCorpInfos());
 
 How-to
 ------
@@ -34,12 +31,15 @@ Installation & Requirements
 To install this library with composer, run this command :
 
     composer require teknoo/sellsy-client
+    
+To use the embedded Guzzle transport    
+
+    composer require guzzlehttp/guzzle
 
 This library requires :
 
-    * PHP 5.4+
-    * Teknoo Software Curl Request library
-    * cUrl extension
+    * PHP 7+
+    * A PSR-7 implementation
 
 API Documentation
 -----------------
@@ -58,7 +58,7 @@ Teknoo Software's DNA is simple : Provide to our partners and to the community a
  
 License
 -------
-States is licensed under the MIT and GPL3+ Licenses - see the licenses folder for details
+States is licensed under the MIT Licenses - see the licenses folder for details
 
 Contribute :)
 -------------

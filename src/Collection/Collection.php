@@ -23,6 +23,7 @@
 namespace Teknoo\Sellsy\Collection;
 
 use Teknoo\Sellsy\Client\ClientInterface;
+use Teknoo\Sellsy\Client\ResultInterface;
 use Teknoo\Sellsy\Method\MethodInterface;
 
 /**
@@ -109,5 +110,15 @@ class Collection implements CollectionInterface
         }
 
         return $this->methods[$methodName];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __call(string $methodName, array $params): ResultInterface
+    {
+        $method = $this->{$methodName};
+
+        return $method(...$params);
     }
 }

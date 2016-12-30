@@ -23,6 +23,7 @@
 namespace Teknoo\Tests\Sellsy\Collection;
 
 use Teknoo\Sellsy\Client\ClientInterface;
+use Teknoo\Sellsy\Client\ResultInterface;
 use Teknoo\Sellsy\Collection\CollectionInterface;
 use Teknoo\Sellsy\Method\MethodInterface;
 
@@ -105,5 +106,37 @@ abstract class AbstractCollectionTest extends \PHPUnit_Framework_TestCase
     {
         $collection = $this->buildCollection();
         $collection->method1;
+    }
+
+    public function testCall()
+    {
+        $collection = $this->buildCollection();
+        $method1 = $this->createMock(MethodInterface::class);
+        $method1->expects(self::any())
+            ->method('__invoke')
+            ->with([])
+            ->willReturn($this->createMock(ResultInterface::class));
+        $method1->expects(self::any())->method('getName')->willReturn('method1');
+        $collection->registerMethod($method1);
+
+        $method2 = $this->createMock(MethodInterface::class);
+        $method2->expects(self::any())
+            ->method('__invoke')
+            ->with(['foo'=>'bar'])
+            ->willReturn($this->createMock(ResultInterface::class));
+        $method2->expects(self::any())->method('getName')->willReturn('method2');
+        $collection->registerMethod($method2);
+
+        self::assertInstanceOf(ResultInterface::class, $collection->method1());
+        self::assertInstanceOf(ResultInterface::class, $collection->method2(['foo'=>'bar']));
+    }
+
+    /**
+     * @expectedException \DomainException
+     */
+    public function testCalltUnknown()
+    {
+        $collection = $this->buildCollection();
+        $collection->method1();
     }
 }

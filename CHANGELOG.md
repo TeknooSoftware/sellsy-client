@@ -1,5 +1,9 @@
 #Teknoo Software - Sellsy client library - Change Log
 
+##[2.0.0-alpha2] - 2016-12-30
+###Updated
+- Add an helper into collection to execute directly method without use "{}" in PHP.
+
 ##[2.0.0-alpha1] - 2016-12-30
 - First release on new version
 
