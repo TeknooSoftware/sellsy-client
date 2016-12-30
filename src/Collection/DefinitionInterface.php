@@ -26,7 +26,7 @@ use Teknoo\Sellsy\Client\ClientInterface;
 
 /**
  * Interface DefinitionInterface
- * To define a class to prepare a Collection of Sellsy method, grouping several
+ * To define a class to prepare a Collection of Sellsy method, grouping several.
  *
  * @link https://api.sellsy.com/documentation/methods#ttgetlist
  *
@@ -43,6 +43,7 @@ interface DefinitionInterface
      * To create on the flow a new collection instance, regrouping several sellsy's methods.
      *
      * @param ClientInterface $client
+     *
      * @return CollectionInterface
      */
     public function __invoke(ClientInterface $client): CollectionInterface;

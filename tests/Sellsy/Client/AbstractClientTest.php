@@ -1,5 +1,25 @@
 <?php
 
+/**
+ * Sellsy Client.
+ *
+ * LICENSE
+ *
+ * This source file is subject to the MIT license and the version 3 of the GPL3
+ * license that are bundled with this package in the folder licences
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to richarddeloge@gmail.com so we can send you a copy immediately.
+ *
+ *
+ * @copyright   Copyright (c) 2009-2016 Richard Déloge (richarddeloge@gmail.com)
+ *
+ * @link        http://teknoo.software/sellsy-client Project website
+ *
+ * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
+ * @author      Richard Déloge <richarddeloge@gmail.com>
+ */
+
 namespace Teknoo\Tests\Sellsy\Client;
 
 use Psr\Http\Message\RequestInterface;
@@ -12,7 +32,7 @@ use Teknoo\Sellsy\Method\MethodInterface;
 use Teknoo\Sellsy\Transport\TransportInterface;
 
 /**
- * Class AbstractClientTest
+ * Class AbstractClientTest.
  *
  * @copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
  *
@@ -203,7 +223,7 @@ abstract class AbstractClientTest extends \PHPUnit_Framework_TestCase
             ->expects(self::exactly(2))
             ->method('withHeader')
             ->withConsecutive(
-                ['Authorization', ],
+                ['Authorization'],
                 ['Expect', '']
             )->willReturnSelf();
 
@@ -220,8 +240,8 @@ abstract class AbstractClientTest extends \PHPUnit_Framework_TestCase
                 'io_mode' => 'json',
                 'do_in' => \json_encode([
                     'method' => 'collection.method',
-                    'params' => ['foo'=>'bar'],
-                ])
+                    'params' => ['foo' => 'bar'],
+                ]),
             ]))
             ->willReturnSelf();
 
@@ -231,14 +251,13 @@ abstract class AbstractClientTest extends \PHPUnit_Framework_TestCase
             ->with($this->buildStream())
             ->willReturnSelf();
 
-
         $method = $this->createMock(MethodInterface::class);
         $method->expects(self::any())
             ->method('__toString')
             ->willReturn('collection.method');
 
         $stream = $this->createMock(StreamInterface::class);
-        $stream->expects(self::any())->method('getContents')->willReturn(\json_encode(['status'=>'success', 'response'=>['foo'=>'bar']]));
+        $stream->expects(self::any())->method('getContents')->willReturn(\json_encode(['status' => 'success', 'response' => ['foo' => 'bar']]));
 
         $response = $this->createMock(ResponseInterface::class);
         $response->expects(self::any())->method('getBody')->willReturn($stream);
@@ -256,7 +275,7 @@ abstract class AbstractClientTest extends \PHPUnit_Framework_TestCase
         $client->setOAuthConsumerSecret('consumerSecret');
         $client->setOAuthAccessToken('token');
         $client->setOAuthAccessTokenSecret('tokenSecret');
-        self::assertInstanceOf(ResultInterface::class, $client->run($method, ['foo'=>'bar']));
+        self::assertInstanceOf(ResultInterface::class, $client->run($method, ['foo' => 'bar']));
         self::assertInstanceOf(RequestInterface::class, $client->getLastRequest());
         self::assertInstanceOf(ResponseInterface::class, $client->getLastResponse());
     }
@@ -324,7 +343,7 @@ abstract class AbstractClientTest extends \PHPUnit_Framework_TestCase
             ->expects(self::exactly(2))
             ->method('withHeader')
             ->withConsecutive(
-                ['Authorization', ],
+                ['Authorization'],
                 ['Expect', '']
             )->willReturnSelf();
 
@@ -341,8 +360,8 @@ abstract class AbstractClientTest extends \PHPUnit_Framework_TestCase
                 'io_mode' => 'json',
                 'do_in' => \json_encode([
                     'method' => 'collection.method',
-                    'params' => ['foo'=>'bar'],
-                ])
+                    'params' => ['foo' => 'bar'],
+                ]),
             ]))
             ->willReturnSelf();
 
@@ -352,14 +371,13 @@ abstract class AbstractClientTest extends \PHPUnit_Framework_TestCase
             ->with($this->buildStream())
             ->willReturnSelf();
 
-
         $method = $this->createMock(MethodInterface::class);
         $method->expects(self::any())
             ->method('__toString')
             ->willReturn('collection.method');
 
         $stream = $this->createMock(StreamInterface::class);
-        $stream->expects(self::any())->method('getContents')->willReturn(\json_encode(['status'=>'error', 'error'=>'fooBar']));
+        $stream->expects(self::any())->method('getContents')->willReturn(\json_encode(['status' => 'error', 'error' => 'fooBar']));
 
         $response = $this->createMock(ResponseInterface::class);
         $response->expects(self::any())->method('getBody')->willReturn($stream);
@@ -377,7 +395,7 @@ abstract class AbstractClientTest extends \PHPUnit_Framework_TestCase
         $client->setOAuthConsumerSecret('consumerSecret');
         $client->setOAuthAccessToken('token');
         $client->setOAuthAccessTokenSecret('tokenSecret');
-        $client->run($method, ['foo'=>'bar']);
+        $client->run($method, ['foo' => 'bar']);
     }
 
     /**
@@ -443,7 +461,7 @@ abstract class AbstractClientTest extends \PHPUnit_Framework_TestCase
             ->expects(self::exactly(2))
             ->method('withHeader')
             ->withConsecutive(
-                ['Authorization', ],
+                ['Authorization'],
                 ['Expect', '']
             )->willReturnSelf();
 
@@ -460,8 +478,8 @@ abstract class AbstractClientTest extends \PHPUnit_Framework_TestCase
                 'io_mode' => 'json',
                 'do_in' => \json_encode([
                     'method' => 'collection.method',
-                    'params' => ['foo'=>'bar'],
-                ])
+                    'params' => ['foo' => 'bar'],
+                ]),
             ]))
             ->willReturnSelf();
 
@@ -489,7 +507,7 @@ abstract class AbstractClientTest extends \PHPUnit_Framework_TestCase
         $client->setOAuthConsumerSecret('consumerSecret');
         $client->setOAuthAccessToken('token');
         $client->setOAuthAccessTokenSecret('tokenSecret');
-        $client->run($method, ['foo'=>'bar']);
+        $client->run($method, ['foo' => 'bar']);
     }
 
     /**
@@ -555,7 +573,7 @@ abstract class AbstractClientTest extends \PHPUnit_Framework_TestCase
             ->expects(self::exactly(2))
             ->method('withHeader')
             ->withConsecutive(
-                ['Authorization', ],
+                ['Authorization'],
                 ['Expect', '']
             )->willReturnSelf();
 
@@ -572,8 +590,8 @@ abstract class AbstractClientTest extends \PHPUnit_Framework_TestCase
                 'io_mode' => 'json',
                 'do_in' => \json_encode([
                     'method' => 'collection.method',
-                    'params' => ['foo'=>'bar'],
-                ])
+                    'params' => ['foo' => 'bar'],
+                ]),
             ]))
             ->willReturnSelf();
 
@@ -604,12 +622,12 @@ abstract class AbstractClientTest extends \PHPUnit_Framework_TestCase
         $client->setOAuthConsumerSecret('consumerSecret');
         $client->setOAuthAccessToken('token');
         $client->setOAuthAccessTokenSecret('tokenSecret');
-        $client->run($method, ['foo'=>'bar']);
+        $client->run($method, ['foo' => 'bar']);
     }
 
     /**
-    * @expectedException \Teknoo\Sellsy\Client\Exception\RequestFailureException
-    */
+     * @expectedException \Teknoo\Sellsy\Client\Exception\RequestFailureException
+     */
     public function testRunWithWithOAUthIssue()
     {
         $uri = $this->uriString;
@@ -670,7 +688,7 @@ abstract class AbstractClientTest extends \PHPUnit_Framework_TestCase
             ->expects(self::exactly(2))
             ->method('withHeader')
             ->withConsecutive(
-                ['Authorization', ],
+                ['Authorization'],
                 ['Expect', '']
             )->willReturnSelf();
 
@@ -687,8 +705,8 @@ abstract class AbstractClientTest extends \PHPUnit_Framework_TestCase
                 'io_mode' => 'json',
                 'do_in' => \json_encode([
                     'method' => 'collection.method',
-                    'params' => ['foo'=>'bar'],
-                ])
+                    'params' => ['foo' => 'bar'],
+                ]),
             ]))
             ->willReturnSelf();
 
@@ -722,6 +740,6 @@ abstract class AbstractClientTest extends \PHPUnit_Framework_TestCase
         $client->setOAuthConsumerSecret('consumerSecret');
         $client->setOAuthAccessToken('token');
         $client->setOAuthAccessTokenSecret('tokenSecret');
-        $client->run($method, ['foo'=>'bar']);
+        $client->run($method, ['foo' => 'bar']);
     }
 }

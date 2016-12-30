@@ -121,7 +121,7 @@ class Sellsy
     }
 
     /**
-     * Return and configure a guzzle client, on the flow
+     * Return and configure a guzzle client, on the flow.
      *
      * @return Client
      */
@@ -135,7 +135,7 @@ class Sellsy
     }
 
     /**
-     * Return and configure a sellsy transport, on the flow
+     * Return and configure a sellsy transport, on the flow.
      *
      * @return TransportInterface
      */
@@ -149,7 +149,7 @@ class Sellsy
     }
 
     /**
-     * Return and configure a sellsy client, on the flow
+     * Return and configure a sellsy client, on the flow.
      *
      * @return SellsyClient
      */
@@ -170,7 +170,7 @@ class Sellsy
     }
 
     /**
-     * To define a specific Guzzle client instance to avoid to create it on the flow
+     * To define a specific Guzzle client instance to avoid to create it on the flow.
      *
      * @param Client $guzzleClient
      *
@@ -184,7 +184,7 @@ class Sellsy
     }
 
     /**
-     * To define a specific Sellsy transport instance to avoid to create it on the flow
+     * To define a specific Sellsy transport instance to avoid to create it on the flow.
      *
      * @param TransportInterface $transport
      *
@@ -198,7 +198,7 @@ class Sellsy
     }
 
     /**
-     * To define a specific Sellsy client instance to avoid to create it on the flow
+     * To define a specific Sellsy client instance to avoid to create it on the flow.
      *
      * @param SellsyClient $client
      *

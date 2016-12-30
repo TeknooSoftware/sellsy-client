@@ -1,5 +1,25 @@
 <?php
 
+/**
+ * Sellsy Client.
+ *
+ * LICENSE
+ *
+ * This source file is subject to the MIT license and the version 3 of the GPL3
+ * license that are bundled with this package in the folder licences
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to richarddeloge@gmail.com so we can send you a copy immediately.
+ *
+ *
+ * @copyright   Copyright (c) 2009-2016 Richard Déloge (richarddeloge@gmail.com)
+ *
+ * @link        http://teknoo.software/sellsy-client Project website
+ *
+ * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
+ * @author      Richard Déloge <richarddeloge@gmail.com>
+ */
+
 namespace Teknoo\Tests\Sellsy\Method;
 
 use Teknoo\Sellsy\Client\ClientInterface;
@@ -8,7 +28,8 @@ use Teknoo\Sellsy\Collection\CollectionInterface;
 use Teknoo\Sellsy\Method\MethodInterface;
 
 /**
- * Class AbstractMethodTest
+ * Class AbstractMethodTest.
+ *
  * @copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
  *
  * @link        http://teknoo.software/sellsy-client Project website
@@ -73,7 +94,7 @@ abstract class AbstractMethodTest extends \PHPUnit_Framework_TestCase
     public function testInvoke()
     {
         /**
-         * @var callable $method
+         * @var callable
          */
         $method = $this->buildMethod();
 
@@ -82,10 +103,10 @@ abstract class AbstractMethodTest extends \PHPUnit_Framework_TestCase
         $this->buildClient()
             ->expects(self::once())
             ->method('run')
-            ->with($method, ['foo'=>'bar'])
+            ->with($method, ['foo' => 'bar'])
             ->willReturn($response);
 
-        self::assertInstanceOf(ResultInterface::class, $method(['foo'=>'bar']));
+        self::assertInstanceOf(ResultInterface::class, $method(['foo' => 'bar']));
     }
 
     public function testToString()
