@@ -11,9 +11,19 @@ use Teknoo\Sellsy\Client\Client as SellsyClient;
 /**
  * Class SellsyTest
  * @covers \Teknoo\Sellsy\Sellsy
+ *
+ *@copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
+ *
+ * @link        http://teknoo.software/sellsy-client Project website
+ *
+ * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
+ * @author      Richard Déloge <richarddeloge@gmail.com>
  */
 class SellsyTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @return Sellsy
+     */
     public function buildSellsy()
     {
         return new Sellsy('https://foo.bar', 'bar', 'foo', 'hello', 'world');

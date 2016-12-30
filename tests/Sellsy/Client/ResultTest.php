@@ -5,6 +5,17 @@ namespace Teknoo\Tests\Sellsy\Client;
 use Teknoo\Sellsy\Client\Result;
 use Teknoo\Sellsy\Client\ResultInterface;
 
+/**
+ * Class ResultTest
+ * @covers \Teknoo\Sellsy\Client\Result
+ *
+ * @copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
+ *
+ * @link        http://teknoo.software/sellsy-client Project website
+ *
+ * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
+ * @author      Richard Déloge <richarddeloge@gmail.com>
+ */
 class ResultTest extends AbstractResultTest
 {
     public function buildResultWithSuccess(): ResultInterface

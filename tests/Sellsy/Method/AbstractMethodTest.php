@@ -7,6 +7,15 @@ use Teknoo\Sellsy\Client\ResultInterface;
 use Teknoo\Sellsy\Collection\CollectionInterface;
 use Teknoo\Sellsy\Method\MethodInterface;
 
+/**
+ * Class AbstractMethodTest
+ * @copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
+ *
+ * @link        http://teknoo.software/sellsy-client Project website
+ *
+ * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
+ * @author      Richard Déloge <richarddeloge@gmail.com>
+ */
 abstract class AbstractMethodTest extends \PHPUnit_Framework_TestCase
 {
     /**

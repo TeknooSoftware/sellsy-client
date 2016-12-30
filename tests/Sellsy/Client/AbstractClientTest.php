@@ -11,6 +11,16 @@ use Teknoo\Sellsy\Client\ResultInterface;
 use Teknoo\Sellsy\Method\MethodInterface;
 use Teknoo\Sellsy\Transport\TransportInterface;
 
+/**
+ * Class AbstractClientTest
+ *
+ * @copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
+ *
+ * @link        http://teknoo.software/sellsy-client Project website
+ *
+ * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
+ * @author      Richard Déloge <richarddeloge@gmail.com>
+ */
 abstract class AbstractClientTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -98,6 +108,9 @@ abstract class AbstractClientTest extends \PHPUnit_Framework_TestCase
         return new \DateTime('2016-12-11 10:09:08');
     }
 
+    /**
+     * @return ClientInterface
+     */
     abstract public function buildClient(): ClientInterface;
 
     public function testSetApiUrl()

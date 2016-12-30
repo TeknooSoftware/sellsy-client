@@ -6,8 +6,20 @@ use Teknoo\Sellsy\Client\ClientInterface;
 use Teknoo\Sellsy\Collection\CollectionInterface;
 use Teknoo\Sellsy\Method\MethodInterface;
 
+/**
+ * Class AbstractCollectionTest
+ * @copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
+ *
+ * @link        http://teknoo.software/sellsy-client Project website
+ *
+ * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
+ * @author      Richard Déloge <richarddeloge@gmail.com>
+ */
 abstract class AbstractCollectionTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @return CollectionInterface
+     */
     abstract public function buildCollection(): CollectionInterface;
 
     public function testGetName()

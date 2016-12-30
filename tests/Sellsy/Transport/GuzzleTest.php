@@ -8,8 +8,22 @@ use Psr\Http\Message\ResponseInterface;
 use Teknoo\Sellsy\Transport\Guzzle;
 use Teknoo\Sellsy\Transport\TransportInterface;
 
+/**
+ * Class GuzzleTest
+ * @covers \Teknoo\Sellsy\Transport\Guzzle
+ *
+ * @copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
+ *
+ * @link        http://teknoo.software/sellsy-client Project website
+ *
+ * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
+ * @author      Richard Déloge <richarddeloge@gmail.com>
+ */
 class GuzzleTest extends AbstractTransportTest
 {
+    /**
+     * @return TransportInterface
+     */
     public function buildTransport(): TransportInterface
     {
         $guzzle = $this->createMock(Client::class);

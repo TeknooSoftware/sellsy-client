@@ -8,8 +8,20 @@ use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
 use Teknoo\Sellsy\Transport\TransportInterface;
 
+/**
+ * Class AbstractTransportTest
+ * @copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
+ *
+ * @link        http://teknoo.software/sellsy-client Project website
+ *
+ * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
+ * @author      Richard Déloge <richarddeloge@gmail.com>
+ */
 abstract class AbstractTransportTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @return TransportInterface
+     */
     abstract public function buildTransport(): TransportInterface;
 
     public function testCreateUri()
