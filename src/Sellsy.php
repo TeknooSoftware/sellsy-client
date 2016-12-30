@@ -29,6 +29,17 @@ use Teknoo\Sellsy\Collection\DefinitionInterface;
 use Teknoo\Sellsy\Transport\Guzzle;
 use Teknoo\Sellsy\Transport\TransportInterface;
 
+/**
+ * Class Sellsy
+ * Class helper to create automatically instances needed to dialog with the Sellsy API and interact with it.
+ *
+ * @copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
+ *
+ * @link        http://teknoo.software/sellsy-client Project website
+ *
+ * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
+ * @author      Richard Déloge <richarddeloge@gmail.com>
+ */
 class Sellsy
 {
     /**
@@ -110,6 +121,8 @@ class Sellsy
     }
 
     /**
+     * Return and configure a guzzle client, on the flow
+     *
      * @return Client
      */
     public function getGuzzleClient(): Client
@@ -122,6 +135,8 @@ class Sellsy
     }
 
     /**
+     * Return and configure a sellsy transport, on the flow
+     *
      * @return TransportInterface
      */
     public function getTransport(): TransportInterface
@@ -134,6 +149,8 @@ class Sellsy
     }
 
     /**
+     * Return and configure a sellsy client, on the flow
+     *
      * @return SellsyClient
      */
     public function getClient(): SellsyClient
@@ -153,6 +170,8 @@ class Sellsy
     }
 
     /**
+     * To define a specific Guzzle client instance to avoid to create it on the flow
+     *
      * @param Client $guzzleClient
      *
      * @return self
@@ -165,6 +184,8 @@ class Sellsy
     }
 
     /**
+     * To define a specific Sellsy transport instance to avoid to create it on the flow
+     *
      * @param TransportInterface $transport
      *
      * @return self
@@ -177,6 +198,8 @@ class Sellsy
     }
 
     /**
+     * To define a specific Sellsy client instance to avoid to create it on the flow
+     *
      * @param SellsyClient $client
      *
      * @return self

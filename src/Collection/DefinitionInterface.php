@@ -24,7 +24,26 @@ namespace Teknoo\Sellsy\Collection;
 
 use Teknoo\Sellsy\Client\ClientInterface;
 
+/**
+ * Interface DefinitionInterface
+ * To define a class to prepare a Collection of Sellsy method, grouping several
+ *
+ * @link https://api.sellsy.com/documentation/methods#ttgetlist
+ *
+ * @copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
+ *
+ * @link        http://teknoo.software/sellsy-client Project website
+ *
+ * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
+ * @author      Richard Déloge <richarddeloge@gmail.com>
+ */
 interface DefinitionInterface
 {
+    /**
+     * To create on the flow a new collection instance, regrouping several sellsy's methods.
+     *
+     * @param ClientInterface $client
+     * @return CollectionInterface
+     */
     public function __invoke(ClientInterface $client): CollectionInterface;
 }

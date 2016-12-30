@@ -28,6 +28,19 @@ use Teknoo\Sellsy\Collection\CollectionInterface;
 use Teknoo\Sellsy\Collection\DefinitionInterface;
 use Teknoo\Sellsy\Method\Method;
 
+/**
+ * Class Addresses
+ * Collection of methods for TimeTracking operations.
+ *
+ * @link https://api.sellsy.com/documentation/methods#addressesgetlist
+ *
+ * @copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
+ *
+ * @link        http://teknoo.software/sellsy-client Project website
+ *
+ * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
+ * @author      Richard Déloge <richarddeloge@gmail.com>
+ */
 class Addresses implements DefinitionInterface
 {
     /**
