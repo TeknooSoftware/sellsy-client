@@ -9,9 +9,15 @@ PHP library to connect your applications to your [Sellsy account](http://sellsy.
 Simple Example
 --------------
 
-     //Create the front object
-     $sellsy = new Teknoo\Sellsy\Sellsy(
-        'https://apifeed.sellsy.com/0/',
+      //Create the HTTP client
+      $guzzleClient = new GuzzleHttp\Client();
+
+      //Create the transport bridge
+      $transportBridge = new Teknoo\Sellsy\Transport\Guzzle($guzzleClient);
+
+      //Create the front object
+      $sellsy = new Teknoo\Sellsy\Sellsy(
+        $transportBridge
         'User Token'
         'User Secret'
         'Consumer Token'

@@ -22,35 +22,42 @@ To identify clients, the Sellsy API use the standard protocol OAuth.
     
 ##Configuration
     
-All clients are instantiated by the generator :
-     
-     //Create the generator
-     $clientGenerator = new Teknoo\Sellsy\Client\ClientGenerator();
-     //Get a new client
-     $client = $clientGenerator->getClient();
-     //Configure the client to use the API
-     $client->setApiUrl('https://apifeed.sellsy.com/0/')
-        ->setOAuthAccessToken('User Token')
-        ->setOAuthAccessTokenSecret('User Secret')
-        ->setOAuthConsumerKey('Consumer Token')
-        ->setOAuthConsumerSecret('Consumer Secret');
+Since the version 2, the library follows the PSR-7 and needs a transport to communicate with Sellsy' servers.
+The transport prepares all PSR7's messages instances, used by the client and executes requests.
+By default, this library use Guzzle to implement PSR-7. A transport is available :
+
+     //Create the HTTP client
+     $guzzleClient = new GuzzleHttp\Client();
+
+     //Create the transport bridge
+     $transportBridge = new Teknoo\Sellsy\Transport\Guzzle($guzzleClient);
+
+     //Create the front object
+      $sellsy = new Teknoo\Sellsy\Sellsy(
+         $transportBridge
+         'https://apifeed.sellsy.com/0/',
+         'User Token'
+         'User Secret'
+         'Consumer Token'
+         'Consumer Secret';
+      );
         
 ##Perform a request
         
-All methods defined in the api <http://api.sellsy.com/documentation/methodes> are available by this client :
+All methods defined in the api <http://api.sellsy.com/documentation/methodes> are available via collection, directly
+ callable on the client:
      
-The method `Infos.getInfos` is directly accessible via the client
+By example, for `Infos.getInfos` :
      
-     print_r($client->getInfos());
+     print_r($sellsy->Infos()->getInfos());
      
-To execute all others methods, you must go through the collection attached.
-By example, to call the method `AccountPrefs.getCorpInfos`
+to call the method `AccountPrefs.getCorpInfos`
 
-    print_r($client->accountPrefs()->getCorpInfos());
+    print_r($sellsy->AccountPrefs()->getCorpInfos());
     
 To call a method with arguments, you need pass them in an array
 
-    print_r($client->agenda()->getOne(['id'=>$youAgendaId]);
+    print_r($client->Agenda()->getOne(['id'=>$youAgendaId]);
     
 On errors, the client can throw two types of exceptions :
     
