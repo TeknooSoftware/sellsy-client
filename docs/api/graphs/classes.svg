@@ -21,130 +21,130 @@
 <path fill="none" stroke="gray" d="M377.666,-60C377.666,-60 789.459,-60 789.459,-60 795.459,-60 801.459,-66 801.459,-72 801.459,-72 801.459,-684 801.459,-684 801.459,-690 795.459,-696 789.459,-696 789.459,-696 377.666,-696 377.666,-696 371.666,-696 365.666,-690 365.666,-684 365.666,-684 365.666,-72 365.666,-72 365.666,-66 371.666,-60 377.666,-60"/>
 <text text-anchor="middle" x="583.563" y="-683.2" font-family="Times,serif" font-size="11.00" fill="gray">Sellsy</text>
 </g>
-<g id="clust4" class="cluster"><title>cluster_\Teknoo\Sellsy\Collection</title>
-<path fill="none" stroke="gray" d="M385.666,-542C385.666,-542 759.959,-542 759.959,-542 765.959,-542 771.959,-548 771.959,-554 771.959,-554 771.959,-656 771.959,-656 771.959,-662 765.959,-668 759.959,-668 759.959,-668 385.666,-668 385.666,-668 379.666,-668 373.666,-662 373.666,-656 373.666,-656 373.666,-554 373.666,-554 373.666,-548 379.666,-542 385.666,-542"/>
-<text text-anchor="middle" x="572.813" y="-655.2" font-family="Times,serif" font-size="11.00" fill="gray">Collection</text>
+<g id="clust4" class="cluster"><title>cluster_\Teknoo\Sellsy\Client</title>
+<path fill="none" stroke="gray" d="M399.166,-408C399.166,-408 781.459,-408 781.459,-408 787.459,-408 793.459,-414 793.459,-420 793.459,-420 793.459,-656 793.459,-656 793.459,-662 787.459,-668 781.459,-668 781.459,-668 399.166,-668 399.166,-668 393.166,-668 387.166,-662 387.166,-656 387.166,-656 387.166,-420 387.166,-420 387.166,-414 393.166,-408 399.166,-408"/>
+<text text-anchor="middle" x="590.313" y="-655.2" font-family="Times,serif" font-size="11.00" fill="gray">Client</text>
 </g>
-<g id="clust5" class="cluster"><title>cluster_\Teknoo\Sellsy\Method</title>
-<path fill="none" stroke="gray" d="M399.166,-462C399.166,-462 715.959,-462 715.959,-462 721.959,-462 727.959,-468 727.959,-474 727.959,-474 727.959,-522 727.959,-522 727.959,-528 721.959,-534 715.959,-534 715.959,-534 399.166,-534 399.166,-534 393.166,-534 387.166,-528 387.166,-522 387.166,-522 387.166,-474 387.166,-474 387.166,-468 393.166,-462 399.166,-462"/>
-<text text-anchor="middle" x="557.563" y="-521.2" font-family="Times,serif" font-size="11.00" fill="gray">Method</text>
+<g id="clust5" class="cluster"><title>cluster_\Teknoo\Sellsy\Client\Exception</title>
+<path fill="none" stroke="gray" d="M609.459,-416C609.459,-416 773.459,-416 773.459,-416 779.459,-416 785.459,-422 785.459,-428 785.459,-428 785.459,-530 785.459,-530 785.459,-536 779.459,-542 773.459,-542 773.459,-542 609.459,-542 609.459,-542 603.459,-542 597.459,-536 597.459,-530 597.459,-530 597.459,-428 597.459,-428 597.459,-422 603.459,-416 609.459,-416"/>
+<text text-anchor="middle" x="691.459" y="-529.2" font-family="Times,serif" font-size="11.00" fill="gray">Exception</text>
 </g>
-<g id="clust6" class="cluster"><title>cluster_\Teknoo\Sellsy\Client</title>
-<path fill="none" stroke="gray" d="M399.166,-194C399.166,-194 781.459,-194 781.459,-194 787.459,-194 793.459,-200 793.459,-206 793.459,-206 793.459,-442 793.459,-442 793.459,-448 787.459,-454 781.459,-454 781.459,-454 399.166,-454 399.166,-454 393.166,-454 387.166,-448 387.166,-442 387.166,-442 387.166,-206 387.166,-206 387.166,-200 393.166,-194 399.166,-194"/>
-<text text-anchor="middle" x="590.313" y="-441.2" font-family="Times,serif" font-size="11.00" fill="gray">Client</text>
+<g id="clust6" class="cluster"><title>cluster_\Teknoo\Sellsy\Collection</title>
+<path fill="none" stroke="gray" d="M385.666,-274C385.666,-274 759.959,-274 759.959,-274 765.959,-274 771.959,-280 771.959,-286 771.959,-286 771.959,-388 771.959,-388 771.959,-394 765.959,-400 759.959,-400 759.959,-400 385.666,-400 385.666,-400 379.666,-400 373.666,-394 373.666,-388 373.666,-388 373.666,-286 373.666,-286 373.666,-280 379.666,-274 385.666,-274"/>
+<text text-anchor="middle" x="572.813" y="-387.2" font-family="Times,serif" font-size="11.00" fill="gray">Collection</text>
 </g>
-<g id="clust7" class="cluster"><title>cluster_\Teknoo\Sellsy\Client\Exception</title>
-<path fill="none" stroke="gray" d="M609.459,-202C609.459,-202 773.459,-202 773.459,-202 779.459,-202 785.459,-208 785.459,-214 785.459,-214 785.459,-316 785.459,-316 785.459,-322 779.459,-328 773.459,-328 773.459,-328 609.459,-328 609.459,-328 603.459,-328 597.459,-322 597.459,-316 597.459,-316 597.459,-214 597.459,-214 597.459,-208 603.459,-202 609.459,-202"/>
-<text text-anchor="middle" x="691.459" y="-315.2" font-family="Times,serif" font-size="11.00" fill="gray">Exception</text>
+<g id="clust7" class="cluster"><title>cluster_\Teknoo\Sellsy\Method</title>
+<path fill="none" stroke="gray" d="M399.166,-194C399.166,-194 715.959,-194 715.959,-194 721.959,-194 727.959,-200 727.959,-206 727.959,-206 727.959,-254 727.959,-254 727.959,-260 721.959,-266 715.959,-266 715.959,-266 399.166,-266 399.166,-266 393.166,-266 387.166,-260 387.166,-254 387.166,-254 387.166,-206 387.166,-206 387.166,-200 393.166,-194 399.166,-194"/>
+<text text-anchor="middle" x="557.563" y="-253.2" font-family="Times,serif" font-size="11.00" fill="gray">Method</text>
 </g>
 <g id="clust8" class="cluster"><title>cluster_\Teknoo\Sellsy\Transport</title>
 <path fill="none" stroke="gray" d="M389.166,-114C389.166,-114 715.959,-114 715.959,-114 721.959,-114 727.959,-120 727.959,-126 727.959,-126 727.959,-174 727.959,-174 727.959,-180 721.959,-186 715.959,-186 715.959,-186 389.166,-186 389.166,-186 383.166,-186 377.166,-180 377.166,-174 377.166,-174 377.166,-126 377.166,-126 377.166,-120 383.166,-114 389.166,-114"/>
 <text text-anchor="middle" x="552.563" y="-173.2" font-family="Times,serif" font-size="11.00" fill="gray">Transport</text>
 </g>
-<!-- \\Teknoo\\Sellsy\\Collection\\Collection -->
-<g id="node1" class="node"><title>\\Teknoo\\Sellsy\\Collection\\Collection</title>
-<polygon fill="none" stroke="black" points="733.459,-640 649.459,-640 649.459,-604 733.459,-604 733.459,-640"/>
-<text text-anchor="middle" x="691.459" y="-619.2" font-family="Courier,monospace" font-size="11.00">Collection</text>
-</g>
-<!-- \\Teknoo\\Sellsy\\Collection\\CollectionInterface -->
-<g id="node3" class="node"><title>\\Teknoo\\Sellsy\\Collection\\CollectionInterface</title>
-<polygon fill="none" stroke="black" points="526.666,-640 381.666,-640 381.666,-604 526.666,-604 526.666,-640"/>
-<text text-anchor="middle" x="454.166" y="-619.2" font-family="Courier,monospace" font-size="11.00">CollectionInterface</text>
-</g>
-<!-- \\Teknoo\\Sellsy\\Collection\\Collection&#45;&gt;\\Teknoo\\Sellsy\\Collection\\CollectionInterface -->
-<g id="edge1" class="edge"><title>\\Teknoo\\Sellsy\\Collection\\Collection&#45;&gt;\\Teknoo\\Sellsy\\Collection\\CollectionInterface</title>
-<path fill="none" stroke="black" stroke-dasharray="1,5" d="M649.205,-622C618.232,-622 574.814,-622 536.9,-622"/>
-<polygon fill="none" stroke="black" points="536.88,-618.5 526.88,-622 536.88,-625.5 536.88,-618.5"/>
-</g>
-<!-- \\Teknoo\\Sellsy\\Collection\\DefinitionInterface -->
-<g id="node2" class="node"><title>\\Teknoo\\Sellsy\\Collection\\DefinitionInterface</title>
-<polygon fill="none" stroke="black" points="763.959,-586 618.959,-586 618.959,-550 763.959,-550 763.959,-586"/>
-<text text-anchor="middle" x="691.459" y="-565.2" font-family="Courier,monospace" font-size="11.00">DefinitionInterface</text>
-</g>
-<!-- \\Teknoo\\Sellsy\\Method\\Method -->
-<g id="node4" class="node"><title>\\Teknoo\\Sellsy\\Method\\Method</title>
-<polygon fill="none" stroke="black" points="719.959,-506 662.959,-506 662.959,-470 719.959,-470 719.959,-506"/>
-<text text-anchor="middle" x="691.459" y="-485.2" font-family="Courier,monospace" font-size="11.00">Method</text>
-</g>
-<!-- \\Teknoo\\Sellsy\\Method\\MethodInterface -->
-<g id="node5" class="node"><title>\\Teknoo\\Sellsy\\Method\\MethodInterface</title>
-<polygon fill="none" stroke="black" points="513.166,-506 395.166,-506 395.166,-470 513.166,-470 513.166,-506"/>
-<text text-anchor="middle" x="454.166" y="-485.2" font-family="Courier,monospace" font-size="11.00">MethodInterface</text>
-</g>
-<!-- \\Teknoo\\Sellsy\\Method\\Method&#45;&gt;\\Teknoo\\Sellsy\\Method\\MethodInterface -->
-<g id="edge2" class="edge"><title>\\Teknoo\\Sellsy\\Method\\Method&#45;&gt;\\Teknoo\\Sellsy\\Method\\MethodInterface</title>
-<path fill="none" stroke="black" stroke-dasharray="1,5" d="M662.544,-488C628.592,-488 570.093,-488 523.865,-488"/>
-<polygon fill="none" stroke="black" points="523.602,-484.5 513.602,-488 523.602,-491.5 523.602,-484.5"/>
-</g>
-<!-- \\Teknoo\\Immutable\\ImmutableInterface -->
-<g id="node16" class="node"><title>\\Teknoo\\Immutable\\ImmutableInterface</title>
-<ellipse fill="none" stroke="black" cx="151.437" cy="-421" rx="151.373" ry="18"/>
-<text text-anchor="middle" x="151.437" y="-417.3" font-family="Times,serif" font-size="14.00" fill="gray">Teknoo\Immutable\ImmutableInterface</text>
-</g>
-<!-- \\Teknoo\\Sellsy\\Method\\MethodInterface&#45;&gt;\\Teknoo\\Immutable\\ImmutableInterface -->
-<g id="edge8" class="edge"><title>\\Teknoo\\Sellsy\\Method\\MethodInterface&#45;&gt;\\Teknoo\\Immutable\\ImmutableInterface</title>
-<path fill="none" stroke="black" d="M394.826,-475.002C348.948,-464.781 284.499,-450.422 233.589,-439.08"/>
-<polygon fill="none" stroke="black" points="234.119,-435.612 223.597,-436.854 232.597,-442.445 234.119,-435.612"/>
-</g>
-<!-- \\Teknoo\\Sellsy\\Client\\Exception\\ErrorException -->
-<g id="node6" class="node"><title>\\Teknoo\\Sellsy\\Client\\Exception\\ErrorException</title>
-<polygon fill="none" stroke="black" points="746.959,-300 635.959,-300 635.959,-264 746.959,-264 746.959,-300"/>
-<text text-anchor="middle" x="691.459" y="-279.2" font-family="Courier,monospace" font-size="11.00">ErrorException</text>
+<!-- \\Teknoo\\Sellsy\\Client\\Exception\\RequestFailureException -->
+<g id="node1" class="node"><title>\\Teknoo\\Sellsy\\Client\\Exception\\RequestFailureException</title>
+<polygon fill="none" stroke="black" points="777.459,-514 605.459,-514 605.459,-478 777.459,-478 777.459,-514"/>
+<text text-anchor="middle" x="691.459" y="-493.2" font-family="Courier,monospace" font-size="11.00">RequestFailureException</text>
 </g>
 <!-- \\RuntimeException -->
 <g id="node15" class="node"><title>\\RuntimeException</title>
 <ellipse fill="none" stroke="black" cx="454.166" cy="-18" rx="79.0865" ry="18"/>
 <text text-anchor="middle" x="454.166" y="-14.3" font-family="Times,serif" font-size="14.00" fill="gray">\RuntimeException</text>
 </g>
-<!-- \\Teknoo\\Sellsy\\Client\\Exception\\ErrorException&#45;&gt;\\RuntimeException -->
-<g id="edge3" class="edge"><title>\\Teknoo\\Sellsy\\Client\\Exception\\ErrorException&#45;&gt;\\RuntimeException</title>
-<path fill="none" stroke="black" d="M635.804,-274.55C622.079,-270.549 608.214,-264.411 597.459,-255 544.446,-208.612 570.899,-169.669 533.459,-110 518.186,-85.6586 496.834,-61.019 480.285,-43.3732"/>
-<polygon fill="none" stroke="black" points="482.49,-40.6126 473.059,-35.784 477.42,-45.4396 482.49,-40.6126"/>
-</g>
-<!-- \\Teknoo\\Sellsy\\Client\\Exception\\RequestFailureException -->
-<g id="node7" class="node"><title>\\Teknoo\\Sellsy\\Client\\Exception\\RequestFailureException</title>
-<polygon fill="none" stroke="black" points="777.459,-246 605.459,-246 605.459,-210 777.459,-210 777.459,-246"/>
-<text text-anchor="middle" x="691.459" y="-225.2" font-family="Courier,monospace" font-size="11.00">RequestFailureException</text>
-</g>
 <!-- \\Teknoo\\Sellsy\\Client\\Exception\\RequestFailureException&#45;&gt;\\RuntimeException -->
-<g id="edge4" class="edge"><title>\\Teknoo\\Sellsy\\Client\\Exception\\RequestFailureException&#45;&gt;\\RuntimeException</title>
-<path fill="none" stroke="black" d="M632.928,-209.831C620.585,-204.511 608.076,-197.937 597.459,-190 560.991,-162.736 562.44,-145.12 533.459,-110 514.822,-87.4147 493.226,-62.1002 477.442,-43.7511"/>
-<polygon fill="none" stroke="black" points="479.81,-41.1366 470.631,-35.8453 474.506,-45.7058 479.81,-41.1366"/>
+<g id="edge3" class="edge"><title>\\Teknoo\\Sellsy\\Client\\Exception\\RequestFailureException&#45;&gt;\\RuntimeException</title>
+<path fill="none" stroke="black" d="M607.63,-477.941C603.923,-475.339 600.494,-472.376 597.459,-469 489.098,-348.481 602.602,-256.582 533.459,-110 521.355,-84.3389 500.18,-60.1075 482.901,-42.9607"/>
+<polygon fill="none" stroke="black" points="484.907,-40.0319 475.283,-35.6012 480.043,-45.0664 484.907,-40.0319"/>
+</g>
+<!-- \\Teknoo\\Sellsy\\Client\\Exception\\ErrorException -->
+<g id="node2" class="node"><title>\\Teknoo\\Sellsy\\Client\\Exception\\ErrorException</title>
+<polygon fill="none" stroke="black" points="746.959,-460 635.959,-460 635.959,-424 746.959,-424 746.959,-460"/>
+<text text-anchor="middle" x="691.459" y="-439.2" font-family="Courier,monospace" font-size="11.00">ErrorException</text>
+</g>
+<!-- \\Teknoo\\Sellsy\\Client\\Exception\\ErrorException&#45;&gt;\\RuntimeException -->
+<g id="edge6" class="edge"><title>\\Teknoo\\Sellsy\\Client\\Exception\\ErrorException&#45;&gt;\\RuntimeException</title>
+<path fill="none" stroke="black" d="M635.626,-429.568C621.405,-423.916 607.331,-415.753 597.459,-404 511.451,-301.601 592.792,-229.843 533.459,-110 520.79,-84.41 499.452,-60.0175 482.249,-42.7867"/>
+<polygon fill="none" stroke="black" points="484.281,-39.8792 474.682,-35.3953 479.39,-44.8867 484.281,-39.8792"/>
 </g>
 <!-- \\Teknoo\\Sellsy\\Client\\Client -->
-<g id="node8" class="node"><title>\\Teknoo\\Sellsy\\Client\\Client</title>
-<polygon fill="none" stroke="black" points="719.959,-426 662.959,-426 662.959,-390 719.959,-390 719.959,-426"/>
-<text text-anchor="middle" x="691.459" y="-405.2" font-family="Courier,monospace" font-size="11.00">Client</text>
+<g id="node3" class="node"><title>\\Teknoo\\Sellsy\\Client\\Client</title>
+<polygon fill="none" stroke="black" points="719.959,-640 662.959,-640 662.959,-604 719.959,-604 719.959,-640"/>
+<text text-anchor="middle" x="691.459" y="-619.2" font-family="Courier,monospace" font-size="11.00">Client</text>
 </g>
 <!-- \\Teknoo\\Sellsy\\Client\\ClientInterface -->
-<g id="node11" class="node"><title>\\Teknoo\\Sellsy\\Client\\ClientInterface</title>
-<polygon fill="none" stroke="black" points="513.166,-426 395.166,-426 395.166,-390 513.166,-390 513.166,-426"/>
-<text text-anchor="middle" x="454.166" y="-405.2" font-family="Courier,monospace" font-size="11.00">ClientInterface</text>
+<g id="node6" class="node"><title>\\Teknoo\\Sellsy\\Client\\ClientInterface</title>
+<polygon fill="none" stroke="black" points="513.166,-640 395.166,-640 395.166,-604 513.166,-604 513.166,-640"/>
+<text text-anchor="middle" x="454.166" y="-619.2" font-family="Courier,monospace" font-size="11.00">ClientInterface</text>
 </g>
 <!-- \\Teknoo\\Sellsy\\Client\\Client&#45;&gt;\\Teknoo\\Sellsy\\Client\\ClientInterface -->
 <g id="edge5" class="edge"><title>\\Teknoo\\Sellsy\\Client\\Client&#45;&gt;\\Teknoo\\Sellsy\\Client\\ClientInterface</title>
-<path fill="none" stroke="black" stroke-dasharray="1,5" d="M662.544,-408C628.592,-408 570.093,-408 523.865,-408"/>
-<polygon fill="none" stroke="black" points="523.602,-404.5 513.602,-408 523.602,-411.5 523.602,-404.5"/>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M662.544,-622C628.592,-622 570.093,-622 523.865,-622"/>
+<polygon fill="none" stroke="black" points="523.602,-618.5 513.602,-622 523.602,-625.5 523.602,-618.5"/>
 </g>
 <!-- \\Teknoo\\Sellsy\\Client\\Result -->
-<g id="node9" class="node"><title>\\Teknoo\\Sellsy\\Client\\Result</title>
-<polygon fill="none" stroke="black" points="719.959,-372 662.959,-372 662.959,-336 719.959,-336 719.959,-372"/>
-<text text-anchor="middle" x="691.459" y="-351.2" font-family="Courier,monospace" font-size="11.00">Result</text>
+<g id="node4" class="node"><title>\\Teknoo\\Sellsy\\Client\\Result</title>
+<polygon fill="none" stroke="black" points="719.959,-586 662.959,-586 662.959,-550 719.959,-550 719.959,-586"/>
+<text text-anchor="middle" x="691.459" y="-565.2" font-family="Courier,monospace" font-size="11.00">Result</text>
 </g>
 <!-- \\Teknoo\\Sellsy\\Client\\ResultInterface -->
-<g id="node10" class="node"><title>\\Teknoo\\Sellsy\\Client\\ResultInterface</title>
-<polygon fill="none" stroke="black" points="513.166,-372 395.166,-372 395.166,-336 513.166,-336 513.166,-372"/>
-<text text-anchor="middle" x="454.166" y="-351.2" font-family="Courier,monospace" font-size="11.00">ResultInterface</text>
+<g id="node5" class="node"><title>\\Teknoo\\Sellsy\\Client\\ResultInterface</title>
+<polygon fill="none" stroke="black" points="513.166,-519 395.166,-519 395.166,-483 513.166,-483 513.166,-519"/>
+<text text-anchor="middle" x="454.166" y="-498.2" font-family="Courier,monospace" font-size="11.00">ResultInterface</text>
 </g>
 <!-- \\Teknoo\\Sellsy\\Client\\Result&#45;&gt;\\Teknoo\\Sellsy\\Client\\ResultInterface -->
-<g id="edge6" class="edge"><title>\\Teknoo\\Sellsy\\Client\\Result&#45;&gt;\\Teknoo\\Sellsy\\Client\\ResultInterface</title>
-<path fill="none" stroke="black" stroke-dasharray="1,5" d="M662.544,-354C628.592,-354 570.093,-354 523.865,-354"/>
-<polygon fill="none" stroke="black" points="523.602,-350.5 513.602,-354 523.602,-357.5 523.602,-350.5"/>
+<g id="edge7" class="edge"><title>\\Teknoo\\Sellsy\\Client\\Result&#45;&gt;\\Teknoo\\Sellsy\\Client\\ResultInterface</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M662.651,-561.987C644.098,-557.837 619.21,-552.003 597.459,-546 571.441,-538.819 543.036,-530.031 518.495,-522.133"/>
+<polygon fill="none" stroke="black" points="519.533,-518.79 508.941,-519.04 517.377,-525.45 519.533,-518.79"/>
+</g>
+<!-- \\Teknoo\\Immutable\\ImmutableInterface -->
+<g id="node16" class="node"><title>\\Teknoo\\Immutable\\ImmutableInterface</title>
+<ellipse fill="none" stroke="black" cx="151.437" cy="-360" rx="151.373" ry="18"/>
+<text text-anchor="middle" x="151.437" y="-356.3" font-family="Times,serif" font-size="14.00" fill="gray">Teknoo\Immutable\ImmutableInterface</text>
 </g>
 <!-- \\Teknoo\\Sellsy\\Client\\ResultInterface&#45;&gt;\\Teknoo\\Immutable\\ImmutableInterface -->
-<g id="edge9" class="edge"><title>\\Teknoo\\Sellsy\\Client\\ResultInterface&#45;&gt;\\Teknoo\\Immutable\\ImmutableInterface</title>
-<path fill="none" stroke="black" d="M394.826,-366.998C348.948,-377.219 284.499,-391.578 233.589,-402.92"/>
-<polygon fill="none" stroke="black" points="232.597,-399.555 223.597,-405.146 234.119,-406.388 232.597,-399.555"/>
+<g id="edge8" class="edge"><title>\\Teknoo\\Sellsy\\Client\\ResultInterface&#45;&gt;\\Teknoo\\Immutable\\ImmutableInterface</title>
+<path fill="none" stroke="black" d="M414.773,-482.999C359.611,-457.136 258.067,-409.526 198.794,-381.735"/>
+<polygon fill="none" stroke="black" points="200.198,-378.528 189.658,-377.452 197.226,-384.866 200.198,-378.528"/>
+</g>
+<!-- \\Teknoo\\Sellsy\\Collection\\Collection -->
+<g id="node7" class="node"><title>\\Teknoo\\Sellsy\\Collection\\Collection</title>
+<polygon fill="none" stroke="black" points="733.459,-372 649.459,-372 649.459,-336 733.459,-336 733.459,-372"/>
+<text text-anchor="middle" x="691.459" y="-351.2" font-family="Courier,monospace" font-size="11.00">Collection</text>
+</g>
+<!-- \\Teknoo\\Sellsy\\Collection\\CollectionInterface -->
+<g id="node9" class="node"><title>\\Teknoo\\Sellsy\\Collection\\CollectionInterface</title>
+<polygon fill="none" stroke="black" points="526.666,-372 381.666,-372 381.666,-336 526.666,-336 526.666,-372"/>
+<text text-anchor="middle" x="454.166" y="-351.2" font-family="Courier,monospace" font-size="11.00">CollectionInterface</text>
+</g>
+<!-- \\Teknoo\\Sellsy\\Collection\\Collection&#45;&gt;\\Teknoo\\Sellsy\\Collection\\CollectionInterface -->
+<g id="edge4" class="edge"><title>\\Teknoo\\Sellsy\\Collection\\Collection&#45;&gt;\\Teknoo\\Sellsy\\Collection\\CollectionInterface</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M649.205,-354C618.232,-354 574.814,-354 536.9,-354"/>
+<polygon fill="none" stroke="black" points="536.88,-350.5 526.88,-354 536.88,-357.5 536.88,-350.5"/>
+</g>
+<!-- \\Teknoo\\Sellsy\\Collection\\DefinitionInterface -->
+<g id="node8" class="node"><title>\\Teknoo\\Sellsy\\Collection\\DefinitionInterface</title>
+<polygon fill="none" stroke="black" points="763.959,-318 618.959,-318 618.959,-282 763.959,-282 763.959,-318"/>
+<text text-anchor="middle" x="691.459" y="-297.2" font-family="Courier,monospace" font-size="11.00">DefinitionInterface</text>
+</g>
+<!-- \\Teknoo\\Sellsy\\Method\\Method -->
+<g id="node10" class="node"><title>\\Teknoo\\Sellsy\\Method\\Method</title>
+<polygon fill="none" stroke="black" points="719.959,-238 662.959,-238 662.959,-202 719.959,-202 719.959,-238"/>
+<text text-anchor="middle" x="691.459" y="-217.2" font-family="Courier,monospace" font-size="11.00">Method</text>
+</g>
+<!-- \\Teknoo\\Sellsy\\Method\\MethodInterface -->
+<g id="node11" class="node"><title>\\Teknoo\\Sellsy\\Method\\MethodInterface</title>
+<polygon fill="none" stroke="black" points="513.166,-238 395.166,-238 395.166,-202 513.166,-202 513.166,-238"/>
+<text text-anchor="middle" x="454.166" y="-217.2" font-family="Courier,monospace" font-size="11.00">MethodInterface</text>
+</g>
+<!-- \\Teknoo\\Sellsy\\Method\\Method&#45;&gt;\\Teknoo\\Sellsy\\Method\\MethodInterface -->
+<g id="edge1" class="edge"><title>\\Teknoo\\Sellsy\\Method\\Method&#45;&gt;\\Teknoo\\Sellsy\\Method\\MethodInterface</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M662.544,-220C628.592,-220 570.093,-220 523.865,-220"/>
+<polygon fill="none" stroke="black" points="523.602,-216.5 513.602,-220 523.602,-223.5 523.602,-216.5"/>
+</g>
+<!-- \\Teknoo\\Sellsy\\Method\\MethodInterface&#45;&gt;\\Teknoo\\Immutable\\ImmutableInterface -->
+<g id="edge9" class="edge"><title>\\Teknoo\\Sellsy\\Method\\MethodInterface&#45;&gt;\\Teknoo\\Immutable\\ImmutableInterface</title>
+<path fill="none" stroke="black" d="M414.467,-238.016C359.354,-263.673 258.39,-310.675 199.174,-338.242"/>
+<polygon fill="none" stroke="black" points="197.63,-335.1 190.042,-342.494 200.585,-341.446 197.63,-335.1"/>
 </g>
 <!-- \\Teknoo\\Sellsy\\Transport\\Guzzle -->
 <g id="node12" class="node"><title>\\Teknoo\\Sellsy\\Transport\\Guzzle</title>
@@ -157,7 +157,7 @@
 <text text-anchor="middle" x="454.166" y="-137.2" font-family="Courier,monospace" font-size="11.00">TransportInterface</text>
 </g>
 <!-- \\Teknoo\\Sellsy\\Transport\\Guzzle&#45;&gt;\\Teknoo\\Sellsy\\Transport\\TransportInterface -->
-<g id="edge7" class="edge"><title>\\Teknoo\\Sellsy\\Transport\\Guzzle&#45;&gt;\\Teknoo\\Sellsy\\Transport\\TransportInterface</title>
+<g id="edge2" class="edge"><title>\\Teknoo\\Sellsy\\Transport\\Guzzle&#45;&gt;\\Teknoo\\Sellsy\\Transport\\TransportInterface</title>
 <path fill="none" stroke="black" stroke-dasharray="1,5" d="M662.544,-140C630.922,-140 578.006,-140 533.544,-140"/>
 <polygon fill="none" stroke="black" points="533.321,-136.5 523.321,-140 533.321,-143.5 533.321,-136.5"/>
 </g>
