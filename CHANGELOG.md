@@ -1,5 +1,13 @@
 #Teknoo Software - Sellsy client library - Change Log
 
+###[2.0.0-alpha3] - 2017-02-15
+###Fix
+- Code style fix
+- License file follow Github specs
+- Add tools to checks QA, use `make qa` and `make test`, `make` to initalize the project, (or `composer update`).
+- Update Travis to use this tool
+- Fix QA Errors
+
 ##[2.0.0-alpha2] - 2016-12-30
 ###Updated
 - Add an helper into collection to execute directly method without use "{}" in PHP.
