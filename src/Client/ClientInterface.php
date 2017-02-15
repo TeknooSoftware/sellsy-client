@@ -52,38 +52,38 @@ interface ClientInterface
     /**
      * Update the OAuth access token to use to authenticate with your account.
      *
-     * @param string $oauthAccessToken
+     * @param string $accessToken
      *
      * @return ClientInterface
      */
-    public function setOAuthAccessToken(string $oauthAccessToken): ClientInterface;
+    public function setOAuthAccessToken(string $accessToken): ClientInterface;
 
     /**
      * Update the OAuth access secret token to use to authenticate with your account.
      *
-     * @param string $oauthAccessTokenSecret
+     * @param string $accessTokenSecret
      *
      * @return ClientInterface
      */
-    public function setOAuthAccessTokenSecret(string $oauthAccessTokenSecret): ClientInterface;
+    public function setOAuthAccessTokenSecret(string $accessTokenSecret): ClientInterface;
 
     /**
      * Update the OAuth consumer key to use to authenticate with your account.
      *
-     * @param string $oauthConsumerKey
+     * @param string $consumerKey
      *
      * @return ClientInterface
      */
-    public function setOAuthConsumerKey(string $oauthConsumerKey): ClientInterface;
+    public function setOAuthConsumerKey(string $consumerKey): ClientInterface;
 
     /**
      * Update the OAuth consumer secret to use to authenticate with your account.
      *
-     * @param string $oauthConsumerSecret
+     * @param string $consumerSecret
      *
      * @return ClientInterface
      */
-    public function setOAuthConsumerSecret(string $oauthConsumerSecret): ClientInterface;
+    public function setOAuthConsumerSecret(string $consumerSecret): ClientInterface;
 
     /**
      * Get the last PSR7 request sent to the Sellsy server. It's a method to help debug.

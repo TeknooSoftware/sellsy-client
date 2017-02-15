@@ -28,7 +28,8 @@ use Teknoo\Sellsy\Client\ResultInterface;
 
 /**
  * Implementation to define entity able to represent an available method in the Sellsy Api/
- * Instance are directly invokable, but parameters must passed into an array and not been passed like a normal PHP method.
+ * Instance are directly invokable, but parameters must passed into an array and not been passed
+ * like a normal PHP method.
  *
  * @copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
  *

@@ -101,23 +101,23 @@ class Sellsy
      * Sellsy constructor.
      *
      * @param string $apiUrl
-     * @param string $oauthAccessToken
-     * @param string $oauthAccessTokenSecret
-     * @param string $oauthConsumerKey
-     * @param string $oauthConsumerSecret
+     * @param string $accessToken
+     * @param string $accessTokenSecret
+     * @param string $consumerKey
+     * @param string $consumerSecret
      */
     public function __construct(
         string $apiUrl,
-        string $oauthAccessToken,
-        string $oauthAccessTokenSecret,
-        string $oauthConsumerKey,
-        string $oauthConsumerSecret
+        string $accessToken,
+        string $accessTokenSecret,
+        string $consumerKey,
+        string $consumerSecret
     ) {
         $this->apiUrl = $apiUrl;
-        $this->oauthAccessToken = $oauthAccessToken;
-        $this->oauthAccessTokenSecret = $oauthAccessTokenSecret;
-        $this->oauthConsumerKey = $oauthConsumerKey;
-        $this->oauthConsumerSecret = $oauthConsumerSecret;
+        $this->oauthAccessToken = $accessToken;
+        $this->oauthAccessTokenSecret = $accessTokenSecret;
+        $this->oauthConsumerKey = $consumerKey;
+        $this->oauthConsumerSecret = $consumerSecret;
     }
 
     /**

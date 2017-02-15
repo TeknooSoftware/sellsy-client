@@ -110,27 +110,27 @@ class Client implements ClientInterface
      *
      * @param TransportInterface $transport
      * @param string             $apiUrl
-     * @param string             $oauthAccessToken
-     * @param string             $oauthAccessTokenSecret
-     * @param string             $oauthConsumerKey
-     * @param string             $oauthConsumerSecret
+     * @param string             $accessToken
+     * @param string             $accessTokenSecret
+     * @param string             $consumerKey
+     * @param string             $consumerSecret
      * @param \DateTime|null     $now
      */
     public function __construct(
         TransportInterface $transport,
         string $apiUrl = '',
-        string $oauthAccessToken = '',
-        string $oauthAccessTokenSecret = '',
-        string $oauthConsumerKey = '',
-        string $oauthConsumerSecret = '',
+        string $accessToken = '',
+        string $accessTokenSecret = '',
+        string $consumerKey = '',
+        string $consumerSecret = '',
         \DateTime $now = null
     ) {
         $this->transport = $transport;
         $this->setApiUrl($apiUrl);
-        $this->setOAuthAccessToken($oauthAccessToken);
-        $this->setOAuthAccessTokenSecret($oauthAccessTokenSecret);
-        $this->setOAuthConsumerKey($oauthConsumerKey);
-        $this->setOAuthConsumerSecret($oauthConsumerSecret);
+        $this->setOAuthAccessToken($accessToken);
+        $this->setOAuthAccessTokenSecret($accessTokenSecret);
+        $this->setOAuthConsumerKey($consumerKey);
+        $this->setOAuthConsumerSecret($consumerSecret);
         $this->now = $now;
     }
 
@@ -147,9 +147,9 @@ class Client implements ClientInterface
     /**
      * {@inheritdoc}
      */
-    public function setOAuthAccessToken(string $oauthAccessToken): ClientInterface
+    public function setOAuthAccessToken(string $accessToken): ClientInterface
     {
-        $this->oauthAccessToken = $oauthAccessToken;
+        $this->oauthAccessToken = $accessToken;
 
         return $this;
     }
@@ -157,9 +157,9 @@ class Client implements ClientInterface
     /**
      * {@inheritdoc}
      */
-    public function setOAuthAccessTokenSecret(string $oauthAccessTokenSecret): ClientInterface
+    public function setOAuthAccessTokenSecret(string $accessTokenSecret): ClientInterface
     {
-        $this->oauthAccessTokenSecret = $oauthAccessTokenSecret;
+        $this->oauthAccessTokenSecret = $accessTokenSecret;
 
         return $this;
     }
@@ -167,9 +167,9 @@ class Client implements ClientInterface
     /**
      * {@inheritdoc}
      */
-    public function setOAuthConsumerKey(string $oauthConsumerKey): ClientInterface
+    public function setOAuthConsumerKey(string $consumerKey): ClientInterface
     {
-        $this->oauthConsumerKey = $oauthConsumerKey;
+        $this->oauthConsumerKey = $consumerKey;
 
         return $this;
     }
@@ -177,9 +177,9 @@ class Client implements ClientInterface
     /**
      * {@inheritdoc}
      */
-    public function setOAuthConsumerSecret(string $oauthConsumerSecret): ClientInterface
+    public function setOAuthConsumerSecret(string $consumerSecret): ClientInterface
     {
-        $this->oauthConsumerSecret = $oauthConsumerSecret;
+        $this->oauthConsumerSecret = $consumerSecret;
 
         return $this;
     }
