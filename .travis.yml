@@ -8,7 +8,10 @@ php:
 
 install:
   - composer self-update
-  - composer install --dev --prefer-source --no-interaction
+
+before_script:
+  - make
 
 script:
-  - phpunit
+    - make qa
+    - make test
