@@ -79,10 +79,11 @@ interface CollectionInterface
     public function __get(string $methodName): MethodInterface;
 
     /**
-     * To call directly a method interface
+     * To call directly a method interface.
      *
      * @param string $methodName
-     * @param array $params
+     * @param array  $params
+     *
      * @return ResultInterface
      */
     public function __call(string $methodName, array $params): ResultInterface;
