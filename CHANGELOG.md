@@ -1,5 +1,9 @@
 #Teknoo Software - Sellsy client library - Change Log
 
+###[2.0.0-alpha4] - 2017-07-24
+###Fix
+- Fixing a missing return call on Uri PSR7 instance on the Client #4 (Thanks to @gouaille)
+
 ###[2.0.0-alpha3] - 2017-02-15
 ###Fix
 - Code style fix
