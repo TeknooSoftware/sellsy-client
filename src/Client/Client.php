@@ -263,27 +263,27 @@ class Client implements ClientInterface
         $uri = $this->getNewUri();
 
         if (!empty($this->apiUrl['scheme'])) {
-            $uri->withScheme($this->apiUrl['scheme']);
+            $uri = $uri->withScheme($this->apiUrl['scheme']);
         }
 
         if (!empty($this->apiUrl['host'])) {
-            $uri->withHost($this->apiUrl['host']);
+            $uri = $uri->withHost($this->apiUrl['host']);
         }
 
         if (!empty($this->apiUrl['port'])) {
-            $uri->withPort($this->apiUrl['port']);
+            $uri = $uri->withPort($this->apiUrl['port']);
         }
 
         if (!empty($this->apiUrl['path'])) {
-            $uri->withPath($this->apiUrl['path']);
+            $uri = $uri->withPath($this->apiUrl['path']);
         }
 
         if (!empty($this->apiUrl['query'])) {
-            $uri->withQuery($this->apiUrl['query']);
+            $uri = $uri->withQuery($this->apiUrl['query']);
         }
 
         if (!empty($this->apiUrl['fragment'])) {
-            $uri->withFragment($this->apiUrl['fragment']);
+            $uri = $uri->withFragment($this->apiUrl['fragment']);
         }
 
         return $uri;
