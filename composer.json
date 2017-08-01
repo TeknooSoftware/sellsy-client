@@ -25,14 +25,14 @@
         "teknoo/immutable": "^0.0.1"
     },
     "require-dev": {
-        "guzzlehttp/guzzle":"^6.0.0",
-        "guzzlehttp/psr7":"^1.0.0",
-        "phpunit/phpunit": "~5.4",
-        "squizlabs/php_codesniffer": "~2.8",
+        "phpunit/phpunit": "6.2",
+        "squizlabs/php_codesniffer": "~3.0",
         "pdepend/pdepend": "~2.5",
         "phpmd/phpmd": "~2.6",
         "sebastian/phpcpd": "~3.0",
-        "phploc/phploc": "~3.0"
+        "phploc/phploc": "~4.0",
+        "guzzlehttp/guzzle":"^6.0.0",
+        "guzzlehttp/psr7":"^1.0.0"
     },
     "minimum-stability": "beta",
     "autoload": {

@@ -40,7 +40,7 @@ use Teknoo\Sellsy\Client\Client as SellsyClient;
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
-class SellsyTest extends \PHPUnit_Framework_TestCase
+class SellsyTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @return Sellsy

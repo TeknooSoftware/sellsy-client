@@ -37,7 +37,7 @@ use Teknoo\Sellsy\Method\MethodInterface;
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
-abstract class AbstractMethodTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractMethodTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var ClientInterface

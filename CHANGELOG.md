@@ -1,5 +1,9 @@
 #Teknoo Software - Sellsy client library - Change Log
 
+###[2.0.0-beta1] - 2017-08-01
+###Updated
+- Update dev libraries used for this project and use now PHPUnit 6.2 for tests.
+
 ###[2.0.0-alpha4] - 2017-07-24
 ###Fix
 - Fixing a missing return call on Uri PSR7 instance on the Client #4 (Thanks to @gouaille)
