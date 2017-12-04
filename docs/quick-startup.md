@@ -34,12 +34,11 @@ By default, this library use Guzzle to implement PSR-7. A transport is available
 
      //Create the front object
       $sellsy = new Teknoo\Sellsy\Sellsy(
-         $transportBridge
          'https://apifeed.sellsy.com/0/',
-         'User Token'
-         'User Secret'
-         'Consumer Token'
-         'Consumer Secret';
+         'User Token',
+         'User Secret',
+         'Consumer Token',
+         'Consumer Secret'
       );
         
 ##Perform a request
