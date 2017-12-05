@@ -17,12 +17,15 @@ Simple Example
 
       //Create the front object
       $sellsy = new Teknoo\Sellsy\Sellsy(
-        $transportBridge
-        'User Token'
-        'User Secret'
-        'Consumer Token'
-        'Consumer Secret';
+        'API URL',
+        'User Token',
+        'User Secret',
+        'Consumer Token',
+        'Consumer Secret'
      );
+     
+     $sellsy->setTransport($transportBridge);
+     $sellsy->setGuzzleClient($guzzleClient);
         
      //Example of request, follow the API documentation of Sellsy API.
      print_r($sellsy->Infos()->getInfos());
