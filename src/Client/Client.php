@@ -299,8 +299,6 @@ class Client implements ClientInterface
      */
     private function setBodyRequest(RequestInterface $request, array &$requestSettings): RequestInterface
     {
-        //$request = $request->withHeader('Content-Type', 'multipart/form-data');
-
         $multipartBody = [];
         foreach ($requestSettings as $key => &$value) {
             $multipartBody[] = [
