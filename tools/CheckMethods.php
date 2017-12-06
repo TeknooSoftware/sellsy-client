@@ -83,7 +83,7 @@ class CheckMethods extends Command
             {
             }
 
-            public function createRequest(string $method , UriInterface $uri): RequestInterface
+            public function createRequest(string $method, UriInterface $uri): RequestInterface
             {
             }
 
