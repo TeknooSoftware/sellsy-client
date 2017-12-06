@@ -22,12 +22,17 @@
 
 namespace Teknoo\Sellsy\Tools;
 
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\StreamInterface;
+use Psr\Http\Message\UriInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Teknoo\Sellsy\Sellsy;
+use Teknoo\Sellsy\Transport\TransportInterface;
 
 /**
  * To check if all methods available in the api are available here.
@@ -73,7 +78,25 @@ class CheckMethods extends Command
     private function getSellsyInstance(): Sellsy
     {
         $sellSy = new Sellsy('', '', '', '', '');
+        $transport = new class implements TransportInterface {
+            public function createUri(): UriInterface
+            {
+            }
 
+            public function createRequest(string $method , UriInterface $uri): RequestInterface
+            {
+            }
+
+            public function createStream(array &$elements): StreamInterface
+            {
+            }
+
+            public function execute(RequestInterface $request): ResponseInterface
+            {
+            }
+
+        };
+        $sellSy->setTransport($transport);
         //To prevent case issues from the inconsistent documentation
         $sellSy->AccountDatas();
         $sellSy->TimeTracking();
