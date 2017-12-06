@@ -35,7 +35,7 @@ phpcpd:
 	vendor/bin/phpcpd src/ tools/
 
 checkmethods:
-	tools/console.php teknoo:sellsy:checks-methods https://api.sellsy.com/documentation/methods -i Accoundatas
+	php tools/console.php teknoo:sellsy:checks-methods https://api.sellsy.com/documentation/methods -i Accoundatas
 
 .PHONY: qa lint phploc phpmd phpcs phpcpd checkmethods
 
