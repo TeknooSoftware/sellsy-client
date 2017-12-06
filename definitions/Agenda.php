@@ -29,9 +29,6 @@ use Teknoo\Sellsy\Collection\DefinitionInterface;
 use Teknoo\Sellsy\Method\Method;
 
 /**
- * Class Agenda
- * Collection of methods for TimeTracking operations.
- *
  * @link https://api.sellsy.com/documentation/methods#agendagetlist
  *
  * @copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)

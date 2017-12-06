@@ -29,9 +29,6 @@ use Teknoo\Sellsy\Collection\DefinitionInterface;
 use Teknoo\Sellsy\Method\Method;
 
 /**
- * Class AccountDatas
- * Collection of methods for TimeTracking operations.
- *
  * @link https://api.sellsy.com/documentation/methods#accountdatasgettaxes
  *
  * @copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
@@ -87,6 +84,7 @@ class AccountDatas implements DefinitionInterface
         $collection->registerMethod(new Method($collection, 'getDocLayouts'));
         $collection->registerMethod(new Method($collection, 'getPayDates'));
         $collection->registerMethod(new Method($collection, 'getTranslationLanguages'));
+        $collection->registerMethod(new Method($collection, 'deletePayMedium'));
 
         return $collection;
     }

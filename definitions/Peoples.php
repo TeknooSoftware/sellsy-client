@@ -29,9 +29,6 @@ use Teknoo\Sellsy\Collection\DefinitionInterface;
 use Teknoo\Sellsy\Method\Method;
 
 /**
- * Class Peoples
- * Collection of methods for TimeTracking operations.
- *
  * @link https://api.sellsy.com/documentation/methods#peoplesgetlist
  *
  * @copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
@@ -67,6 +64,9 @@ class Peoples implements DefinitionInterface
         $collection->registerMethod(new Method($collection, 'updateOwner'));
         $collection->registerMethod(new Method($collection, 'updateLinkedDocuments'));
         $collection->registerMethod(new Method($collection, 'getCurrentIdent'));
+        $collection->registerMethod(new Method($collection, 'getAddresses'));
+        $collection->registerMethod(new Method($collection, 'unlinkThirds'));
+        $collection->registerMethod(new Method($collection, 'updateSharingGroups'));
 
         return $collection;
     }

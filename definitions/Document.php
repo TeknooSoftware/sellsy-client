@@ -29,9 +29,6 @@ use Teknoo\Sellsy\Collection\DefinitionInterface;
 use Teknoo\Sellsy\Method\Method;
 
 /**
- * Class Document
- * Collection of methods for TimeTracking operations.
- *
  * @link https://api.sellsy.com/documentation/methods#documentgetlist
  *
  * @copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
@@ -74,6 +71,9 @@ class Document implements DefinitionInterface
         $collection->registerMethod(new Method($collection, 'linkToDoc'));
         $collection->registerMethod(new Method($collection, 'getLinkedDocuments'));
         $collection->registerMethod(new Method($collection, 'getTree'));
+        $collection->registerMethod(new Method($collection, 'getPayment'));
+        $collection->registerMethod(new Method($collection, 'linkPurchase'));
+        $collection->registerMethod(new Method($collection, 'updateSharingGroups'));
 
         return $collection;
     }

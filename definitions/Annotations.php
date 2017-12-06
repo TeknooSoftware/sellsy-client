@@ -29,7 +29,7 @@ use Teknoo\Sellsy\Collection\DefinitionInterface;
 use Teknoo\Sellsy\Method\Method;
 
 /**
- * @link https://api.sellsy.com/documentation/methods#infosgetinfos
+ * @link https://api.sellsy.com/documentation/methods#accountinggetlist
  *
  * @copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
  *
@@ -38,16 +38,21 @@ use Teknoo\Sellsy\Method\Method;
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
-class Infos implements DefinitionInterface
+class Annotations implements DefinitionInterface
 {
     /**
      * {@inheritdoc}
      */
     public function __invoke(ClientInterface $client): CollectionInterface
     {
-        $collection = new Collection($client, 'Infos');
+        $collection = new Collection($client, 'Annotations');
 
-        $collection->registerMethod(new Method($collection, 'getInfos'));
+        $collection->registerMethod(new Method($collection, 'getList'));
+        $collection->registerMethod(new Method($collection, 'getOne'));
+        $collection->registerMethod(new Method($collection, 'create'));
+        $collection->registerMethod(new Method($collection, 'update'));
+        $collection->registerMethod(new Method($collection, 'delete'));
+        $collection->registerMethod(new Method($collection, 'updateOwner'));
 
         return $collection;
     }

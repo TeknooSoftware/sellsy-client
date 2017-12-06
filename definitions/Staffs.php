@@ -29,9 +29,6 @@ use Teknoo\Sellsy\Collection\DefinitionInterface;
 use Teknoo\Sellsy\Method\Method;
 
 /**
- * Class Staffs
- * Collection of methods for TimeTracking operations.
- *
  * @link https://api.sellsy.com/documentation/methods#statgetsalesstats
  *
  * @copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
@@ -51,6 +48,8 @@ class Staffs implements DefinitionInterface
         $collection = new Collection($client, 'Staffs');
 
         $collection->registerMethod(new Method($collection, 'getList'));
+        $collection->registerMethod(new Method($collection, 'getOne'));
+        $collection->registerMethod(new Method($collection, 'getGroups'));
 
         return $collection;
     }

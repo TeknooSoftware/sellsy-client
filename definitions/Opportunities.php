@@ -29,9 +29,6 @@ use Teknoo\Sellsy\Collection\DefinitionInterface;
 use Teknoo\Sellsy\Method\Method;
 
 /**
- * Class Opportunities
- * Collection of methods for TimeTracking operations.
- *
  * @link https://api.sellsy.com/documentation/methods#opportunitiesgetlist
  *
  * @copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
@@ -67,6 +64,7 @@ class Opportunities implements DefinitionInterface
         $collection->registerMethod(new Method($collection, 'updateOwner'));
         $collection->registerMethod(new Method($collection, 'updateLinkedDocuments'));
         $collection->registerMethod(new Method($collection, 'getCurrentIdent'));
+        $collection->registerMethod(new Method($collection, 'updateSharingGroups'));
 
         return $collection;
     }
