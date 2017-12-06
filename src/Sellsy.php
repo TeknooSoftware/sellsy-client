@@ -224,8 +224,9 @@ class Sellsy
      */
     public function __call(string $collectionName, array $arguments): CollectionInterface
     {
-        if (isset($this->collections[$collectionName])) {
-            return $this->collections[$collectionName];
+        $lowerName = \strtolower($collectionName);
+        if (isset($this->collections[$lowerName])) {
+            return $this->collections[$lowerName];
         }
 
         if (!\class_exists($collectionName, true)) {
@@ -249,8 +250,8 @@ class Sellsy
          * @var callable $definitionInstance
          */
         $definitionInstance = $reflectionClass->newInstance();
-        $this->collections[$collectionName] = $definitionInstance($this->getClient());
+        $this->collections[$lowerName] = $definitionInstance($this->getClient());
 
-        return $this->collections[$collectionName];
+        return $this->collections[$lowerName];
     }
 }

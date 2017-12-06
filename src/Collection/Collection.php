@@ -87,7 +87,7 @@ class Collection implements CollectionInterface
      */
     public function registerMethod(MethodInterface $method): CollectionInterface
     {
-        $this->methods[$method->getName()] = $method;
+        $this->methods[\strtolower($method->getName())] = $method;
 
         return $this;
     }
@@ -105,6 +105,7 @@ class Collection implements CollectionInterface
      */
     public function __get(string $methodName): MethodInterface
     {
+        $methodName = \strtolower($methodName);
         if (!isset($this->methods[$methodName])) {
             throw new \DomainException("Error the method $methodName is not available for this collection");
         }
