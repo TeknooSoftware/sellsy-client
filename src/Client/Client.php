@@ -290,16 +290,6 @@ class Client implements ClientInterface
     }
 
     /**
-     * To get a new PSR7 stream to inject in the request to pass arguments and methods to call ont the API.
-     *
-     * @return StreamInterface
-     */
-    private function getNewStream(): StreamInterface
-    {
-        return $this->transport->createStream();
-    }
-
-    /**
      * To register method's argument in the request for the Sellsy API.
      *
      * @param RequestInterface $request
@@ -309,11 +299,17 @@ class Client implements ClientInterface
      */
     private function setBodyRequest(RequestInterface $request, array &$requestSettings): RequestInterface
     {
-        $stream = $this->getNewStream();
-        $stream->rewind();
-        $stream->write(\http_build_query($requestSettings));
+        //$request = $request->withHeader('Content-Type', 'multipart/form-data');
 
-        return $request->withBody($stream);
+        $multipartBody = [];
+        foreach ($requestSettings as $key => &$value) {
+            $multipartBody[] = [
+                'name' => $key,
+                'contents' => $value
+            ];
+        }
+
+        return $request->withBody($this->transport->createStream($multipartBody));
     }
 
     /**

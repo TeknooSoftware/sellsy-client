@@ -58,11 +58,14 @@ interface TransportInterface
     public function createRequest(string $method, UriInterface $uri): RequestInterface;
 
     /**
-     * To initialize a PSR7 Stream, needed by the request.
+     * To initialize a PSR7 Stream, compatible with the content type multipart/form-data, needed to execute the request,
+     * Sellsy API accepts only requests with a content type defined to "multipart/form-data".
+     *
+     * @param array &$elements
      *
      * @return StreamInterface
      */
-    public function createStream(): StreamInterface;
+    public function createStream(array &$elements): StreamInterface;
 
     /**
      * To execute the PSR7 request, from the Sellsy client.

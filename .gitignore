@@ -9,3 +9,4 @@
 *.done
 composer.lock
 /vendor/*
+/test.php
