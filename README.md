@@ -17,19 +17,20 @@ Simple Example
 
       //Create the front object
       $sellsy = new Teknoo\Sellsy\Sellsy(
-        'API URL',
-        'User Token',
-        'User Secret',
-        'Consumer Token',
-        'Consumer Secret'
-     );
-     
-     $sellsy->setTransport($transportBridge);
-     $sellsy->setGuzzleClient($guzzleClient);
-        
-     //Example of request, follow the API documentation of Sellsy API.
-     print_r($sellsy->Infos()->getInfos());
-     print_r($sellsy->AccountPrefs()->getCorpInfos());
+          'https://apifeed.sellsy.com/0/',
+          '{access token}',
+          '{access token secret}',
+          '{consumer token}',
+          '{consumer token secret}'
+      );
+
+      $sellsy->setTransport($transportBridge);
+
+      //Example of request, follow the API documentation of Sellsy API.
+      print_r($sellsy->Infos()->getInfos()->getResponse()['consumerdatas']);
+      print_r($sellsy->AccountPrefs()->getCorpInfos()->getResponse()['email']);
+
+
 
 How-to
 ------
@@ -50,10 +51,6 @@ This library requires :
     * PHP 7+
     * A PSR-7 implementation
 
-API Documentation
------------------
-Generated documentation from the library with PhpDocumentor : [Open](https://cdn.rawgit.com/TeknooSoftware/sellsy-client/master/docs/api/index.html).
-
 Credits
 -------
 Richard Déloge - <richarddeloge@gmail.com> - Lead developer.
@@ -67,7 +64,7 @@ Teknoo Software's DNA is simple : Provide to our partners and to the community a
  
 License
 -------
-States is licensed under the MIT Licenses - see the licenses folder for details
+Sellsy is licensed under the MIT Licenses - see the licenses folder for details
 
 Contribute :)
 -------------
