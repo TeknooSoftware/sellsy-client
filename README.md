@@ -9,28 +9,34 @@ PHP library to connect your applications to your [Sellsy account](http://sellsy.
 Simple Example
 --------------
 
+      <?php
+
+      use GuzzleHttp\Client;
+      use Teknoo\Sellsy\Transport\Guzzle;
+      use Teknoo\Sellsy\Sellsy;
+
+      include 'vendor/autoload.php';
+
       //Create the HTTP client
-      $guzzleClient = new GuzzleHttp\Client();
+      $guzzleClient = new Client();
 
       //Create the transport bridge
-      $transportBridge = new Teknoo\Sellsy\Transport\Guzzle($guzzleClient);
+      $transportBridge = new Guzzle($guzzleClient);
 
       //Create the front object
-      $sellsy = new Teknoo\Sellsy\Sellsy(
+      $sellsy = new Sellsy(
           'https://apifeed.sellsy.com/0/',
-          '{access token}',
-          '{access token secret}',
-          '{consumer token}',
-          '{consumer token secret}'
+          '27ea6ef9d319d615d5ad9fc81c831cf80be769d0',
+          'fe9cf54290cf38a0ec7cd9508413926f5f8f495e',
+          '9c601a9504f497bae67358488c3d8a68597d2020',
+          'd68c188386a5d6798375fb799e02e1aa4aaae5b8'
       );
 
       $sellsy->setTransport($transportBridge);
 
       //Example of request, follow the API documentation of Sellsy API.
-      print_r($sellsy->Infos()->getInfos()->getResponse()['consumerdatas']);
-      print_r($sellsy->AccountPrefs()->getCorpInfos()->getResponse()['email']);
-
-
+      print $sellsy->Infos()->getInfos()->getResponse()['consumerdatas']['id'].PHP_EOL;
+      print $sellsy->AccountPrefs()->getCorpInfos()->getResponse()['email'].PHP_EOL;
 
 How-to
 ------
