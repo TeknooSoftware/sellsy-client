@@ -1,5 +1,8 @@
 #Teknoo Software - Sellsy client library - Change Log
 
+##[2.0.0] - 2018-04-14
+###Stable release
+
 ##[2.0.0-beta2] - 2017-12-07
 ###Fix
 - Fix issue in client, query's parameters must be sent following
