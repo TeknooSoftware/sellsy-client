@@ -1,5 +1,9 @@
 #Teknoo Software - Sellsy client library - Change Log
 
+#[2.0.1] - 2018-05-01
+###Add
+Add reference to API endpoint : Document.enablePublicLink and Document.disablePublicLink
+
 ##[2.0.0] - 2018-04-14
 ###Stable release
 

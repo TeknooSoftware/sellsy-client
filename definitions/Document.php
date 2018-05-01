@@ -74,6 +74,8 @@ class Document implements DefinitionInterface
         $collection->registerMethod(new Method($collection, 'getPayment'));
         $collection->registerMethod(new Method($collection, 'linkPurchase'));
         $collection->registerMethod(new Method($collection, 'updateSharingGroups'));
+        $collection->registerMethod(new Method($collection, 'enablePublicLink'));
+        $collection->registerMethod(new Method($collection, 'disablePublicLink'));
 
         return $collection;
     }
