@@ -26,10 +26,10 @@ Simple Example
       //Create the front object
       $sellsy = new Sellsy(
           'https://apifeed.sellsy.com/0/',
-          '{access token}',
-          '{access token secret}',
-          '{consumer token}',
-          '{consumer token secret}'
+          'User Token',
+          'User Secret',
+          'Consumer Token',
+          'Consumer Secret'
       );
 
       $sellsy->setTransport($transportBridge);
