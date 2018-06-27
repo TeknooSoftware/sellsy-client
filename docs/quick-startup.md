@@ -30,22 +30,21 @@ Since the version 2, the library follows the PSR-7 and needs a transport to comm
 The transport prepares all PSR7's messages instances, used by the client and executes requests.
 By default, this library use Guzzle to implement PSR-7. A transport is available :
 
-    //Create the HTTP client
-    $guzzleClient = new GuzzleHttp\Client();
+     //Create the HTTP client
+     $guzzleClient = new GuzzleHttp\Client();
 
-    //Create the transport bridge
-    $transportBridge = new Teknoo\Sellsy\Transport\Guzzle($guzzleClient);
+     //Create the transport bridge
+     $transportBridge = new Teknoo\Sellsy\Transport\Guzzle($guzzleClient);
 
-    //Create the front object
-    $sellsy = new Teknoo\Sellsy\Sellsy(
-       'https://apifeed.sellsy.com/0/',
-       '{access token}',
-       '{access token secret}',
-       '{consumer token}',
-       '{consumer token secret}'
-    );
+     //Create the front object
+      $sellsy = new Teknoo\Sellsy\Sellsy(
+         'https://apifeed.sellsy.com/0/',
+         'User Token',
+         'User Secret',
+         'Consumer Token',
+         'Consumer Secret'
+      );
 
-    $sellsy->setTransport($transportBridge);
         
 ##Perform a request
         
