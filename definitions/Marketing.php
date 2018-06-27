@@ -29,9 +29,6 @@ use Teknoo\Sellsy\Collection\DefinitionInterface;
 use Teknoo\Sellsy\Method\Method;
 
 /**
- * Class Marketing
- * Collection of methods for TimeTracking operations.
- *
  * @link https://api.sellsy.com/documentation/methods#marketinggetmailinglists
  *
  * @copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
@@ -58,6 +55,8 @@ class Marketing implements DefinitionInterface
         $collection->registerMethod(new Method($collection, 'getCampaign'));
         $collection->registerMethod(new Method($collection, 'sendCampaign'));
         $collection->registerMethod(new Method($collection, 'updateOwner'));
+        $collection->registerMethod(new Method($collection, 'getPrefs'));
+        $collection->registerMethod(new Method($collection, 'updateSharingGroups'));
 
         return $collection;
     }

@@ -32,13 +32,19 @@
         "sebastian/phpcpd": "~3.0",
         "phploc/phploc": "~4.0",
         "guzzlehttp/guzzle":"^6.0.0",
-        "guzzlehttp/psr7":"^1.0.0"
+        "guzzlehttp/psr7":"^1.0.0",
+        "symfony/console": "^3.4.0||^4.0.0"
     },
     "minimum-stability": "beta",
     "autoload": {
         "psr-4": {
             "Teknoo\\Sellsy\\": ["src/"],
             "Teknoo\\Sellsy\\Definitions\\": ["definitions/"],
+            "Teknoo\\Sellsy\\Tools\\": ["tools/"]
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
             "Teknoo\\Tests\\Sellsy\\": ["tests/"]
         }
     },

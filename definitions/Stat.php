@@ -29,9 +29,6 @@ use Teknoo\Sellsy\Collection\DefinitionInterface;
 use Teknoo\Sellsy\Method\Method;
 
 /**
- * Class Stat
- * Collection of methods for TimeTracking operations.
- *
  * @link https://api.sellsy.com/documentation/methods#statgetsalesstats
  *
  * @copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
@@ -52,6 +49,8 @@ class Stat implements DefinitionInterface
 
         $collection->registerMethod(new Method($collection, 'getSalesStats'));
         $collection->registerMethod(new Method($collection, 'getFull'));
+        $collection->registerMethod(new Method($collection, 'getOne'));
+        $collection->registerMethod(new Method($collection, 'getGroups'));
 
         return $collection;
     }

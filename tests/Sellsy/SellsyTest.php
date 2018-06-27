@@ -33,7 +33,7 @@ use Teknoo\Sellsy\Client\Client as SellsyClient;
  *
  * @covers \Teknoo\Sellsy\Sellsy
  *
- *@copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
+ * @copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
  *
  * @link        http://teknoo.software/sellsy-client Project website
  *
@@ -50,36 +50,25 @@ class SellsyTest extends \PHPUnit\Framework\TestCase
         return new Sellsy('https://foo.bar', 'bar', 'foo', 'hello', 'world');
     }
 
-    public function testGetGuzzleClient()
-    {
-        self::assertInstanceOf(
-            Client::class,
-            $this->buildSellsy()->getGuzzleClient()
-        );
-    }
-
-    public function testSetGuzzleClient()
-    {
-        $sellsy = $this->buildSellsy();
-
-        $gc = $this->createMock(Client::class);
-
-        self::assertInstanceOf(
-            Sellsy::class,
-            $sellsy->setGuzzleClient($gc)
-        );
-
-        self::assertEquals(
-            $gc,
-            $sellsy->getGuzzleClient()
-        );
-    }
-
     public function testGetTransport()
     {
         self::assertInstanceOf(
             TransportInterface::class,
-            $this->buildSellsy()->getTransport()
+            $this->buildSellsy()
+                ->setTransport($this->createMock(TransportInterface::class))
+                ->getTransport()
+        );
+    }
+
+    /**
+     * @expectedException \RuntimeException
+     */
+    public function testExceptionOnGetTransportWithNoTransport()
+    {
+        self::assertInstanceOf(
+            TransportInterface::class,
+            $this->buildSellsy()
+                ->getTransport()
         );
     }
 
@@ -104,7 +93,9 @@ class SellsyTest extends \PHPUnit\Framework\TestCase
     {
         self::assertInstanceOf(
             SellsyClient::class,
-            $this->buildSellsy()->getClient()
+            $this->buildSellsy()
+                ->setTransport($this->createMock(TransportInterface::class))
+                ->getClient()
         );
     }
 
@@ -144,6 +135,7 @@ class SellsyTest extends \PHPUnit\Framework\TestCase
     public function testDefinitions()
     {
         $sellsy = $this->buildSellsy();
+        $sellsy->setTransport($this->createMock(TransportInterface::class));
 
         $definitionDir = dirname(dirname(__DIR__)).'/definitions';
         foreach (scandir($definitionDir) as $item) {

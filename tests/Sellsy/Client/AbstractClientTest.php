@@ -114,7 +114,6 @@ abstract class AbstractClientTest extends \PHPUnit\Framework\TestCase
 
             $this->transport->expects(self::any())->method('createUri')->willReturn($this->buildUri());
             $this->transport->expects(self::any())->method('createRequest')->willReturn($this->buildRequest());
-            $this->transport->expects(self::any())->method('createStream')->willReturn($this->buildStream());
         }
 
         return $this->transport;
@@ -227,23 +226,18 @@ abstract class AbstractClientTest extends \PHPUnit\Framework\TestCase
                 ['Expect', '']
             )->willReturnSelf();
 
-        $this->buildStream()
+        $this->buildTransport()
             ->expects(self::once())
-            ->method('rewind')
-            ->willReturnSelf();
-
-        $this->buildStream()
-            ->expects(self::once())
-            ->method('write')
-            ->with(\http_build_query([
-                'request' => 1,
-                'io_mode' => 'json',
-                'do_in' => \json_encode([
+            ->method('createStream')
+            ->with([
+                ['name' => 'request', 'contents' => 1],
+                ['name' => 'io_mode', 'contents' => 'json'],
+                ['name' => 'do_in', 'contents' => \json_encode([
                     'method' => 'collection.method',
                     'params' => ['foo' => 'bar'],
-                ]),
-            ]))
-            ->willReturnSelf();
+                ])],
+            ])
+            ->willReturn($this->buildStream());
 
         $this->buildRequest()
             ->expects(self::once())
@@ -347,23 +341,18 @@ abstract class AbstractClientTest extends \PHPUnit\Framework\TestCase
                 ['Expect', '']
             )->willReturnSelf();
 
-        $this->buildStream()
+        $this->buildTransport()
             ->expects(self::once())
-            ->method('rewind')
-            ->willReturnSelf();
-
-        $this->buildStream()
-            ->expects(self::once())
-            ->method('write')
-            ->with(\http_build_query([
-                'request' => 1,
-                'io_mode' => 'json',
-                'do_in' => \json_encode([
+            ->method('createStream')
+            ->with([
+                ['name' => 'request', 'contents' => 1],
+                ['name' => 'io_mode', 'contents' => 'json'],
+                ['name' => 'do_in', 'contents' => \json_encode([
                     'method' => 'collection.method',
                     'params' => ['foo' => 'bar'],
-                ]),
-            ]))
-            ->willReturnSelf();
+                ])],
+            ])
+            ->willReturn($this->buildStream());
 
         $this->buildRequest()
             ->expects(self::once())
@@ -465,23 +454,18 @@ abstract class AbstractClientTest extends \PHPUnit\Framework\TestCase
                 ['Expect', '']
             )->willReturnSelf();
 
-        $this->buildStream()
+        $this->buildTransport()
             ->expects(self::once())
-            ->method('rewind')
-            ->willReturnSelf();
-
-        $this->buildStream()
-            ->expects(self::once())
-            ->method('write')
-            ->with(\http_build_query([
-                'request' => 1,
-                'io_mode' => 'json',
-                'do_in' => \json_encode([
+            ->method('createStream')
+            ->with([
+                ['name' => 'request', 'contents' => 1],
+                ['name' => 'io_mode', 'contents' => 'json'],
+                ['name' => 'do_in', 'contents' => \json_encode([
                     'method' => 'collection.method',
                     'params' => ['foo' => 'bar'],
-                ]),
-            ]))
-            ->willReturnSelf();
+                ])],
+            ])
+            ->willReturn($this->buildStream());
 
         $this->buildRequest()
             ->expects(self::once())
@@ -577,23 +561,18 @@ abstract class AbstractClientTest extends \PHPUnit\Framework\TestCase
                 ['Expect', '']
             )->willReturnSelf();
 
-        $this->buildStream()
+        $this->buildTransport()
             ->expects(self::once())
-            ->method('rewind')
-            ->willReturnSelf();
-
-        $this->buildStream()
-            ->expects(self::once())
-            ->method('write')
-            ->with(\http_build_query([
-                'request' => 1,
-                'io_mode' => 'json',
-                'do_in' => \json_encode([
+            ->method('createStream')
+            ->with([
+                ['name' => 'request', 'contents' => 1],
+                ['name' => 'io_mode', 'contents' => 'json'],
+                ['name' => 'do_in', 'contents' => \json_encode([
                     'method' => 'collection.method',
                     'params' => ['foo' => 'bar'],
-                ]),
-            ]))
-            ->willReturnSelf();
+                ])],
+            ])
+            ->willReturn($this->buildStream());
 
         $this->buildRequest()
             ->expects(self::once())
@@ -692,23 +671,18 @@ abstract class AbstractClientTest extends \PHPUnit\Framework\TestCase
                 ['Expect', '']
             )->willReturnSelf();
 
-        $this->buildStream()
+        $this->buildTransport()
             ->expects(self::once())
-            ->method('rewind')
-            ->willReturnSelf();
-
-        $this->buildStream()
-            ->expects(self::once())
-            ->method('write')
-            ->with(\http_build_query([
-                'request' => 1,
-                'io_mode' => 'json',
-                'do_in' => \json_encode([
+            ->method('createStream')
+            ->with([
+                ['name' => 'request', 'contents' => 1],
+                ['name' => 'io_mode', 'contents' => 'json'],
+                ['name' => 'do_in', 'contents' => \json_encode([
                     'method' => 'collection.method',
                     'params' => ['foo' => 'bar'],
-                ]),
-            ]))
-            ->willReturnSelf();
+                ])],
+            ])
+            ->willReturn($this->buildStream());
 
         $this->buildRequest()
             ->expects(self::once())

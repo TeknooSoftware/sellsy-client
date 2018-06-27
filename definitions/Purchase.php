@@ -29,9 +29,6 @@ use Teknoo\Sellsy\Collection\DefinitionInterface;
 use Teknoo\Sellsy\Method\Method;
 
 /**
- * Class Purchase
- * Collection of methods for TimeTracking operations.
- *
  * @link https://api.sellsy.com/documentation/methods#purchasegetlist
  *
  * @copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
@@ -61,6 +58,8 @@ class Purchase implements DefinitionInterface
         $collection->registerMethod(new Method($collection, 'getPublicLink'));
         $collection->registerMethod(new Method($collection, 'getNextIdent'));
         $collection->registerMethod(new Method($collection, 'getPayments'));
+        $collection->registerMethod(new Method($collection, 'uploadRelatedFile'));
+        $collection->registerMethod(new Method($collection, 'updateSharingGroups'));
 
         return $collection;
     }

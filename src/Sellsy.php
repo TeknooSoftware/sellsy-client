@@ -23,10 +23,8 @@
 namespace Teknoo\Sellsy;
 
 use Teknoo\Sellsy\Client\Client as SellsyClient;
-use GuzzleHttp\Client;
 use Teknoo\Sellsy\Collection\CollectionInterface;
 use Teknoo\Sellsy\Collection\DefinitionInterface;
-use Teknoo\Sellsy\Transport\Guzzle;
 use Teknoo\Sellsy\Transport\TransportInterface;
 
 /**
@@ -42,11 +40,6 @@ use Teknoo\Sellsy\Transport\TransportInterface;
  */
 class Sellsy
 {
-    /**
-     * @var Client
-     */
-    private $guzzleClient;
-
     /**
      * @var TransportInterface
      */
@@ -121,20 +114,6 @@ class Sellsy
     }
 
     /**
-     * Return and configure a guzzle client, on the flow.
-     *
-     * @return Client
-     */
-    public function getGuzzleClient(): Client
-    {
-        if (!$this->guzzleClient instanceof Client) {
-            $this->guzzleClient = new Client();
-        }
-
-        return $this->guzzleClient;
-    }
-
-    /**
      * Return and configure a sellsy transport, on the flow.
      *
      * @return TransportInterface
@@ -142,7 +121,7 @@ class Sellsy
     public function getTransport(): TransportInterface
     {
         if (!$this->transport instanceof TransportInterface) {
-            $this->transport = new Guzzle($this->getGuzzleClient());
+            throw new \RuntimeException('Missing defined transport');
         }
 
         return $this->transport;
@@ -167,20 +146,6 @@ class Sellsy
         }
 
         return $this->client;
-    }
-
-    /**
-     * To define a specific Guzzle client instance to avoid to create it on the flow.
-     *
-     * @param Client $guzzleClient
-     *
-     * @return self
-     */
-    public function setGuzzleClient(Client $guzzleClient): Sellsy
-    {
-        $this->guzzleClient = $guzzleClient;
-
-        return $this;
     }
 
     /**
@@ -224,8 +189,9 @@ class Sellsy
      */
     public function __call(string $collectionName, array $arguments): CollectionInterface
     {
-        if (isset($this->collections[$collectionName])) {
-            return $this->collections[$collectionName];
+        $lowerName = \strtolower($collectionName);
+        if (isset($this->collections[$lowerName])) {
+            return $this->collections[$lowerName];
         }
 
         if (!\class_exists($collectionName, true)) {
@@ -249,8 +215,8 @@ class Sellsy
          * @var callable $definitionInstance
          */
         $definitionInstance = $reflectionClass->newInstance();
-        $this->collections[$collectionName] = $definitionInstance($this->getClient());
+        $this->collections[$lowerName] = $definitionInstance($this->getClient());
 
-        return $this->collections[$collectionName];
+        return $this->collections[$lowerName];
     }
 }

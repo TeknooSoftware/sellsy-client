@@ -9,24 +9,34 @@ PHP library to connect your applications to your [Sellsy account](http://sellsy.
 Simple Example
 --------------
 
+      <?php
+
+      use GuzzleHttp\Client;
+      use Teknoo\Sellsy\Transport\Guzzle;
+      use Teknoo\Sellsy\Sellsy;
+
+      include 'vendor/autoload.php';
+
       //Create the HTTP client
-      $guzzleClient = new GuzzleHttp\Client();
+      $guzzleClient = new Client();
 
       //Create the transport bridge
-      $transportBridge = new Teknoo\Sellsy\Transport\Guzzle($guzzleClient);
+      $transportBridge = new Guzzle($guzzleClient);
 
       //Create the front object
-      $sellsy = new Teknoo\Sellsy\Sellsy(
-        $transportBridge
-        'User Token'
-        'User Secret'
-        'Consumer Token'
-        'Consumer Secret';
-     );
-        
-     //Example of request, follow the API documentation of Sellsy API.
-     print_r($sellsy->Infos()->getInfos());
-     print_r($sellsy->AccountPrefs()->getCorpInfos());
+      $sellsy = new Sellsy(
+          'https://apifeed.sellsy.com/0/',
+          '{access token}',
+          '{access token secret}',
+          '{consumer token}',
+          '{consumer token secret}'
+      );
+
+      $sellsy->setTransport($transportBridge);
+
+      //Example of request, follow the API documentation of Sellsy API.
+      print $sellsy->Infos()->getInfos()->getResponse()['consumerdatas']['id'].PHP_EOL;
+      print $sellsy->AccountPrefs()->getCorpInfos()->getResponse()['email'].PHP_EOL;
 
 How-to
 ------
@@ -47,10 +57,6 @@ This library requires :
     * PHP 7+
     * A PSR-7 implementation
 
-API Documentation
------------------
-Generated documentation from the library with PhpDocumentor : [Open](https://cdn.rawgit.com/TeknooSoftware/sellsy-client/master/docs/api/index.html).
-
 Credits
 -------
 Richard Déloge - <richarddeloge@gmail.com> - Lead developer.
@@ -64,7 +70,7 @@ Teknoo Software's DNA is simple : Provide to our partners and to the community a
  
 License
 -------
-States is licensed under the MIT Licenses - see the licenses folder for details
+Sellsy is licensed under the MIT Licenses - see the licenses folder for details
 
 Contribute :)
 -------------

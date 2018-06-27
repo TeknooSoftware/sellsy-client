@@ -29,9 +29,6 @@ use Teknoo\Sellsy\Collection\DefinitionInterface;
 use Teknoo\Sellsy\Method\Method;
 
 /**
- * Class Mails
- * Collection of methods for TimeTracking operations.
- *
  * @link https://api.sellsy.com/documentation/methods#mailsgetlist
  *
  * @copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
@@ -51,6 +48,7 @@ class Mails implements DefinitionInterface
         $collection = new Collection($client, 'Mails');
 
         $collection->registerMethod(new Method($collection, 'getList'));
+        $collection->registerMethod(new Method($collection, 'getOne'));
         $collection->registerMethod(new Method($collection, 'sendOne'));
         $collection->registerMethod(new Method($collection, 'delete'));
         $collection->registerMethod(new Method($collection, 'getCustomTemplates'));

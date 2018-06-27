@@ -29,9 +29,6 @@ use Teknoo\Sellsy\Collection\DefinitionInterface;
 use Teknoo\Sellsy\Method\Method;
 
 /**
- * Class Stock
- * Collection of methods for TimeTracking operations.
- *
  * @link https://api.sellsy.com/documentation/methods#stockgetmoves
  *
  * @copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
@@ -63,6 +60,7 @@ class Stock implements DefinitionInterface
         $collection->registerMethod(new Method($collection, 'reactivate'));
         $collection->registerMethod(new Method($collection, 'add'));
         $collection->registerMethod(new Method($collection, 'updateThresHold'));
+        $collection->registerMethod(new Method($collection, 'getPrefs'));
 
         return $collection;
     }

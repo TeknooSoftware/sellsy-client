@@ -5,7 +5,11 @@
 To install this library with composer, run this command: 
 
     composer require teknoo/sellsy-client
-    
+
+To use the embedded Guzzle transport
+
+    composer require guzzlehttp/guzzle
+
 ##Get from your Sellsy account your API credentials
 
 The client needs some credentials to be identified by the Sellsy API to be granted
@@ -40,6 +44,7 @@ By default, this library use Guzzle to implement PSR-7. A transport is available
          'Consumer Token',
          'Consumer Secret'
       );
+
         
 ##Perform a request
         
@@ -48,12 +53,15 @@ All methods defined in the api <http://api.sellsy.com/documentation/methodes> ar
      
 By example, for `Infos.getInfos` :
      
-     print_r($sellsy->Infos()->getInfos());
+     print_r($sellsy->Infos()->getInfos()->getResponse());
      
 to call the method `AccountPrefs.getCorpInfos`
 
-    print_r($sellsy->AccountPrefs()->getCorpInfos());
-    
+    print_r($sellsy->AccountPrefs()->getCorpInfos()->getResponse());
+
+All methods return a `Teknoo\Sellsy\Client\ResultInterface` object.
+Values are accessible, as array, by calling it's method `getResponse()`.
+
 To call a method with arguments, you need pass them in an array
 
     print_r($client->Agenda()->getOne(['id'=>$youAgendaId]);

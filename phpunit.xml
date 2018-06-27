@@ -18,6 +18,7 @@
     <filter>
         <whitelist>
             <directory>src</directory>
+            <directory>definitions</directory>
             <exclude>
                 <directory>tests</directory>
                 <directory>docs</directory>

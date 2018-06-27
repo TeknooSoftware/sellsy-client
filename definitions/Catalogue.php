@@ -29,9 +29,6 @@ use Teknoo\Sellsy\Collection\DefinitionInterface;
 use Teknoo\Sellsy\Method\Method;
 
 /**
- * Class Catalogue
- * Collection of methods for TimeTracking operations.
- *
  * @link https://api.sellsy.com/documentation/methods#cataloguegetlist
  *
  * @copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
@@ -82,6 +79,8 @@ class Catalogue implements DefinitionInterface
         $collection->registerMethod(new Method($collection, 'updateCategory'));
         $collection->registerMethod(new Method($collection, 'deleteCategory'));
         $collection->registerMethod(new Method($collection, 'addPictureToGallery'));
+        $collection->registerMethod(new Method($collection, 'updateTranslations'));
+        $collection->registerMethod(new Method($collection, 'updateSharingGroups'));
 
         return $collection;
     }

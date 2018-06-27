@@ -1,14 +1,33 @@
 #Teknoo Software - Sellsy client library - Change Log
 
-###[2.0.0-beta1] - 2017-08-01
+#[2.0.1] - 2018-05-01
+###Add
+Add reference to API endpoint : Document.enablePublicLink and Document.disablePublicLink
+
+##[2.0.0] - 2018-04-14
+###Stable release
+
+##[2.0.0-beta2] - 2017-12-07
+###Fix
+- Fix issue in client, query's parameters must be sent following
+  "Content-Type: multipart/form-data" and not url-form-encoded. (Thanks to Benjamin JeanJean for the help)
+- Fix mistake in the documentation
+
+###Updated
+- Set insensitive to the case the collection name and method name (the sellsy api has many inconsistencies)
+- Add tools to check if all methods defined in the Sellsy Api are registered into this library, in definitions
+- Update makefile to checks if all methods of the api are available at each build (daily)
+- Update definitions list from the Sellsy api
+
+##[2.0.0-beta1] - 2017-08-01
 ###Updated
 - Update dev libraries used for this project and use now PHPUnit 6.2 for tests.
 
-###[2.0.0-alpha4] - 2017-07-24
+##[2.0.0-alpha4] - 2017-07-24
 ###Fix
 - Fixing a missing return call on Uri PSR7 instance on the Client #4 (Thanks to @gouaille)
 
-###[2.0.0-alpha3] - 2017-02-15
+##[2.0.0-alpha3] - 2017-02-15
 ###Fix
 - Code style fix
 - License file follow Github specs

@@ -29,9 +29,6 @@ use Teknoo\Sellsy\Collection\DefinitionInterface;
 use Teknoo\Sellsy\Method\Method;
 
 /**
- * Class Support
- * Collection of methods for TimeTracking operations.
- *
  * @link https://api.sellsy.com/documentation/methods#supportgetlist
  *
  * @copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
@@ -59,6 +56,8 @@ class Support implements DefinitionInterface
         $collection->registerMethod(new Method($collection, 'updateReply'));
         $collection->registerMethod(new Method($collection, 'updateAssignation'));
         $collection->registerMethod(new Method($collection, 'updateThird'));
+        $collection->registerMethod(new Method($collection, 'updateStep'));
+        $collection->registerMethod(new Method($collection, 'getTemplates'));
 
         return $collection;
     }

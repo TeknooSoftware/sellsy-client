@@ -23,6 +23,7 @@
 namespace Teknoo\Sellsy\Transport;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Stream;
 use GuzzleHttp\Psr7\Uri;
@@ -80,11 +81,9 @@ class Guzzle implements TransportInterface
     /**
      * {@inheritdoc}
      */
-    public function createStream(): StreamInterface
+    public function createStream(array &$elements): StreamInterface
     {
-        $stream = fopen('php://temp', 'r+');
-
-        return new Stream($stream);
+        return new MultipartStream($elements);
     }
 
     /**
