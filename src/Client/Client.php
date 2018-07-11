@@ -233,7 +233,7 @@ class Client implements ClientInterface
         $oauthParams = [
             'oauth_consumer_key' => $this->oauthConsumerKey,
             'oauth_token' => $this->oauthAccessToken,
-            'oauth_nonce' => \sha1(\microtime(true).\rand(0, 10000)),
+            'oauth_nonce' => \sha1(\microtime(true).\rand(10000, 99999)),
             'oauth_timestamp' => $now->getTimestamp(),
             'oauth_signature_method' => 'PLAINTEXT',
             'oauth_version' => '1.0',
