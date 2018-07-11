@@ -1,5 +1,9 @@
 #Teknoo Software - Sellsy client library - Change Log
 
+#[2.0.2] - 2018-07-11
+###Fix
+Change oauth_nonce generation to avoid colision on several calls
+
 #[2.0.1] - 2018-05-01
 ###Add
 Add reference to API endpoint : Document.enablePublicLink and Document.disablePublicLink
