@@ -1,6 +1,6 @@
 #Teknoo Software - Sellsy client library - Change Log
 
-#[2.0.3] - 2018-08-03
+#[2.0.4] - 2018-08-03
 ###Add
 Add Supplier collection methods from Sellsy Api Documentation
 
