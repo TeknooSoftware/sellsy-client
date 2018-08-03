@@ -1,5 +1,9 @@
 #Teknoo Software - Sellsy client library - Change Log
 
+#[2.0.3] - 2018-08-03
+###Add
+Add Supplier collection methods from Sellsy Api Documentation
+
 #[2.0.3] - 2018-07-11
 ###Fix
 Change oauth_nonce generation to avoid collision on several calls. (bis)
