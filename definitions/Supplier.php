@@ -45,7 +45,7 @@ class Supplier implements DefinitionInterface
      */
     public function __invoke(ClientInterface $client): CollectionInterface
     {
-        $collection = new Collection($client, 'Support');
+        $collection = new Collection($client, 'Supplier');
 
         $collection->registerMethod(new Method($collection, 'getList'));
         $collection->registerMethod(new Method($collection, 'getOne'));
