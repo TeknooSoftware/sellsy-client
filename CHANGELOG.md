@@ -1,5 +1,10 @@
 #Teknoo Software - Sellsy client library - Change Log
 
+#[2.0.5] - 2018-12-21
+###Fix
+- Synchronize definitions with API documentations
+- Supplier getList error #14
+
 #[2.0.4] - 2018-08-03
 ###Add
 Add Supplier collection methods from Sellsy Api Documentation
