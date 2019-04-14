@@ -55,6 +55,7 @@ class Prospects implements DefinitionInterface
         $collection->registerMethod(new Method($collection, 'updateOwner'));
         $collection->registerMethod(new Method($collection, 'getAddress'));
         $collection->registerMethod(new Method($collection, 'getContact'));
+        $collection->registerMethod(new Method($collection, 'getContactList'));
         $collection->registerMethod(new Method($collection, 'addAddress'));
         $collection->registerMethod(new Method($collection, 'addContact'));
         $collection->registerMethod(new Method($collection, 'updateAddress'));

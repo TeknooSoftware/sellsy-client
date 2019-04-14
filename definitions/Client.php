@@ -51,6 +51,7 @@ class Client implements DefinitionInterface
         $collection->registerMethod(new Method($collection, 'getOne'));
         $collection->registerMethod(new Method($collection, 'getAddress'));
         $collection->registerMethod(new Method($collection, 'getContact'));
+        $collection->registerMethod(new Method($collection, 'getContactList'));
         $collection->registerMethod(new Method($collection, 'create'));
         $collection->registerMethod(new Method($collection, 'update'));
         $collection->registerMethod(new Method($collection, 'delete'));
