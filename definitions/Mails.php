@@ -52,6 +52,12 @@ class Mails implements DefinitionInterface
         $collection->registerMethod(new Method($collection, 'sendOne'));
         $collection->registerMethod(new Method($collection, 'delete'));
         $collection->registerMethod(new Method($collection, 'getCustomTemplates'));
+        $collection->registerMethod(new Method($collection, 'getAttachments'));
+        $collection->registerMethod(new Method($collection, 'getCustomTags'));
+        $collection->registerMethod(new Method($collection, 'createCustomTemplate'));
+        $collection->registerMethod(new Method($collection, 'updateCustomTemplate'));
+        $collection->registerMethod(new Method($collection, 'deleteCustomTemplate'));
+        $collection->registerMethod(new Method($collection, 'getCustomTemplate'));
 
         return $collection;
     }

@@ -1,5 +1,9 @@
 #Teknoo Software - Sellsy client library - Change Log
 
+#[2.0.6] - 2019-04-14
+###Update
+- Methods definitions, thanks to @aguerin.
+
 #[2.0.5] - 2018-12-21
 ###Fix
 - Synchronize definitions with API documentations
