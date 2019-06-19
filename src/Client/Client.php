@@ -35,7 +35,7 @@ use Teknoo\Sellsy\Transport\TransportInterface;
  * Implementation of an HTTP+OAuth client to use the Sellsy API with your credentials to execute some operations on
  * your account.
  *
- * @copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
+ * @copyright   Copyright (c) 2009-2019 Richard Déloge (richarddeloge@gmail.com)
  *
  * @link        http://teknoo.software/sellsy-client Project website
  *

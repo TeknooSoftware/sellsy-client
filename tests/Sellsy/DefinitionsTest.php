@@ -33,7 +33,7 @@ use Teknoo\Sellsy\Client\Client as SellsyClient;
 /**
  * Class DefinitionsTest.
  *
- * @copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
+ * @copyright   Copyright (c) 2009-2019 Richard Déloge (richarddeloge@gmail.com)
  *
  * @link        http://teknoo.software/sellsy-client Project website
  *

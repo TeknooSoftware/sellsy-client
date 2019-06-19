@@ -31,7 +31,7 @@ use Teknoo\Sellsy\Client\ResultInterface;
  * Instance are directly invokable, but parameters must passed into an array and not been passed like a
  * normal PHP method.
  *
- * @copyright   Copyright (c) 2009-2017 Richard Déloge (richarddeloge@gmail.com)
+ * @copyright   Copyright (c) 2009-2019 Richard Déloge (richarddeloge@gmail.com)
  *
  * @link        http://teknoo.software/sellsy-client Project website
  *
