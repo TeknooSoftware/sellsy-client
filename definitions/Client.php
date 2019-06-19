@@ -69,6 +69,7 @@ class Client implements DefinitionInterface
         $collection->registerMethod(new Method($collection, 'sendContactPwd'));
         $collection->registerMethod(new Method($collection, 'updateThirdPicture'));
         $collection->registerMethod(new Method($collection, 'updateSharingGroups'));
+        $collection->registerMethod(new Method($collection, 'getMargin'));
 
         return $collection;
     }

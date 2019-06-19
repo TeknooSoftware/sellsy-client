@@ -66,6 +66,7 @@ class Prospects implements DefinitionInterface
         $collection->registerMethod(new Method($collection, 'transformToCustomer'));
         $collection->registerMethod(new Method($collection, 'updateThirdPicture'));
         $collection->registerMethod(new Method($collection, 'updateSharingGroups'));
+        $collection->registerMethod(new Method($collection, 'updatePrefs'));
 
         return $collection;
     }
