@@ -30,6 +30,4 @@ class ElectronicSign implements DefinitionInterface
 
         return $collection;
     }
-
-
 }
