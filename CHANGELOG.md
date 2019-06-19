@@ -1,5 +1,11 @@
 #Teknoo Software - Sellsy client library - Change Log
 
+#[2.0.7] - 2019-06-19
+###Update
+- Methods definitions update
+- Add new definition for ElectronicSign, thanks to @aguerin.
+- Update copyright declaration
+
 #[2.0.6] - 2019-04-14
 ###Update
 - Methods definitions, thanks to @aguerin.
