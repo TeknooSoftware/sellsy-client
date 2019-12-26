@@ -81,6 +81,7 @@ class Catalogue implements DefinitionInterface
         $collection->registerMethod(new Method($collection, 'addPictureToGallery'));
         $collection->registerMethod(new Method($collection, 'updateTranslations'));
         $collection->registerMethod(new Method($collection, 'updateSharingGroups'));
+        $collection->registerMethod(new Method($collection, 'getOneByRef'));
 
         return $collection;
     }

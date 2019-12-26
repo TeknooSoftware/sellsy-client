@@ -57,7 +57,7 @@ interface MethodInterface extends ImmutableInterface
     /**
      * To execute the method on the Sellsy API.
      *
-     * @param array $params
+     * @param array<mixed, mixed> $params
      *
      * @return ResultInterface
      */

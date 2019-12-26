@@ -27,6 +27,8 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
 use Teknoo\Sellsy\Client\ClientInterface;
+use Teknoo\Sellsy\Client\Exception\ErrorException;
+use Teknoo\Sellsy\Client\Exception\RequestFailureException;
 use Teknoo\Sellsy\Client\ResultInterface;
 use Teknoo\Sellsy\Method\MethodInterface;
 use Teknoo\Sellsy\Transport\TransportInterface;
@@ -274,11 +276,9 @@ abstract class AbstractClientTest extends \PHPUnit\Framework\TestCase
         self::assertInstanceOf(ResponseInterface::class, $client->getLastResponse());
     }
 
-    /**
-     * @expectedException \Teknoo\Sellsy\Client\Exception\ErrorException
-     */
     public function testRunReturnError()
     {
+        $this->expectException(ErrorException::class);
         $uri = $this->uriString;
 
         $this->buildUri()
@@ -387,11 +387,9 @@ abstract class AbstractClientTest extends \PHPUnit\Framework\TestCase
         $client->run($method, ['foo' => 'bar']);
     }
 
-    /**
-     * @expectedException \Teknoo\Sellsy\Client\Exception\RequestFailureException
-     */
     public function testRunWithExceptionOnExecute()
     {
+        $this->expectException(RequestFailureException::class);
         $uri = $this->uriString;
 
         $this->buildUri()
@@ -494,11 +492,9 @@ abstract class AbstractClientTest extends \PHPUnit\Framework\TestCase
         $client->run($method, ['foo' => 'bar']);
     }
 
-    /**
-     * @expectedException \Teknoo\Sellsy\Client\Exception\RequestFailureException
-     */
     public function testRunWithWithNoResponseStream()
     {
+        $this->expectException(RequestFailureException::class);
         $uri = $this->uriString;
 
         $this->buildUri()
@@ -604,11 +600,10 @@ abstract class AbstractClientTest extends \PHPUnit\Framework\TestCase
         $client->run($method, ['foo' => 'bar']);
     }
 
-    /**
-     * @expectedException \Teknoo\Sellsy\Client\Exception\RequestFailureException
-     */
     public function testRunWithWithOAUthIssue()
     {
+        $this->expectException(RequestFailureException::class);
+
         $uri = $this->uriString;
 
         $this->buildUri()

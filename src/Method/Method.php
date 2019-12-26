@@ -90,6 +90,7 @@ class Method implements MethodInterface
 
     /**
      * {@inheritdoc}
+     * @param array<mixed, mixed> $params
      */
     public function __invoke(array $params = []): ResultInterface
     {
@@ -103,6 +104,6 @@ class Method implements MethodInterface
      */
     public function __toString(): string
     {
-        return ($this->collection->getName()).'.'.$this->name;
+        return ($this->collection->getName()) . '.' . $this->name;
     }
 }

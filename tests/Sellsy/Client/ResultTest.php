@@ -65,7 +65,7 @@ class ResultTest extends AbstractResultTest
         $result = new Result(
             \json_encode(['status' => 'error', 'error' => 'fooBar'])
         );
-        self::assertInternalType('string', $result->getErrorMessage());
+        self::assertIsString($result->getErrorMessage());
         self::assertEquals('fooBar', $result->getErrorMessage());
     }
 }

@@ -60,11 +60,9 @@ class SellsyTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    /**
-     * @expectedException \RuntimeException
-     */
     public function testExceptionOnGetTransportWithNoTransport()
     {
+        $this->expectException(\RuntimeException::class);
         self::assertInstanceOf(
             TransportInterface::class,
             $this->buildSellsy()
@@ -116,19 +114,15 @@ class SellsyTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    /**
-     * @expectedException \DomainException
-     */
     public function testDefinitionsNotFound()
     {
+        $this->expectException(\DomainException::class);
         $this->buildSellsy()->foooBar();
     }
 
-    /**
-     * @expectedException \RuntimeException
-     */
     public function testDefinitionsBadDefinition()
     {
+        $this->expectException(\RuntimeException::class);
         $this->buildSellsy()->DateTime();
     }
 

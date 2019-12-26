@@ -87,7 +87,7 @@ abstract class AbstractMethodTest extends \PHPUnit\Framework\TestCase
     public function testGetName()
     {
         $method = $this->buildMethod();
-        self::assertInternalType('string', $method->getName());
+        self::assertIsString( $method->getName());
         self::assertEquals('fooBar', $method->getName());
     }
 
@@ -112,7 +112,7 @@ abstract class AbstractMethodTest extends \PHPUnit\Framework\TestCase
     public function testToString()
     {
         $method = $this->buildMethod();
-        self::assertInternalType('string', (string) $method);
+        self::assertIsString( (string) $method);
         self::assertEquals('collectionName.fooBar', (string) $method);
     }
 }

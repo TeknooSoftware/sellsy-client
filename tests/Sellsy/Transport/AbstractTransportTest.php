@@ -58,11 +58,10 @@ abstract class AbstractTransportTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    /**
-     * @expectedException \TypeError
-     */
     public function testCreateStreamWithBadRequest()
     {
+        $this->expectException(\TypeError::class);
+
         $object = new \stdClass();
         $this->buildTransport()->createStream($object);
     }

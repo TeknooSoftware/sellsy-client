@@ -52,7 +52,7 @@ class CheckMethods extends Command
      * To extract from the documentation (downloaded from the Sellsy server) all methods declared into it.
      *
      * @param string $websiteUrl
-     * @return array
+     * @return array<string, string>
      */
     private function extractMethodsName(string $websiteUrl): array
     {
@@ -94,8 +94,8 @@ class CheckMethods extends Command
             public function execute(RequestInterface $request): ResponseInterface
             {
             }
-
         };
+
         $sellSy->setTransport($transport);
         //To prevent case issues from the inconsistent documentation
         $sellSy->AccountDatas();
@@ -174,12 +174,12 @@ class CheckMethods extends Command
             return 0;
         }
 
-        $output->writeln(PHP_EOL.'Missing collections :');
+        $output->writeln(PHP_EOL . 'Missing collections :');
         foreach ($missingCollections as $collection) {
             $output->writeln($collection);
         }
 
-        $output->writeln(PHP_EOL.'Missing methods :');
+        $output->writeln(PHP_EOL . 'Missing methods :');
         foreach ($missingMethods as $method) {
             $output->writeln($method);
         }

@@ -25,7 +25,7 @@ namespace Teknoo\Sellsy\Tools;
 
 use Symfony\Component\Console\Application;
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 $application = new Application();
 $application->add(new CheckMethods());

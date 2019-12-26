@@ -104,7 +104,7 @@ interface ClientInterface
      * your credentials.
      *
      * @param MethodInterface $method
-     * @param array           $params
+     * @param array<string, mixed> $params
      *
      * @return ResultInterface
      */

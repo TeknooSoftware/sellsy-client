@@ -82,7 +82,7 @@ interface CollectionInterface
      * To call directly a method interface.
      *
      * @param string $methodName
-     * @param array  $params
+     * @param array<mixed, mixed> $params
      *
      * @return ResultInterface
      */

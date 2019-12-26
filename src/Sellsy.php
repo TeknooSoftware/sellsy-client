@@ -180,7 +180,7 @@ class Sellsy
      * To return the collection instance, initiated by the definition.
      *
      * @param string $collectionName
-     * @param array  $arguments
+     * @param array<mixed, mixed> $arguments
      *
      * @return CollectionInterface
      *
@@ -195,7 +195,7 @@ class Sellsy
         }
 
         if (!\class_exists($collectionName, true)) {
-            $collectionClassName = 'Teknoo\\Sellsy\\Definitions\\'.$collectionName;
+            $collectionClassName = 'Teknoo\\Sellsy\\Definitions\\' . $collectionName;
 
             if (!\class_exists($collectionClassName, true)) {
                 throw new \DomainException("Error, the $collectionName has been not found");
@@ -207,7 +207,7 @@ class Sellsy
         $reflectionClass = new \ReflectionClass($collectionClassName);
         if (!$reflectionClass->implementsInterface(DefinitionInterface::class)) {
             throw new \RuntimeException(
-                "Error, the definition of $collectionName must implement ".DefinitionInterface::class
+                "Error, the definition of $collectionName must implement " . DefinitionInterface::class
             );
         }
 

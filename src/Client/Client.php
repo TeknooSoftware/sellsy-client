@@ -54,7 +54,7 @@ class Client implements ClientInterface
     /**
      * Sellsy API End point.
      *
-     * @var array
+     * @var array<string, string>
      */
     private $apiUrl;
 
@@ -89,7 +89,7 @@ class Client implements ClientInterface
     /**
      * Var to store the last PSR7 request to facility debugging.
      *
-     * @var array
+     * @var RequestInterface|null
      */
     private $lastRequest;
 
@@ -101,7 +101,7 @@ class Client implements ClientInterface
     private $lastResponse;
 
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      */
     private $now;
 
@@ -200,7 +200,7 @@ class Client implements ClientInterface
     /**
      * Transform an the OAuth array configuration to HTTP headers OAuth string.
      *
-     * @param array $oauth
+     * @param array<string, string> $oauth
      *
      * @return string
      */
@@ -208,10 +208,10 @@ class Client implements ClientInterface
     {
         $values = [];
         foreach ($oauth as $key => &$value) {
-            $values[] = $key.'="'.\rawurlencode($value).'"';
+            $values[] = $key . '="' . \rawurlencode($value) . '"';
         }
 
-        return 'OAuth '.\implode(', ', $values);
+        return 'OAuth ' . \implode(', ', $values);
     }
 
     /**
@@ -229,11 +229,11 @@ class Client implements ClientInterface
         }
 
         //Generate HTTP headers
-        $encodedKey = \rawurlencode($this->oauthConsumerSecret).'&'.\rawurlencode($this->oauthAccessTokenSecret);
+        $encodedKey = \rawurlencode($this->oauthConsumerSecret) . '&' . \rawurlencode($this->oauthAccessTokenSecret);
         $oauthParams = [
             'oauth_consumer_key' => $this->oauthConsumerKey,
             'oauth_token' => $this->oauthAccessToken,
-            'oauth_nonce' => \sha1(\microtime(true).\rand(10000, 99999)),
+            'oauth_nonce' => \sha1(\microtime(true) . \rand(10000, 99999)),
             'oauth_timestamp' => $now->getTimestamp(),
             'oauth_signature_method' => 'PLAINTEXT',
             'oauth_version' => '1.0',
@@ -271,7 +271,7 @@ class Client implements ClientInterface
         }
 
         if (!empty($this->apiUrl['port'])) {
-            $uri = $uri->withPort($this->apiUrl['port']);
+            $uri = $uri->withPort((int) $this->apiUrl['port']);
         }
 
         if (!empty($this->apiUrl['path'])) {
@@ -293,7 +293,7 @@ class Client implements ClientInterface
      * To register method's argument in the request for the Sellsy API.
      *
      * @param RequestInterface $request
-     * @param array            $requestSettings
+     * @param array<string, string> $requestSettings
      *
      * @return RequestInterface
      */
@@ -312,6 +312,7 @@ class Client implements ClientInterface
 
     /**
      * {@inheritdoc}
+     * @param array<string, mixed> $params
      */
     public function run(MethodInterface $method, array $params = []): ResultInterface
     {

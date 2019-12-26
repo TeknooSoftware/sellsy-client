@@ -1,5 +1,12 @@
 #Teknoo Software - Sellsy client library - Change Log
 
+#[2.0.8] - 2019-12-27
+###Update
+- Replace PHPMd by PHPStan
+- Fix QA issues spotted by PHPStan
+- Register method `Catalogue.getOneByRef`
+- Enable check with PHP7.4 in travis
+
 #[2.0.7] - 2019-06-19
 ###Update
 - Methods definitions update

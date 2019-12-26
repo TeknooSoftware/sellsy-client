@@ -48,7 +48,7 @@ class Result implements ResultInterface
     /**
      * Decoded result from Sellsy API.
      *
-     * @var array
+     * @var array<string, mixed>
      */
     private $decodedResult;
 

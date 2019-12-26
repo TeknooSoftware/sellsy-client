@@ -61,7 +61,7 @@ interface TransportInterface
      * To initialize a PSR7 Stream, compatible with the content type multipart/form-data, needed to execute the request,
      * Sellsy API accepts only requests with a content type defined to "multipart/form-data".
      *
-     * @param array &$elements
+     * @param array<mixed, mixed> $elements
      *
      * @return StreamInterface
      */

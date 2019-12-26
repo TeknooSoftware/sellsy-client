@@ -47,7 +47,7 @@ abstract class AbstractCollectionTest extends \PHPUnit\Framework\TestCase
     public function testGetName()
     {
         $collection = $this->buildCollection();
-        self::assertInternalType('string', $collection->getName());
+        self::assertIsString( $collection->getName());
         self::assertEquals('fooBar', $collection->getName());
     }
 
@@ -99,11 +99,10 @@ abstract class AbstractCollectionTest extends \PHPUnit\Framework\TestCase
         self::assertEquals('method2', $collection->method2->getName());
     }
 
-    /**
-     * @expectedException \DomainException
-     */
     public function testGetUnknown()
     {
+        $this->expectException(\DomainException::class);
+
         $collection = $this->buildCollection();
         $collection->method1;
     }
@@ -131,11 +130,10 @@ abstract class AbstractCollectionTest extends \PHPUnit\Framework\TestCase
         self::assertInstanceOf(ResultInterface::class, $collection->method2(['foo'=>'bar']));
     }
 
-    /**
-     * @expectedException \DomainException
-     */
     public function testCalltUnknown()
     {
+        $this->expectException(\DomainException::class);
+
         $collection = $this->buildCollection();
         $collection->method1();
     }
