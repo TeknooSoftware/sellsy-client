@@ -33,3 +33,9 @@ Accepted coverage for new contributions is 90%. Any contribution not satisfying 
 won't be merged.
 
 For any questions, contact me : [richarddeloge@gmail.com](richarddeloge@gmail.com) :)
+
+## Support this project
+
+This project is free and will remain free, but it is developed on my personal time. 
+If you like it and help me maintain it and evolve it, don't hesitate to support me on [Patreon](https://patreon.com/teknoo_software).
+Thanks :) Richard. 
