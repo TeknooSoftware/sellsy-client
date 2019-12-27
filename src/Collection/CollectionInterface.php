@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * Sellsy Client.
  *
  * LICENSE
@@ -41,50 +41,34 @@ interface CollectionInterface
 {
     /**
      * Return the current collection name.
-     *
-     * @return string
      */
     public function getName(): string;
 
     /**
      * To return the Sellsy client attached to this client.
-     *
-     * @return ClientInterface
      */
     public function getClient(): ClientInterface;
 
     /**
      * To register a new MethodInterface instance in this collection.
-     *
-     * @param MethodInterface $method
-     *
-     * @return CollectionInterface
      */
     public function registerMethod(MethodInterface $method): CollectionInterface;
 
     /**
      * To list methods provided by this collection.
      *
-     * @return MethodInterface[]
+     * @return array<MethodInterface>
      */
     public function listMethods(): array;
 
     /**
      * To get the MethodInterface instance, identified by $methodName.
-     *
-     * @param string $methodName
-     *
-     * @return MethodInterface
      */
     public function __get(string $methodName): MethodInterface;
 
     /**
      * To call directly a method interface.
-     *
-     * @param string $methodName
      * @param array<mixed, mixed> $params
-     *
-     * @return ResultInterface
      */
     public function __call(string $methodName, array $params): ResultInterface;
 }

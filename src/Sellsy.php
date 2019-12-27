@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * Sellsy Client.
  *
  * LICENSE
@@ -40,65 +40,43 @@ use Teknoo\Sellsy\Transport\TransportInterface;
  */
 class Sellsy
 {
-    /**
-     * @var TransportInterface
-     */
-    private $transport;
+    private ?TransportInterface $transport = null;
 
     /**
      * Sellsy API End point.
-     *
-     * @var string
      */
-    private $apiUrl;
+    private string $apiUrl;
 
     /**
      * OAuth access token (provided by Sellsy).
-     *
-     * @var string
      */
-    private $oauthAccessToken;
+    private string $oauthAccessToken;
 
     /**
      * OAuth secret (provided by Sellsy).
-     *
-     * @var string
      */
-    private $oauthAccessTokenSecret;
+    private string $oauthAccessTokenSecret;
 
     /**
      * OAuth consumer token (provided by Sellsy).
-     *
-     * @var string
      */
-    private $oauthConsumerKey;
+    private string $oauthConsumerKey;
 
     /**
      * OAuth consumer secret  (provided by Sellsy).
-     *
-     * @var string
      */
-    private $oauthConsumerSecret;
+    private string $oauthConsumerSecret;
 
     /**
      * @var SellsyClient
      */
-    private $client;
+    private ?SellsyClient $client = null;
 
     /**
-     * @var CollectionInterface[]
+     * @var array<CollectionInterface>
      */
-    private $collections;
+    private array $collections;
 
-    /**
-     * Sellsy constructor.
-     *
-     * @param string $apiUrl
-     * @param string $accessToken
-     * @param string $accessTokenSecret
-     * @param string $consumerKey
-     * @param string $consumerSecret
-     */
     public function __construct(
         string $apiUrl,
         string $accessToken,
@@ -115,8 +93,6 @@ class Sellsy
 
     /**
      * Return and configure a sellsy transport, on the flow.
-     *
-     * @return TransportInterface
      */
     public function getTransport(): TransportInterface
     {
@@ -129,8 +105,6 @@ class Sellsy
 
     /**
      * Return and configure a sellsy client, on the flow.
-     *
-     * @return SellsyClient
      */
     public function getClient(): SellsyClient
     {
@@ -150,10 +124,6 @@ class Sellsy
 
     /**
      * To define a specific Sellsy transport instance to avoid to create it on the flow.
-     *
-     * @param TransportInterface $transport
-     *
-     * @return self
      */
     public function setTransport(TransportInterface $transport): Sellsy
     {
@@ -164,10 +134,6 @@ class Sellsy
 
     /**
      * To define a specific Sellsy client instance to avoid to create it on the flow.
-     *
-     * @param SellsyClient $client
-     *
-     * @return self
      */
     public function setClient(SellsyClient $client): Sellsy
     {
@@ -179,10 +145,7 @@ class Sellsy
     /**
      * To return the collection instance, initiated by the definition.
      *
-     * @param string $collectionName
      * @param array<mixed, mixed> $arguments
-     *
-     * @return CollectionInterface
      *
      * @throws \DomainException  if the collection does not exist
      * @throws \RuntimeException if the collection's definition does not implementing the good interface

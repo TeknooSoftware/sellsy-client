@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * Sellsy Client.
  *
  * LICENSE
@@ -44,24 +44,14 @@ class Method implements MethodInterface
 
     /**
      * Collection owning this method.
-     *
-     * @var CollectionInterface
      */
-    private $collection;
+    private CollectionInterface $collection;
 
     /**
      * Name of this method on the Sellsy API.
-     *
-     * @var string
      */
-    private $name;
+    private string $name;
 
-    /**
-     * Method constructor.
-     *
-     * @param CollectionInterface $collection
-     * @param string              $name
-     */
     public function __construct(CollectionInterface $collection, string $name)
     {
         $this->collection = $collection;
@@ -72,17 +62,11 @@ class Method implements MethodInterface
         $this->uniqueConstructorCheck();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCollection(): CollectionInterface
     {
         return $this->collection;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return $this->name;
@@ -99,9 +83,6 @@ class Method implements MethodInterface
         return $client->run($this, $params);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function __toString(): string
     {
         return ($this->collection->getName()) . '.' . $this->name;

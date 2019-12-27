@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * Sellsy Client.
  *
  * LICENSE
@@ -40,37 +40,26 @@ class Result implements ResultInterface
 
     /**
      * Raw result from the Sellsy API.
-     *
-     * @var string
      */
-    private $result;
+    private string $result;
 
     /**
      * Decoded result from Sellsy API.
      *
      * @var array<string, mixed>
      */
-    private $decodedResult;
+    private array $decodedResult;
 
     /**
      * To know if the method has been correctly executed.
-     *
-     * @var bool
      */
-    private $isSuccess;
+    private bool $isSuccess;
 
     /**
      * To know the reason of the error.
-     *
-     * @var string
      */
-    private $errorMessage = '';
+    private string $errorMessage = '';
 
-    /**
-     * Result constructor.
-     *
-     * @param string $result
-     */
     public function __construct(string $result)
     {
         $this->result = $result;
@@ -96,33 +85,21 @@ class Result implements ResultInterface
         $this->uniqueConstructorCheck();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isSuccess(): bool
     {
         return $this->isSuccess;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isError(): bool
     {
         return !$this->isSuccess;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getErrorMessage(): string
     {
         return $this->errorMessage;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRaw(): string
     {
         return $this->result;

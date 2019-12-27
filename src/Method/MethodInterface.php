@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * Sellsy Client.
  *
  * LICENSE
@@ -42,15 +42,11 @@ interface MethodInterface extends ImmutableInterface
 {
     /**
      * To know the collection attached to this method.
-     *
-     * @return CollectionInterface
      */
     public function getCollection(): CollectionInterface;
 
     /**
      * To know the name of the method in the Sellsy API.
-     *
-     * @return string
      */
     public function getName(): string;
 
@@ -58,15 +54,11 @@ interface MethodInterface extends ImmutableInterface
      * To execute the method on the Sellsy API.
      *
      * @param array<mixed, mixed> $params
-     *
-     * @return ResultInterface
      */
     public function __invoke(array $params = []): ResultInterface;
 
     /**
      * To know the name of the method in the Sellsy api, accompanied with the collection name.
-     *
-     * @return string
      */
     public function __toString(): string;
 }

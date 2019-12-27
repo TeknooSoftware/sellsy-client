@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * Sellsy Client.
  *
  * LICENSE
@@ -39,52 +39,31 @@ use Teknoo\Sellsy\Method\MethodInterface;
  */
 class Collection implements CollectionInterface
 {
-    /**
-     * @var ClientInterface
-     */
-    private $client;
+    private ClientInterface $client;
+
+    private string $name;
 
     /**
-     * @var string
+     * @var array<MethodInterface>
      */
-    private $name;
+    private array $methods = [];
 
-    /**
-     * @var MethodInterface[]
-     */
-    private $methods = [];
-
-    /**
-     * Collection constructor.
-     *
-     * @param ClientInterface $client
-     * @param string          $name
-     */
     public function __construct(ClientInterface $client, string $name)
     {
         $this->client = $client;
         $this->name = $name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getClient(): ClientInterface
     {
         return $this->client;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function registerMethod(MethodInterface $method): CollectionInterface
     {
         $this->methods[\strtolower($method->getName())] = $method;
@@ -92,17 +71,11 @@ class Collection implements CollectionInterface
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function listMethods(): array
     {
         return $this->methods;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function __get(string $methodName): MethodInterface
     {
         $methodName = \strtolower($methodName);

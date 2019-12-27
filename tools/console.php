@@ -1,7 +1,7 @@
 #!/usr/bin/php
 <?php
 
-/**
+/*
  * Sellsy Client.
  *
  * LICENSE

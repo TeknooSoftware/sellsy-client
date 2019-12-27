@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * Sellsy Client.
  *
  * LICENSE
@@ -42,18 +42,13 @@ interface TransportInterface
 {
     /**
      * To initiate a PSR7 Uri instance to configure a request.
-     *
-     * @return UriInterface
      */
     public function createUri(): UriInterface;
 
     /**
      * To initialize a PSR7 request for the Sellsy client.
      *
-     * @param string       $method
      * @param UriInterface $uri
-     *
-     * @return RequestInterface
      */
     public function createRequest(string $method, UriInterface $uri): RequestInterface;
 
@@ -62,17 +57,11 @@ interface TransportInterface
      * Sellsy API accepts only requests with a content type defined to "multipart/form-data".
      *
      * @param array<mixed, mixed> $elements
-     *
-     * @return StreamInterface
      */
     public function createStream(array &$elements): StreamInterface;
 
     /**
      * To execute the PSR7 request, from the Sellsy client.
-     *
-     * @param RequestInterface $request
-     *
-     * @return ResponseInterface
      */
     public function execute(RequestInterface $request): ResponseInterface;
 }

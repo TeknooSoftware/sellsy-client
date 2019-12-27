@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * Sellsy Client.
  *
  * LICENSE
@@ -40,9 +40,6 @@ use Teknoo\Sellsy\Method\Method;
  */
 class Payments implements DefinitionInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function __invoke(ClientInterface $client): CollectionInterface
     {
         $collection = new Collection($client, 'Payments');

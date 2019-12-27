@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * Sellsy Client.
  *
  * LICENSE
@@ -38,36 +38,27 @@ interface ResultInterface extends ImmutableInterface
 {
     /**
      * To know if the method has been correctly executed.
-     *
-     * @return bool
      */
     public function isSuccess(): bool;
 
     /**
      * To know if an error has been occurred during the execution.
-     *
-     * @return bool
      */
     public function isError(): bool;
 
     /**
      * To know the reason of the error.
-     *
-     * @return string
      */
     public function getErrorMessage(): string;
 
     /**
      * To extract the result in original value.
-     *
-     * @return string
      */
     public function getRaw(): string;
 
     /**
      * To get the answer, in an usable format (array).
-     *
-     * @return mixed
+     * @return string|array<mixed, mixed>
      */
     public function getResponse();
 }

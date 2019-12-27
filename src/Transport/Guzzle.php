@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * Sellsy Client.
  *
  * LICENSE
@@ -47,32 +47,19 @@ class Guzzle implements TransportInterface
 {
     /**
      * Guzzle instance.
-     *
-     * @var Client
      */
-    private $guzzleClient;
+    private Client $guzzleClient;
 
-    /**
-     * Guzzle constructor.
-     *
-     * @param Client $guzzleClient
-     */
     public function __construct(Client $guzzleClient)
     {
         $this->guzzleClient = $guzzleClient;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createUri(): UriInterface
     {
         return new Uri();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createRequest(string $method, UriInterface $uri): RequestInterface
     {
         return new Request($method, $uri);
@@ -87,9 +74,6 @@ class Guzzle implements TransportInterface
         return new MultipartStream($elements);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function execute(RequestInterface $request): ResponseInterface
     {
         return $this->guzzleClient->send($request);

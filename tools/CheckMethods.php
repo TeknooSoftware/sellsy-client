@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * Sellsy Client.
  *
  * LICENSE
@@ -50,8 +50,6 @@ class CheckMethods extends Command
 {
     /**
      * To extract from the documentation (downloaded from the Sellsy server) all methods declared into it.
-     *
-     * @param string $websiteUrl
      * @return array<string, string>
      */
     private function extractMethodsName(string $websiteUrl): array
@@ -81,18 +79,22 @@ class CheckMethods extends Command
         $transport = new class implements TransportInterface {
             public function createUri(): UriInterface
             {
+                throw new \RuntimeException('Not implemented');
             }
 
             public function createRequest(string $method, UriInterface $uri): RequestInterface
             {
+                throw new \RuntimeException('Not implemented');
             }
 
             public function createStream(array &$elements): StreamInterface
             {
+                throw new \RuntimeException('Not implemented');
             }
 
             public function execute(RequestInterface $request): ResponseInterface
             {
+                throw new \RuntimeException('Not implemented');
             }
         };
 
@@ -109,10 +111,10 @@ class CheckMethods extends Command
      */
     protected function configure()
     {
-        $this->setName('teknoo:sellsy:checks-methods')
-            ->setDescription('To check if all methods available in the Sellsy API are defined here')
-            ->addArgument('website', InputArgument::REQUIRED, 'The URL of the documentation provided by Sellsy')
-            ->addOption('ignore', 'i', InputOption::VALUE_OPTIONAL, 'Collection to ignore');
+        $this->setName('teknoo:sellsy:checks-methods');
+        $this->setDescription('To check if all methods available in the Sellsy API are defined here');
+        $this->addArgument('website', InputArgument::REQUIRED, 'The URL of the documentation provided by Sellsy');
+        $this->addOption('ignore', 'i', InputOption::VALUE_OPTIONAL, 'Collection to ignore');
     }
 
 
@@ -148,10 +150,7 @@ class CheckMethods extends Command
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $websiteUrl = $input->getArgument('website');
         $output->writeln(\sprintf('Check the documentation at "%s"', $websiteUrl));

@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * Sellsy Client.
  *
  * LICENSE
@@ -23,6 +23,7 @@
 namespace Teknoo\Sellsy\Client;
 
 use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
 use Teknoo\Sellsy\Client\Exception\ErrorException;
@@ -31,7 +32,6 @@ use Teknoo\Sellsy\Method\MethodInterface;
 use Teknoo\Sellsy\Transport\TransportInterface;
 
 /**
- * Class Client
  * Implementation of an HTTP+OAuth client to use the Sellsy API with your credentials to execute some operations on
  * your account.
  *
@@ -49,73 +49,57 @@ class Client implements ClientInterface
      *
      * @var TransportInterface
      */
-    private $transport;
+    private TransportInterface $transport;
 
     /**
      * Sellsy API End point.
      *
      * @var array<string, string>
      */
-    private $apiUrl;
+    private array $apiUrl;
 
     /**
      * OAuth access token (provided by Sellsy).
      *
      * @var string
      */
-    private $oauthAccessToken;
+    private string $oauthAccessToken;
 
     /**
      * OAuth secret (provided by Sellsy).
      *
      * @var string
      */
-    private $oauthAccessTokenSecret;
+    private string $oauthAccessTokenSecret;
 
     /**
      * OAuth consumer token (provided by Sellsy).
      *
      * @var string
      */
-    private $oauthConsumerKey;
+    private string $oauthConsumerKey;
 
     /**
      * OAuth consumer secret  (provided by Sellsy).
      *
      * @var string
      */
-    private $oauthConsumerSecret;
+    private string $oauthConsumerSecret;
 
     /**
      * Var to store the last PSR7 request to facility debugging.
      *
      * @var RequestInterface|null
      */
-    private $lastRequest;
+    private ?RequestInterface $lastRequest = null;
 
     /**
      * Var to store the last PSR7 answer of Sellsy API to facility debugging.
-     *
-     * @var mixed|\stdClass
      */
-    private $lastResponse;
+    private ?ResponseInterface $lastResponse = null;
 
-    /**
-     * @var \DateTime|null
-     */
-    private $now;
+    private ?\DateTimeInterface $now = null;
 
-    /**
-     * Client constructor.
-     *
-     * @param TransportInterface $transport
-     * @param string             $apiUrl
-     * @param string             $accessToken
-     * @param string             $accessTokenSecret
-     * @param string             $consumerKey
-     * @param string             $consumerSecret
-     * @param \DateTime|null     $now
-     */
     public function __construct(
         TransportInterface $transport,
         string $apiUrl = '',
@@ -123,7 +107,7 @@ class Client implements ClientInterface
         string $accessTokenSecret = '',
         string $consumerKey = '',
         string $consumerSecret = '',
-        \DateTime $now = null
+        \DateTimeInterface $now = null
     ) {
         $this->transport = $transport;
         $this->setApiUrl($apiUrl);
@@ -134,9 +118,6 @@ class Client implements ClientInterface
         $this->now = $now;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setApiUrl(string $apiUrl): ClientInterface
     {
         $this->apiUrl = \parse_url($apiUrl);
@@ -144,9 +125,6 @@ class Client implements ClientInterface
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setOAuthAccessToken(string $accessToken): ClientInterface
     {
         $this->oauthAccessToken = $accessToken;
@@ -154,9 +132,6 @@ class Client implements ClientInterface
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setOAuthAccessTokenSecret(string $accessTokenSecret): ClientInterface
     {
         $this->oauthAccessTokenSecret = $accessTokenSecret;
@@ -164,9 +139,6 @@ class Client implements ClientInterface
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setOAuthConsumerKey(string $consumerKey): ClientInterface
     {
         $this->oauthConsumerKey = $consumerKey;
@@ -174,9 +146,6 @@ class Client implements ClientInterface
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setOAuthConsumerSecret(string $consumerSecret): ClientInterface
     {
         $this->oauthConsumerSecret = $consumerSecret;
@@ -186,11 +155,6 @@ class Client implements ClientInterface
 
     /**
      * To get a new PSR7 request from transport instance to be able to dialog with Sellsy API.
-     *
-     * @param string       $method
-     * @param UriInterface $uri
-     *
-     * @return RequestInterface
      */
     private function getNewRequest(string $method, UriInterface $uri): RequestInterface
     {
@@ -199,12 +163,9 @@ class Client implements ClientInterface
 
     /**
      * Transform an the OAuth array configuration to HTTP headers OAuth string.
-     *
-     * @param array<string, string> $oauth
-     *
-     * @return string
+     * @param array<string, mixed> $oauth
      */
-    private function encodeOAuthHeaders(&$oauth)
+    private function encodeOAuthHeaders(array &$oauth): string
     {
         $values = [];
         foreach ($oauth as $key => &$value) {
@@ -216,10 +177,6 @@ class Client implements ClientInterface
 
     /**
      * Internal method to generate HTTP headers to use for the API authentication with OAuth protocol.
-     *
-     * @param RequestInterface $request
-     *
-     * @return RequestInterface
      */
     private function setOAuthHeaders(RequestInterface $request): RequestInterface
     {
@@ -245,9 +202,6 @@ class Client implements ClientInterface
         return $request->withHeader('Expect', '');
     }
 
-    /**
-     * @return UriInterface
-     */
     private function getNewUri(): UriInterface
     {
         return $this->transport->createUri();
@@ -255,8 +209,6 @@ class Client implements ClientInterface
 
     /**
      * To get the PSR7 Uri instance to configure the PSR7 request to be able to dialog with the Sellsy API.
-     *
-     * @return UriInterface
      */
     private function getUri(): UriInterface
     {
@@ -291,12 +243,8 @@ class Client implements ClientInterface
 
     /**
      * To register method's argument in the request for the Sellsy API.
-     *
-     * @param RequestInterface $request
      * @param array<string, string> $requestSettings
-     *
-     * @return RequestInterface
-     */
+     **/
     private function setBodyRequest(RequestInterface $request, array &$requestSettings): RequestInterface
     {
         $multipartBody = [];
@@ -364,10 +312,7 @@ class Client implements ClientInterface
         return $answer;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getLastRequest()
+    public function getLastRequest(): ?RequestInterface
     {
         return $this->lastRequest;
     }
@@ -375,7 +320,7 @@ class Client implements ClientInterface
     /**
      * {@inheritdoc}
      */
-    public function getLastResponse()
+    public function getLastResponse(): ?ResponseInterface
     {
         return $this->lastResponse;
     }

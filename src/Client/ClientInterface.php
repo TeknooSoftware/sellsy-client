@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * Sellsy Client.
  *
  * LICENSE
@@ -42,71 +42,43 @@ interface ClientInterface
 {
     /**
      * Update the api url to use to execute an operation.
-     *
-     * @param string $apiUrl
-     *
-     * @return ClientInterface
      */
     public function setApiUrl(string $apiUrl): ClientInterface;
 
     /**
      * Update the OAuth access token to use to authenticate with your account.
-     *
-     * @param string $accessToken
-     *
-     * @return ClientInterface
      */
     public function setOAuthAccessToken(string $accessToken): ClientInterface;
 
     /**
      * Update the OAuth access secret token to use to authenticate with your account.
-     *
-     * @param string $accessTokenSecret
-     *
-     * @return ClientInterface
      */
     public function setOAuthAccessTokenSecret(string $accessTokenSecret): ClientInterface;
 
     /**
      * Update the OAuth consumer key to use to authenticate with your account.
-     *
-     * @param string $consumerKey
-     *
-     * @return ClientInterface
      */
     public function setOAuthConsumerKey(string $consumerKey): ClientInterface;
 
     /**
      * Update the OAuth consumer secret to use to authenticate with your account.
-     *
-     * @param string $consumerSecret
-     *
-     * @return ClientInterface
      */
     public function setOAuthConsumerSecret(string $consumerSecret): ClientInterface;
 
     /**
      * Get the last PSR7 request sent to the Sellsy server. It's a method to help debug.
-     *
-     * @return RequestInterface|null
      */
-    public function getLastRequest();
+    public function getLastRequest(): ?RequestInterface;
 
     /**
      * Get the last PSR7 response sent by the Sellsy server. It's a method to help debug.
-     *
-     * @return ResponseInterface|null
      */
-    public function getLastResponse();
+    public function getLastResponse(): ?ResponseInterface;
 
     /**
      * To execute a method, referenced by the $method instance on the Sellsy server via it's api, authenticated with
      * your credentials.
-     *
-     * @param MethodInterface $method
      * @param array<string, mixed> $params
-     *
-     * @return ResultInterface
      */
     public function run(MethodInterface $method, array $params = []): ResultInterface;
 }
