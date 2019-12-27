@@ -49,6 +49,6 @@
         }
     },
     "archive": {
-        "exclude": ["demo", "vendor", ".idea"]
+        "exclude": ["docs", "vendor", ".idea", "tests"]
     }
 }
