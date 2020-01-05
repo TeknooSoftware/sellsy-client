@@ -64,8 +64,6 @@ class Sellsy
      */
     private array $collections;
 
-    private bool $parametersChecksEnabled = true;
-
     public function __construct(
         string $apiUrl,
         string $accessToken,
@@ -129,25 +127,6 @@ class Sellsy
         $this->client = $client;
 
         return $this;
-    }
-
-    public function enableParametersChecks(): self
-    {
-        $this->parametersChecksEnabled = true;
-
-        return $this;
-    }
-
-    public function disableParametersChecks(): self
-    {
-        $this->parametersChecksEnabled = true;
-
-        return $this;
-    }
-
-    public function hasParametersCheckingsEnabled(): bool
-    {
-        return $this->parametersChecksEnabled;
     }
 
     /**
