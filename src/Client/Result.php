@@ -38,9 +38,7 @@ class Result implements ResultInterface
 {
     use ImmutableTrait;
 
-    /**
-     * Raw result from the Sellsy API.
-     */
+    // Raw result from the Sellsy API.
     private string $result;
 
     /**
@@ -50,14 +48,10 @@ class Result implements ResultInterface
      */
     private array $decodedResult;
 
-    /**
-     * To know if the method has been correctly executed.
-     */
+    // To know if the method has been correctly executed.
     private bool $isSuccess;
 
-    /**
-     * To know the reason of the error.
-     */
+    // To know the reason of the error.
     private string $errorMessage = '';
 
     public function __construct(string $result)
@@ -105,9 +99,6 @@ class Result implements ResultInterface
         return $this->result;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getResponse()
     {
         if (!isset($this->decodedResult['response'])) {

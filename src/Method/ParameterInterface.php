@@ -20,11 +20,11 @@
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
 
-namespace Teknoo\Sellsy\Client\Exception;
+namespace Teknoo\Sellsy\Method;
+
+use Teknoo\Immutable\ImmutableInterface;;
 
 /**
- * Exception threw when an error has occurred during request to the API.
- *
  * @copyright   Copyright (c) 2009-2019 Richard Déloge (richarddeloge@gmail.com)
  *
  * @link        http://teknoo.software/sellsy-client Project website
@@ -32,6 +32,27 @@ namespace Teknoo\Sellsy\Client\Exception;
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
-class RequestFailureException extends \RuntimeException
+interface ParameterInterface extends ImmutableInterface
 {
+    /**
+     * To know the name of the parameter in the Sellsy API.
+     */
+    public function getName(): string;
+
+    /**
+     * To define types attempted for this parameter
+     * @return array<string|int, string|ParameterInterface>
+     */
+    public function getTypes(): array;
+
+    /**
+     * If this parameter represent an array
+     */
+    public function isArray(): bool;
+
+    /**
+     * Return an array of definitions to pass to filter_var_array
+     * @return array
+     */
+    public function getFilterDefinition(): array;
 }

@@ -44,11 +44,7 @@ use Teknoo\Sellsy\Transport\TransportInterface;
  */
 class Client implements ClientInterface
 {
-    /**
-     * Transport instance to dialog with Sellsy api.
-     *
-     * @var TransportInterface
-     */
+    // Transport instance to dialog with Sellsy api.
     private TransportInterface $transport;
 
     /**
@@ -58,44 +54,22 @@ class Client implements ClientInterface
      */
     private array $apiUrl;
 
-    /**
-     * OAuth access token (provided by Sellsy).
-     *
-     * @var string
-     */
+    // OAuth access token (provided by Sellsy).
     private string $oauthAccessToken;
 
-    /**
-     * OAuth secret (provided by Sellsy).
-     *
-     * @var string
-     */
+    // OAuth secret (provided by Sellsy).
     private string $oauthAccessTokenSecret;
 
-    /**
-     * OAuth consumer token (provided by Sellsy).
-     *
-     * @var string
-     */
+    //OAuth consumer token (provided by Sellsy).
     private string $oauthConsumerKey;
 
-    /**
-     * OAuth consumer secret  (provided by Sellsy).
-     *
-     * @var string
-     */
+    // OAuth consumer secret  (provided by Sellsy).
     private string $oauthConsumerSecret;
 
-    /**
-     * Var to store the last PSR7 request to facility debugging.
-     *
-     * @var RequestInterface|null
-     */
+    // Var to store the last PSR7 request to facility debugging.
     private ?RequestInterface $lastRequest = null;
 
-    /**
-     * Var to store the last PSR7 answer of Sellsy API to facility debugging.
-     */
+    // Var to store the last PSR7 answer of Sellsy API to facility debugging.
     private ?ResponseInterface $lastResponse = null;
 
     private ?\DateTimeInterface $now = null;

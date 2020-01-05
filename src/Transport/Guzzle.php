@@ -66,7 +66,6 @@ class Guzzle implements TransportInterface
     }
 
     /**
-     * {@inheritdoc}
      * @param array<mixed, mixed> $elements
      */
     public function createStream(array &$elements): StreamInterface

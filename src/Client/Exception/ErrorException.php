@@ -23,7 +23,6 @@
 namespace Teknoo\Sellsy\Client\Exception;
 
 /**
- * Class ErrorException
  * Exception threw when the Sellsy API has been returned an error.
  *
  * @copyright   Copyright (c) 2009-2019 Richard Déloge (richarddeloge@gmail.com)

@@ -87,7 +87,6 @@ class Collection implements CollectionInterface
     }
 
     /**
-     * {@inheritdoc}
      * @param array<mixed, mixed> $params
      */
     public function __call(string $methodName, array $params): ResultInterface

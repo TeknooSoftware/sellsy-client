@@ -42,40 +42,29 @@ class Sellsy
 {
     private ?TransportInterface $transport = null;
 
-    /**
-     * Sellsy API End point.
-     */
+    // Sellsy API End point.
     private string $apiUrl;
 
-    /**
-     * OAuth access token (provided by Sellsy).
-     */
+    // OAuth access token (provided by Sellsy).
     private string $oauthAccessToken;
 
-    /**
-     * OAuth secret (provided by Sellsy).
-     */
+    // OAuth secret (provided by Sellsy).
     private string $oauthAccessTokenSecret;
 
-    /**
-     * OAuth consumer token (provided by Sellsy).
-     */
+    // OAuth consumer token (provided by Sellsy).
     private string $oauthConsumerKey;
 
-    /**
-     * OAuth consumer secret  (provided by Sellsy).
-     */
+    // OAuth consumer secret  (provided by Sellsy).
     private string $oauthConsumerSecret;
 
-    /**
-     * @var SellsyClient
-     */
     private ?SellsyClient $client = null;
 
     /**
      * @var array<CollectionInterface>
      */
     private array $collections;
+
+    private bool $parametersChecksEnabled = true;
 
     public function __construct(
         string $apiUrl,
@@ -91,7 +80,7 @@ class Sellsy
         $this->oauthConsumerSecret = $consumerSecret;
     }
 
-    /**
+    /*
      * Return and configure a sellsy transport, on the flow.
      */
     public function getTransport(): TransportInterface
@@ -103,7 +92,7 @@ class Sellsy
         return $this->transport;
     }
 
-    /**
+    /*
      * Return and configure a sellsy client, on the flow.
      */
     public function getClient(): SellsyClient
@@ -122,33 +111,54 @@ class Sellsy
         return $this->client;
     }
 
-    /**
+    /*
      * To define a specific Sellsy transport instance to avoid to create it on the flow.
      */
-    public function setTransport(TransportInterface $transport): Sellsy
+    public function setTransport(TransportInterface $transport): self
     {
         $this->transport = $transport;
 
         return $this;
     }
 
-    /**
+    /*
      * To define a specific Sellsy client instance to avoid to create it on the flow.
      */
-    public function setClient(SellsyClient $client): Sellsy
+    public function setClient(SellsyClient $client): self
     {
         $this->client = $client;
 
         return $this;
     }
 
+    public function enableParametersChecks(): self
+    {
+        $this->parametersChecksEnabled = true;
+
+        return $this;
+    }
+
+    public function disableParametersChecks(): self
+    {
+        $this->parametersChecksEnabled = true;
+
+        return $this;
+    }
+
+    public function hasParametersCheckingsEnabled(): bool
+    {
+        return $this->parametersChecksEnabled;
+    }
+
     /**
      * To return the collection instance, initiated by the definition.
      *
+     * @param class-string<CollectionInterface> $collectionName
      * @param array<mixed, mixed> $arguments
      *
      * @throws \DomainException  if the collection does not exist
      * @throws \RuntimeException if the collection's definition does not implementing the good interface
+     * @throws \ReflectionException
      */
     public function __call(string $collectionName, array $arguments): CollectionInterface
     {
@@ -174,9 +184,7 @@ class Sellsy
             );
         }
 
-        /**
-         * @var callable $definitionInstance
-         */
+        /** @var callable $definitionInstance */
         $definitionInstance = $reflectionClass->newInstance();
         $this->collections[$lowerName] = $definitionInstance($this->getClient());
 

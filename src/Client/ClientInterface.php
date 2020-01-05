@@ -27,7 +27,6 @@ use Psr\Http\Message\ResponseInterface;
 use Teknoo\Sellsy\Method\MethodInterface;
 
 /**
- * Interface ClientInterface
  * Interface to define an HTTP+OAuth client to use the Sellsy API with your credentials to execute some operations on
  * your account.
  *
