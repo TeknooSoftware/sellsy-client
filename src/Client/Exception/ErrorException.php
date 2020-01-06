@@ -12,13 +12,15 @@
  * to richarddeloge@gmail.com so we can send you a copy immediately.
  *
  *
- * @copyright   Copyright (c) 2009-2016 Richard Déloge (richarddeloge@gmail.com)
+ * @copyright   Copyright (c) 2009-2020 Richard Déloge (richarddeloge@gmail.com)
  *
  * @link        http://teknoo.software/sellsy-client Project website
  *
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
+
+declare(strict_types=1);
 
 namespace Teknoo\Sellsy\Client\Exception;
 
@@ -27,25 +29,21 @@ use Teknoo\Sellsy\Client\ResultInterface;
 /**
  * Exception threw when the Sellsy API has been returned an error.
  *
- * @copyright   Copyright (c) 2009-2019 Richard Déloge (richarddeloge@gmail.com)
+ * @copyright   Copyright (c) 2009-2020 Richard Déloge (richarddeloge@gmail.com)
  *
  * @link        http://teknoo.software/sellsy-client Project website
  *
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
-class ErrorException extends \ErrorException
+interface ErrorException extends \Throwable
 {
-    private ResultInterface $result;
+    public function __construct(ResultInterface $result, ?\Throwable $previous = null);
+
+    public function getErrorCode(): string;
 
     /**
-     * ApiAuthenticationException constructor.
-     * @param ResultInterface $result
+     * @return mixed|null
      */
-    public function __construct(ResultInterface $result, \Throwable $previous = null)
-    {
-        $this->result = $result;
-
-        parent::__construct($result->getErrorMessage(), 0, $previous);
-    }
+    public function getMore();
 }

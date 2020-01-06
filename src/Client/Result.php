@@ -12,13 +12,15 @@
  * to richarddeloge@gmail.com so we can send you a copy immediately.
  *
  *
- * @copyright   Copyright (c) 2009-2016 Richard Déloge (richarddeloge@gmail.com)
+ * @copyright   Copyright (c) 2009-2020 Richard Déloge (richarddeloge@gmail.com)
  *
  * @link        http://teknoo.software/sellsy-client Project website
  *
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
+
+declare(strict_types=1);
 
 namespace Teknoo\Sellsy\Client;
 
@@ -28,7 +30,7 @@ use Teknoo\Immutable\ImmutableTrait;
 /**
  * Implementation immutable value object encapsuling result/response about a Sellsy operation.
  *
- * @copyright   Copyright (c) 2009-2019 Richard Déloge (richarddeloge@gmail.com)
+ * @copyright   Copyright (c) 2009-2020 Richard Déloge (richarddeloge@gmail.com)
  *
  * @link        http://teknoo.software/sellsy-client Project website
  *
@@ -129,12 +131,12 @@ class Result implements ResultInterface
 
     public function getResponse()
     {
-        if (isset($this->decoded['error'])) {
-            return $this->decoded['error'];
+        if (!empty($this->decoded['response'])) {
+            return $this->decoded['response'];
         }
 
-        if (isset($this->decoded['response'])) {
-            return $this->decoded['response'];
+        if (!empty($this->decoded['error'])) {
+            return $this->decoded['error'];
         }
 
         throw new \RuntimeException('No response available');
@@ -145,23 +147,33 @@ class Result implements ResultInterface
         if (!empty($this->errorMessage)) {
             return $this->errorMessage;
         }
+
+
     }
 
     public function __get(string $name)
     {
-        if (!isset($this->decoded['response'][$name])) {
-            throw new \InvalidArgumentException("$name does not exist in the response");
-        }
-
-        if (!\is_array($this->decoded['response'][$name])) {
+        if (isset($this->decoded['response'][$name]) && !\is_array($this->decoded['response'][$name])) {
             return $this->decoded['response'][$name];
         }
 
-        return (new Arrayy($this->decoded))[$name];
+        if (isset($this->decoded['error'][$name]) && !\is_array($this->decoded['error'][$name])) {
+            return $this->decoded['error'][$name];
+        }
+
+        if (isset($this->decoded['error'][$name])) {
+            return (new Arrayy($this->decoded['error']))[$name];
+        }
+
+        if (isset($this->decoded['response'][$name])) {
+            return (new Arrayy($this->decoded['response']))[$name];
+        }
+
+        throw new \InvalidArgumentException("$name does not exist in the response");
     }
 
     public function __isset(string $name): bool
     {
-        return isset($this->decoded['response'][$name]);
+        return isset($this->decoded['response'][$name]) || isset($this->decoded['error'][$name]);
     }
 }

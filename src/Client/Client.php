@@ -12,7 +12,7 @@
  * to richarddeloge@gmail.com so we can send you a copy immediately.
  *
  *
- * @copyright   Copyright (c) 2009-2016 Richard Déloge (richarddeloge@gmail.com)
+ * @copyright   Copyright (c) 2009-2020 Richard Déloge (richarddeloge@gmail.com)
  *
  * @link        http://teknoo.software/sellsy-client Project website
  *
@@ -20,13 +20,15 @@
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
 
+declare(strict_types=1);
+
 namespace Teknoo\Sellsy\Client;
 
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
-use Teknoo\Sellsy\Client\Exception\CustomErrorExcetion;
+use Teknoo\Sellsy\Client\Exception\CustomErrorException;
 use Teknoo\Sellsy\Client\Exception\DoInParamMissingException;
 use Teknoo\Sellsy\Client\Exception\DoInWrongFormatException;
 use Teknoo\Sellsy\Client\Exception\ErrorException;
@@ -54,7 +56,7 @@ use Teknoo\Sellsy\Transport\TransportInterface;
  * Implementation of an HTTP+OAuth client to use the Sellsy API with your credentials to execute some operations on
  * your account.
  *
- * @copyright   Copyright (c) 2009-2019 Richard Déloge (richarddeloge@gmail.com)
+ * @copyright   Copyright (c) 2009-2020 Richard Déloge (richarddeloge@gmail.com)
  *
  * @link        http://teknoo.software/sellsy-client Project website
  *
@@ -115,7 +117,7 @@ class Client implements ClientInterface
         'E_LIST_VALUE_DONT_EXIST' => ValueDoesNotInListException::class,
         'E_PAGINATION_MAX' => MaxPaginationReachedException::class,
         'E_UNKNOW' => UnknownException::class,
-        'E_CUSTOM' => CustomErrorExcetion::class,
+        'E_CUSTOM' => CustomErrorException::class,
     ];
 
     public function __construct(
@@ -280,7 +282,7 @@ class Client implements ClientInterface
     /**
      * @throws ErrorException
      */
-    private function parseError(ResultInterface $result)
+    private function parseError(ResultInterface $result): void
     {
         if (isset($this->errorsExceptionMapping[$result->getErrorCode()])) {
             $classException = $this->errorsExceptionMapping[$result->getErrorCode()];
@@ -342,7 +344,7 @@ class Client implements ClientInterface
 
         if ($answer->isError()) {
             //Bad request, error returned by the api, throw an error
-            throw $this->parseError($answer);
+            $this->parseError($answer);
         }
 
         return $answer;

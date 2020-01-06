@@ -34,7 +34,7 @@ namespace Teknoo\Sellsy\Client\Exception;
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
-class IOModeDoInMissingException extends \InvalidArgumentException implements ErrorException
+class CustomErrorException extends \Exception implements ErrorException
 {
     use ErrorExceptionTrait;
 }
