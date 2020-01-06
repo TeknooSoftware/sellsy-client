@@ -22,6 +22,8 @@
 
 namespace Teknoo\Sellsy\Client\Exception;
 
+use Teknoo\Sellsy\Client\ResultInterface;
+
 /**
  * Exception threw when the Sellsy API has been returned an error.
  *
@@ -32,6 +34,18 @@ namespace Teknoo\Sellsy\Client\Exception;
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
-class ErrorException extends \RuntimeException
+class ErrorException extends \ErrorException
 {
+    private ResultInterface $result;
+
+    /**
+     * ApiAuthenticationException constructor.
+     * @param ResultInterface $result
+     */
+    public function __construct(ResultInterface $result, \Throwable $previous = null)
+    {
+        $this->result = $result;
+
+        parent::__construct($result->getErrorMessage(), 0, $previous);
+    }
 }

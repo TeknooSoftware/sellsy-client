@@ -76,6 +76,11 @@ class Collection implements CollectionInterface
         return $this->methods;
     }
 
+    public function __isset(string $methodName): bool
+    {
+        return isset($this->methods[\strtolower($methodName)]);
+    }
+
     public function __get(string $methodName): MethodInterface
     {
         $methodName = \strtolower($methodName);

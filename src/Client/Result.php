@@ -22,6 +22,7 @@
 
 namespace Teknoo\Sellsy\Client;
 
+use Arrayy\Arrayy;
 use Teknoo\Immutable\ImmutableTrait;
 
 /**
@@ -39,44 +40,61 @@ class Result implements ResultInterface
     use ImmutableTrait;
 
     // Raw result from the Sellsy API.
-    private string $result;
+    private string $raw;
 
     /**
-     * Decoded result from Sellsy API.
-     *
      * @var array<string, mixed>
      */
-    private array $decodedResult;
+    private array $decoded;
 
     // To know if the method has been correctly executed.
     private bool $isSuccess;
+
+    // To know the reason of the error.
+    private string $errorCode = '';
 
     // To know the reason of the error.
     private string $errorMessage = '';
 
     public function __construct(string $result)
     {
-        $this->result = $result;
-        $this->decodedResult = \json_decode($result, true);
+        $this->raw = $result;
+        $this->decoded = \json_decode($result, true,  512, JSON_THROW_ON_ERROR);
 
-        //Bad request, error returned by the api, throw an error
-        if (!empty($this->decodedResult['status']) && 'error' == $this->decodedResult['status']) {
-            $this->isSuccess = false;
-            if (!empty($this->decodedResult['error']['message'])) {
-                //Retrieve error message like it's defined in Sellsy API documentation
-                $this->errorMessage = $this->decodedResult['error']['message'];
-            } elseif (\is_string($this->decodedResult['error'])) {
-                //Retrieve error message (sometime, error is not an object...)
-                $this->errorMessage = $this->decodedResult['error'];
-            } else {
-                //Other case, return directly the answer
-                $this->errorMessage = $result;
-            }
-        } else {
-            $this->isSuccess = true;
-        }
+        $this->parseResult();
 
         $this->uniqueConstructorCheck();
+    }
+
+    private function parseResult(): void
+    {
+        if (empty($this->decoded['status']) || 'error' !== $this->decoded['status']) {
+            $this->isSuccess = true;
+
+            return;
+        }
+
+        //Bad request, error returned by the api, throw an error
+        $this->isSuccess = false;
+        if (!empty($this->decoded['error']['message'])) {
+            //Retrieve error message like it's defined in Sellsy API documentation
+            $this->errorCode = (string) ($this->decoded['error']['code'] ?? 'E_UNKNOW');
+            $this->errorMessage = (string) $this->decoded['error']['message'];
+
+            return;
+        }
+
+        if (\is_string($this->decoded['error'])) {
+            //Retrieve error message (sometime, error is not an object...)
+            $this->errorCode = 'E_UNKNOW';
+            $this->errorMessage = (string) $this->decoded['error'];
+
+            return;
+        }
+
+        //Other case, return directly the answer
+        $this->errorCode = 'E_UNKNOW';
+        $this->errorMessage = (string) $this->raw;
     }
 
     public function isSuccess(): bool
@@ -89,6 +107,11 @@ class Result implements ResultInterface
         return !$this->isSuccess;
     }
 
+    public function getErrorCode(): string
+    {
+        return $this->errorCode;
+    }
+
     public function getErrorMessage(): string
     {
         return $this->errorMessage;
@@ -96,19 +119,49 @@ class Result implements ResultInterface
 
     public function getRaw(): string
     {
-        return $this->result;
+        return $this->raw;
+    }
+
+    public function hasResponse(): bool
+    {
+        return isset($this->decoded['error']) || isset($this->decoded['response']);
     }
 
     public function getResponse()
     {
-        if (!isset($this->decodedResult['response'])) {
-            if (isset($this->decodedResult['error'])) {
-                return $this->decodedResult['error'];
-            }
-
-            throw new \RuntimeException('Missing response value');
+        if (isset($this->decoded['error'])) {
+            return $this->decoded['error'];
         }
 
-        return $this->decodedResult['response'];
+        if (isset($this->decoded['response'])) {
+            return $this->decoded['response'];
+        }
+
+        throw new \RuntimeException('No response available');
+    }
+
+    public function __toString(): string
+    {
+        if (!empty($this->errorMessage)) {
+            return $this->errorMessage;
+        }
+    }
+
+    public function __get(string $name)
+    {
+        if (!isset($this->decoded['response'][$name])) {
+            throw new \InvalidArgumentException("$name does not exist in the response");
+        }
+
+        if (!\is_array($this->decoded['response'][$name])) {
+            return $this->decoded['response'][$name];
+        }
+
+        return (new Arrayy($this->decoded))[$name];
+    }
+
+    public function __isset(string $name): bool
+    {
+        return isset($this->decoded['response'][$name]);
     }
 }

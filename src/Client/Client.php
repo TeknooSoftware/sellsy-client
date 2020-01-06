@@ -26,8 +26,27 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
+use Teknoo\Sellsy\Client\Exception\CustomErrorExcetion;
+use Teknoo\Sellsy\Client\Exception\DoInParamMissingException;
+use Teknoo\Sellsy\Client\Exception\DoInWrongFormatException;
 use Teknoo\Sellsy\Client\Exception\ErrorException;
+use Teknoo\Sellsy\Client\Exception\IOModeDoesNotExistException;
+use Teknoo\Sellsy\Client\Exception\IOModeDoInMissingException;
+use Teknoo\Sellsy\Client\Exception\ListDoesNotExistException;
+use Teknoo\Sellsy\Client\Exception\MaxPaginationReachedException;
+use Teknoo\Sellsy\Client\Exception\MethodDoesNotExistException;
+use Teknoo\Sellsy\Client\Exception\NotAllowedException;
+use Teknoo\Sellsy\Client\Exception\ObjectNotEditableException;
+use Teknoo\Sellsy\Client\Exception\ObjectNotLoadableException;
+use Teknoo\Sellsy\Client\Exception\ObjectNotLoadedException;
+use Teknoo\Sellsy\Client\Exception\ParameterInvalidException;
+use Teknoo\Sellsy\Client\Exception\ParameterMissingException;
+use Teknoo\Sellsy\Client\Exception\ParameterRequiredException;
 use Teknoo\Sellsy\Client\Exception\RequestFailureException;
+use Teknoo\Sellsy\Client\Exception\SubscribtionRequiredException;
+use Teknoo\Sellsy\Client\Exception\UnknownException;
+use Teknoo\Sellsy\Client\Exception\UserNotLoggedException;
+use Teknoo\Sellsy\Client\Exception\ValueDoesNotInListException;
 use Teknoo\Sellsy\Method\MethodInterface;
 use Teknoo\Sellsy\Transport\TransportInterface;
 
@@ -44,7 +63,7 @@ use Teknoo\Sellsy\Transport\TransportInterface;
  */
 class Client implements ClientInterface
 {
-    // Transport instance to dialog with Sellsy api.
+    // Transport to dialog with Sellsy api.
     private TransportInterface $transport;
 
     /**
@@ -73,6 +92,31 @@ class Client implements ClientInterface
     private ?ResponseInterface $lastResponse = null;
 
     private ?\DateTimeInterface $now = null;
+
+    /**
+     * @var array<string, class-string<ErrorException>>
+     */
+    private array $errorsExceptionMapping = [
+        'E_USER_NOT_LOGGED' => UserNotLoggedException::class,
+        'E_IO_MODE_DONT_EXIST' => IOModeDoesNotExistException::class,
+        'E_IO_MODE_DO_IN_MISSING' => IOModeDoInMissingException::class,
+        'E_DO_IN_WRONG_FORMAT' => DoInWrongFormatException::class,
+        'E_METHOD_DONT_EXIT' => MethodDoesNotExistException::class,
+        'E_DO_IN_PARAM_MISSING' => DoInParamMissingException::class,
+        'E_PRIV_NOT_ALLOWED' => NotAllowedException::class,
+        'E_SUBSCRIBE_HAVETO' => SubscribtionRequiredException::class,
+        'E_PARAM_MISSING' => ParameterMissingException::class,
+        'E_PARAM_INVALID' => ParameterInvalidException::class,
+        'E_PARAM_REQUIRED' => ParameterRequiredException::class,
+        'E_OBJ_NOT_LOADABLE' => ObjectNotLoadableException::class,
+        'E_OBJ_NOT_EDITABLE' => ObjectNotEditableException::class,
+        'E_OBJ_NOT_LOADED' => ObjectNotLoadedException::class,
+        'E_LIST_DONT_EXIST' => ListDoesNotExistException::class,
+        'E_LIST_VALUE_DONT_EXIST' => ValueDoesNotInListException::class,
+        'E_PAGINATION_MAX' => MaxPaginationReachedException::class,
+        'E_UNKNOW' => UnknownException::class,
+        'E_CUSTOM' => CustomErrorExcetion::class,
+    ];
 
     public function __construct(
         TransportInterface $transport,
@@ -151,6 +195,7 @@ class Client implements ClientInterface
 
     /**
      * Internal method to generate HTTP headers to use for the API authentication with OAuth protocol.
+     * @throws \Throwable
      */
     private function setOAuthHeaders(RequestInterface $request): RequestInterface
     {
@@ -164,7 +209,7 @@ class Client implements ClientInterface
         $oauthParams = [
             'oauth_consumer_key' => $this->oauthConsumerKey,
             'oauth_token' => $this->oauthAccessToken,
-            'oauth_nonce' => \sha1(\microtime(true) . \rand(10000, 99999)),
+            'oauth_nonce' => \sha1(\microtime(true) . \random_int(10000, 99999)),
             'oauth_timestamp' => $now->getTimestamp(),
             'oauth_signature_method' => 'PLAINTEXT',
             'oauth_version' => '1.0',
@@ -233,41 +278,58 @@ class Client implements ClientInterface
     }
 
     /**
+     * @throws ErrorException
+     */
+    private function parseError(ResultInterface $result)
+    {
+        if (isset($this->errorsExceptionMapping[$result->getErrorCode()])) {
+            $classException = $this->errorsExceptionMapping[$result->getErrorCode()];
+            throw new $classException($result);
+        }
+
+        throw new UnknownException($result);
+    }
+
+    /**
      * {@inheritdoc}
      * @param array<string, mixed> $params
+     * @throws RequestFailureException
+     * @throws ErrorException
      */
     public function run(MethodInterface $method, array $params = []): ResultInterface
     {
-        //Arguments for the Sellsy API
-        $this->lastResponse = null;
-        $encodedRequest = [
-            'request' => 1,
-            'io_mode' => 'json',
-            'do_in' => \json_encode([
-                'method' => (string) $method,
-                'params' => $params,
-            ]),
-        ];
-
-        //Configure to contact the api with POST request and return value
-        //Generate client request
-        $request = $this->getNewRequest('POST', $this->getUri());
-
-        $request = $this->setOAuthHeaders($request);
-        $request = $this->setBodyRequest($request, $encodedRequest);
-
-        $this->lastRequest = $request;
-
-        //Execute the request
         try {
+            //Arguments for the Sellsy API
+            $this->lastResponse = null;
+            $encodedRequest = [
+                'request' => 1,
+                'io_mode' => 'json',
+                'do_in' => \json_encode([
+                    'method' => (string) $method,
+                    'params' => $params,
+                    ],
+                    JSON_THROW_ON_ERROR
+                ),
+            ];
+
+            //Configure to contact the api with POST request and return value
+            //Generate client request
+            $request = $this->getNewRequest('POST', $this->getUri());
+
+            $request = $this->setOAuthHeaders($request);
+            $request = $this->setBodyRequest($request, $encodedRequest);
+
+            $this->lastRequest = $request;
+
+            //Execute the request
             $this->lastResponse = $this->transport->execute($request);
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             throw new RequestFailureException($e->getMessage(), $e->getCode(), $e);
         }
 
         $body = $this->lastResponse->getBody();
         if (!$body instanceof StreamInterface) {
-            throw new RequestFailureException('Bad body response');
+            throw new RequestFailureException('Bad body response', 500);
         }
 
         //OAuth issue, throw an exception
@@ -280,7 +342,7 @@ class Client implements ClientInterface
 
         if ($answer->isError()) {
             //Bad request, error returned by the api, throw an error
-            throw new ErrorException($answer->getErrorMessage());
+            throw $this->parseError($answer);
         }
 
         return $answer;
@@ -291,9 +353,6 @@ class Client implements ClientInterface
         return $this->lastRequest;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getLastResponse(): ?ResponseInterface
     {
         return $this->lastResponse;

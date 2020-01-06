@@ -20,12 +20,10 @@
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
 
-namespace Teknoo\Sellsy\Client;
-
-use Teknoo\Immutable\ImmutableInterface;
+namespace Teknoo\Sellsy\Client\Exception;
 
 /**
- * Interface to implement immutable value object encapsuling result/response about a Sellsy operation.
+ * Exception threw when the Sellsy API has been returned an error.
  *
  * @copyright   Copyright (c) 2009-2019 Richard Déloge (richarddeloge@gmail.com)
  *
@@ -34,35 +32,6 @@ use Teknoo\Immutable\ImmutableInterface;
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
-interface ResultInterface extends ImmutableInterface
+class ValueDoesNotInListException extends ErrorException
 {
-    public function __toString(): string;
-
-    /**
-     * @return mixed
-     */
-    public function __get(string $name);
-
-    public function __isset(string $name): bool;
-
-    public function isSuccess(): bool;
-
-    public function isError(): bool;
-
-    public function getErrorCode(): string;
-
-    public function getErrorMessage(): string;
-
-    /**
-     * To extract the result in original value.
-     */
-    public function getRaw(): string;
-
-    public function hasResponse(): bool;
-
-    /**
-     * To get the answer, in an usable format (array).
-     * @return string|array<mixed, mixed>
-     */
-    public function getResponse();
 }

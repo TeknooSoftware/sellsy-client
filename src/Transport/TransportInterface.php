@@ -47,8 +47,6 @@ interface TransportInterface
 
     /**
      * To initialize a PSR7 request for the Sellsy client.
-     *
-     * @param UriInterface $uri
      */
     public function createRequest(string $method, UriInterface $uri): RequestInterface;
 
