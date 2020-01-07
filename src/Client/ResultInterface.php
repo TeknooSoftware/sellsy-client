@@ -38,8 +38,6 @@ use Teknoo\Immutable\ImmutableInterface;
  */
 interface ResultInterface extends ImmutableInterface
 {
-    public function __toString(): string;
-
     /**
      * @return mixed
      */

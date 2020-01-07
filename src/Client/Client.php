@@ -189,7 +189,7 @@ class Client implements ClientInterface
     {
         $values = [];
         foreach ($oauth as $key => &$value) {
-            $values[] = $key . '="' . \rawurlencode($value) . '"';
+            $values[] = $key . '="' . \rawurlencode((string) $value) . '"';
         }
 
         return 'OAuth ' . \implode(', ', $values);
@@ -306,9 +306,10 @@ class Client implements ClientInterface
             $encodedRequest = [
                 'request' => 1,
                 'io_mode' => 'json',
-                'do_in' => \json_encode([
-                    'method' => (string) $method,
-                    'params' => $params,
+                'do_in' => \json_encode(
+                    [
+                        'method' => (string) $method,
+                        'params' => $params,
                     ],
                     JSON_THROW_ON_ERROR
                 ),

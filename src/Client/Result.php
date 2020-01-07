@@ -61,7 +61,7 @@ class Result implements ResultInterface
     public function __construct(string $result)
     {
         $this->raw = $result;
-        $this->decoded = \json_decode($result, true,  512, JSON_THROW_ON_ERROR);
+        $this->decoded = \json_decode($result, true, 512, JSON_THROW_ON_ERROR);
 
         $this->parseResult();
 
@@ -140,15 +140,6 @@ class Result implements ResultInterface
         }
 
         throw new \RuntimeException('No response available');
-    }
-
-    public function __toString(): string
-    {
-        if (!empty($this->errorMessage)) {
-            return $this->errorMessage;
-        }
-
-
     }
 
     public function __get(string $name)
