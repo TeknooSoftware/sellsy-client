@@ -1,9 +1,9 @@
 <?php
-if (!defined('_PS_VERSION_')) {
-	exit;
-}
-
 namespace Teknoo\Sellsy\Client;
+
+use Teknoo\Curl\RequestGenerator;
+use Teknoo\Sellsy\Client\Collection\CollectionGenerator;
+use Teknoo\Sellsy\Client\Collection\CollectionGeneratorInterface;
 
 /**
  * This is the extension of the Sellsy client generator.
@@ -48,7 +48,6 @@ class Webapic_ClientGenerator extends ClientGenerator {
                 $oauthConsumerSecret
             );
         } elseif (empty($requestGenerator)) {
-			exit('foobar');
             //Clone next clients with default request generator and collection generator
             $this->originalClient = new Webapic_Client(
                 new RequestGenerator(),
@@ -58,10 +57,12 @@ class Webapic_ClientGenerator extends ClientGenerator {
                 $oauthAccessTokenSecret,
                 $oauthConsumerKey,
                 $oauthConsumerSecret
-            );
-        } else {
+			);
+
+		} else {
             throw new \InvalidArgumentException('Error, invalid arguments passed to the Sellsy client generator');
         }
     }
 }
+
 

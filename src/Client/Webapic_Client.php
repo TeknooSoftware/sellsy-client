@@ -1,9 +1,11 @@
 <?php
-if (!defined('_PS_VERSION_')) {
-	exit;
-}
-
 namespace Teknoo\Sellsy\Client;
+
+use Teknoo\Curl\RequestGenerator;
+use Teknoo\Sellsy\Client\Collection\CollectionGeneratorInterface;
+use Teknoo\Sellsy\Client\Collection\CollectionInterface;
+use Teknoo\Sellsy\Client\Exception\ErrorException;
+use Teknoo\Sellsy\Client\Exception\RequestFailureException;
 
 /**
  * This is the extension of the Sellsy client.
@@ -21,4 +23,5 @@ class Webapic_Client extends Client {
         return $this->collectionGenerator->getCollection($this, 'Supplier');
     }
 }
+
 
