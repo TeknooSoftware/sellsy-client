@@ -22,6 +22,7 @@
 
 namespace Teknoo\Tests\Sellsy\Transport;
 
+use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
@@ -38,7 +39,7 @@ use Teknoo\Sellsy\Transport\TransportInterface;
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
-abstract class AbstractTransportTest extends \PHPUnit\Framework\TestCase
+abstract class AbstractTransportTest extends TestCase
 {
     /**
      * @return TransportInterface

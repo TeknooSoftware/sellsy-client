@@ -22,6 +22,7 @@
 
 namespace Teknoo\Tests\Sellsy\Client;
 
+use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
@@ -29,6 +30,7 @@ use Psr\Http\Message\UriInterface;
 use Teknoo\Sellsy\Client\ClientInterface;
 use Teknoo\Sellsy\Client\Exception\ErrorException;
 use Teknoo\Sellsy\Client\Exception\RequestFailureException;
+use Teknoo\Sellsy\Client\Exception\UnknownException;
 use Teknoo\Sellsy\Client\ResultInterface;
 use Teknoo\Sellsy\Method\MethodInterface;
 use Teknoo\Sellsy\Transport\TransportInterface;
@@ -43,7 +45,7 @@ use Teknoo\Sellsy\Transport\TransportInterface;
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
-abstract class AbstractClientTest extends \PHPUnit\Framework\TestCase
+abstract class AbstractClientTest extends TestCase
 {
     /**
      * @var string
@@ -367,6 +369,124 @@ abstract class AbstractClientTest extends \PHPUnit\Framework\TestCase
 
         $stream = $this->createMock(StreamInterface::class);
         $stream->expects(self::any())->method('getContents')->willReturn(\json_encode(['status' => 'error', 'error' => 'fooBar']));
+
+        $response = $this->createMock(ResponseInterface::class);
+        $response->expects(self::any())->method('getBody')->willReturn($stream);
+
+        $this->buildTransport()
+            ->expects(self::once())
+            ->method('execute')
+            ->with($this->buildRequest())
+            ->willReturn($response);
+
+        $client = $this->buildClient();
+
+        $client->setApiUrl($uri);
+        $client->setOAuthConsumerKey('consumerKey');
+        $client->setOAuthConsumerSecret('consumerSecret');
+        $client->setOAuthAccessToken('token');
+        $client->setOAuthAccessTokenSecret('tokenSecret');
+        $client->run($method, ['foo' => 'bar']);
+    }
+    public function testRunReturnErrorWithNotManagedCode()
+    {
+        $this->expectException(UnknownException::class);
+        $uri = $this->uriString;
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withScheme')
+            ->with('https')
+            ->willReturnSelf();
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withHost')
+            ->with('foo.bar')
+            ->willReturnSelf();
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withPort')
+            ->with('8080')
+            ->willReturnSelf();
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withPath')
+            ->with('/path/api')
+            ->willReturnSelf();
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withQuery')
+            ->with('method=toCall')
+            ->willReturnSelf();
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withFragment')
+            ->with('archor=true')
+            ->willReturnSelf();
+
+        $now = $this->getDate();
+        $oauth = [
+            'oauth_consumer_key' => 'consumerKey',
+            'oauth_token' => 'token',
+            'oauth_nonce' => \md5($now->getTimestamp() + \rand(0, 1000)),
+            'oauth_timestamp' => $now->getTimestamp(),
+            'oauth_signature_method' => 'PLAINTEXT',
+            'oauth_version' => '1.0',
+            'oauth_signature' => 'consumerSecret&tokenSecret',
+        ];
+
+        $values = [];
+        foreach ($oauth as $key => &$value) {
+            $values[] = $key.'="'.\rawurlencode($value).'"';
+        }
+
+        $this->buildRequest()
+            ->expects(self::exactly(2))
+            ->method('withHeader')
+            ->withConsecutive(
+                ['Authorization'],
+                ['Expect', '']
+            )->willReturnSelf();
+
+        $this->buildTransport()
+            ->expects(self::once())
+            ->method('createStream')
+            ->with([
+                ['name' => 'request', 'contents' => 1],
+                ['name' => 'io_mode', 'contents' => 'json'],
+                ['name' => 'do_in', 'contents' => \json_encode([
+                    'method' => 'collection.method',
+                    'params' => ['foo' => 'bar'],
+                ])],
+            ])
+            ->willReturn($this->buildStream());
+
+        $this->buildRequest()
+            ->expects(self::once())
+            ->method('withBody')
+            ->with($this->buildStream())
+            ->willReturnSelf();
+
+        $method = $this->createMock(MethodInterface::class);
+        $method->expects(self::any())
+            ->method('__toString')
+            ->willReturn('collection.method');
+
+        $stream = $this->createMock(StreamInterface::class);
+        $stream->expects(self::any())->method('getContents')->willReturn(\json_encode(
+            [
+                'status' => 'error',
+                'error' => [
+                    'message' => 'fooBar',
+                    'code' => 'E_NOT_MANAGED',
+                ],
+            ]
+        ));
 
         $response = $this->createMock(ResponseInterface::class);
         $response->expects(self::any())->method('getBody')->willReturn($stream);

@@ -41,31 +41,50 @@ class ResultTest extends AbstractResultTest
 {
     public function buildResultWithSuccess(): ResultInterface
     {
-        return new Result(
-            \json_encode(['status' => 'success', 'response' => ['foo' => 'bar']])
-        );
+        $string = \json_encode(['status' => 'success', 'response' => ['foo' => ['bar' => 'hello'], 'bar' => 'world'], 'error' => null]);
+        return new Result($string);
     }
 
-    public function buildResultWithError(): ResultInterface
+    public function buildResultWithSuccessWithoutReturn(): ResultInterface
     {
-        return new Result(
-            \json_encode(['status' => 'error', 'error' => ['message' => 'fooBar']])
-        );
+        $string = \json_encode(['status' => 'success', 'response' => null, 'error' => null]);
+        return new Result($string);
     }
 
-    public function buildResultWithNoResponse(): ResultInterface
+    public function buildResultWithErrorString(): ResultInterface
     {
-        return new Result(
-            \json_encode(['status' => 'success'])
-        );
+        $string = \json_encode(['status' => 'error', 'error' => 'fooBar']);
+        return new Result($string);
     }
 
-    public function testGetErrorMessageString()
+    public function buildResultWithErrorCodeCustom(): ResultInterface
     {
-        $result = new Result(
-            \json_encode(['status' => 'error', 'error' => 'fooBar'])
-        );
-        self::assertIsString($result->getErrorMessage());
-        self::assertEquals('fooBar', $result->getErrorMessage());
+        $string = \json_encode(['status' => 'error', 'error' => ['message' => 'fooBar', 'more' => ['foo' => 'bar'], 'code' => 'E_CUSTOM']]);
+        return new Result($string);
+    }
+
+    public function buildResultWithErrorIsNotJson(): ResultInterface
+    {
+        $string = 'fooBar';
+        return new Result($string);
+    }
+
+    public function testGet()
+    {
+        $result = $this->buildResultWithSuccess();
+        self::assertEquals('hello', $result->foo->bar);
+        self::assertEquals('world', $result->bar);
+
+        $result = $this->buildResultWithErrorCodeCustom();
+        self::assertEquals('fooBar', $result->message);
+        self::assertEquals('bar', $result->more->foo);
+    }
+
+    public function testGetNotAccessible()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        $result = $this->buildResultWithSuccessWithoutReturn();
+        $result->foo;
     }
 }

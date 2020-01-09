@@ -10,7 +10,7 @@
         bootstrap="tests/bootstrap.php"
         colors="true">
     <testsuites>
-        <testsuite name="UniAltery/sellsy-client Test Suite">
+        <testsuite name="Teknoo Software Sellsy Client Test Suite">
             <directory>tests/Sellsy</directory>
         </testsuite>
     </testsuites>

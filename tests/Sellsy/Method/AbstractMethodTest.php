@@ -22,6 +22,7 @@
 
 namespace Teknoo\Tests\Sellsy\Method;
 
+use PHPUnit\Framework\TestCase;
 use Teknoo\Sellsy\Client\ClientInterface;
 use Teknoo\Sellsy\Client\ResultInterface;
 use Teknoo\Sellsy\Collection\CollectionInterface;
@@ -37,7 +38,7 @@ use Teknoo\Sellsy\Method\MethodInterface;
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
-abstract class AbstractMethodTest extends \PHPUnit\Framework\TestCase
+abstract class AbstractMethodTest extends TestCase
 {
     /**
      * @var ClientInterface

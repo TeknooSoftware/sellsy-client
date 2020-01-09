@@ -22,6 +22,7 @@
 
 namespace Teknoo\Tests\Sellsy\Collection;
 
+use PHPUnit\Framework\TestCase;
 use Teknoo\Sellsy\Client\ClientInterface;
 use Teknoo\Sellsy\Client\ResultInterface;
 use Teknoo\Sellsy\Collection\CollectionInterface;
@@ -37,7 +38,7 @@ use Teknoo\Sellsy\Method\MethodInterface;
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
-abstract class AbstractCollectionTest extends \PHPUnit\Framework\TestCase
+abstract class AbstractCollectionTest extends TestCase
 {
     /**
      * @return CollectionInterface
@@ -105,6 +106,17 @@ abstract class AbstractCollectionTest extends \PHPUnit\Framework\TestCase
 
         $collection = $this->buildCollection();
         $collection->method1;
+    }
+
+    public function testIsset()
+    {
+        $collection = $this->buildCollection();
+        $method1 = $this->createMock(MethodInterface::class);
+        $method1->expects(self::any())->method('getName')->willReturn('method1');
+        $collection->registerMethod($method1);
+
+        self::assertTrue(isset($collection->method1));
+        self::assertFalse(isset($collection->method2));
     }
 
     public function testCall()

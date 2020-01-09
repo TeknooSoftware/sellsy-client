@@ -63,6 +63,8 @@ interface CollectionInterface
      */
     public function listMethods(): array;
 
+    public function __isset(string $methodName): bool;
+
     /**
      * To get the MethodInterface instance, identified by $methodName.
      */

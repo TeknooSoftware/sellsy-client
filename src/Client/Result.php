@@ -58,10 +58,14 @@ class Result implements ResultInterface
     // To know the reason of the error.
     private string $errorMessage = '';
 
-    public function __construct(string $result)
+    public function __construct(string &$result)
     {
         $this->raw = $result;
-        $this->decoded = \json_decode($result, true, 512, JSON_THROW_ON_ERROR);
+        try {
+            $this->decoded = \json_decode($result, true, 512, JSON_THROW_ON_ERROR);
+        } catch (\Throwable $error) {
+            $this->decoded = [];
+        }
 
         $this->parseResult();
 
@@ -70,7 +74,7 @@ class Result implements ResultInterface
 
     private function parseResult(): void
     {
-        if (empty($this->decoded['status']) || 'error' !== $this->decoded['status']) {
+        if (!empty($this->decoded['status']) && 'error' !== $this->decoded['status']) {
             $this->isSuccess = true;
 
             return;
@@ -86,7 +90,7 @@ class Result implements ResultInterface
             return;
         }
 
-        if (\is_string($this->decoded['error'])) {
+        if (isset($this->decoded['error']) && \is_string($this->decoded['error'])) {
             //Retrieve error message (sometime, error is not an object...)
             $this->errorCode = 'E_UNKNOW';
             $this->errorMessage = (string) $this->decoded['error'];
@@ -126,7 +130,7 @@ class Result implements ResultInterface
 
     public function hasResponse(): bool
     {
-        return isset($this->decoded['error']) || isset($this->decoded['response']);
+        return !empty($this->decoded['error']) || !empty($this->decoded['response']);
     }
 
     public function getResponse()
