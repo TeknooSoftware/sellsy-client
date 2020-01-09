@@ -133,6 +133,10 @@ class Result implements ResultInterface
         return !empty($this->decoded['error']) || !empty($this->decoded['response']);
     }
 
+    /**
+     * To get the answer, in an usable format (array).
+     * @return string|array<mixed, mixed>
+     */
     public function getResponse()
     {
         if (!empty($this->decoded['response'])) {
@@ -146,6 +150,9 @@ class Result implements ResultInterface
         throw new \RuntimeException('No response available');
     }
 
+    /**
+     * @return mixed|array<string, mixed>
+     */
     public function __get(string $name)
     {
         if (isset($this->decoded['response'][$name]) && !\is_array($this->decoded['response'][$name])) {

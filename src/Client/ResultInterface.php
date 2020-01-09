@@ -39,7 +39,7 @@ use Teknoo\Immutable\ImmutableInterface;
 interface ResultInterface extends ImmutableInterface
 {
     /**
-     * @return mixed
+     * @return mixed|array<string, mixed>
      */
     public function __get(string $name);
 
