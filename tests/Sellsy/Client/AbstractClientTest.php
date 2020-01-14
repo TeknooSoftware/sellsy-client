@@ -136,36 +136,6 @@ abstract class AbstractClientTest extends TestCase
      */
     abstract public function buildClient(): ClientInterface;
 
-    public function testSetApiUrl()
-    {
-        $client = $this->buildClient();
-        self::assertInstanceOf(ClientInterface::class, $client->setApiUrl('http://foo.bar'));
-    }
-
-    public function testSetOAuthAccessToken()
-    {
-        $client = $this->buildClient();
-        self::assertInstanceOf(ClientInterface::class, $client->setOAuthAccessToken('fooBar'));
-    }
-
-    public function testSetOAuthAccessTokenSecret()
-    {
-        $client = $this->buildClient();
-        self::assertInstanceOf(ClientInterface::class, $client->setOAuthConsumerSecret('fooBar'));
-    }
-
-    public function testSetOAuthConsumerKey()
-    {
-        $client = $this->buildClient();
-        self::assertInstanceOf(ClientInterface::class, $client->setOAuthConsumerKey('fooBar'));
-    }
-
-    public function testSetOAuthConsumerSecret()
-    {
-        $client = $this->buildClient();
-        self::assertInstanceOf(ClientInterface::class, $client->setOAuthConsumerSecret('fooBar'));
-    }
-
     public function testRun()
     {
         $uri = $this->uriString;

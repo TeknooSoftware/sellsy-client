@@ -28,6 +28,7 @@ use Teknoo\Immutable\ImmutableTrait;
 use Teknoo\Sellsy\Collection\CollectionInterface;
 use Teknoo\Sellsy\Client\ResultInterface;
 use Teknoo\Sellsy\Sellsy;
+use Teknoo\Sellsy\Transport\PromiseInterface;
 
 /**
  * Implementation to define entity able to represent an available method in the Sellsy Api/
@@ -49,6 +50,8 @@ class Method implements MethodInterface
 
     private string $name;
 
+    private bool $isAsync = false;
+
     public function __construct(CollectionInterface $collection, string $name)
     {
         $this->collection = $collection;
@@ -69,12 +72,25 @@ class Method implements MethodInterface
         return $this->name;
     }
 
+    public function async(): MethodInterface
+    {
+        $newThis = clone $this;
+        $newThis->isAsync = true;
+
+        return $newThis;
+    }
+
     /**
      * @param array<mixed, mixed> $params
+     * @return ResultInterface|PromiseInterface
      */
-    public function __invoke(array $params = []): ResultInterface
+    public function __invoke(array $params = [])
     {
         $client = $this->collection->getClient();
+
+        if (true === $this->isAsync) {
+            return $client->promise($this, $params);
+        }
 
         return $client->run($this, $params);
     }

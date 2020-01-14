@@ -63,5 +63,5 @@ interface TransportInterface
     /**
      * To execute the PSR7 request, from the Sellsy client.
      */
-    public function execute(RequestInterface $request): ResponseInterface;
+    public function asyncExecute(RequestInterface $request): PromiseInterface;
 }

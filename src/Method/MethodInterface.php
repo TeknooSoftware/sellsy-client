@@ -27,6 +27,7 @@ namespace Teknoo\Sellsy\Method;
 use Teknoo\Immutable\ImmutableInterface;
 use Teknoo\Sellsy\Collection\CollectionInterface;
 use Teknoo\Sellsy\Client\ResultInterface;
+use Teknoo\Sellsy\Transport\PromiseInterface;
 
 /**
  * Interface to define entity able to represent an available method in the Sellsy Api/
@@ -52,12 +53,15 @@ interface MethodInterface extends ImmutableInterface
      */
     public function getName(): string;
 
+    public function async(): MethodInterface;
+
     /**
      * To execute the method on the Sellsy API.
      *
      * @param array<mixed, mixed> $params
+     * @return ResultInterface|PromiseInterface
      */
-    public function __invoke(array $params = []): ResultInterface;
+    public function __invoke(array $params = []);
 
     /**
      * To know the name of the method in the Sellsy api, accompanied with the collection name.

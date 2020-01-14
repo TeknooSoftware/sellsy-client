@@ -27,6 +27,7 @@ namespace Teknoo\Sellsy\Collection;
 use Teknoo\Sellsy\Client\ClientInterface;
 use Teknoo\Sellsy\Client\ResultInterface;
 use Teknoo\Sellsy\Method\MethodInterface;
+use Teknoo\Sellsy\Transport\PromiseInterface;
 
 /**
  * Implementation to define a collection of methods, declared in the sellsy api :
@@ -49,6 +50,8 @@ class Collection implements CollectionInterface
      * @var array<MethodInterface>
      */
     private array $methods = [];
+
+    private bool $isAsync = false;
 
     public function __construct(ClientInterface $client, string $name)
     {
@@ -93,12 +96,26 @@ class Collection implements CollectionInterface
         return $this->methods[$methodName];
     }
 
+    public function async(): CollectionInterface
+    {
+        $this->isAsync = true;
+
+        return $this;
+    }
+
     /**
      * @param array<mixed, mixed> $params
+     * @return ResultInterface|PromiseInterface
      */
-    public function __call(string $methodName, array $params): ResultInterface
+    public function __call(string $methodName, array $params)
     {
         $method = $this->{$methodName};
+
+        if ($this->isAsync) {
+            $method = $method->async();
+
+            $this->isAsync = false;
+        }
 
         return $method(...$params);
     }

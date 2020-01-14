@@ -27,6 +27,7 @@ namespace Teknoo\Sellsy\Client;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Teknoo\Sellsy\Method\MethodInterface;
+use Teknoo\Sellsy\Transport\PromiseInterface;
 
 /**
  * Interface to define an HTTP+OAuth client to use the Sellsy API with your credentials to execute some operations on
@@ -41,31 +42,6 @@ use Teknoo\Sellsy\Method\MethodInterface;
  */
 interface ClientInterface
 {
-    /**
-     * Update the api url to use to execute an operation.
-     */
-    public function setApiUrl(string $apiUrl): ClientInterface;
-
-    /**
-     * Update the OAuth access token to use to authenticate with your account.
-     */
-    public function setOAuthAccessToken(string $accessToken): ClientInterface;
-
-    /**
-     * Update the OAuth access secret token to use to authenticate with your account.
-     */
-    public function setOAuthAccessTokenSecret(string $accessTokenSecret): ClientInterface;
-
-    /**
-     * Update the OAuth consumer key to use to authenticate with your account.
-     */
-    public function setOAuthConsumerKey(string $consumerKey): ClientInterface;
-
-    /**
-     * Update the OAuth consumer secret to use to authenticate with your account.
-     */
-    public function setOAuthConsumerSecret(string $consumerSecret): ClientInterface;
-
     /**
      * Get the last PSR7 request sent to the Sellsy server. It's a method to help debug.
      */
@@ -82,4 +58,11 @@ interface ClientInterface
      * @param array<string, mixed> $params
      */
     public function run(MethodInterface $method, array $params = []): ResultInterface;
+
+    /**
+     * To execute a method, referenced by the $method instance on the Sellsy server via it's api, authenticated with
+     * your credentials.
+     * @param array<string, mixed> $params
+     */
+    public function promise(MethodInterface $method, array $params = []): PromiseInterface;
 }

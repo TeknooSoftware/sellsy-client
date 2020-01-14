@@ -25,13 +25,13 @@ namespace Teknoo\Tests\Sellsy\Transport;
 use GuzzleHttp\Client;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Teknoo\Sellsy\Transport\Guzzle;
+use Teknoo\Sellsy\Transport\Guzzle6;
 use Teknoo\Sellsy\Transport\TransportInterface;
 
 /**
  * Class GuzzleTest.
  *
- * @covers \Teknoo\Sellsy\Transport\Guzzle
+ * @covers \Teknoo\Sellsy\Transport\Guzzle6
  *
  * @copyright   Copyright (c) 2009-2020 Richard Déloge (richarddeloge@gmail.com)
  *
@@ -40,7 +40,7 @@ use Teknoo\Sellsy\Transport\TransportInterface;
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
-class GuzzleTest extends AbstractTransportTest
+class Guzzle6Test extends AbstractTransportTest
 {
     /**
      * @return TransportInterface
@@ -55,6 +55,6 @@ class GuzzleTest extends AbstractTransportTest
             }))
             ->willReturn($this->createMock(ResponseInterface::class));
 
-        return new Guzzle($guzzle);
+        return new Guzzle6($guzzle);
     }
 }

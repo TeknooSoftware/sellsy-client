@@ -45,7 +45,7 @@ use Psr\Http\Message\UriInterface;
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
-class Guzzle implements TransportInterface
+class Guzzle6 implements TransportInterface
 {
     /**
      * Guzzle instance.
@@ -75,8 +75,10 @@ class Guzzle implements TransportInterface
         return new MultipartStream($elements);
     }
 
-    public function execute(RequestInterface $request): ResponseInterface
+    public function asyncExecute(RequestInterface $request): PromiseInterface
     {
-        return $this->guzzleClient->send($request);
+        $guzzlePromise = $this->guzzleClient->sendAsync($request);
+
+        return new Guzzle6Promise($guzzlePromise);
     }
 }

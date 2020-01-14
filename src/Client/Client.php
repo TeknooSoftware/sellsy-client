@@ -50,6 +50,7 @@ use Teknoo\Sellsy\Client\Exception\UnknownException;
 use Teknoo\Sellsy\Client\Exception\UserNotLoggedException;
 use Teknoo\Sellsy\Client\Exception\ValueDoesNotInListException;
 use Teknoo\Sellsy\Method\MethodInterface;
+use Teknoo\Sellsy\Transport\PromiseInterface;
 use Teknoo\Sellsy\Transport\TransportInterface;
 
 /**
@@ -122,61 +123,26 @@ class Client implements ClientInterface
 
     public function __construct(
         TransportInterface $transport,
-        string $apiUrl = '',
-        string $accessToken = '',
-        string $accessTokenSecret = '',
-        string $consumerKey = '',
-        string $consumerSecret = '',
+        string $apiUrl,
+        string $accessToken,
+        string $accessTokenSecret,
+        string $consumerKey,
+        string $consumerSecret,
         \DateTimeInterface $now = null
     ) {
         $this->transport = $transport;
-        $this->setApiUrl($apiUrl);
-        $this->setOAuthAccessToken($accessToken);
-        $this->setOAuthAccessTokenSecret($accessTokenSecret);
-        $this->setOAuthConsumerKey($consumerKey);
-        $this->setOAuthConsumerSecret($consumerSecret);
-        $this->now = $now;
-    }
-
-    public function setApiUrl(string $apiUrl): ClientInterface
-    {
         $this->apiUrl = \parse_url($apiUrl);
-
-        return $this;
-    }
-
-    public function setOAuthAccessToken(string $accessToken): ClientInterface
-    {
         $this->oauthAccessToken = $accessToken;
-
-        return $this;
-    }
-
-    public function setOAuthAccessTokenSecret(string $accessTokenSecret): ClientInterface
-    {
         $this->oauthAccessTokenSecret = $accessTokenSecret;
-
-        return $this;
-    }
-
-    public function setOAuthConsumerKey(string $consumerKey): ClientInterface
-    {
         $this->oauthConsumerKey = $consumerKey;
-
-        return $this;
-    }
-
-    public function setOAuthConsumerSecret(string $consumerSecret): ClientInterface
-    {
         $this->oauthConsumerSecret = $consumerSecret;
-
-        return $this;
+        $this->now = $now;
     }
 
     /**
      * To get a new PSR7 request from transport instance to be able to dialog with Sellsy API.
      */
-    private function getNewRequest(string $method, UriInterface $uri): RequestInterface
+    private function createNewRequest(string $method, UriInterface $uri): RequestInterface
     {
         return $this->transport->createRequest($method, $uri);
     }
@@ -280,6 +246,54 @@ class Client implements ClientInterface
     }
 
     /**
+     * @throws \Throwable
+     */
+    private function prepareRequest(MethodInterface $method, array $params = []): RequestInterface
+    {
+        //Arguments for the Sellsy API
+        $this->lastResponse = null;
+        $encodedRequest = [
+            'request' => 1,
+            'io_mode' => 'json',
+            'do_in' => \json_encode(
+                [
+                    'method' => (string) $method,
+                    'params' => $params,
+                ],
+                JSON_THROW_ON_ERROR
+            ),
+        ];
+
+        //Configure to contact the api with POST request and return value
+        //Generate client request
+        $request = $this->createNewRequest('POST', $this->getUri());
+
+        $request = $this->setOAuthHeaders($request);
+        $request = $this->setBodyRequest($request, $encodedRequest);
+
+        return $request;
+    }
+
+    /**
+     * @param ResponseInterface $response
+     */
+    private function parseResponse(ResponseInterface $response): ResultInterface
+    {
+        $body = $response->getBody();
+        if (!$body instanceof StreamInterface) {
+            throw new RequestFailureException('Bad body response', 500);
+        }
+
+        //OAuth issue, throw an exception
+        $result = (string) $body->getContents();
+        if (false !== \strpos($result, 'oauth_problem')) {
+            throw new RequestFailureException($result);
+        }
+
+        return new Result($result);
+    }
+
+    /**
      * @throws ErrorException
      */
     private function parseError(ResultInterface $result): void
@@ -300,55 +314,51 @@ class Client implements ClientInterface
      */
     public function run(MethodInterface $method, array $params = []): ResultInterface
     {
+        $result = null;
+        $promise = $this->promise($method, $params)->then(function (ResultInterface $promiseResult) use (&$result) {
+            $result = $promiseResult;
+        });
+
+        $promise->wait();
+
+        return $result;
+    }
+
+    /**
+     * {@inheritdoc}
+     * @param array<string, mixed> $params
+     * @throws RequestFailureException
+     * @throws ErrorException
+     */
+    public function promise(MethodInterface $method, array $params = []): PromiseInterface
+    {
         try {
-            //Arguments for the Sellsy API
-            $this->lastResponse = null;
-            $encodedRequest = [
-                'request' => 1,
-                'io_mode' => 'json',
-                'do_in' => \json_encode(
-                    [
-                        'method' => (string) $method,
-                        'params' => $params,
-                    ],
-                    JSON_THROW_ON_ERROR
-                ),
-            ];
-
-            //Configure to contact the api with POST request and return value
-            //Generate client request
-            $request = $this->getNewRequest('POST', $this->getUri());
-
-            $request = $this->setOAuthHeaders($request);
-            $request = $this->setBodyRequest($request, $encodedRequest);
-
-            $this->lastRequest = $request;
+            $this->lastRequest = $request = $this->prepareRequest($method, $params);
 
             //Execute the request
-            $this->lastResponse = $this->transport->execute($request);
+            $promise = $this->transport->asyncExecute($request);
+            $promise = $promise->then(
+                function (ResponseInterface $response) {
+                    $this->lastResponse = $response;
+
+                    $answer = $this->parseResponse($response);
+
+                    if ($answer->isError()) {
+                        //Bad request, error returned by the api, throw an error
+                        $this->parseError($answer);
+                    }
+
+                    return $answer;
+                },
+                function (\Throwable $e) {
+                    throw new RequestFailureException($e->getMessage(), $e->getCode(), $e);
+                }
+            );
+
+            return $promise;
         } catch (\Throwable $e) {
             throw new RequestFailureException($e->getMessage(), $e->getCode(), $e);
         }
-
-        $body = $this->lastResponse->getBody();
-        if (!$body instanceof StreamInterface) {
-            throw new RequestFailureException('Bad body response', 500);
-        }
-
-        //OAuth issue, throw an exception
-        $result = (string) $body->getContents();
-        if (false !== \strpos($result, 'oauth_problem')) {
-            throw new RequestFailureException($result);
-        }
-
-        $answer = new Result($result);
-
-        if ($answer->isError()) {
-            //Bad request, error returned by the api, throw an error
-            $this->parseError($answer);
-        }
-
-        return $answer;
     }
 
     public function getLastRequest(): ?RequestInterface
