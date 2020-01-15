@@ -246,6 +246,7 @@ class Client implements ClientInterface
     }
 
     /**
+     * @param array<string, mixed> $params
      * @throws \Throwable
      */
     private function prepareRequest(MethodInterface $method, array $params = []): RequestInterface

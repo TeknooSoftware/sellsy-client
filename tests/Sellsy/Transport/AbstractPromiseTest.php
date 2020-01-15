@@ -1,0 +1,125 @@
+<?php
+
+/**
+ * Sellsy Client.
+ *
+ * LICENSE
+ *
+ * This source file is subject to the MIT license and the version 3 of the GPL3
+ * license that are bundled with this package in the folder licences
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to richarddeloge@gmail.com so we can send you a copy immediately.
+ *
+ *
+ * @copyright   Copyright (c) 2009-2020 Richard Déloge (richarddeloge@gmail.com)
+ *
+ * @link        http://teknoo.software/sellsy-client Project website
+ *
+ * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
+ * @author      Richard Déloge <richarddeloge@gmail.com>
+ */
+
+namespace Teknoo\Tests\Sellsy\Promise;
+
+use PHPUnit\Framework\TestCase;
+use Teknoo\Sellsy\Transport\PromiseInterface;
+
+/**
+ * Class AbstractPromiseTest.
+ *
+ * @copyright   Copyright (c) 2009-2020 Richard Déloge (richarddeloge@gmail.com)
+ *
+ * @link        http://teknoo.software/sellsy-client Project website
+ *
+ * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
+ * @author      Richard Déloge <richarddeloge@gmail.com>
+ */
+abstract class AbstractPromiseTest extends TestCase
+{
+    abstract public function buildPromise(): PromiseInterface;
+
+    abstract public function buildFulfilledPromise(): PromiseInterface;
+
+    abstract public function buildRejectedPromise(): PromiseInterface;
+
+    public function testThen()
+    {
+        $promise1 = $this->buildPromise();
+        $promise2 = $promise1->then(function () {});
+
+        self::assertInstanceOf(PromiseInterface::class, $promise2);
+        self::assertNotSame($promise1, $promise2);
+    }
+
+    public function testOtherwise()
+    {
+        $promise1 = $this->buildPromise();
+        $promise2 = $promise1->otherwise(function () {});
+
+        self::assertInstanceOf(PromiseInterface::class, $promise2);
+        self::assertNotSame($promise1, $promise2);
+    }
+
+    public function testIsPending()
+    {
+        self::assertTrue($this->buildPromise()->isPending());
+        self::assertFalse($this->buildFulfilledPromise()->isPending());
+        self::assertFalse($this->buildRejectedPromise()->isPending());
+    }
+
+    public function testIsFulfilled()
+    {
+        self::assertFalse($this->buildPromise()->isFulfilled());
+        self::assertTrue($this->buildFulfilledPromise()->isFulfilled());
+        self::assertFalse($this->buildRejectedPromise()->isFulfilled());
+    }
+
+    public function testIsRejected()
+    {
+        self::assertFalse($this->buildPromise()->isRejected());
+        self::assertFalse($this->buildFulfilledPromise()->isRejected());
+        self::assertTrue($this->buildRejectedPromise()->isRejected());
+    }
+
+    public function testResolveOnPendingPromise()
+    {
+        $this->buildPromise()->resolve(123);
+        $this->assertTrue(true); //No return, and no error must be expected
+    }
+
+    public function testResolveOnNotPendingPromise()
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->buildFulfilledPromise()->resolve(123);
+    }
+
+    public function testRejectOnPendingPromise()
+    {
+        $this->buildPromise()->reject(123);
+        $this->assertTrue(true); //No return, and no error must be expected
+    }
+
+    public function testRejectOnNotPendingPromise()
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->buildFulfilledPromise()->reject(123);
+    }
+
+    public function testCancelOnPendingPromise()
+    {
+        $this->buildPromise()->cancel(123);
+        $this->assertTrue(true); //No return, and no error must be expected
+    }
+
+    public function testCancelOnNotPendingPromise()
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->buildFulfilledPromise()->cancel(123);
+    }
+
+    public function testWait()
+    {
+        self::assertEquals('foo', $this->buildFulfilledPromise()->wait());
+    }
+}

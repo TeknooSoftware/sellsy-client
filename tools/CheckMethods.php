@@ -34,6 +34,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Teknoo\Sellsy\Sellsy;
+use Teknoo\Sellsy\Transport\PromiseInterface;
 use Teknoo\Sellsy\Transport\TransportInterface;
 
 /**
@@ -94,7 +95,7 @@ class CheckMethods extends Command
                 throw new \RuntimeException('Not implemented');
             }
 
-            public function execute(RequestInterface $request): ResponseInterface
+            public function asyncExecute(RequestInterface $request): PromiseInterface
             {
                 throw new \RuntimeException('Not implemented');
             }

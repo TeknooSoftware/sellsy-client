@@ -1,0 +1,81 @@
+<?php
+
+/**
+ * Sellsy Client.
+ *
+ * LICENSE
+ *
+ * This source file is subject to the MIT license and the version 3 of the GPL3
+ * license that are bundled with this package in the folder licences
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to richarddeloge@gmail.com so we can send you a copy immediately.
+ *
+ *
+ * @copyright   Copyright (c) 2009-2020 Richard Déloge (richarddeloge@gmail.com)
+ *
+ * @link        http://teknoo.software/sellsy-client Project website
+ *
+ * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
+ * @author      Richard Déloge <richarddeloge@gmail.com>
+ */
+
+namespace Teknoo\Tests\Sellsy\Transport;
+
+use GuzzleHttp\Promise\PromiseInterface as GuzzlePromiseInterface;
+use Teknoo\Sellsy\Transport\Guzzle6Promise;
+use Teknoo\Tests\Sellsy\Promise\AbstractPromiseTest;
+
+/**
+ * Class GuzzleTest.
+ *
+ * @covers \Teknoo\Sellsy\Transport\Guzzle6Promise
+ *
+ * @copyright   Copyright (c) 2009-2020 Richard Déloge (richarddeloge@gmail.com)
+ *
+ * @link        http://teknoo.software/sellsy-client Project website
+ *
+ * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
+ * @author      Richard Déloge <richarddeloge@gmail.com>
+ */
+class Guzzle6PromiseTest extends AbstractPromiseTest
+{
+    public function buildPromise(): \Teknoo\Sellsy\Transport\PromiseInterface
+    {
+        $promise = $this->createMock(GuzzlePromiseInterface::class);
+        $promise->expects(self::any())->method('getState')->willReturn(GuzzlePromiseInterface::PENDING);
+        $promise->expects(self::any())->method('then')->willReturn($this->createMock(GuzzlePromiseInterface::class));
+        $promise->expects(self::any())->method('otherwise')->willReturn($this->createMock(GuzzlePromiseInterface::class));
+        $promise->expects(self::any())->method('wait')->willReturn('foo');
+
+        return new Guzzle6Promise($promise);
+    }
+
+    public function buildFulfilledPromise(): \Teknoo\Sellsy\Transport\PromiseInterface
+    {
+        $promise = $this->createMock(GuzzlePromiseInterface::class);
+        $promise->expects(self::any())->method('getState')->willReturn(GuzzlePromiseInterface::FULFILLED);
+        $promise->expects(self::any())->method('then')->willReturn($this->createMock(GuzzlePromiseInterface::class));
+        $promise->expects(self::any())->method('otherwise')->willReturn($this->createMock(GuzzlePromiseInterface::class));
+        $promise->expects(self::any())->method('resolve')->willThrowException(new \RuntimeException('foo'));
+        $promise->expects(self::any())->method('reject')->willThrowException(new \RuntimeException('foo'));
+        $promise->expects(self::any())->method('cancel')->willThrowException(new \RuntimeException('foo'));
+        $promise->expects(self::any())->method('wait')->willReturn('foo');
+
+        return new Guzzle6Promise($promise);
+    }
+
+    public function buildRejectedPromise(): \Teknoo\Sellsy\Transport\PromiseInterface
+    {
+        $promise = $this->createMock(GuzzlePromiseInterface::class);
+        $promise->expects(self::any())->method('getState')->willReturn(GuzzlePromiseInterface::REJECTED);
+        $promise->expects(self::any())->method('then')->willReturn($this->createMock(GuzzlePromiseInterface::class));
+        $promise->expects(self::any())->method('otherwise')->willReturn($this->createMock(GuzzlePromiseInterface::class));
+        $promise->expects(self::any())->method('resolve')->willThrowException(new \RuntimeException('foo'));
+        $promise->expects(self::any())->method('reject')->willThrowException(new \RuntimeException('foo'));
+        $promise->expects(self::any())->method('cancel')->willThrowException(new \RuntimeException('foo'));
+        $promise->expects(self::any())->method('wait')->willReturn('foo');
+
+        return new Guzzle6Promise($promise);
+    }
+}

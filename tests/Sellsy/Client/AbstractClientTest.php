@@ -240,7 +240,7 @@ abstract class AbstractClientTest extends TestCase
 
         $promise->expects(self::any())->method('wait')->willReturnCallback(
             function () use (&$cb, $response) {
-                if (null === $cb) {
+                if (!\is_callable($cb)) {
                     return null;
                 }
 
@@ -267,6 +267,21 @@ abstract class AbstractClientTest extends TestCase
         $client = $this->prepareTestRun($method);
         self::assertInstanceOf(ResultInterface::class, $client->run($method, ['foo' => 'bar']));
         self::assertInstanceOf(RequestInterface::class, $client->getLastRequest());
+        self::assertInstanceOf(ResponseInterface::class, $client->getLastResponse());
+    }
+
+    public function testPromise()
+    {
+        $method = $this->createMock(MethodInterface::class);
+        $method->expects(self::any())
+            ->method('__toString')
+            ->willReturn('collection.method');
+
+        $client = $this->prepareTestRun($method);
+        self::assertInstanceOf(PromiseInterface::class, $promise = $client->promise($method, ['foo' => 'bar']));
+        self::assertInstanceOf(RequestInterface::class, $client->getLastRequest());
+        self::assertNull($client->getLastResponse());
+        self::assertInstanceOf(ResultInterface::class, $promise->wait());
         self::assertInstanceOf(ResponseInterface::class, $client->getLastResponse());
     }
 
@@ -370,7 +385,7 @@ abstract class AbstractClientTest extends TestCase
 
         $promise->expects(self::any())->method('wait')->willReturnCallback(
             function () use (&$cb, $response) {
-                if (null === $cb) {
+                if (!\is_callable($cb)) {
                     return null;
                 }
 
@@ -397,6 +412,19 @@ abstract class AbstractClientTest extends TestCase
 
         $client = $this->prepareRunReturnError($method);
         $client->run($method, ['foo' => 'bar']);
+    }
+
+    public function testPromiseReturnError()
+    {
+        $this->expectException(ErrorException::class);
+        $method = $this->createMock(MethodInterface::class);
+        $method->expects(self::any())
+            ->method('__toString')
+            ->willReturn('collection.method');
+
+        $client = $this->prepareRunReturnError($method);
+        $promise = $client->promise($method, ['foo' => 'bar']);
+        $promise->wait();
     }
 
     private function prepareRunReturnErrorWithNotManagedCode($method)
@@ -507,7 +535,7 @@ abstract class AbstractClientTest extends TestCase
 
         $promise->expects(self::any())->method('wait')->willReturnCallback(
             function () use (&$cb, $response) {
-                if (null === $cb) {
+                if (!\is_callable($cb)) {
                     return null;
                 }
 
@@ -537,7 +565,23 @@ abstract class AbstractClientTest extends TestCase
         $client->run($method, ['foo' => 'bar']);
     }
 
-    public function prepareRunWithExceptionOnExecute($method)
+
+    public function testPromiseReturnErrorWithNotManagedCode()
+    {
+        $this->expectException(UnknownException::class);
+
+        $method = $this->createMock(MethodInterface::class);
+        $method->expects(self::any())
+            ->method('__toString')
+            ->willReturn('collection.method');
+
+        $client = $this->prepareRunReturnErrorWithNotManagedCode($method);
+        $promise = $client->promise($method, ['foo' => 'bar']);
+
+        $promise->wait();
+    }
+
+    private function prepareRunWithExceptionOnExecute($method)
     {
         $uri = $this->uriString;
 
@@ -642,6 +686,19 @@ abstract class AbstractClientTest extends TestCase
         $client->run($method, ['foo' => 'bar']);
     }
 
+    public function testPromiseWithExceptionOnExecute()
+    {
+        $this->expectException(RequestFailureException::class);
+
+        $method = $this->createMock(MethodInterface::class);
+        $method->expects(self::any())
+            ->method('__toString')
+            ->willReturn('collection.method');
+
+        $client = $this->prepareRunWithExceptionOnExecute($method);
+        $client->promise($method, ['foo' => 'bar']);
+    }
+
     private function privateRunWithNoResponseStream($method)
     {
         $uri = $this->uriString;
@@ -739,7 +796,7 @@ abstract class AbstractClientTest extends TestCase
 
         $promise->expects(self::any())->method('wait')->willReturnCallback(
             function () use (&$cb, $response) {
-                if (null === $cb) {
+                if (!\is_callable($cb)) {
                     return null;
                 }
 
@@ -769,7 +826,22 @@ abstract class AbstractClientTest extends TestCase
         $client->run($method, ['foo' => 'bar']);
     }
 
-    private function prepareRunWithWithOAUthIssue($method)
+    public function testPromiseWithNoResponseStream()
+    {
+        $this->expectException(RequestFailureException::class);
+
+        $method = $this->createMock(MethodInterface::class);
+        $method->expects(self::any())
+            ->method('__toString')
+            ->willReturn('collection.method');
+
+        $client = $this->privateRunWithNoResponseStream($method);
+        $promise = $client->promise($method, ['foo' => 'bar']);
+
+        $promise->wait();
+    }
+
+    private function prepareRunWithOAUthIssue($method)
     {
         $uri = $this->uriString;
 
@@ -869,7 +941,7 @@ abstract class AbstractClientTest extends TestCase
 
         $promise->expects(self::any())->method('wait')->willReturnCallback(
             function () use (&$cb, $response) {
-                if (null === $cb) {
+                if (!\is_callable($cb)) {
                     return null;
                 }
 
@@ -886,7 +958,7 @@ abstract class AbstractClientTest extends TestCase
         return $this->buildClient($uri, 'token', 'tokenSecret', 'consumerKey', 'consumerSecret');
     }
 
-    public function testRunWithWithOAUthIssue()
+    public function testRunWithOAUthIssue()
     {
         $this->expectException(RequestFailureException::class);
 
@@ -895,7 +967,165 @@ abstract class AbstractClientTest extends TestCase
             ->method('__toString')
             ->willReturn('collection.method');
 
-        $client = $this->prepareRunWithWithOAUthIssue($method);
+        $client = $this->prepareRunWithOAUthIssue($method);
         $client->run($method, ['foo' => 'bar']);
+    }
+
+    public function testPromiseWithOAUthIssue()
+    {
+        $this->expectException(RequestFailureException::class);
+        $method = $this->createMock(MethodInterface::class);
+        $method->expects(self::any())
+            ->method('__toString')
+            ->willReturn('collection.method');
+
+        $client = $this->prepareRunWithOAUthIssue($method);
+        $promise = $client->promise($method, ['foo' => 'bar']);
+
+        $promise->wait();
+    }
+
+    private function prepareRunWithOtherNonInterceptedError($method)
+    {
+        $uri = $this->uriString;
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withScheme')
+            ->with('https')
+            ->willReturnSelf();
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withHost')
+            ->with('foo.bar')
+            ->willReturnSelf();
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withPort')
+            ->with('8080')
+            ->willReturnSelf();
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withPath')
+            ->with('/path/api')
+            ->willReturnSelf();
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withQuery')
+            ->with('method=toCall')
+            ->willReturnSelf();
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withFragment')
+            ->with('archor=true')
+            ->willReturnSelf();
+
+        $now = $this->getDate();
+        $oauth = [
+            'oauth_consumer_key' => 'consumerKey',
+            'oauth_token' => 'token',
+            'oauth_nonce' => \md5($now->getTimestamp() + \rand(0, 1000)),
+            'oauth_timestamp' => $now->getTimestamp(),
+            'oauth_signature_method' => 'PLAINTEXT',
+            'oauth_version' => '1.0',
+            'oauth_signature' => 'consumerSecret&tokenSecret',
+        ];
+
+        $values = [];
+        foreach ($oauth as $key => &$value) {
+            $values[] = $key.'="'.\rawurlencode($value).'"';
+        }
+
+        $this->buildRequest()
+            ->expects(self::exactly(2))
+            ->method('withHeader')
+            ->withConsecutive(
+                ['Authorization'],
+                ['Expect', '']
+            )->willReturnSelf();
+
+        $this->buildTransport()
+            ->expects(self::once())
+            ->method('createStream')
+            ->with([
+                ['name' => 'request', 'contents' => 1],
+                ['name' => 'io_mode', 'contents' => 'json'],
+                ['name' => 'do_in', 'contents' => \json_encode([
+                    'method' => 'collection.method',
+                    'params' => ['foo' => 'bar'],
+                ])],
+            ])
+            ->willReturn($this->buildStream());
+
+        $this->buildRequest()
+            ->expects(self::once())
+            ->method('withBody')
+            ->with($this->buildStream())
+            ->willReturnSelf();
+
+        $stream = $this->createMock(StreamInterface::class);
+        $stream->expects(self::any())->method('getContents')->willReturn('oauth_problem=true');
+
+        $response = $this->createMock(ResponseInterface::class);
+        $response->expects(self::any())->method('getBody')->willReturn($stream);
+
+        $cb = null;
+        $promise = $this->createMock(PromiseInterface::class);
+        $promise->expects(self::any())->method('then')->willReturnCallback(
+            function (callable $callback, $errorHandler) use (&$cb, $promise) {
+                $cb = $errorHandler;
+                return $promise;
+            }
+        );
+
+        $promise->expects(self::any())->method('wait')->willReturnCallback(
+            function () use (&$cb, $response) {
+                if (!\is_callable($cb)) {
+                    return null;
+                }
+
+                return $cb(new \Exception('fooBar'));
+            }
+        );
+
+        $this->buildTransport()
+            ->expects(self::once())
+            ->method('asyncExecute')
+            ->with($this->buildRequest())
+            ->willReturn($promise);
+
+        return $this->buildClient($uri, 'token', 'tokenSecret', 'consumerKey', 'consumerSecret');
+    }
+
+    public function testRunWithOtherNonInterceptedError()
+    {
+        $this->expectException(RequestFailureException::class);
+
+        $method = $this->createMock(MethodInterface::class);
+        $method->expects(self::any())
+            ->method('__toString')
+            ->willReturn('collection.method');
+
+        $client = $this->prepareRunWithOAUthIssue($method);
+        $client->run($method, ['foo' => 'bar']);
+    }
+
+    public function testPromiseWithOtherNonInterceptedError()
+    {
+        $this->expectException(RequestFailureException::class);
+        $method = $this->createMock(MethodInterface::class);
+        $method->expects(self::any())
+            ->method('__toString')
+            ->willReturn('collection.method');
+
+        $client = $this->prepareRunWithOtherNonInterceptedError($method);
+        $promise = $client->promise($method, ['foo' => 'bar']);
+
+        $promise->wait();
     }
 }
