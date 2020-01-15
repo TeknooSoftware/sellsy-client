@@ -1,5 +1,23 @@
 #Teknoo Software - Sellsy client library - Change Log
 
+##[3.0.0-beta1] - 2020-01-15
+###Change
+- Most methods have been updated to include type hints where applicable. Please check your extension points to make sure the function signatures are correct.
+_ All files use strict typing. Please make sure to not rely on type coercion.
+- PHP 7.4 is the minimum required
+- Switch to typed properties
+- Remove some PHP useless DockBlocks
+- Replace array_merge by "..." operators
+- Enable PHPStan in QA Tools
+- Update copyright
+
+###Add
+- Improve errors management from returns of API. All errors and exceptions thrown by the API
+  are now mapped to an explicit PHP exception
+- Improve result management: key/values are directly accessible, as object's property from the result object, thanks to voku/arrayy
+- Improve result object, error message is now accessible from dedicated getter.
+- Add Asynchronous requests capabilities
+  
 #[2.0.8] - 2019-12-27
 ###Update
 - Replace PHPMd by PHPStan
