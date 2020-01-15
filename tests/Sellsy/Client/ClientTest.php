@@ -39,18 +39,20 @@ use Teknoo\Sellsy\Client\ClientInterface;
  */
 class ClientTest extends AbstractClientTest
 {
-    /**
-     * @return ClientInterface
-     */
-    public function buildClient(): ClientInterface
-    {
+    public function buildClient(
+        string $uri,
+        string $token,
+        string $tokenSecret,
+        string $consumerKey,
+        string $consumerSecret
+    ): ClientInterface {
         return new Client(
             $this->buildTransport(),
-            $this->uriString,
-            '',
-            '',
-            '',
-            '',
+            $uri,
+            $token,
+            $tokenSecret,
+            $consumerKey,
+            $consumerSecret,
             $this->getDate()
         );
     }

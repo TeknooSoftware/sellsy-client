@@ -33,6 +33,7 @@ use Teknoo\Sellsy\Client\Exception\RequestFailureException;
 use Teknoo\Sellsy\Client\Exception\UnknownException;
 use Teknoo\Sellsy\Client\ResultInterface;
 use Teknoo\Sellsy\Method\MethodInterface;
+use Teknoo\Sellsy\Transport\PromiseInterface;
 use Teknoo\Sellsy\Transport\TransportInterface;
 
 /**
@@ -131,12 +132,15 @@ abstract class AbstractClientTest extends TestCase
         return new \DateTime('2016-12-11 10:09:08');
     }
 
-    /**
-     * @return ClientInterface
-     */
-    abstract public function buildClient(): ClientInterface;
+    abstract public function buildClient(
+        string $uri,
+        string $token,
+        string $tokenSecret,
+        string $consumerKey,
+        string $consumerSecret
+    ): ClientInterface;
 
-    public function testRun()
+    private function prepareTestRun($method)
     {
         $uri = $this->uriString;
 
@@ -218,11 +222,6 @@ abstract class AbstractClientTest extends TestCase
             ->method('withBody')
             ->with($this->buildStream())
             ->willReturnSelf();
-
-        $method = $this->createMock(MethodInterface::class);
-        $method->expects(self::any())
-            ->method('__toString')
-            ->willReturn('collection.method');
 
         $stream = $this->createMock(StreamInterface::class);
         $stream->expects(self::any())->method('getContents')->willReturn(\json_encode(['status' => 'success', 'response' => ['foo' => 'bar']]));
@@ -230,27 +229,49 @@ abstract class AbstractClientTest extends TestCase
         $response = $this->createMock(ResponseInterface::class);
         $response->expects(self::any())->method('getBody')->willReturn($stream);
 
+        $cb = null;
+        $promise = $this->createMock(PromiseInterface::class);
+        $promise->expects(self::any())->method('then')->willReturnCallback(
+            function (callable $callback) use (&$cb, $promise) {
+                $cb = $callback;
+                return $promise;
+            }
+        );
+
+        $promise->expects(self::any())->method('wait')->willReturnCallback(
+            function () use (&$cb, $response) {
+                if (null === $cb) {
+                    return null;
+                }
+
+                return $cb($response);
+            }
+        );
+
         $this->buildTransport()
             ->expects(self::once())
-            ->method('execute')
+            ->method('asyncExecute')
             ->with($this->buildRequest())
-            ->willReturn($response);
+            ->willReturn($promise);
 
-        $client = $this->buildClient();
+        return $this->buildClient($uri, 'token', 'tokenSecret', 'consumerKey', 'consumerSecret');
+    }
 
-        $client->setApiUrl($uri);
-        $client->setOAuthConsumerKey('consumerKey');
-        $client->setOAuthConsumerSecret('consumerSecret');
-        $client->setOAuthAccessToken('token');
-        $client->setOAuthAccessTokenSecret('tokenSecret');
+    public function testRun()
+    {
+        $method = $this->createMock(MethodInterface::class);
+        $method->expects(self::any())
+            ->method('__toString')
+            ->willReturn('collection.method');
+
+        $client = $this->prepareTestRun($method);
         self::assertInstanceOf(ResultInterface::class, $client->run($method, ['foo' => 'bar']));
         self::assertInstanceOf(RequestInterface::class, $client->getLastRequest());
         self::assertInstanceOf(ResponseInterface::class, $client->getLastResponse());
     }
 
-    public function testRunReturnError()
+    private function prepareRunReturnError($method)
     {
-        $this->expectException(ErrorException::class);
         $uri = $this->uriString;
 
         $this->buildUri()
@@ -331,11 +352,6 @@ abstract class AbstractClientTest extends TestCase
             ->method('withBody')
             ->with($this->buildStream())
             ->willReturnSelf();
-
-        $method = $this->createMock(MethodInterface::class);
-        $method->expects(self::any())
-            ->method('__toString')
-            ->willReturn('collection.method');
 
         $stream = $this->createMock(StreamInterface::class);
         $stream->expects(self::any())->method('getContents')->willReturn(\json_encode(['status' => 'error', 'error' => 'fooBar']));
@@ -343,24 +359,48 @@ abstract class AbstractClientTest extends TestCase
         $response = $this->createMock(ResponseInterface::class);
         $response->expects(self::any())->method('getBody')->willReturn($stream);
 
+        $cb = null;
+        $promise = $this->createMock(PromiseInterface::class);
+        $promise->expects(self::any())->method('then')->willReturnCallback(
+            function (callable $callback) use (&$cb, $promise) {
+                $cb = $callback;
+                return $promise;
+            }
+        );
+
+        $promise->expects(self::any())->method('wait')->willReturnCallback(
+            function () use (&$cb, $response) {
+                if (null === $cb) {
+                    return null;
+                }
+
+                return $cb($response);
+            }
+        );
+
         $this->buildTransport()
             ->expects(self::once())
-            ->method('execute')
+            ->method('asyncExecute')
             ->with($this->buildRequest())
-            ->willReturn($response);
+            ->willReturn($promise);
 
-        $client = $this->buildClient();
+        return $this->buildClient($uri, 'token', 'tokenSecret', 'consumerKey', 'consumerSecret');
+    }
 
-        $client->setApiUrl($uri);
-        $client->setOAuthConsumerKey('consumerKey');
-        $client->setOAuthConsumerSecret('consumerSecret');
-        $client->setOAuthAccessToken('token');
-        $client->setOAuthAccessTokenSecret('tokenSecret');
+    public function testRunReturnError()
+    {
+        $this->expectException(ErrorException::class);
+        $method = $this->createMock(MethodInterface::class);
+        $method->expects(self::any())
+            ->method('__toString')
+            ->willReturn('collection.method');
+
+        $client = $this->prepareRunReturnError($method);
         $client->run($method, ['foo' => 'bar']);
     }
-    public function testRunReturnErrorWithNotManagedCode()
+
+    private function prepareRunReturnErrorWithNotManagedCode($method)
     {
-        $this->expectException(UnknownException::class);
         $uri = $this->uriString;
 
         $this->buildUri()
@@ -441,11 +481,6 @@ abstract class AbstractClientTest extends TestCase
             ->method('withBody')
             ->with($this->buildStream())
             ->willReturnSelf();
-
-        $method = $this->createMock(MethodInterface::class);
-        $method->expects(self::any())
-            ->method('__toString')
-            ->willReturn('collection.method');
 
         $stream = $this->createMock(StreamInterface::class);
         $stream->expects(self::any())->method('getContents')->willReturn(\json_encode(
@@ -461,130 +496,154 @@ abstract class AbstractClientTest extends TestCase
         $response = $this->createMock(ResponseInterface::class);
         $response->expects(self::any())->method('getBody')->willReturn($stream);
 
+        $cb = null;
+        $promise = $this->createMock(PromiseInterface::class);
+        $promise->expects(self::any())->method('then')->willReturnCallback(
+            function (callable $callback) use (&$cb, $promise) {
+                $cb = $callback;
+                return $promise;
+            }
+        );
+
+        $promise->expects(self::any())->method('wait')->willReturnCallback(
+            function () use (&$cb, $response) {
+                if (null === $cb) {
+                    return null;
+                }
+
+                return $cb($response);
+            }
+        );
+
         $this->buildTransport()
             ->expects(self::once())
-            ->method('execute')
+            ->method('asyncExecute')
             ->with($this->buildRequest())
-            ->willReturn($response);
+            ->willReturn($promise);
 
-        $client = $this->buildClient();
+        return $this->buildClient($uri, 'token', 'tokenSecret', 'consumerKey', 'consumerSecret');
+    }
 
-        $client->setApiUrl($uri);
-        $client->setOAuthConsumerKey('consumerKey');
-        $client->setOAuthConsumerSecret('consumerSecret');
-        $client->setOAuthAccessToken('token');
-        $client->setOAuthAccessTokenSecret('tokenSecret');
+    public function testRunReturnErrorWithNotManagedCode()
+    {
+        $this->expectException(UnknownException::class);
+
+        $method = $this->createMock(MethodInterface::class);
+        $method->expects(self::any())
+            ->method('__toString')
+            ->willReturn('collection.method');
+
+        $client = $this->prepareRunReturnErrorWithNotManagedCode($method);
         $client->run($method, ['foo' => 'bar']);
+    }
+
+    public function prepareRunWithExceptionOnExecute($method)
+    {
+        $uri = $this->uriString;
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withScheme')
+            ->with('https')
+            ->willReturnSelf();
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withHost')
+            ->with('foo.bar')
+            ->willReturnSelf();
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withPort')
+            ->with('8080')
+            ->willReturnSelf();
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withPath')
+            ->with('/path/api')
+            ->willReturnSelf();
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withQuery')
+            ->with('method=toCall')
+            ->willReturnSelf();
+
+        $this->buildUri()
+            ->expects(self::once())
+            ->method('withFragment')
+            ->with('archor=true')
+            ->willReturnSelf();
+
+        $now = $this->getDate();
+        $oauth = [
+            'oauth_consumer_key' => 'consumerKey',
+            'oauth_token' => 'token',
+            'oauth_nonce' => \md5($now->getTimestamp() + \rand(0, 1000)),
+            'oauth_timestamp' => $now->getTimestamp(),
+            'oauth_signature_method' => 'PLAINTEXT',
+            'oauth_version' => '1.0',
+            'oauth_signature' => 'consumerSecret&tokenSecret',
+        ];
+
+        $values = [];
+        foreach ($oauth as $key => &$value) {
+            $values[] = $key.'="'.\rawurlencode($value).'"';
+        }
+
+        $this->buildRequest()
+            ->expects(self::exactly(2))
+            ->method('withHeader')
+            ->withConsecutive(
+                ['Authorization'],
+                ['Expect', '']
+            )->willReturnSelf();
+
+        $this->buildTransport()
+            ->expects(self::once())
+            ->method('createStream')
+            ->with([
+                ['name' => 'request', 'contents' => 1],
+                ['name' => 'io_mode', 'contents' => 'json'],
+                ['name' => 'do_in', 'contents' => \json_encode([
+                    'method' => 'collection.method',
+                    'params' => ['foo' => 'bar'],
+                ])],
+            ])
+            ->willReturn($this->buildStream());
+
+        $this->buildRequest()
+            ->expects(self::once())
+            ->method('withBody')
+            ->with($this->buildStream())
+            ->willReturnSelf();
+
+        $this->buildTransport()
+            ->expects(self::once())
+            ->method('asyncExecute')
+            ->with($this->buildRequest())
+            ->willThrowException(new \Exception('fooBar'));
+
+        return $this->buildClient($uri, 'token', 'tokenSecret', 'consumerKey', 'consumerSecret');
     }
 
     public function testRunWithExceptionOnExecute()
     {
         $this->expectException(RequestFailureException::class);
-        $uri = $this->uriString;
-
-        $this->buildUri()
-            ->expects(self::once())
-            ->method('withScheme')
-            ->with('https')
-            ->willReturnSelf();
-
-        $this->buildUri()
-            ->expects(self::once())
-            ->method('withHost')
-            ->with('foo.bar')
-            ->willReturnSelf();
-
-        $this->buildUri()
-            ->expects(self::once())
-            ->method('withPort')
-            ->with('8080')
-            ->willReturnSelf();
-
-        $this->buildUri()
-            ->expects(self::once())
-            ->method('withPath')
-            ->with('/path/api')
-            ->willReturnSelf();
-
-        $this->buildUri()
-            ->expects(self::once())
-            ->method('withQuery')
-            ->with('method=toCall')
-            ->willReturnSelf();
-
-        $this->buildUri()
-            ->expects(self::once())
-            ->method('withFragment')
-            ->with('archor=true')
-            ->willReturnSelf();
-
-        $now = $this->getDate();
-        $oauth = [
-            'oauth_consumer_key' => 'consumerKey',
-            'oauth_token' => 'token',
-            'oauth_nonce' => \md5($now->getTimestamp() + \rand(0, 1000)),
-            'oauth_timestamp' => $now->getTimestamp(),
-            'oauth_signature_method' => 'PLAINTEXT',
-            'oauth_version' => '1.0',
-            'oauth_signature' => 'consumerSecret&tokenSecret',
-        ];
-
-        $values = [];
-        foreach ($oauth as $key => &$value) {
-            $values[] = $key.'="'.\rawurlencode($value).'"';
-        }
-
-        $this->buildRequest()
-            ->expects(self::exactly(2))
-            ->method('withHeader')
-            ->withConsecutive(
-                ['Authorization'],
-                ['Expect', '']
-            )->willReturnSelf();
-
-        $this->buildTransport()
-            ->expects(self::once())
-            ->method('createStream')
-            ->with([
-                ['name' => 'request', 'contents' => 1],
-                ['name' => 'io_mode', 'contents' => 'json'],
-                ['name' => 'do_in', 'contents' => \json_encode([
-                    'method' => 'collection.method',
-                    'params' => ['foo' => 'bar'],
-                ])],
-            ])
-            ->willReturn($this->buildStream());
-
-        $this->buildRequest()
-            ->expects(self::once())
-            ->method('withBody')
-            ->with($this->buildStream())
-            ->willReturnSelf();
 
         $method = $this->createMock(MethodInterface::class);
         $method->expects(self::any())
             ->method('__toString')
             ->willReturn('collection.method');
 
-        $this->buildTransport()
-            ->expects(self::once())
-            ->method('execute')
-            ->with($this->buildRequest())
-            ->willThrowException(new \Exception('fooBar'));
-
-        $client = $this->buildClient();
-
-        $client->setApiUrl($uri);
-        $client->setOAuthConsumerKey('consumerKey');
-        $client->setOAuthConsumerSecret('consumerSecret');
-        $client->setOAuthAccessToken('token');
-        $client->setOAuthAccessTokenSecret('tokenSecret');
+        $client = $this->prepareRunWithExceptionOnExecute($method);
         $client->run($method, ['foo' => 'bar']);
     }
 
-    public function testRunWithWithNoResponseStream()
+    private function privateRunWithNoResponseStream($method)
     {
-        $this->expectException(RequestFailureException::class);
         $uri = $this->uriString;
 
         $this->buildUri()
@@ -665,35 +724,53 @@ abstract class AbstractClientTest extends TestCase
             ->method('withBody')
             ->with($this->buildStream())
             ->willReturnSelf();
-
-        $method = $this->createMock(MethodInterface::class);
-        $method->expects(self::any())
-            ->method('__toString')
-            ->willReturn('collection.method');
 
         $response = $this->createMock(ResponseInterface::class);
         $response->expects(self::any())->method('getBody')->willReturn(null);
 
+        $cb = null;
+        $promise = $this->createMock(PromiseInterface::class);
+        $promise->expects(self::any())->method('then')->willReturnCallback(
+            function (callable $callback) use (&$cb, $promise) {
+                $cb = $callback;
+                return $promise;
+            }
+        );
+
+        $promise->expects(self::any())->method('wait')->willReturnCallback(
+            function () use (&$cb, $response) {
+                if (null === $cb) {
+                    return null;
+                }
+
+                return $cb($response);
+            }
+        );
+
         $this->buildTransport()
             ->expects(self::once())
-            ->method('execute')
+            ->method('asyncExecute')
             ->with($this->buildRequest())
-            ->willReturn($response);
+            ->willReturn($promise);
 
-        $client = $this->buildClient();
-
-        $client->setApiUrl($uri);
-        $client->setOAuthConsumerKey('consumerKey');
-        $client->setOAuthConsumerSecret('consumerSecret');
-        $client->setOAuthAccessToken('token');
-        $client->setOAuthAccessTokenSecret('tokenSecret');
-        $client->run($method, ['foo' => 'bar']);
+        return $this->buildClient($uri, 'token', 'tokenSecret', 'consumerKey', 'consumerSecret');
     }
 
-    public function testRunWithWithOAUthIssue()
+    public function testRunWithNoResponseStream()
     {
         $this->expectException(RequestFailureException::class);
 
+        $method = $this->createMock(MethodInterface::class);
+        $method->expects(self::any())
+            ->method('__toString')
+            ->willReturn('collection.method');
+
+        $client = $this->privateRunWithNoResponseStream($method);
+        $client->run($method, ['foo' => 'bar']);
+    }
+
+    private function prepareRunWithWithOAUthIssue($method)
+    {
         $uri = $this->uriString;
 
         $this->buildUri()
@@ -774,11 +851,6 @@ abstract class AbstractClientTest extends TestCase
             ->method('withBody')
             ->with($this->buildStream())
             ->willReturnSelf();
-
-        $method = $this->createMock(MethodInterface::class);
-        $method->expects(self::any())
-            ->method('__toString')
-            ->willReturn('collection.method');
 
         $stream = $this->createMock(StreamInterface::class);
         $stream->expects(self::any())->method('getContents')->willReturn('oauth_problem=true');
@@ -786,19 +858,44 @@ abstract class AbstractClientTest extends TestCase
         $response = $this->createMock(ResponseInterface::class);
         $response->expects(self::any())->method('getBody')->willReturn($stream);
 
+        $cb = null;
+        $promise = $this->createMock(PromiseInterface::class);
+        $promise->expects(self::any())->method('then')->willReturnCallback(
+            function (callable $callback) use (&$cb, $promise) {
+                $cb = $callback;
+                return $promise;
+            }
+        );
+
+        $promise->expects(self::any())->method('wait')->willReturnCallback(
+            function () use (&$cb, $response) {
+                if (null === $cb) {
+                    return null;
+                }
+
+                return $cb($response);
+            }
+        );
+
         $this->buildTransport()
             ->expects(self::once())
-            ->method('execute')
+            ->method('asyncExecute')
             ->with($this->buildRequest())
-            ->willReturn($response);
+            ->willReturn($promise);
 
-        $client = $this->buildClient();
+        return $this->buildClient($uri, 'token', 'tokenSecret', 'consumerKey', 'consumerSecret');
+    }
 
-        $client->setApiUrl($uri);
-        $client->setOAuthConsumerKey('consumerKey');
-        $client->setOAuthConsumerSecret('consumerSecret');
-        $client->setOAuthAccessToken('token');
-        $client->setOAuthAccessTokenSecret('tokenSecret');
+    public function testRunWithWithOAUthIssue()
+    {
+        $this->expectException(RequestFailureException::class);
+
+        $method = $this->createMock(MethodInterface::class);
+        $method->expects(self::any())
+            ->method('__toString')
+            ->willReturn('collection.method');
+
+        $client = $this->prepareRunWithWithOAUthIssue($method);
         $client->run($method, ['foo' => 'bar']);
     }
 }

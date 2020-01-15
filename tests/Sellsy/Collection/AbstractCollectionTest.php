@@ -86,16 +86,42 @@ abstract class AbstractCollectionTest extends TestCase
         );
     }
 
+    public function testAsync()
+    {
+        $collection = $this->buildCollection();
+        self::assertInstanceOf(CollectionInterface::class, $collection->async());
+    }
+
     public function testGet()
     {
         $collection = $this->buildCollection();
         $method1 = $this->createMock(MethodInterface::class);
         $method1->expects(self::any())->method('getName')->willReturn('method1');
+        $method1->expects(self::never())->method('async');
         $collection->registerMethod($method1);
         $method2 = $this->createMock(MethodInterface::class);
         $method2->expects(self::any())->method('getName')->willReturn('method2');
+        $method2->expects(self::never())->method('async');
         $collection->registerMethod($method2);
 
+        self::assertEquals('method1', $collection->method1->getName());
+        self::assertEquals('method2', $collection->method2->getName());
+    }
+
+    public function testGetAsync()
+    {
+        $collection = $this->buildCollection();
+        $method1 = $this->createMock(MethodInterface::class);
+        $method1->expects(self::any())->method('getName')->willReturn('method1');
+        $method1->expects(self::once())->method('async')->willReturn($method1);
+        $collection->registerMethod($method1);
+        $method2 = $this->createMock(MethodInterface::class);
+        $method2->expects(self::any())->method('getName')->willReturn('method2');
+        $method2->expects(self::once())->method('async')->willReturn($method2);
+        $collection->registerMethod($method2);
+
+        self::assertEquals('method1', $collection->async()->method1->getName());
+        self::assertEquals('method2', $collection->async()->method2->getName());
         self::assertEquals('method1', $collection->method1->getName());
         self::assertEquals('method2', $collection->method2->getName());
     }

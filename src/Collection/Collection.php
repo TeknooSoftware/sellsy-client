@@ -93,7 +93,15 @@ class Collection implements CollectionInterface
             throw new \DomainException("Error the method $methodName is not available for this collection");
         }
 
-        return $this->methods[$methodName];
+        $method = $this->methods[$methodName];
+
+        if ($this->isAsync) {
+            $method = $method->async();
+
+            $this->isAsync = false;
+        }
+
+        return $method;
     }
 
     public function async(): CollectionInterface
@@ -110,12 +118,6 @@ class Collection implements CollectionInterface
     public function __call(string $methodName, array $params)
     {
         $method = $this->{$methodName};
-
-        if ($this->isAsync) {
-            $method = $method->async();
-
-            $this->isAsync = false;
-        }
 
         return $method(...$params);
     }

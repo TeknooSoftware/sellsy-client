@@ -27,6 +27,7 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
+use Teknoo\Sellsy\Transport\PromiseInterface;
 use Teknoo\Sellsy\Transport\TransportInterface;
 
 /**
@@ -76,11 +77,11 @@ abstract class AbstractTransportTest extends TestCase
         self::assertInstanceOf(StreamInterface::class, $this->buildTransport()->createStream($request));
     }
 
-    public function testExecute()
+    public function testAsyncExecute()
     {
         self::assertInstanceOf(
-            ResponseInterface::class,
-            $this->buildTransport()->execute($this->createMock(RequestInterface::class))
+            PromiseInterface::class,
+            $this->buildTransport()->asyncExecute($this->createMock(RequestInterface::class))
         );
     }
 }

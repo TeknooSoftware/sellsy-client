@@ -23,6 +23,7 @@
 namespace Teknoo\Tests\Sellsy\Transport;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Promise\PromiseInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Teknoo\Sellsy\Transport\Guzzle6;
@@ -49,11 +50,11 @@ class Guzzle6Test extends AbstractTransportTest
     {
         $guzzle = $this->createMock(Client::class);
         $guzzle->expects(self::any())
-            ->method('send')
+            ->method('sendAsync')
             ->with($this->callback(function ($arg) {
                 return $arg instanceof RequestInterface;
             }))
-            ->willReturn($this->createMock(ResponseInterface::class));
+            ->willReturn($this->createMock(PromiseInterface::class));
 
         return new Guzzle6($guzzle);
     }

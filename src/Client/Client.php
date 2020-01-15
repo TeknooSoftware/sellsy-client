@@ -315,13 +315,9 @@ class Client implements ClientInterface
     public function run(MethodInterface $method, array $params = []): ResultInterface
     {
         $result = null;
-        $promise = $this->promise($method, $params)->then(function (ResultInterface $promiseResult) use (&$result) {
-            $result = $promiseResult;
-        });
+        $promise = $this->promise($method, $params);
 
-        $promise->wait();
-
-        return $result;
+        return $promise->wait();
     }
 
     /**

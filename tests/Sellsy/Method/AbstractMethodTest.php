@@ -27,6 +27,7 @@ use Teknoo\Sellsy\Client\ClientInterface;
 use Teknoo\Sellsy\Client\ResultInterface;
 use Teknoo\Sellsy\Collection\CollectionInterface;
 use Teknoo\Sellsy\Method\MethodInterface;
+use Teknoo\Sellsy\Transport\PromiseInterface;
 
 /**
  * Class AbstractMethodTest.
@@ -85,6 +86,12 @@ abstract class AbstractMethodTest extends TestCase
         self::assertInstanceOf(CollectionInterface::class, $method->getCollection());
     }
 
+    public function testAsync()
+    {
+        $method = $this->buildMethod();
+        self::assertInstanceOf(MethodInterface::class, $method->async());
+    }
+
     public function testGetName()
     {
         $method = $this->buildMethod();
@@ -102,12 +109,38 @@ abstract class AbstractMethodTest extends TestCase
         $response = $this->createMock(ResultInterface::class);
 
         $this->buildClient()
+            ->expects(self::never())
+            ->method('promise');
+
+        $this->buildClient()
             ->expects(self::once())
             ->method('run')
             ->with($method, ['foo' => 'bar'])
             ->willReturn($response);
 
         self::assertInstanceOf(ResultInterface::class, $method(['foo' => 'bar']));
+    }
+
+    public function testInvokeAsync()
+    {
+        /**
+         * @var callable
+         */
+        $method = $this->buildMethod()->async();
+
+        $promise = $this->createMock(PromiseInterface::class);
+
+        $this->buildClient()
+            ->expects(self::never())
+            ->method('run');
+
+        $this->buildClient()
+            ->expects(self::once())
+            ->method('promise')
+            ->with($method, ['foo' => 'bar'])
+            ->willReturn($promise);
+
+        self::assertInstanceOf(PromiseInterface::class, $method(['foo' => 'bar']));
     }
 
     public function testToString()
