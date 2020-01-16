@@ -13,34 +13,56 @@ PHP library to connect your applications to your [Sellsy account](http://sellsy.
 Simple Example
 --------------
 
-      <?php
+        <?php
 
-      use GuzzleHttp\Client;
-      use Teknoo\Sellsy\Transport\Guzzle;
-      use Teknoo\Sellsy\Sellsy;
-
-      include 'vendor/autoload.php';
-
-      //Create the HTTP client
-      $guzzleClient = new Client();
-
-      //Create the transport bridge
-      $transportBridge = new Guzzle($guzzleClient);
-
-      //Create the front object
-      $sellsy = new Sellsy(
-          'https://apifeed.sellsy.com/0/',
-          'User Token',
-          'User Secret',
-          'Consumer Token',
-          'Consumer Secret'
-      );
-
-      $sellsy->setTransport($transportBridge);
-
-      //Example of request, follow the API documentation of Sellsy API.
-      print $sellsy->Infos()->getInfos()->getResponse()['consumerdatas']['id'].PHP_EOL;
-      print $sellsy->AccountPrefs()->getCorpInfos()->getResponse()['email'].PHP_EOL;
+        use GuzzleHttp\Client;
+        use Teknoo\Sellsy\Transport\Guzzle6;
+        use Teknoo\Sellsy\Sellsy;
+        
+        include 'vendor/autoload.php';
+        
+        //Create the HTTP client
+        $guzzleClient = new Client();
+        
+        //Create the transport bridge
+        $transportBridge = new Guzzle6($guzzleClient);
+        
+        //Create the front object
+        $sellsy = new Sellsy(
+            'https://apifeed.sellsy.com/0/',
+            $accessToken,
+            $accessTokenSecret,
+            $consumerKey,
+            $consumerSecret
+        );
+        
+        $sellsy->setTransport($transportBridge);
+        
+        //Example of request, follow the API documentation of Sellsy API.
+        print $sellsy->Infos()->getInfos()->getResponse()['consumerdatas']['id'];
+        //Show your ConsumerDatas id, like 9001
+        
+        print $sellsy->Infos()->getInfos()->consumerdatas->id;
+        //Show again your ConsumerDatas id, like 9001
+        
+        $sellsy->Infos()->async()->getInfos()->then(function (\Teknoo\Sellsy\Client\ResultInterface $result) {
+            print $result->consumerdatas->id.PHP_EOL;
+        })->wait();
+        //Show again your ConsumerDatas id, like 9001
+        
+        print $sellsy->AccountPrefs()->getCorpInfos()->getResponse()['email'];
+        //Show your email, like contact@teknoo.software
+        
+        print $sellsy->AccountPrefs()->getCorpInfos()->email;
+        //Show your email, like contact@teknoo.software
+        
+        $sellsy->AccountPrefs()->async()->getCorpInfos()->then(function (\Teknoo\Sellsy\Client\ResultInterface $result) {
+            print $result->email.PHP_EOL;
+        })->wait();
+        //Show your email, like contact@teknoo.software
+        
+        $sellsy->AccountDatas()->deleteTaxe();
+        //Thrown an exception : Teknoo\Sellsy\Client\Exception\ParameterMissingException: id is missing
 
 How-to
 ------
