@@ -1,7 +1,11 @@
 Teknoo Software - Sellsy client
 ==========================
 
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/e053f347-f92a-47d9-b8b3-9f415d407889/mini.png)](https://insight.sensiolabs.com/projects/e053f347-f92a-47d9-b8b3-9f415d407889) [![Build Status](https://travis-ci.org/TeknooSoftware/sellsy-client.svg?branch=master)](https://travis-ci.org/TeknooSoftware/sellsy-client)
+[![Build Status](https://travis-ci.com/TeknooSoftware/sellsy-client.svg?branch=master)](https://travis-ci.com/TeknooSoftware/sellsy-client)
+[![Latest Stable Version](https://poser.pugx.org/teknoo/sellsy-client/v/stable)](https://packagist.org/packages/teknoo/sellsy-client)
+[![Total Downloads](https://poser.pugx.org/teknoo/sellsy-client/downloads)](https://packagist.org/packages/teknoo/sellsy-client)
+[![License](https://poser.pugx.org/teknoo/sellsy-client/license)](https://packagist.org/packages/teknoo/sellsy-client)
+[![PHPStan](https://img.shields.io/badge/PHPStan-enabled-brightgreen.svg?style=flat)](https://github.com/phpstan/phpstan)
 
 PHP library to connect your applications to your [Sellsy account](http://sellsy.com/) account using the 
 [Sellsy API](http://api.sellsy.com/) and build your websites and your platforms on the Sellsy technology.
