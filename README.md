@@ -65,9 +65,30 @@ To use the embedded Guzzle transport
 
 This library requires :
 
-    * PHP 7+
+    * PHP 7.4+
+    * A PHP autoloader (Composer is recommended)
+    * Teknoo/Immutable.
     * A PSR-7 implementation
 
+News from Teknoo Sellsy Client 3.0
+----------------------------------
+
+This library requires PHP 7.4 or newer. Some change causes bc breaks :
+
+- PHP 7.4 is the minimum required
+- Improve errors management from returns of API. All errors and exceptions thrown by the API
+  are now mapped to an explicit PHP exception
+- Improve result management: key/values are directly accessible, as object's property from the result object, thanks to voku/arrayy
+- Improve result object, error message is now accessible from dedicated getter.
+- Add Asynchronous requests capabilities
+- Switch to typed properties
+- Remove some PHP useless DockBlocks
+- Replace array_merge by "..." operators
+- Most methods have been updated to include type hints where applicable. Please check your extension points to make sure the function signatures are correct.
+_ All files use strict typing. Please make sure to not rely on type coercion.
+- Switch to PHPStan in QA Tools and disable PHPMd
+  
+  
 Credits
 -------
 Richard Déloge - <richarddeloge@gmail.com> - Lead developer.
