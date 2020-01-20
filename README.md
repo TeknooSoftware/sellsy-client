@@ -3,6 +3,7 @@ Teknoo Software - Sellsy client
 
 [![Build Status](https://travis-ci.com/TeknooSoftware/sellsy-client.svg?branch=master)](https://travis-ci.com/TeknooSoftware/sellsy-client)
 [![Latest Stable Version](https://poser.pugx.org/teknoo/sellsy-client/v/stable)](https://packagist.org/packages/teknoo/sellsy-client)
+[![Latest Unstable Version](https://poser.pugx.org/teknoo/sellsy-client/v/unstable)](https://packagist.org/packages/teknoo/sellsy-client)
 [![Total Downloads](https://poser.pugx.org/teknoo/sellsy-client/downloads)](https://packagist.org/packages/teknoo/sellsy-client)
 [![License](https://poser.pugx.org/teknoo/sellsy-client/license)](https://packagist.org/packages/teknoo/sellsy-client)
 [![PHPStan](https://img.shields.io/badge/PHPStan-enabled-brightgreen.svg?style=flat)](https://github.com/phpstan/phpstan)
