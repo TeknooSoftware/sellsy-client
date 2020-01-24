@@ -82,30 +82,6 @@ abstract class AbstractPromiseTest extends TestCase
         self::assertTrue($this->buildRejectedPromise()->isRejected());
     }
 
-    public function testResolveOnPendingPromise()
-    {
-        $this->buildPromise()->resolve(123);
-        $this->assertTrue(true); //No return, and no error must be expected
-    }
-
-    public function testResolveOnNotPendingPromise()
-    {
-        $this->expectException(\RuntimeException::class);
-        $this->buildFulfilledPromise()->resolve(123);
-    }
-
-    public function testRejectOnPendingPromise()
-    {
-        $this->buildPromise()->reject(123);
-        $this->assertTrue(true); //No return, and no error must be expected
-    }
-
-    public function testRejectOnNotPendingPromise()
-    {
-        $this->expectException(\RuntimeException::class);
-        $this->buildFulfilledPromise()->reject(123);
-    }
-
     public function testCancelOnPendingPromise()
     {
         $this->buildPromise()->cancel(123);

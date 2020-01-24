@@ -24,9 +24,12 @@ declare(strict_types=1);
 
 namespace Teknoo\Sellsy\Transport;
 
+use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\StreamInterface;
+use Psr\Http\Message\UriFactoryInterface;
 use Psr\Http\Message\UriInterface;
 
 /**
@@ -40,18 +43,8 @@ use Psr\Http\Message\UriInterface;
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
-interface TransportInterface
+interface TransportInterface extends RequestFactoryInterface, UriFactoryInterface
 {
-    /**
-     * To initiate a PSR7 Uri instance to configure a request.
-     */
-    public function createUri(): UriInterface;
-
-    /**
-     * To initialize a PSR7 request for the Sellsy client.
-     */
-    public function createRequest(string $method, UriInterface $uri): RequestInterface;
-
     /**
      * To initialize a PSR7 Stream, compatible with the content type multipart/form-data, needed to execute the request,
      * Sellsy API accepts only requests with a content type defined to "multipart/form-data".

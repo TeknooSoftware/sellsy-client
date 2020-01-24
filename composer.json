@@ -23,6 +23,8 @@
         "php": "~7.4",
         "ext-json": "*",
         "psr/http-message":"^1.0.0",
+        "psr/http-factory":"^1.0.0",
+        "php-http/async-client-implementation": "^1.0",
         "teknoo/immutable": "~2.0.0",
         "voku/arrayy": "^7.1"
     },

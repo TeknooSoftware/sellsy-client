@@ -64,22 +64,6 @@ class Guzzle6Promise implements PromiseInterface
         return GuzzlePromiseInterface::REJECTED === $this->promise->getState();
     }
 
-    /**
-     * @param mixed $value
-     */
-    public function resolve($value): void
-    {
-        $this->promise->resolve($value);
-    }
-
-    /**
-     * @param mixed $reason
-     */
-    public function reject($reason): void
-    {
-        $this->promise->reject($reason);
-    }
-
     public function cancel(): void
     {
         $this->promise->cancel();

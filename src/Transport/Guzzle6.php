@@ -57,12 +57,12 @@ class Guzzle6 implements TransportInterface
         $this->guzzleClient = $guzzleClient;
     }
 
-    public function createUri(): UriInterface
+    public function createUri(string $uri = ''): UriInterface
     {
-        return new Uri();
+        return new Uri($uri);
     }
 
-    public function createRequest(string $method, UriInterface $uri): RequestInterface
+    public function createRequest(string $method, $uri): RequestInterface
     {
         return new Request($method, $uri);
     }

@@ -59,24 +59,6 @@ interface PromiseInterface
     public function isRejected(): bool;
 
     /**
-     * Resolve the promise with the given value.
-     *
-     * @param mixed $value
-     *
-     * @throws \RuntimeException if the promise is already resolved.
-     */
-    public function resolve($value): void;
-
-    /**
-     * Reject the promise with the given reason.
-     *
-     * @param mixed $reason
-     *
-     * @throws \RuntimeException if the promise is already resolved.
-     */
-    public function reject($reason): void;
-
-    /**
      * Cancels the promise if possible.
      */
     public function cancel(): void;
