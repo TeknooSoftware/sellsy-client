@@ -26,11 +26,8 @@ namespace Teknoo\Sellsy\Transport;
 
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriFactoryInterface;
-use Psr\Http\Message\UriInterface;
 
 /**
  * Interface to define a transporter, able to initialize a PSR7 request for the client and send it to the Sellsy API
@@ -51,7 +48,7 @@ interface TransportInterface extends RequestFactoryInterface, UriFactoryInterfac
      *
      * @param array<mixed, mixed> $elements
      */
-    public function createStream(array &$elements): StreamInterface;
+    public function createStream(RequestInterface $request, array &$elements): StreamInterface;
 
     /**
      * To execute the PSR7 request, from the Sellsy client.

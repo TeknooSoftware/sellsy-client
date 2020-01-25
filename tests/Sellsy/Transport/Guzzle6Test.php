@@ -30,8 +30,6 @@ use Teknoo\Sellsy\Transport\Guzzle6;
 use Teknoo\Sellsy\Transport\TransportInterface;
 
 /**
- * Class GuzzleTest.
- *
  * @covers \Teknoo\Sellsy\Transport\Guzzle6
  *
  * @copyright   Copyright (c) 2009-2020 Richard Déloge (richarddeloge@gmail.com)

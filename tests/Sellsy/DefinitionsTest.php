@@ -22,17 +22,11 @@
 
 namespace Teknoo\Tests\Sellsy;
 
-use GuzzleHttp\Client;
 use Teknoo\Sellsy\Client\ClientInterface;
 use Teknoo\Sellsy\Collection\CollectionInterface;
 use Teknoo\Sellsy\Collection\DefinitionInterface;
-use Teknoo\Sellsy\Sellsy;
-use Teknoo\Sellsy\Transport\TransportInterface;
-use Teknoo\Sellsy\Client\Client as SellsyClient;
 
 /**
- * Class DefinitionsTest.
- *
  * @copyright   Copyright (c) 2009-2020 Richard Déloge (richarddeloge@gmail.com)
  *
  * @link        http://teknoo.software/sellsy-client Project website

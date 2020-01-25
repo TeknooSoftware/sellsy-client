@@ -59,11 +59,6 @@ interface PromiseInterface
     public function isRejected(): bool;
 
     /**
-     * Cancels the promise if possible.
-     */
-    public function cancel(): void;
-
-    /**
      * Waits until the promise completes if possible.
      *
      * Pass $unwrap as true to unwrap the result of the promise, either

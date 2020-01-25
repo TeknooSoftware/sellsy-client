@@ -24,18 +24,16 @@ declare(strict_types=1);
 
 namespace Teknoo\Sellsy\Transport;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\MultipartStream;
-use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\Psr7\Uri;
+use Http\Client\HttpAsyncClient;
+use Http\Message\MultipartStream\MultipartStreamBuilder;
+use Http\Message\RequestFactory;
+use Http\Message\StreamFactory;
+use Http\Message\UriFactory;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
 
-/**
- * Define a transporter, using Guzzle, able to initialize a PSR7 request for the client and send it to the Sellsy API
- * and return PSR7 response.
- *
+/** *
  * @copyright   Copyright (c) 2009-2020 Richard Déloge (richarddeloge@gmail.com)
  *
  * @link        http://teknoo.software/sellsy-client Project website
@@ -43,26 +41,39 @@ use Psr\Http\Message\UriInterface;
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
-class Guzzle6 implements TransportInterface
+class HttpPlug implements TransportInterface
 {
-    /**
-     * Guzzle instance.
-     */
-    private Client $guzzleClient;
+    private HttpAsyncClient $client;
 
-    public function __construct(Client $guzzleClient)
-    {
-        $this->guzzleClient = $guzzleClient;
+    private UriFactory $uriFactory;
+
+    private RequestFactory $requestFactory;
+
+    private StreamFactory $streamFactory;
+
+    public function __construct(
+        HttpAsyncClient $client,
+        UriFactory $uriFactory,
+        RequestFactory $requestFactory,
+        StreamFactory $streamFactory
+    ) {
+        $this->client = $client;
+        $this->uriFactory = $uriFactory;
+        $this->requestFactory = $requestFactory;
+        $this->streamFactory = $streamFactory;
     }
 
     public function createUri(string $uri = ''): UriInterface
     {
-        return new Uri($uri);
+        return $this->uriFactory->createUri($uri);
     }
 
     public function createRequest(string $method, $uri): RequestInterface
     {
-        return new Request($method, $uri);
+        $request = $this->requestFactory->createRequest($method, $uri);
+        $boundary = uniqid('', true);
+
+        return $request->withHeader('Content-Type', 'multipart/form-data; boundary="' . $boundary . '"');
     }
 
     /**
@@ -70,13 +81,23 @@ class Guzzle6 implements TransportInterface
      */
     public function createStream(RequestInterface $request, array &$elements): StreamInterface
     {
-        return new MultipartStream($elements);
+        $builder = new MultipartStreamBuilder($this->streamFactory);
+        foreach ($elements as &$value) {
+            $builder->addResource($value['name'], $value['contents']);
+        }
+
+        $contentType = $request->getHeader('Content-Type');
+        $boundary = [];
+        \preg_match('#multipart/form-data; boundary="([^"]+)"#iS', $contentType[0], $boundary);
+        $builder->setBoundary($boundary[1]);
+
+        return $builder->build();
     }
 
     public function asyncExecute(RequestInterface $request): PromiseInterface
     {
-        $guzzlePromise = $this->guzzleClient->sendAsync($request);
+        $promise = $this->client->sendAsyncRequest($request);
 
-        return new Guzzle6Promise($guzzlePromise);
+        return new HttpPlugPromise($promise);
     }
 }

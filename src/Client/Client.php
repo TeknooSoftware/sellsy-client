@@ -242,7 +242,7 @@ class Client implements ClientInterface
             ];
         }
 
-        return $request->withBody($this->transport->createStream($multipartBody));
+        return $request->withBody($this->transport->createStream($request, $multipartBody));
     }
 
     /**

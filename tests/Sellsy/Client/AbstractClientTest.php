@@ -196,8 +196,8 @@ abstract class AbstractClientTest extends TestCase
             $values[] = $key.'="'.\rawurlencode($value).'"';
         }
 
-        $this->buildRequest()
-            ->expects(self::exactly(2))
+        $request = $this->buildRequest();
+        $request->expects(self::exactly(2))
             ->method('withHeader')
             ->withConsecutive(
                 ['Authorization'],
@@ -207,14 +207,17 @@ abstract class AbstractClientTest extends TestCase
         $this->buildTransport()
             ->expects(self::once())
             ->method('createStream')
-            ->with([
-                ['name' => 'request', 'contents' => 1],
-                ['name' => 'io_mode', 'contents' => 'json'],
-                ['name' => 'do_in', 'contents' => \json_encode([
-                    'method' => 'collection.method',
-                    'params' => ['foo' => 'bar'],
-                ])],
-            ])
+            ->with(
+                $request,
+                [
+                    ['name' => 'request', 'contents' => 1],
+                    ['name' => 'io_mode', 'contents' => 'json'],
+                    ['name' => 'do_in', 'contents' => \json_encode([
+                        'method' => 'collection.method',
+                        'params' => ['foo' => 'bar'],
+                    ])],
+                ]
+            )
             ->willReturn($this->buildStream());
 
         $this->buildRequest()
@@ -352,14 +355,17 @@ abstract class AbstractClientTest extends TestCase
         $this->buildTransport()
             ->expects(self::once())
             ->method('createStream')
-            ->with([
-                ['name' => 'request', 'contents' => 1],
-                ['name' => 'io_mode', 'contents' => 'json'],
-                ['name' => 'do_in', 'contents' => \json_encode([
-                    'method' => 'collection.method',
-                    'params' => ['foo' => 'bar'],
-                ])],
-            ])
+            ->with(
+                $this->buildRequest(),
+                [
+                    ['name' => 'request', 'contents' => 1],
+                    ['name' => 'io_mode', 'contents' => 'json'],
+                    ['name' => 'do_in', 'contents' => \json_encode([
+                        'method' => 'collection.method',
+                        'params' => ['foo' => 'bar'],
+                    ])],
+                ]
+            )
             ->willReturn($this->buildStream());
 
         $this->buildRequest()
@@ -494,14 +500,17 @@ abstract class AbstractClientTest extends TestCase
         $this->buildTransport()
             ->expects(self::once())
             ->method('createStream')
-            ->with([
-                ['name' => 'request', 'contents' => 1],
-                ['name' => 'io_mode', 'contents' => 'json'],
-                ['name' => 'do_in', 'contents' => \json_encode([
-                    'method' => 'collection.method',
-                    'params' => ['foo' => 'bar'],
-                ])],
-            ])
+            ->with(
+                $this->buildRequest(),
+                [
+                    ['name' => 'request', 'contents' => 1],
+                    ['name' => 'io_mode', 'contents' => 'json'],
+                    ['name' => 'do_in', 'contents' => \json_encode([
+                        'method' => 'collection.method',
+                        'params' => ['foo' => 'bar'],
+                    ])],
+                ]
+            )
             ->willReturn($this->buildStream());
 
         $this->buildRequest()
@@ -648,14 +657,17 @@ abstract class AbstractClientTest extends TestCase
         $this->buildTransport()
             ->expects(self::once())
             ->method('createStream')
-            ->with([
-                ['name' => 'request', 'contents' => 1],
-                ['name' => 'io_mode', 'contents' => 'json'],
-                ['name' => 'do_in', 'contents' => \json_encode([
-                    'method' => 'collection.method',
-                    'params' => ['foo' => 'bar'],
-                ])],
-            ])
+            ->with(
+                $this->buildRequest(),
+                [
+                    ['name' => 'request', 'contents' => 1],
+                    ['name' => 'io_mode', 'contents' => 'json'],
+                    ['name' => 'do_in', 'contents' => \json_encode([
+                        'method' => 'collection.method',
+                        'params' => ['foo' => 'bar'],
+                    ])],
+                ]
+            )
             ->willReturn($this->buildStream());
 
         $this->buildRequest()
@@ -766,14 +778,17 @@ abstract class AbstractClientTest extends TestCase
         $this->buildTransport()
             ->expects(self::once())
             ->method('createStream')
-            ->with([
-                ['name' => 'request', 'contents' => 1],
-                ['name' => 'io_mode', 'contents' => 'json'],
-                ['name' => 'do_in', 'contents' => \json_encode([
-                    'method' => 'collection.method',
-                    'params' => ['foo' => 'bar'],
-                ])],
-            ])
+            ->with(
+                $this->buildRequest(),
+                [
+                    ['name' => 'request', 'contents' => 1],
+                    ['name' => 'io_mode', 'contents' => 'json'],
+                    ['name' => 'do_in', 'contents' => \json_encode([
+                        'method' => 'collection.method',
+                        'params' => ['foo' => 'bar'],
+                    ])],
+                ]
+            )
             ->willReturn($this->buildStream());
 
         $this->buildRequest()
@@ -908,14 +923,17 @@ abstract class AbstractClientTest extends TestCase
         $this->buildTransport()
             ->expects(self::once())
             ->method('createStream')
-            ->with([
-                ['name' => 'request', 'contents' => 1],
-                ['name' => 'io_mode', 'contents' => 'json'],
-                ['name' => 'do_in', 'contents' => \json_encode([
-                    'method' => 'collection.method',
-                    'params' => ['foo' => 'bar'],
-                ])],
-            ])
+            ->with(
+                $this->buildRequest(),
+                [
+                    ['name' => 'request', 'contents' => 1],
+                    ['name' => 'io_mode', 'contents' => 'json'],
+                    ['name' => 'do_in', 'contents' => \json_encode([
+                        'method' => 'collection.method',
+                        'params' => ['foo' => 'bar'],
+                    ])],
+                ]
+            )
             ->willReturn($this->buildStream());
 
         $this->buildRequest()
@@ -1052,14 +1070,17 @@ abstract class AbstractClientTest extends TestCase
         $this->buildTransport()
             ->expects(self::once())
             ->method('createStream')
-            ->with([
-                ['name' => 'request', 'contents' => 1],
-                ['name' => 'io_mode', 'contents' => 'json'],
-                ['name' => 'do_in', 'contents' => \json_encode([
-                    'method' => 'collection.method',
-                    'params' => ['foo' => 'bar'],
-                ])],
-            ])
+            ->with(
+                $this->buildRequest(),
+                [
+                    ['name' => 'request', 'contents' => 1],
+                    ['name' => 'io_mode', 'contents' => 'json'],
+                    ['name' => 'do_in', 'contents' => \json_encode([
+                        'method' => 'collection.method',
+                        'params' => ['foo' => 'bar'],
+                    ])],
+                ]
+            )
             ->willReturn($this->buildStream());
 
         $this->buildRequest()

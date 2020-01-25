@@ -70,11 +70,17 @@ abstract class AbstractTransportTest extends TestCase
 
     public function testCreateStream()
     {
-        $request = [
+        $body = [
             ['name' => 'foo', 'contents' => 'bar']
         ];
 
-        self::assertInstanceOf(StreamInterface::class, $this->buildTransport()->createStream($request));
+        self::assertInstanceOf(
+            StreamInterface::class,
+            $this->buildTransport()->createStream(
+                $this->createMock(RequestInterface::class),
+                $body
+            )
+        );
     }
 
     public function testAsyncExecute()

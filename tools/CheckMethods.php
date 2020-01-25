@@ -80,17 +80,17 @@ class CheckMethods extends Command
     {
         $sellSy = new Sellsy('', '', '', '', '');
         $transport = new class implements TransportInterface {
-            public function createUri(): UriInterface
+            public function createUri(string $uri = ''): UriInterface
             {
                 throw new \RuntimeException('Not implemented');
             }
 
-            public function createRequest(string $method, UriInterface $uri): RequestInterface
+            public function createRequest(string $method, $uri): RequestInterface
             {
                 throw new \RuntimeException('Not implemented');
             }
 
-            public function createStream(array &$elements): StreamInterface
+            public function createStream(RequestInterface $request, array &$elements): StreamInterface
             {
                 throw new \RuntimeException('Not implemented');
             }
@@ -130,7 +130,7 @@ class CheckMethods extends Command
         $sellsy = $this->getSellsyInstance();
 
         foreach ($methodsList as $method) {
-            list($collection , $methodName) = \explode('.', $method);
+            list($collection, $methodName) = \explode('.', $method);
 
             if (isset($collectionsToIgnore[$collection])) {
                 continue;

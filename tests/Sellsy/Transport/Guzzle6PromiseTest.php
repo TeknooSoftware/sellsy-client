@@ -27,8 +27,6 @@ use Teknoo\Sellsy\Transport\Guzzle6Promise;
 use Teknoo\Tests\Sellsy\Promise\AbstractPromiseTest;
 
 /**
- * Class GuzzleTest.
- *
  * @covers \Teknoo\Sellsy\Transport\Guzzle6Promise
  *
  * @copyright   Copyright (c) 2009-2020 Richard Déloge (richarddeloge@gmail.com)
