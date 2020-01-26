@@ -68,7 +68,7 @@ class Guzzle6 implements TransportInterface
     /**
      * @param array<mixed, mixed> $elements
      */
-    public function createStream(RequestInterface $request, array &$elements): StreamInterface
+    public function createStream(array &$elements, ?RequestInterface $request = null): StreamInterface
     {
         return new MultipartStream($elements);
     }

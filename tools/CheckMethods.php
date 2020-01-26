@@ -90,7 +90,7 @@ class CheckMethods extends Command
                 throw new \RuntimeException('Not implemented');
             }
 
-            public function createStream(RequestInterface $request, array &$elements): StreamInterface
+            public function createStream(array &$elements, ?RequestInterface $request = null): StreamInterface
             {
                 throw new \RuntimeException('Not implemented');
             }

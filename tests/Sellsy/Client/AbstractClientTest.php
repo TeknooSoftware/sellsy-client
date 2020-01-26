@@ -208,7 +208,6 @@ abstract class AbstractClientTest extends TestCase
             ->expects(self::once())
             ->method('createStream')
             ->with(
-                $request,
                 [
                     ['name' => 'request', 'contents' => 1],
                     ['name' => 'io_mode', 'contents' => 'json'],
@@ -216,7 +215,8 @@ abstract class AbstractClientTest extends TestCase
                         'method' => 'collection.method',
                         'params' => ['foo' => 'bar'],
                     ])],
-                ]
+                ],
+                $request
             )
             ->willReturn($this->buildStream());
 
@@ -356,7 +356,6 @@ abstract class AbstractClientTest extends TestCase
             ->expects(self::once())
             ->method('createStream')
             ->with(
-                $this->buildRequest(),
                 [
                     ['name' => 'request', 'contents' => 1],
                     ['name' => 'io_mode', 'contents' => 'json'],
@@ -364,7 +363,8 @@ abstract class AbstractClientTest extends TestCase
                         'method' => 'collection.method',
                         'params' => ['foo' => 'bar'],
                     ])],
-                ]
+                ],
+                $this->buildRequest()
             )
             ->willReturn($this->buildStream());
 
@@ -501,7 +501,6 @@ abstract class AbstractClientTest extends TestCase
             ->expects(self::once())
             ->method('createStream')
             ->with(
-                $this->buildRequest(),
                 [
                     ['name' => 'request', 'contents' => 1],
                     ['name' => 'io_mode', 'contents' => 'json'],
@@ -509,7 +508,8 @@ abstract class AbstractClientTest extends TestCase
                         'method' => 'collection.method',
                         'params' => ['foo' => 'bar'],
                     ])],
-                ]
+                ],
+                $this->buildRequest()
             )
             ->willReturn($this->buildStream());
 
@@ -658,7 +658,6 @@ abstract class AbstractClientTest extends TestCase
             ->expects(self::once())
             ->method('createStream')
             ->with(
-                $this->buildRequest(),
                 [
                     ['name' => 'request', 'contents' => 1],
                     ['name' => 'io_mode', 'contents' => 'json'],
@@ -666,7 +665,8 @@ abstract class AbstractClientTest extends TestCase
                         'method' => 'collection.method',
                         'params' => ['foo' => 'bar'],
                     ])],
-                ]
+                ],
+                $this->buildRequest()
             )
             ->willReturn($this->buildStream());
 
@@ -779,7 +779,6 @@ abstract class AbstractClientTest extends TestCase
             ->expects(self::once())
             ->method('createStream')
             ->with(
-                $this->buildRequest(),
                 [
                     ['name' => 'request', 'contents' => 1],
                     ['name' => 'io_mode', 'contents' => 'json'],
@@ -787,7 +786,8 @@ abstract class AbstractClientTest extends TestCase
                         'method' => 'collection.method',
                         'params' => ['foo' => 'bar'],
                     ])],
-                ]
+                ],
+                $this->buildRequest()
             )
             ->willReturn($this->buildStream());
 
@@ -924,7 +924,6 @@ abstract class AbstractClientTest extends TestCase
             ->expects(self::once())
             ->method('createStream')
             ->with(
-                $this->buildRequest(),
                 [
                     ['name' => 'request', 'contents' => 1],
                     ['name' => 'io_mode', 'contents' => 'json'],
@@ -932,7 +931,8 @@ abstract class AbstractClientTest extends TestCase
                         'method' => 'collection.method',
                         'params' => ['foo' => 'bar'],
                     ])],
-                ]
+                ],
+                $this->buildRequest()
             )
             ->willReturn($this->buildStream());
 
@@ -1071,7 +1071,6 @@ abstract class AbstractClientTest extends TestCase
             ->expects(self::once())
             ->method('createStream')
             ->with(
-                $this->buildRequest(),
                 [
                     ['name' => 'request', 'contents' => 1],
                     ['name' => 'io_mode', 'contents' => 'json'],
@@ -1079,7 +1078,8 @@ abstract class AbstractClientTest extends TestCase
                         'method' => 'collection.method',
                         'params' => ['foo' => 'bar'],
                     ])],
-                ]
+                ],
+                $this->buildRequest()
             )
             ->willReturn($this->buildStream());
 

@@ -79,8 +79,12 @@ class HttpPlug implements TransportInterface
     /**
      * @param array<mixed, mixed> $elements
      */
-    public function createStream(RequestInterface $request, array &$elements): StreamInterface
+    public function createStream(array &$elements, ?RequestInterface $request = null): StreamInterface
     {
+        if (!$request instanceof RequestInterface) {
+            throw new \RuntimeException('Error, missing request, needed to cretate a Multipart Stream');
+        }
+
         $builder = new MultipartStreamBuilder($this->streamFactory);
         foreach ($elements as &$value) {
             $builder->addResource($value['name'], $value['contents']);

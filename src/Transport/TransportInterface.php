@@ -48,7 +48,7 @@ interface TransportInterface extends RequestFactoryInterface, UriFactoryInterfac
      *
      * @param array<mixed, mixed> $elements
      */
-    public function createStream(RequestInterface $request, array &$elements): StreamInterface;
+    public function createStream(array &$elements, ?RequestInterface $request = null): StreamInterface;
 
     /**
      * To execute the PSR7 request, from the Sellsy client.

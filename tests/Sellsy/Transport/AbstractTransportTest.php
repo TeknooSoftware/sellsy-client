@@ -77,8 +77,8 @@ abstract class AbstractTransportTest extends TestCase
         self::assertInstanceOf(
             StreamInterface::class,
             $this->buildTransport()->createStream(
-                $this->createMock(RequestInterface::class),
-                $body
+                $body,
+                $this->createMock(RequestInterface::class)
             )
         );
     }

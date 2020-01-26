@@ -97,7 +97,23 @@ class HttpPlugTest extends AbstractTransportTest
         self::assertInstanceOf(
             StreamInterface::class,
             $this->buildTransport()->createStream(
-                $request,
+                $body,
+                $request
+            )
+        );
+    }
+
+    public function testCreateStreamWithoutRequest()
+    {
+        $this->expectException(\RuntimeException::class);
+
+        $body = [
+            ['name' => 'foo', 'contents' => 'bar']
+        ];
+
+        self::assertInstanceOf(
+            StreamInterface::class,
+            $this->buildTransport()->createStream(
                 $body
             )
         );

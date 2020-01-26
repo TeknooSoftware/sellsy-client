@@ -1,5 +1,12 @@
 #Teknoo Software - Sellsy client library - Change Log
 
+##[3.0.0-beta2] - 2020-01-26
+###Change
+- Remove some methods into PromiseInterface to keep only essentials methods.
+- Migrate some methods into TransportInterface to use some PSR 17 interface (RequestFactory and UriInterface)
+- Update TransportInterface 's Stream factory method to pass also Request object
+- Add HttpPlug implementation as Support to support other libraries 
+
 ##[3.0.0-beta1] - 2020-01-15
 ###Change
 - Most methods have been updated to include type hints where applicable. Please check your extension points to make sure the function signatures are correct.
