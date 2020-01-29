@@ -1,4 +1,4 @@
 parameters:
     ignoreErrors:
-        - '#Property [a-zA-Z0-9\\_]+::\$apiUrl (array<string, string>) does not accept array<string, int|string>.#'
-        - '#Parameter \#1 $streamFactory of class [a-zA-Z0-9\\_]+ constructor expects [a-zA-Z0-9\\_]+|[a-zA-Z0-9\\_]+|null, [a-zA-Z0-9\\_]+ given.#'
+        - '#Property [a-zA-Z0-9\\_]+::\$apiUrl \(array<string, string>\) does not accept array<string, int\|string>\|false.#'
+        - '#Parameter \#1 \$streamFactory of class [a-zA-Z0-9\\_]+ constructor expects [a-zA-Z0-9\\_]+\|[a-zA-Z0-9\\_]+\|null, [a-zA-Z0-9\\_]+ given.#'

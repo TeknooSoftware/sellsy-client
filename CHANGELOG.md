@@ -1,5 +1,10 @@
 #Teknoo Software - Sellsy client library - Change Log
 
+##[3.0.0-beta3] - 2020-01-29
+###Stable Release
+- Fix QA
+- Update requirement for dev tools
+
 ##[3.0.0-beta2] - 2020-01-26
 ###Change
 - Remove some methods into PromiseInterface to keep only essentials methods.
