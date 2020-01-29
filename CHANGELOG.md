@@ -1,7 +1,9 @@
 #Teknoo Software - Sellsy client library - Change Log
 
+##[3.0.0-beta4] - 2020-01-29
+- Remove dependence to php-http/async-client-implementation
+
 ##[3.0.0-beta3] - 2020-01-29
-###Stable Release
 - Fix QA
 - Update requirement for dev tools
 
