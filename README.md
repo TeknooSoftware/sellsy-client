@@ -31,8 +31,8 @@ Simple Example
         //Create the front object
         $sellsy = new Sellsy(
             'https://apifeed.sellsy.com/0/',
-            $accessToken,
-            $accessTokenSecret,
+            $userToken,
+            $userSecret,
             $consumerKey,
             $consumerSecret
         );

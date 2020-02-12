@@ -68,14 +68,14 @@ class Sellsy
 
     public function __construct(
         string $apiUrl,
-        string $accessToken,
-        string $accessTokenSecret,
+        string $userToken,
+        string $userSecret,
         string $consumerKey,
         string $consumerSecret
     ) {
         $this->apiUrl = $apiUrl;
-        $this->oauthUserToken = $accessToken;
-        $this->oauthUserSecret = $accessTokenSecret;
+        $this->oauthUserToken = $userToken;
+        $this->oauthUserSecret = $userSecret;
         $this->oauthConsumerKey = $consumerKey;
         $this->oauthConsumerSecret = $consumerSecret;
     }

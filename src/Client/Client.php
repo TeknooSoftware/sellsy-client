@@ -124,16 +124,16 @@ class Client implements ClientInterface
     public function __construct(
         TransportInterface $transport,
         string $apiUrl,
-        string $accessToken,
-        string $accessTokenSecret,
+        string $userToken,
+        string $userSecret,
         string $consumerKey,
         string $consumerSecret,
         \DateTimeInterface $now = null
     ) {
         $this->transport = $transport;
         $this->apiUrl = \parse_url($apiUrl);
-        $this->oauthUserToken = $accessToken;
-        $this->oauthUserSecret = $accessTokenSecret;
+        $this->oauthUserToken = $userToken;
+        $this->oauthUserSecret = $userSecret;
         $this->oauthConsumerKey = $consumerKey;
         $this->oauthConsumerSecret = $consumerSecret;
         $this->now = $now;
