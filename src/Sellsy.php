@@ -48,10 +48,10 @@ class Sellsy
     private string $apiUrl;
 
     // OAuth access token (provided by Sellsy).
-    private string $oauthAccessToken;
+    private string $oauthUserToken;
 
     // OAuth secret (provided by Sellsy).
-    private string $oauthAccessTokenSecret;
+    private string $oauthUserSecret;
 
     // OAuth consumer token (provided by Sellsy).
     private string $oauthConsumerKey;
@@ -74,8 +74,8 @@ class Sellsy
         string $consumerSecret
     ) {
         $this->apiUrl = $apiUrl;
-        $this->oauthAccessToken = $accessToken;
-        $this->oauthAccessTokenSecret = $accessTokenSecret;
+        $this->oauthUserToken = $accessToken;
+        $this->oauthUserSecret = $accessTokenSecret;
         $this->oauthConsumerKey = $consumerKey;
         $this->oauthConsumerSecret = $consumerSecret;
     }
@@ -101,8 +101,8 @@ class Sellsy
             $this->client = new SellsyClient(
                 $this->getTransport(),
                 $this->apiUrl,
-                $this->oauthAccessToken,
-                $this->oauthAccessTokenSecret,
+                $this->oauthUserToken,
+                $this->oauthUserSecret,
                 $this->oauthConsumerKey,
                 $this->oauthConsumerSecret
             );

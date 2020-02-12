@@ -77,10 +77,10 @@ class Client implements ClientInterface
     private array $apiUrl;
 
     // OAuth access token (provided by Sellsy).
-    private string $oauthAccessToken;
+    private string $oauthUserToken;
 
     // OAuth secret (provided by Sellsy).
-    private string $oauthAccessTokenSecret;
+    private string $oauthUserSecret;
 
     //OAuth consumer token (provided by Sellsy).
     private string $oauthConsumerKey;
@@ -132,8 +132,8 @@ class Client implements ClientInterface
     ) {
         $this->transport = $transport;
         $this->apiUrl = \parse_url($apiUrl);
-        $this->oauthAccessToken = $accessToken;
-        $this->oauthAccessTokenSecret = $accessTokenSecret;
+        $this->oauthUserToken = $accessToken;
+        $this->oauthUserSecret = $accessTokenSecret;
         $this->oauthConsumerKey = $consumerKey;
         $this->oauthConsumerSecret = $consumerSecret;
         $this->now = $now;
@@ -173,10 +173,10 @@ class Client implements ClientInterface
         }
 
         //Generate HTTP headers
-        $encodedKey = \rawurlencode($this->oauthConsumerSecret) . '&' . \rawurlencode($this->oauthAccessTokenSecret);
+        $encodedKey = \rawurlencode($this->oauthConsumerSecret) . '&' . \rawurlencode($this->oauthUserSecret);
         $oauthParams = [
             'oauth_consumer_key' => $this->oauthConsumerKey,
-            'oauth_token' => $this->oauthAccessToken,
+            'oauth_token' => $this->oauthUserToken,
             'oauth_nonce' => \sha1(\microtime(true) . \random_int(10000, 99999)),
             'oauth_timestamp' => $now->getTimestamp(),
             'oauth_signature_method' => 'PLAINTEXT',
