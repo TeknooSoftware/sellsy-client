@@ -1,5 +1,9 @@
 #Teknoo Software - Sellsy client library - Change Log
 
+##[3.0.0-beta6] - 2020-02-12
+###Change
+- Rename oauthAccessToken to oauthUserToken to follow Sellsy api change
+
 ##[3.0.0-beta5] - 2020-02-12
 ###Change
 - Rename oauthAccessToken to oauthUserToken to follow Sellsy api change
