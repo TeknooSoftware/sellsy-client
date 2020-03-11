@@ -20,7 +20,7 @@
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
 
-namespace Teknoo\Tests\Sellsy\Promise;
+namespace Teknoo\Tests\Sellsy\Transport;
 
 use PHPUnit\Framework\TestCase;
 use Teknoo\Sellsy\Transport\PromiseInterface;

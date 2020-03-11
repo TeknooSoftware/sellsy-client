@@ -24,7 +24,6 @@ namespace Teknoo\Tests\Sellsy\Transport;
 
 use Http\Promise\Promise as HttpPLugPromiseInterface;
 use Teknoo\Sellsy\Transport\HttpPlugPromise;
-use Teknoo\Tests\Sellsy\Promise\AbstractPromiseTest;
 
 /**
  * @covers \Teknoo\Sellsy\Transport\HttpPlugPromise

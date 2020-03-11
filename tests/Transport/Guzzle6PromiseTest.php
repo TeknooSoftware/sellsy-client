@@ -24,7 +24,6 @@ namespace Teknoo\Tests\Sellsy\Transport;
 
 use GuzzleHttp\Promise\PromiseInterface as GuzzlePromiseInterface;
 use Teknoo\Sellsy\Transport\Guzzle6Promise;
-use Teknoo\Tests\Sellsy\Promise\AbstractPromiseTest;
 
 /**
  * @covers \Teknoo\Sellsy\Transport\Guzzle6Promise

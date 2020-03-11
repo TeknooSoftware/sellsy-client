@@ -10,7 +10,7 @@
         colors="true">
     <testsuites>
         <testsuite name="Teknoo Software Sellsy Client Test Suite">
-            <directory>tests/Sellsy</directory>
+            <directory>tests</directory>
         </testsuite>
     </testsuites>
 

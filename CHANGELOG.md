@@ -1,5 +1,10 @@
 #Teknoo Software - Sellsy client library - Change Log
 
+##[3.0.0-beta7] - 2020-03-11
+###Change
+- Fix PSR4 issue with tests
+- Synchronize API definitions
+
 ##[3.0.0-beta6] - 2020-02-12
 ###Change
 - Rename oauthAccessToken to oauthUserToken to follow Sellsy api change

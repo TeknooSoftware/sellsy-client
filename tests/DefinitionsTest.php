@@ -40,7 +40,7 @@ class DefinitionsTest extends \PHPUnit\Framework\TestCase
     {
         $client = $this->createMock(ClientInterface::class);
 
-        $collectionsList = \scandir(__DIR__.'/../../definitions');
+        $collectionsList = \scandir(__DIR__.'/../definitions');
         foreach ($collectionsList as $collectionName) {
             if ('.' === $collectionName || '..' === $collectionName) {
                 continue;
