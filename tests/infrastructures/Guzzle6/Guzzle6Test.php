@@ -20,17 +20,17 @@
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
 
-namespace Teknoo\Tests\Sellsy\Transport;
+namespace Teknoo\Tests\Sellsy\Guzzle6\Transport;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Promise\PromiseInterface;
 use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
-use Teknoo\Sellsy\Transport\Guzzle6;
+use Teknoo\Sellsy\Guzzle6\Transport\Guzzle6;
 use Teknoo\Sellsy\Transport\TransportInterface;
+use Teknoo\Tests\Sellsy\Transport\AbstractTransportTest;
 
 /**
- * @covers \Teknoo\Sellsy\Transport\Guzzle6
+ * @covers \Teknoo\Sellsy\Guzzle6\Transport\Guzzle6
  *
  * @copyright   Copyright (c) 2009-2020 Richard Déloge (richarddeloge@gmail.com)
  *

@@ -20,7 +20,7 @@
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
 
-namespace Teknoo\Tests\Sellsy\Transport;
+namespace Teknoo\Tests\Sellsy\HttpPlug\Transport;
 
 use Http\Client\HttpAsyncClient;
 use Http\Message\RequestFactory;
@@ -30,11 +30,12 @@ use Http\Promise\Promise;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
-use Teknoo\Sellsy\Transport\HttpPlug;
+use Teknoo\Sellsy\HttpPlug\Transport\HttpPlug;
 use Teknoo\Sellsy\Transport\TransportInterface;
+use Teknoo\Tests\Sellsy\Transport\AbstractTransportTest;
 
 /**
- * @covers \Teknoo\Sellsy\Transport\HttpPlug
+ * @covers \Teknoo\Sellsy\HttpPlug\Transport\HttpPlug
  *
  * @copyright   Copyright (c) 2009-2020 Richard Déloge (richarddeloge@gmail.com)
  *

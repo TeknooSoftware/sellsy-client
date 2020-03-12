@@ -18,19 +18,19 @@ depend:
 qa: lint phpstan phpcs phpcpd checkmethods
 
 lint:
-	find ./src ./definitions ./tools  -name "*.php" -exec /usr/bin/env php -l {} \; | grep "Parse error" > /dev/null && exit 1 || exit 0
+	find ./infrastructures ./src ./definitions ./tools  -name "*.php" -exec /usr/bin/env php -l {} \; | grep "Parse error" > /dev/null && exit 1 || exit 0
 
 phploc:
-	vendor/bin/phploc src definitions tools
+	vendor/bin/phploc src infrastructures definitions tools
 
 phpstan:
-	vendor/bin/phpstan analyse src definitions --level max
+	vendor/bin/phpstan analyse src infrastructures definitions --level max
 
 phpcs:
-	vendor/bin/phpcs --standard=PSR12 --extensions=php src/ definitions/ tools/
+	vendor/bin/phpcs --standard=PSR12 --extensions=php src/ infrastructures/ definitions/ tools/
 
 phpcpd:
-	vendor/bin/phpcpd src/ tools/
+	vendor/bin/phpcpd src/ tools/ infrastructures/
 
 checkmethods:
 	php tools/console.php teknoo:sellsy:checks-methods https://api.sellsy.com/documentation/methods -i Accoundatas

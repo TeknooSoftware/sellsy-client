@@ -128,7 +128,7 @@ class SellsyTest extends \PHPUnit\Framework\TestCase
         $sellsy = $this->buildSellsy();
         $sellsy->setTransport($this->createMock(TransportInterface::class));
 
-        $definitionDir = dirname(__DIR__).'/definitions';
+        $definitionDir = dirname(__DIR__).'/../definitions';
         foreach (scandir($definitionDir) as $item) {
             if ('.' != $item && '..' != $item) {
                 self::assertInstanceOf(

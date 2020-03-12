@@ -20,13 +20,14 @@
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
 
-namespace Teknoo\Tests\Sellsy\Transport;
+namespace Teknoo\Tests\Sellsy\Guzzle6\Transport;
 
 use GuzzleHttp\Promise\PromiseInterface as GuzzlePromiseInterface;
-use Teknoo\Sellsy\Transport\Guzzle6Promise;
+use Teknoo\Sellsy\Guzzle6\Transport\Guzzle6Promise;
+use Teknoo\Tests\Sellsy\Transport\AbstractPromiseTest;
 
 /**
- * @covers \Teknoo\Sellsy\Transport\Guzzle6Promise
+ * @covers \Teknoo\Sellsy\Guzzle6\Transport\Guzzle6Promise
  *
  * @copyright   Copyright (c) 2009-2020 Richard Déloge (richarddeloge@gmail.com)
  *

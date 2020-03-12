@@ -1,5 +1,13 @@
 #Teknoo Software - Sellsy client library - Change Log
 
+##[3.0.0-beta8] - 2020-03-12
+###Change
+- Switch Guzzle6 and HttpPlug implementations from main namespace to dedicated infrastructures namespace :
+    * `Teknoo\Sellsy\Transport\Guzzle6` become `Teknoo\Sellsy\Guzzle6\Transport\Guzzle6`
+    * `Teknoo\Sellsy\Transport\Guzzle6Promise` become `Teknoo\Sellsy\Guzzle6\Transport\Guzzle6Promise`
+    * `Teknoo\Sellsy\Transport\HttpPlug` become `Teknoo\Sellsy\Guzzle6\Transport\HttpPlug`
+    * `Teknoo\Sellsy\Transport\HttpPlugPromise` become `Teknoo\Sellsy\Guzzle6\Transport\HttpPlugPromise`
+
 ##[3.0.0-beta7] - 2020-03-11
 ###Change
 - Fix PSR4 issue with tests

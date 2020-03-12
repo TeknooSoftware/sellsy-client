@@ -17,7 +17,7 @@ Simple Example
         <?php
 
         use GuzzleHttp\Client;
-        use Teknoo\Sellsy\Transport\Guzzle6;
+        use Teknoo\Sellsy\Guzzle6\Transport\Guzzle6;
         use Teknoo\Sellsy\Sellsy;
         
         include 'vendor/autoload.php';

@@ -20,13 +20,14 @@
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
 
-namespace Teknoo\Tests\Sellsy\Transport;
+namespace Teknoo\Tests\Sellsy\HttpPlug\Transport;
 
 use Http\Promise\Promise as HttpPLugPromiseInterface;
-use Teknoo\Sellsy\Transport\HttpPlugPromise;
+use Teknoo\Sellsy\HttpPlug\Transport\HttpPlugPromise;
+use Teknoo\Tests\Sellsy\Transport\AbstractPromiseTest;
 
 /**
- * @covers \Teknoo\Sellsy\Transport\HttpPlugPromise
+ * @covers \Teknoo\Sellsy\HttpPlug\Transport\HttpPlugPromise
  *
  * @copyright   Copyright (c) 2009-2020 Richard Déloge (richarddeloge@gmail.com)
  *

@@ -47,13 +47,17 @@
     "autoload": {
         "psr-4": {
             "Teknoo\\Sellsy\\": ["src/"],
+            "Teknoo\\Sellsy\\Guzzle6\\Transport\\": ["infrastructures/Guzzle6/"],
+            "Teknoo\\Sellsy\\HttpPlug\\Transport\\": ["infrastructures/HttpPlug/"],
             "Teknoo\\Sellsy\\Definitions\\": ["definitions/"],
             "Teknoo\\Sellsy\\Tools\\": ["tools/"]
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Teknoo\\Tests\\Sellsy\\": ["tests/"]
+            "Teknoo\\Tests\\Sellsy\\": ["tests/Sellsy/"],
+            "Teknoo\\Tests\\Sellsy\\Guzzle6\\Transport\\": ["tests/infrastructures/Guzzle6/"],
+            "Teknoo\\Tests\\Sellsy\\HttpPlug\\Transport\\": ["tests/infrastructures/HttpPlug/"]
         }
     },
     "archive": {

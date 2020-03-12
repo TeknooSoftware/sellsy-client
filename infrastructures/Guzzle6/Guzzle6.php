@@ -22,7 +22,7 @@
 
 declare(strict_types=1);
 
-namespace Teknoo\Sellsy\Transport;
+namespace Teknoo\Sellsy\Guzzle6\Transport;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\MultipartStream;
@@ -31,6 +31,8 @@ use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
+use Teknoo\Sellsy\Transport\PromiseInterface;
+use Teknoo\Sellsy\Transport\TransportInterface;
 
 /**
  * Define a transporter, using Guzzle, able to initialize a PSR7 request for the client and send it to the Sellsy API

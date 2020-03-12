@@ -22,7 +22,7 @@
 
 declare(strict_types=1);
 
-namespace Teknoo\Sellsy\Transport;
+namespace Teknoo\Sellsy\HttpPlug\Transport;
 
 use Http\Client\HttpAsyncClient;
 use Http\Message\MultipartStream\MultipartStreamBuilder;
@@ -32,6 +32,8 @@ use Http\Message\UriFactory;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
+use Teknoo\Sellsy\Transport\PromiseInterface;
+use Teknoo\Sellsy\Transport\TransportInterface;
 
 /** *
  * @copyright   Copyright (c) 2009-2020 Richard Déloge (richarddeloge@gmail.com)

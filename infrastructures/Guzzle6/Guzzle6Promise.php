@@ -22,42 +22,43 @@
 
 declare(strict_types=1);
 
-namespace Teknoo\Sellsy\Transport;
+namespace Teknoo\Sellsy\Guzzle6\Transport;
 
-use Http\Promise\Promise as HttpPLugPromiseInterface;
+use GuzzleHttp\Promise\PromiseInterface as GuzzlePromiseInterface;
+use Teknoo\Sellsy\Transport\PromiseInterface;
 
-class HttpPlugPromise implements PromiseInterface
+class Guzzle6Promise implements PromiseInterface
 {
-    private HttpPLugPromiseInterface $promise;
+    private GuzzlePromiseInterface $promise;
 
-    public function __construct(HttpPLugPromiseInterface $promise)
+    public function __construct(GuzzlePromiseInterface $promise)
     {
         $this->promise = $promise;
     }
 
     public function then(?callable $onFulfilled = null, ?callable $onRejected = null): PromiseInterface
     {
-        return new HttpPlugPromise($this->promise->then($onFulfilled, $onRejected));
+        return new Guzzle6Promise($this->promise->then($onFulfilled, $onRejected));
     }
 
     public function otherwise(callable $onRejected): PromiseInterface
     {
-        return new HttpPlugPromise($this->promise->then(null, $onRejected));
+        return new Guzzle6Promise($this->promise->otherwise($onRejected));
     }
 
     public function isPending(): bool
     {
-        return HttpPLugPromiseInterface::PENDING === $this->promise->getState();
+        return GuzzlePromiseInterface::PENDING === $this->promise->getState();
     }
 
     public function isFulfilled(): bool
     {
-        return HttpPLugPromiseInterface::FULFILLED === $this->promise->getState();
+        return GuzzlePromiseInterface::FULFILLED === $this->promise->getState();
     }
 
     public function isRejected(): bool
     {
-        return HttpPLugPromiseInterface::REJECTED === $this->promise->getState();
+        return GuzzlePromiseInterface::REJECTED === $this->promise->getState();
     }
 
     public function wait(bool $unwrap = true)
