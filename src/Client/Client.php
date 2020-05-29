@@ -184,9 +184,7 @@ class Client implements ClientInterface
             'oauth_signature' => $encodedKey,
         ];
 
-        $request = $request->withHeader('Authorization', $this->encodeOAuthHeaders($oauthParams));
-
-        return $request->withHeader('Expect', '');
+        return $request->withHeader('Authorization', $this->encodeOAuthHeaders($oauthParams));
     }
 
     private function getNewUri(): UriInterface
