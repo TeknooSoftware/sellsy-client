@@ -197,11 +197,10 @@ abstract class AbstractClientTest extends TestCase
         }
 
         $request = $this->buildRequest();
-        $request->expects(self::exactly(2))
+        $request->expects(self::atLeastOnce())
             ->method('withHeader')
             ->withConsecutive(
                 ['Authorization'],
-                ['Expect', '']
             )->willReturnSelf();
 
         $this->buildTransport()
