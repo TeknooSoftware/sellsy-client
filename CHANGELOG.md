@@ -1,5 +1,38 @@
 #Teknoo Software - Sellsy client library - Change Log
 
+##[3.0.0] - 2020-06-12
+##Stable Release
+###Add
+- Improve errors management from returns of API. All errors and exceptions thrown by the API
+  are now mapped to an explicit PHP exception
+- Improve result management: key/values are directly accessible, as object's property from the result object, thanks to voku/arrayy
+- Improve result object, error message is now accessible from dedicated getter.
+- Add Asynchronous requests capabilities
+
+###Changes
+- Rename oauthAccessToken to oauthUserToken to follow Sellsy api change
+- Change makefile behavior for test target to auto enable xdebug to check coverage
+- Remove dependence to php-http/async-client-implementation
+- Remove some methods into PromiseInterface to keep only essentials methods.
+- Migrate some methods into TransportInterface to use some PSR 17 interface (RequestFactory and UriInterface)
+- Update TransportInterface 's Stream factory method to pass also Request object
+- Add HttpPlug implementation as Support to support other libraries 
+- Most methods have been updated to include type hints where applicable. Please check your extension points to make sure the function signatures are correct.
+_ All files use strict typing. Please make sure to not rely on type coercion.
+- PHP 7.4 is the minimum required
+- Switch to typed properties
+- Remove some PHP useless DockBlocks
+- Replace array_merge by "..." operators
+- Enable PHPStan in QA Tools
+- Update copyright
+- Fix PSR4 issue with tests
+- Synchronize API definitions
+- Switch Guzzle6 and HttpPlug implementations from main namespace to dedicated infrastructures namespace :
+    * `Teknoo\Sellsy\Transport\Guzzle6` become `Teknoo\Sellsy\Guzzle6\Transport\Guzzle6`
+    * `Teknoo\Sellsy\Transport\Guzzle6Promise` become `Teknoo\Sellsy\Guzzle6\Transport\Guzzle6Promise`
+    * `Teknoo\Sellsy\Transport\HttpPlug` become `Teknoo\Sellsy\Guzzle6\Transport\HttpPlug`
+    * `Teknoo\Sellsy\Transport\HttpPlugPromise` become `Teknoo\Sellsy\Guzzle6\Transport\HttpPlugPromise`
+
 ##[3.0.0-beta9] - 2020-05-29
 ###Fix
 - Remove empty Expect HTTP header in Client
