@@ -95,7 +95,7 @@ abstract class AbstractMethodTest extends TestCase
     public function testGetName()
     {
         $method = $this->buildMethod();
-        self::assertIsString( $method->getName());
+        self::assertIsString($method->getName());
         self::assertEquals('fooBar', $method->getName());
     }
 
@@ -146,7 +146,7 @@ abstract class AbstractMethodTest extends TestCase
     public function testToString()
     {
         $method = $this->buildMethod();
-        self::assertIsString( (string) $method);
+        self::assertIsString((string) $method);
         self::assertEquals('collectionName.fooBar', (string) $method);
     }
 }

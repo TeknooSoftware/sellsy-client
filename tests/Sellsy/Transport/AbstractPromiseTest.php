@@ -46,7 +46,8 @@ abstract class AbstractPromiseTest extends TestCase
     public function testThen()
     {
         $promise1 = $this->buildPromise();
-        $promise2 = $promise1->then(function () {});
+        $promise2 = $promise1->then(function () {
+        });
 
         self::assertInstanceOf(PromiseInterface::class, $promise2);
         self::assertNotSame($promise1, $promise2);
@@ -55,7 +56,8 @@ abstract class AbstractPromiseTest extends TestCase
     public function testOtherwise()
     {
         $promise1 = $this->buildPromise();
-        $promise2 = $promise1->otherwise(function () {});
+        $promise2 = $promise1->otherwise(function () {
+        });
 
         self::assertInstanceOf(PromiseInterface::class, $promise2);
         self::assertNotSame($promise1, $promise2);

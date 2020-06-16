@@ -48,7 +48,7 @@ abstract class AbstractCollectionTest extends TestCase
     public function testGetName()
     {
         $collection = $this->buildCollection();
-        self::assertIsString( $collection->getName());
+        self::assertIsString($collection->getName());
         self::assertEquals('fooBar', $collection->getName());
     }
 

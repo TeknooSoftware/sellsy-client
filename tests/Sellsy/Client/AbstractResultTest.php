@@ -112,69 +112,69 @@ abstract class AbstractResultTest extends TestCase
     public function testGetErrorCode()
     {
         $result = $this->buildResultWithSuccess();
-        self::assertIsString( $result->getErrorCode());
+        self::assertIsString($result->getErrorCode());
         self::assertEmpty($result->getErrorCode());
 
         $result = $this->buildResultWithSuccessWithoutReturn();
-        self::assertIsString( $result->getErrorCode());
+        self::assertIsString($result->getErrorCode());
         self::assertEmpty($result->getErrorCode());
 
         $result = $this->buildResultWithErrorString();
-        self::assertIsString( $result->getErrorCode());
+        self::assertIsString($result->getErrorCode());
         self::assertEquals('E_UNKNOW', $result->getErrorCode());
 
         $result = $this->buildResultWithErrorCodeCustom();
-        self::assertIsString( $result->getErrorCode());
+        self::assertIsString($result->getErrorCode());
         self::assertEquals('E_CUSTOM', $result->getErrorCode());
 
         $result = $this->buildResultWithErrorIsNotJson();
-        self::assertIsString( $result->getErrorCode());
+        self::assertIsString($result->getErrorCode());
         self::assertEquals('E_UNKNOW', $result->getErrorCode());
     }
 
     public function testGetErrorMessage()
     {
         $result = $this->buildResultWithSuccess();
-        self::assertIsString( $result->getErrorMessage());
+        self::assertIsString($result->getErrorMessage());
         self::assertEmpty($result->getErrorMessage());
 
         $result = $this->buildResultWithSuccessWithoutReturn();
-        self::assertIsString( $result->getErrorMessage());
+        self::assertIsString($result->getErrorMessage());
         self::assertEmpty($result->getErrorMessage());
 
         $result = $this->buildResultWithErrorString();
-        self::assertIsString( $result->getErrorMessage());
+        self::assertIsString($result->getErrorMessage());
         self::assertEquals('fooBar', $result->getErrorMessage());
 
         $result = $this->buildResultWithErrorCodeCustom();
-        self::assertIsString( $result->getErrorMessage());
+        self::assertIsString($result->getErrorMessage());
         self::assertEquals('fooBar', $result->getErrorMessage());
 
         $result = $this->buildResultWithErrorIsNotJson();
-        self::assertIsString( $result->getErrorMessage());
+        self::assertIsString($result->getErrorMessage());
         self::assertEquals('fooBar', $result->getErrorMessage());
     }
 
     public function testGetRaw()
     {
         $result = $this->buildResultWithSuccess();
-        self::assertIsString( $result->getRaw());
+        self::assertIsString($result->getRaw());
         self::assertNotEmpty($result->getRaw());
 
         $result = $this->buildResultWithSuccessWithoutReturn();
-        self::assertIsString( $result->getRaw());
+        self::assertIsString($result->getRaw());
         self::assertNotEmpty($result->getRaw());
 
         $result = $this->buildResultWithErrorString();
-        self::assertIsString( $result->getRaw());
+        self::assertIsString($result->getRaw());
         self::assertNotEmpty($result->getRaw());
 
         $result = $this->buildResultWithErrorCodeCustom();
-        self::assertIsString( $result->getRaw());
+        self::assertIsString($result->getRaw());
         self::assertNotEmpty($result->getRaw());
 
         $result = $this->buildResultWithErrorIsNotJson();
-        self::assertIsString( $result->getRaw());
+        self::assertIsString($result->getRaw());
         self::assertNotEmpty($result->getRaw());
     }
 
