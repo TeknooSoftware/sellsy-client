@@ -1,5 +1,10 @@
 #Teknoo Software - Sellsy client library - Change Log
 
+##[3.0.1] - 2020-07-09
+##Stable Release
+###Fix
+- Hashbang has to be #!/usr/bin/env php, not #!/usr/bin/php (@MoogyG)
+
 ##[3.0.0] - 2020-06-12
 ##Stable Release
 ###Add
