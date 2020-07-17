@@ -2,6 +2,7 @@
 
 # Applications
 COMPOSER ?= /usr/bin/env composer
+DEPENDENCIES ?= lastest
 
 ### Helpers
 all: clean depend
@@ -10,7 +11,11 @@ all: clean depend
 
 ### Dependencies
 depend:
-	${COMPOSER} install --prefer-source --no-interaction
+ifeq ($(DEPENDENCIES), lowest)
+	${COMPOSER} update --prefer-lowest --prefer-dist --no-interaction --ignore-platform-reqs;
+else
+	${COMPOSER} update --prefer-dist --no-interaction --ignore-platform-reqs;
+endif
 
 .PHONY: depend
 
