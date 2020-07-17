@@ -1,5 +1,10 @@
 #Teknoo Software - Sellsy client library - Change Log
 
+##[3.0.2] - 2020-07-17
+###Stable Release
+###Change
+- Add travis run also with lowest dependencies.
+
 ##[3.0.1] - 2020-07-09
 ##Stable Release
 ###Fix
