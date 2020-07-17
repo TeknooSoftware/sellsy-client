@@ -5,6 +5,11 @@ sudo: false
 php:
   - 7.4
 
+matrix:
+  include:
+    - php: 7.4
+      env: dependencies=lowest
+
 install:
   - composer self-update
 
