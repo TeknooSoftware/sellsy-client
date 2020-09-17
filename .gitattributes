@@ -3,3 +3,5 @@
 /.gitignore         export-ignore
 /.travis.yml        export-ignore
 /phpunit.xml        export-ignore
+/ci                 export-ignore
+.gitlab-ci.yml      export-ignore
