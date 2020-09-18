@@ -1,5 +1,10 @@
 #Teknoo Software - Sellsy client library - Change Log
 
+##[3.0.4] - 2020-09-18
+###Stable Release
+- Update QA and CI tools
+- fix minimum requirement about psr/http-factory and psr/http-message
+
 ##[3.0.3] - 2020-08-25
 ###Stable Release
 ###Update
