@@ -20,7 +20,7 @@
         "optimize-autoloader": true
     },
     "require":{
-        "php": "~7.4",
+        "php": "~7.4||~8.0",
         "ext-json": "*",
         "psr/http-message":"^1.0.1",
         "psr/http-factory":"^1.0.1",
