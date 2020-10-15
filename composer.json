@@ -44,7 +44,6 @@
         "symfony/console": "~3.4||~4.0||~5.1",
         "php-http/async-client-implementation": "~1.0"
     },
-    "minimum-stability": "beta",
     "autoload": {
         "psr-4": {
             "Teknoo\\Sellsy\\": ["src/"],
