@@ -44,6 +44,9 @@ By default, this library use Guzzle to implement PSR-7. A transport is available
          'Consumer Token',
          'Consumer Secret'
       );
+      
+      //Set the transport bridge
+      $sellsy->setTransport($transportBridge);
 
         
 ##Perform a request
