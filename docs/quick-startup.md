@@ -34,7 +34,7 @@ By default, this library use Guzzle to implement PSR-7. A transport is available
      $guzzleClient = new GuzzleHttp\Client();
 
      //Create the transport bridge
-     $transportBridge = new Teknoo\Sellsy\Transport\Guzzle($guzzleClient);
+     $transportBridge = new Teknoo\Sellsy\Guzzle6\Transport\Guzzle6($guzzleClient);
 
      //Create the front object
       $sellsy = new Teknoo\Sellsy\Sellsy(
