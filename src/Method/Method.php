@@ -12,7 +12,8 @@
  * to richarddeloge@gmail.com so we can send you a copy immediately.
  *
  *
- * @copyright   Copyright (c) 2009-2020 Richard Déloge (richarddeloge@gmail.com)
+ * @copyright   Copyright (c) 2009-2021 EIRL Richard Déloge (richarddeloge@gmail.com)
+ * @copyright   Copyright (c) 2020-2021 SASU Teknoo Software (https://teknoo.software)
  *
  * @link        http://teknoo.software/sellsy-client Project website
  *
@@ -35,7 +36,8 @@ use Teknoo\Sellsy\Transport\PromiseInterface;
  * Instance are directly invokable, but parameters must passed into an array and not been passed
  * like a normal PHP method.
  *
- * @copyright   Copyright (c) 2009-2020 Richard Déloge (richarddeloge@gmail.com)
+ * @copyright   Copyright (c) 2009-2021 EIRL Richard Déloge (richarddeloge@gmail.com)
+ * @copyright   Copyright (c) 2020-2021 SASU Teknoo Software (https://teknoo.software)
  *
  * @link        http://teknoo.software/sellsy-client Project website
  *
