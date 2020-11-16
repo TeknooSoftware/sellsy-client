@@ -16,6 +16,12 @@
         "issues": "https://github.com/TeknooSoftware/sellsy-client/issues",
         "source": "https://github.com/TeknooSoftware/sellsy-client"
     },
+    "funding": [
+        {
+            "type": "patreon",
+            "url": "https://www.patreon.com/teknoo_software"
+        }
+    ],
     "config": {
         "optimize-autoloader": true
     },
