@@ -16,3 +16,16 @@ test:7.4-upper:
     - make qa
     - make test
 
+test:8.0-lower:
+  image: php:8.0
+  script:
+    - make qa
+    - make test
+  variables:
+    DEPENDENCIES: lowest
+
+test:8.0-upper:
+  image: php:8.0
+  script:
+    - make qa
+    - make test
