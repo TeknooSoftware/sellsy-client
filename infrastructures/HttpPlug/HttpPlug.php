@@ -72,6 +72,9 @@ class HttpPlug implements TransportInterface
         return $this->uriFactory->createUri($uri);
     }
 
+    /**
+     * @param UriInterface|string $uri
+     */
     public function createRequest(string $method, $uri): RequestInterface
     {
         $request = $this->requestFactory->createRequest($method, $uri);

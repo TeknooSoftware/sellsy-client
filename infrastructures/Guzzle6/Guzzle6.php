@@ -64,6 +64,9 @@ class Guzzle6 implements TransportInterface
         return new Uri($uri);
     }
 
+    /**
+     * @param UriInterface|string $uri
+     */
     public function createRequest(string $method, $uri): RequestInterface
     {
         return new Request($method, $uri);
