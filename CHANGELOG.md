@@ -1,5 +1,9 @@
 #Teknoo Software - Sellsy client library - Change Log
 
+##[3.0.7] - 2020-12-03
+###Stable Release
+- Official Support of PHP8
+
 ##[3.0.6] - 2020-10-15
 ###Stable Release
 - Fix minimum stability required
