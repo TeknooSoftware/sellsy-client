@@ -44,7 +44,7 @@ checkmethods:
 
 ### Testing
 test:
-	php -dzend_extension=xdebug.so -dxdebug.coverage_enable=1 vendor/bin/phpunit -c phpunit.xml -v --colors --coverage-text
+	XDEBUG_MODE=coverage php -dzend_extension=xdebug.so -dxdebug.coverage_enable=1 vendor/bin/phpunit -c phpunit.xml -v --colors --coverage-text
 
 .PHONY: test
 
