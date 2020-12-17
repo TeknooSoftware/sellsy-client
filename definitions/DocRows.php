@@ -42,7 +42,7 @@ use Teknoo\Sellsy\Method\Method;
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
-class Docrows implements DefinitionInterface
+class DocRows implements DefinitionInterface
 {
     public function __invoke(ClientInterface $client): CollectionInterface
     {

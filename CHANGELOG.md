@@ -1,5 +1,9 @@
 #Teknoo Software - Sellsy client library - Change Log
 
+##[3.0.8] - 2020-12-17
+###Stable Release
+- Fix Docrows typo to DocRows #26
+
 ##[3.0.7] - 2020-12-03
 ###Stable Release
 - Official Support of PHP8
