@@ -46,7 +46,7 @@ class DocRows implements DefinitionInterface
 {
     public function __invoke(ClientInterface $client): CollectionInterface
     {
-        $collection = new Collection($client, 'Docrows');
+        $collection = new Collection($client, 'DocRows');
 
         $collection->registerMethod(new Method($collection, 'getList'));
 
