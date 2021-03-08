@@ -51,7 +51,7 @@
         "php-http/multipart-stream-builder": "^1.1.2",
         "php-http/guzzle6-adapter": "~2.0",
         "php-http/promise": "~1.0",
-        "symfony/console": "~3.4||~4.0||~5.1",
+        "symfony/console": "~4.4||~5.2",
         "php-http/async-client-implementation": "~1.0"
     },
     "autoload": {
