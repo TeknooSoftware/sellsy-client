@@ -44,7 +44,7 @@ checkmethods:
 
 ### Testing
 test:
-	XDEBUG_MODE=coverage php -dzend_extension=xdebug.so -dxdebug.coverage_enable=1 vendor/bin/phpunit -c phpunit.xml -v --colors --coverage-text
+	XDEBUG_MODE=coverage php -d memory_limit=512M -dzend_extension=xdebug.so -dxdebug.coverage_enable=1 vendor/bin/phpunit -c phpunit.xml -v --colors --coverage-text
 
 .PHONY: test
 
