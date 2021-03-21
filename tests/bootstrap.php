@@ -6,7 +6,7 @@ defined('RUN_CLI_MODE')
 defined('PHPUNIT')
     || define('PHPUNIT', true);
 
-ini_set('memory_limit', '32M');
+ini_set('memory_limit', '64M');
 
 date_default_timezone_set('UTC');
 
