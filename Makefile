@@ -29,7 +29,7 @@ phploc:
 	vendor/bin/phploc src infrastructures definitions tools
 
 phpstan:
-	php -d memory_limit=256M vendor/bin/phpstan analyse src infrastructures definitions --level max
+	php -d memory_limit=512M vendor/bin/phpstan analyse src infrastructures definitions --level max
 
 phpcs:
 	vendor/bin/phpcs --standard=PSR12 --extensions=php src/ infrastructures/ definitions/ tools/
