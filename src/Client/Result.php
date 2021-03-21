@@ -5,7 +5,7 @@
  *
  * LICENSE
  *
- * This source file is subject to the MIT license and the version 3 of the GPL3
+ * This source file is subject to the MIT license
  * license that are bundled with this package in the folder licences
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
@@ -26,7 +26,14 @@ declare(strict_types=1);
 namespace Teknoo\Sellsy\Client;
 
 use Arrayy\Arrayy;
+use InvalidArgumentException;
+use RuntimeException;
 use Teknoo\Immutable\ImmutableTrait;
+use Throwable;
+
+use function is_array;
+use function is_string;
+use function json_decode;
 
 /**
  * Implementation immutable value object encapsuling result/response about a Sellsy operation.
@@ -64,8 +71,8 @@ class Result implements ResultInterface
     {
         $this->raw = $result;
         try {
-            $this->decoded = \json_decode($result, true, 512, JSON_THROW_ON_ERROR);
-        } catch (\Throwable $error) {
+            $this->decoded = json_decode($result, true, 512, JSON_THROW_ON_ERROR);
+        } catch (Throwable $error) {
             $this->decoded = [];
         }
 
@@ -92,7 +99,7 @@ class Result implements ResultInterface
             return;
         }
 
-        if (isset($this->decoded['error']) && \is_string($this->decoded['error'])) {
+        if (isset($this->decoded['error']) && is_string($this->decoded['error'])) {
             //Retrieve error message (sometime, error is not an object...)
             $this->errorCode = 'E_UNKNOW';
             $this->errorMessage = (string) $this->decoded['error'];
@@ -149,7 +156,7 @@ class Result implements ResultInterface
             return $this->decoded['error'];
         }
 
-        throw new \RuntimeException('No response available');
+        throw new RuntimeException('No response available');
     }
 
     /**
@@ -157,11 +164,11 @@ class Result implements ResultInterface
      */
     public function __get(string $name)
     {
-        if (isset($this->decoded['response'][$name]) && !\is_array($this->decoded['response'][$name])) {
+        if (isset($this->decoded['response'][$name]) && !is_array($this->decoded['response'][$name])) {
             return $this->decoded['response'][$name];
         }
 
-        if (isset($this->decoded['error'][$name]) && !\is_array($this->decoded['error'][$name])) {
+        if (isset($this->decoded['error'][$name]) && !is_array($this->decoded['error'][$name])) {
             return $this->decoded['error'][$name];
         }
 
@@ -173,7 +180,7 @@ class Result implements ResultInterface
             return (new Arrayy($this->decoded['response']))[$name];
         }
 
-        throw new \InvalidArgumentException("$name does not exist in the response");
+        throw new InvalidArgumentException("$name does not exist in the response");
     }
 
     public function __isset(string $name): bool

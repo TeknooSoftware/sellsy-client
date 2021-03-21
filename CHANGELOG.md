@@ -1,5 +1,10 @@
 #Teknoo Software - Sellsy client library - Change Log
 
+##[3.0.9] - 2021-03-21
+###Stable Release
+- Fix license in header
+- QA
+
 ##[3.0.8] - 2020-12-17
 ###Stable Release
 - Fix Docrows typo to DocRows #26

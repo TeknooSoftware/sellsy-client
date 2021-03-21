@@ -5,7 +5,7 @@
  *
  * LICENSE
  *
- * This source file is subject to the MIT license and the version 3 of the GPL3
+ * This source file is subject to the MIT license
  * license that are bundled with this package in the folder licences
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
@@ -25,6 +25,8 @@ declare(strict_types=1);
 
 namespace Teknoo\Sellsy\Client;
 
+use DateTime;
+use DateTimeInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
@@ -53,6 +55,16 @@ use Teknoo\Sellsy\Client\Exception\ValueDoesNotInListException;
 use Teknoo\Sellsy\Method\MethodInterface;
 use Teknoo\Sellsy\Transport\PromiseInterface;
 use Teknoo\Sellsy\Transport\TransportInterface;
+use Throwable;
+
+use function implode;
+use function json_encode;
+use function microtime;
+use function parse_url;
+use function random_int;
+use function rawurlencode;
+use function sha1;
+use function strpos;
 
 /**
  * Implementation of an HTTP+OAuth client to use the Sellsy API with your credentials to execute some operations on
@@ -96,7 +108,7 @@ class Client implements ClientInterface
     // Var to store the last PSR7 answer of Sellsy API to facility debugging.
     private ?ResponseInterface $lastResponse = null;
 
-    private ?\DateTimeInterface $now = null;
+    private ?DateTimeInterface $now = null;
 
     /**
      * @var array<string, class-string<ErrorException>>
@@ -130,10 +142,10 @@ class Client implements ClientInterface
         string $userSecret,
         string $consumerKey,
         string $consumerSecret,
-        \DateTimeInterface $now = null
+        DateTimeInterface $now = null
     ) {
         $this->transport = $transport;
-        $this->apiUrl = \parse_url($apiUrl);
+        $this->apiUrl = parse_url($apiUrl);
         $this->oauthUserToken = $userToken;
         $this->oauthUserSecret = $userSecret;
         $this->oauthConsumerKey = $consumerKey;
@@ -157,29 +169,29 @@ class Client implements ClientInterface
     {
         $values = [];
         foreach ($oauth as $key => &$value) {
-            $values[] = $key . '="' . \rawurlencode((string) $value) . '"';
+            $values[] = $key . '="' . rawurlencode((string) $value) . '"';
         }
 
-        return 'OAuth ' . \implode(', ', $values);
+        return 'OAuth ' . implode(', ', $values);
     }
 
     /**
      * Internal method to generate HTTP headers to use for the API authentication with OAuth protocol.
-     * @throws \Throwable
+     * @throws Throwable
      */
     private function setOAuthHeaders(RequestInterface $request): RequestInterface
     {
-        $now = new \DateTime();
-        if ($this->now instanceof \DateTime) {
+        $now = new DateTime();
+        if ($this->now instanceof DateTime) {
             $now = clone $this->now;
         }
 
         //Generate HTTP headers
-        $encodedKey = \rawurlencode($this->oauthConsumerSecret) . '&' . \rawurlencode($this->oauthUserSecret);
+        $encodedKey = rawurlencode($this->oauthConsumerSecret) . '&' . rawurlencode($this->oauthUserSecret);
         $oauthParams = [
             'oauth_consumer_key' => $this->oauthConsumerKey,
             'oauth_token' => $this->oauthUserToken,
-            'oauth_nonce' => \sha1(\microtime(true) . \random_int(10000, 99999)),
+            'oauth_nonce' => sha1(microtime(true) . random_int(10000, 99999)),
             'oauth_timestamp' => $now->getTimestamp(),
             'oauth_signature_method' => 'PLAINTEXT',
             'oauth_version' => '1.0',
@@ -247,7 +259,7 @@ class Client implements ClientInterface
 
     /**
      * @param array<string, mixed> $params
-     * @throws \Throwable
+     * @throws Throwable
      */
     private function prepareRequest(MethodInterface $method, array $params = []): RequestInterface
     {
@@ -256,7 +268,7 @@ class Client implements ClientInterface
         $encodedRequest = [
             'request' => 1,
             'io_mode' => 'json',
-            'do_in' => \json_encode(
+            'do_in' => json_encode(
                 [
                     'method' => (string) $method,
                     'params' => $params,
@@ -287,7 +299,7 @@ class Client implements ClientInterface
 
         //OAuth issue, throw an exception
         $result = (string) $body->getContents();
-        if (false !== \strpos($result, 'oauth_problem')) {
+        if (false !== strpos($result, 'oauth_problem')) {
             throw new RequestFailureException($result);
         }
 
@@ -347,13 +359,13 @@ class Client implements ClientInterface
 
                     return $answer;
                 },
-                function (\Throwable $e) {
+                function (Throwable $e) {
                     throw new RequestFailureException($e->getMessage(), $e->getCode(), $e);
                 }
             );
 
             return $promise;
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             throw new RequestFailureException($e->getMessage(), $e->getCode(), $e);
         }
     }

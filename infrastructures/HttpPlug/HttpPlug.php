@@ -5,7 +5,7 @@
  *
  * LICENSE
  *
- * This source file is subject to the MIT license and the version 3 of the GPL3
+ * This source file is subject to the MIT license
  * license that are bundled with this package in the folder licences
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
@@ -33,8 +33,11 @@ use Http\Message\UriFactory;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
+use RuntimeException;
 use Teknoo\Sellsy\Transport\PromiseInterface;
 use Teknoo\Sellsy\Transport\TransportInterface;
+
+use function preg_match;
 
 /** *
  * @copyright   Copyright (c) 2009-2021 EIRL Richard Déloge (richarddeloge@gmail.com)
@@ -89,7 +92,7 @@ class HttpPlug implements TransportInterface
     public function createStream(array &$elements, ?RequestInterface $request = null): StreamInterface
     {
         if (!$request instanceof RequestInterface) {
-            throw new \RuntimeException('Error, missing request, needed to cretate a Multipart Stream');
+            throw new RuntimeException('Error, missing request, needed to cretate a Multipart Stream');
         }
 
         $builder = new MultipartStreamBuilder($this->streamFactory);
@@ -99,7 +102,7 @@ class HttpPlug implements TransportInterface
 
         $contentType = $request->getHeader('Content-Type');
         $boundary = [];
-        \preg_match('#multipart/form-data; boundary="([^"]+)"#iS', $contentType[0], $boundary);
+        preg_match('#multipart/form-data; boundary="([^"]+)"#iS', $contentType[0], $boundary);
         $builder->setBoundary($boundary[1]);
 
         return $builder->build();
