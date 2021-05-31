@@ -1,5 +1,9 @@
 #Teknoo Software - Sellsy client library - Change Log
 
+##[3.0.10] - 2021-05-31
+###Stable Release
+- Minor version about libs requirements
+
 ##[3.0.9] - 2021-03-21
 ###Stable Release
 - Fix license in header

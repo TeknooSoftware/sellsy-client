@@ -34,7 +34,7 @@
         "ext-json": "*",
         "psr/http-message":"^1.0.1",
         "psr/http-factory":"^1.0.1",
-        "teknoo/immutable": "~2.0.1",
+        "teknoo/immutable": "~2.0.7",
         "voku/arrayy": "~7.8"
     },
     "require-dev": {
@@ -44,7 +44,7 @@
         "pdepend/pdepend": "~2.9",
         "sebastian/phpcpd": "^6.0.3",
         "phploc/phploc": "^7.0.2",
-        "phpstan/phpstan": "^0.12.83",
+        "phpstan/phpstan": "^0.12.88",
         "guzzlehttp/guzzle":"~6.0||~7.0",
         "guzzlehttp/psr7":"^1.0.0",
         "php-http/client-common": "~2.3",
