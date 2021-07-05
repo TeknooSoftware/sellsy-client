@@ -38,7 +38,6 @@ use function class_exists;
 use function strtolower;
 
 /**
- * Class Sellsy
  * Class helper to create automatically instances needed to dialog with the Sellsy API and interact with it.
  *
  * @copyright   Copyright (c) 2009-2021 EIRL Richard Déloge (richarddeloge@gmail.com)

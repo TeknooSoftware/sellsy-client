@@ -45,12 +45,12 @@ use Teknoo\Sellsy\Transport\PromiseInterface;
  */
 interface MethodInterface extends ImmutableInterface
 {
-    /**
+    /*
      * To know the collection attached to this method.
      */
     public function getCollection(): CollectionInterface;
 
-    /**
+    /*
      * To know the name of the method in the Sellsy API.
      */
     public function getName(): string;
@@ -65,7 +65,7 @@ interface MethodInterface extends ImmutableInterface
      */
     public function __invoke(array $params = []);
 
-    /**
+    /*
      * To know the name of the method in the Sellsy api, accompanied with the collection name.
      */
     public function __toString(): string;

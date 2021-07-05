@@ -28,6 +28,15 @@ namespace Teknoo\Sellsy\Guzzle6\Transport;
 use GuzzleHttp\Promise\PromiseInterface as GuzzlePromiseInterface;
 use Teknoo\Sellsy\Transport\PromiseInterface;
 
+/**
+ * @copyright   Copyright (c) 2009-2021 EIRL Richard Déloge (richarddeloge@gmail.com)
+ * @copyright   Copyright (c) 2020-2021 SASU Teknoo Software (https://teknoo.software)
+ *
+ * @link        http://teknoo.software/sellsy-client Project website
+ *
+ * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
+ * @author      Richard Déloge <richarddeloge@gmail.com>
+ */
 class Guzzle6Promise implements PromiseInterface
 {
     private GuzzlePromiseInterface $promise;

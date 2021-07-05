@@ -29,7 +29,7 @@ use LogicException;
 
 interface PromiseInterface
 {
-    /**
+    /*
      * Appends fulfillment and rejection handlers to the promise, and returns
      * a new promise resolving to the return value of the called handler.
      */
@@ -38,7 +38,7 @@ interface PromiseInterface
         ?callable $onRejected = null
     ): PromiseInterface;
 
-    /**
+    /*
      * Appends a rejection handler callback to the promise, and returns a new
      * promise resolving to the return value of the callback if it is called,
      * or to its original fulfillment value if the promise is instead
@@ -46,18 +46,18 @@ interface PromiseInterface
      */
     public function otherwise(callable $onRejected): PromiseInterface;
 
-    /**
-     * Toget the state of the promise.
+    /*
+     * To get the state of the promise.
      */
     public function isPending(): bool;
 
-    /**
-     * Toget the state of the promise.
+    /*
+     * To get the state of the promise.
      */
     public function isFulfilled(): bool;
 
-    /**
-     * Toget the state of the promise.
+    /*
+     * To get the state of the promise.
      */
     public function isRejected(): bool;
 

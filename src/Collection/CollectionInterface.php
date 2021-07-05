@@ -44,17 +44,17 @@ use Teknoo\Sellsy\Transport\PromiseInterface;
  */
 interface CollectionInterface
 {
-    /**
+    /*
      * Return the current collection name.
      */
     public function getName(): string;
 
-    /**
+    /*
      * To return the Sellsy client attached to this client.
      */
     public function getClient(): ClientInterface;
 
-    /**
+    /*
      * To register a new MethodInterface instance in this collection.
      */
     public function registerMethod(MethodInterface $method): CollectionInterface;
@@ -70,7 +70,7 @@ interface CollectionInterface
 
     public function __isset(string $methodName): bool;
 
-    /**
+    /*
      * To get the MethodInterface instance, identified by $methodName.
      */
     public function __get(string $methodName): MethodInterface;

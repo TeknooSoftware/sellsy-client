@@ -55,7 +55,7 @@ interface ResultInterface extends ImmutableInterface
 
     public function getErrorMessage(): string;
 
-    /**
+    /*
      * To extract the result in original value.
      */
     public function getRaw(): string;

@@ -52,7 +52,7 @@ interface TransportInterface extends RequestFactoryInterface, UriFactoryInterfac
      */
     public function createStream(array &$elements, ?RequestInterface $request = null): StreamInterface;
 
-    /**
+    /*
      * To execute the PSR7 request, from the Sellsy client.
      */
     public function asyncExecute(RequestInterface $request): PromiseInterface;

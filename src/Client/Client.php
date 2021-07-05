@@ -153,7 +153,7 @@ class Client implements ClientInterface
         $this->now = $now;
     }
 
-    /**
+    /*
      * To get a new PSR7 request from transport instance to be able to dialog with Sellsy API.
      */
     private function createNewRequest(string $method, UriInterface $uri): RequestInterface
@@ -206,7 +206,7 @@ class Client implements ClientInterface
         return $this->transport->createUri();
     }
 
-    /**
+    /*
      * To get the PSR7 Uri instance to configure the PSR7 request to be able to dialog with the Sellsy API.
      */
     private function getUri(): UriInterface

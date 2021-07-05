@@ -44,12 +44,12 @@ use Teknoo\Sellsy\Transport\PromiseInterface;
  */
 interface ClientInterface
 {
-    /**
+    /*
      * Get the last PSR7 request sent to the Sellsy server. It's a method to help debug.
      */
     public function getLastRequest(): ?RequestInterface;
 
-    /**
+    /*
      * Get the last PSR7 response sent by the Sellsy server. It's a method to help debug.
      */
     public function getLastResponse(): ?ResponseInterface;

@@ -43,7 +43,7 @@ use Teknoo\Sellsy\Client\ClientInterface;
  */
 interface DefinitionInterface
 {
-    /**
+    /*
      * To create on the flow a new collection instance, regrouping several sellsy's methods.
      */
     public function __invoke(ClientInterface $client): CollectionInterface;
