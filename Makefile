@@ -33,10 +33,10 @@ phpstan:
 	${PHP} -d memory_limit=512M vendor/bin/phpstan analyse src infrastructures definitions --level max
 
 phpcs:
-	${PHP}vendor/bin/phpcs --standard=PSR12 --extensions=php src/ infrastructures/ definitions/ tools/
+	${PHP} vendor/bin/phpcs --standard=PSR12 --extensions=php src/ infrastructures/ definitions/ tools/
 
 phpcpd:
-	${PHP}vendor/bin/phpcpd src/ tools/ infrastructures/
+	${PHP} vendor/bin/phpcpd src/ tools/ infrastructures/
 
 checkmethods:
 	${PHP} tools/console.php teknoo:sellsy:checks-methods https://api.sellsy.com/documentation/methods -i Accoundatas,Docrows
