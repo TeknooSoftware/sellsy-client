@@ -63,7 +63,7 @@ use function microtime;
 use function parse_url;
 use function random_int;
 use function rawurlencode;
-use function sha1;
+use function hash;
 use function strpos;
 
 /**
@@ -191,7 +191,7 @@ class Client implements ClientInterface
         $oauthParams = [
             'oauth_consumer_key' => $this->oauthConsumerKey,
             'oauth_token' => $this->oauthUserToken,
-            'oauth_nonce' => sha1(microtime(true) . random_int(10000, 99999)),
+            'oauth_nonce' => hash('sha256', microtime(true) . random_int(10000, 99999)),
             'oauth_timestamp' => $now->getTimestamp(),
             'oauth_signature_method' => 'PLAINTEXT',
             'oauth_version' => '1.0',
