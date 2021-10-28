@@ -67,6 +67,7 @@ class Peoples implements DefinitionInterface
         $collection->registerMethod(new Method($collection, 'getCurrentIdent'));
         $collection->registerMethod(new Method($collection, 'getAddresses'));
         $collection->registerMethod(new Method($collection, 'unlinkThirds'));
+        $collection->registerMethod(new Method($collection, 'updateSharingStaffs'));
         $collection->registerMethod(new Method($collection, 'updateSharingGroups'));
 
         return $collection;

@@ -65,6 +65,7 @@ class Opportunities implements DefinitionInterface
         $collection->registerMethod(new Method($collection, 'updateOwner'));
         $collection->registerMethod(new Method($collection, 'updateLinkedDocuments'));
         $collection->registerMethod(new Method($collection, 'getCurrentIdent'));
+        $collection->registerMethod(new Method($collection, 'updateSharingStaffs'));
         $collection->registerMethod(new Method($collection, 'updateSharingGroups'));
         $collection->registerMethod(new Method($collection, 'updateDefaultDocument'));
 

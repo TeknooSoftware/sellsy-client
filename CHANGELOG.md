@@ -1,5 +1,13 @@
 # Teknoo Software - Sellsy client library - Change Log
 
+## [3.0.12] - 2021-07-05
+### Stable Release
+Reference :
+* Client.updateSharingStaffs
+* Peoples.updateSharingStaffs
+* Opportunities.updateSharingStaffs
+* Prospects.updateSharingStaffs
+
 ## [3.0.11] - 2021-07-05
 ### Stable Release
 - Update documents and dev libs requirements
