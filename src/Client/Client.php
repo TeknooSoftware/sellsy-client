@@ -163,7 +163,7 @@ class Client implements ClientInterface
 
     /**
      * Transform an the OAuth array configuration to HTTP headers OAuth string.
-     * @param array<string, mixed> $oauth
+     * @param array<string, string|int> $oauth
      */
     private function encodeOAuthHeaders(array &$oauth): string
     {
@@ -327,7 +327,6 @@ class Client implements ClientInterface
      */
     public function run(MethodInterface $method, array $params = []): ResultInterface
     {
-        $result = null;
         $promise = $this->promise($method, $params);
 
         return $promise->wait();

@@ -44,7 +44,7 @@
         "pdepend/pdepend": "~2.10",
         "sebastian/phpcpd": "^6.0.3",
         "phploc/phploc": "^7.0.2",
-        "phpstan/phpstan": "^0.12.99",
+        "phpstan/phpstan": "^1.1.2",
         "guzzlehttp/guzzle":"~6.0||~7.0",
         "guzzlehttp/psr7":"^1.0.0",
         "php-http/client-common": "~2.4",

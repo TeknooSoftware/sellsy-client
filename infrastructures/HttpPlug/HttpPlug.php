@@ -90,7 +90,7 @@ class HttpPlug implements TransportInterface
     }
 
     /**
-     * @param array<mixed, mixed> $elements
+     * @param array<string, string> $elements
      */
     public function createStream(array &$elements, ?RequestInterface $request = null): StreamInterface
     {
@@ -100,7 +100,9 @@ class HttpPlug implements TransportInterface
 
         $builder = new MultipartStreamBuilder($this->streamFactory);
         foreach ($elements as &$value) {
-            $builder->addResource($value['name'], $value['contents']);
+            if (isset($value['name'], $value['contents'])) {
+                $builder->addResource($value['name'], $value['contents']);
+            }
         }
 
         $contentType = $request->getHeader('Content-Type');

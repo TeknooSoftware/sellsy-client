@@ -1,5 +1,9 @@
 # Teknoo Software - Sellsy client library - Change Log
 
+## [3.0.13] - 2021-11-11
+### Stable Release
+Switch to PHPStan 1.1+
+
 ## [3.0.12] - 2021-07-05
 ### Stable Release
 Reference :

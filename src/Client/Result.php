@@ -54,7 +54,7 @@ class Result implements ResultInterface
     private string $raw;
 
     /**
-     * @var array<string, mixed>
+     * @var array<string, string|array<string, mixed>>
      */
     private array $decoded;
 

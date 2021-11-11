@@ -1,3 +1,6 @@
 parameters:
     ignoreErrors:
         - '#Property [a-zA-Z0-9\\_]+::\$apiUrl \(array<string, string>\) does not accept array<string, int\|string>\|false.#'
+        - '#mixed#'
+        - '#assign offset#'
+        - '#^Offset#'

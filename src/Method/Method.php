@@ -28,7 +28,6 @@ namespace Teknoo\Sellsy\Method;
 use Teknoo\Immutable\ImmutableTrait;
 use Teknoo\Sellsy\Collection\CollectionInterface;
 use Teknoo\Sellsy\Client\ResultInterface;
-use Teknoo\Sellsy\Sellsy;
 use Teknoo\Sellsy\Transport\PromiseInterface;
 
 /**
@@ -83,7 +82,7 @@ class Method implements MethodInterface
     }
 
     /**
-     * @param array<mixed, mixed> $params
+     * @param array<string, mixed> $params
      * @return ResultInterface|PromiseInterface
      */
     public function __invoke(array $params = [])
