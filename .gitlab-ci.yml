@@ -4,8 +4,8 @@ before_script:
 .abstract_tests:
   image: $PHP_IMAGE:$PHP_VERSION
   script:
-    - make qa
     - make test
+    - make qa
 
 test:8.0-lower:
   extends: .abstract_tests
