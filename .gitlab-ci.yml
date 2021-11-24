@@ -17,3 +17,14 @@ test:8.0-upper:
   extends: .abstract_tests
   variables:
     PHP_VERSION: '8.0'
+
+test:8.1-lower:
+  extends: .abstract_tests
+  variables:
+    PHP_VERSION: '8.1'
+    DEPENDENCIES: lowest
+
+test:8.1-upper:
+  extends: .abstract_tests
+  variables:
+    PHP_VERSION: '8.1'
