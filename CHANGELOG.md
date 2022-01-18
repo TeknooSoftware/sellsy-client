@@ -1,5 +1,9 @@
 # Teknoo Software - Sellsy client library - Change Log
 
+## [3.0.15] - 2022-01-18
+### Stable Release
+- Support `Document.getNumberingDraftStatus`
+
 ## [3.0.14] - 2021-12-12
 ### Stable Release
 - Remove unused QA tool

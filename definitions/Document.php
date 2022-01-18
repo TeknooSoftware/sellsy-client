@@ -73,6 +73,7 @@ class Document implements DefinitionInterface
         $collection->registerMethod(new Method($collection, 'getLinkedDocuments'));
         $collection->registerMethod(new Method($collection, 'getTree'));
         $collection->registerMethod(new Method($collection, 'getPayment'));
+        $collection->registerMethod(new Method($collection, 'getNumberingDraftStatus'));
         $collection->registerMethod(new Method($collection, 'linkPurchase'));
         $collection->registerMethod(new Method($collection, 'updateSharingGroups'));
         $collection->registerMethod(new Method($collection, 'enablePublicLink'));
