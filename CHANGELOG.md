@@ -1,5 +1,9 @@
 # Teknoo Software - Sellsy client library - Change Log
 
+## [3.0.16] - 2022-03-14
+### Stable Release
+- Support Teknoo Immutable 3.0
+
 ## [3.0.15] - 2022-01-18
 ### Stable Release
 - Support `Document.getNumberingDraftStatus`
