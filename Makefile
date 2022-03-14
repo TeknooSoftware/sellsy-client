@@ -13,9 +13,9 @@ all: clean depend
 ### Dependencies
 depend:
 ifeq ($(DEPENDENCIES), lowest)
-	${COMPOSER} update --prefer-lowest --prefer-dist --no-interaction --ignore-platform-reqs;
+	${COMPOSER} update --prefer-lowest --prefer-dist --no-interaction;
 else
-	${COMPOSER} update --prefer-dist --no-interaction --ignore-platform-reqs;
+	${COMPOSER} update --prefer-dist --no-interaction;
 endif
 
 .PHONY: depend
