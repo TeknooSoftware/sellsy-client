@@ -157,7 +157,7 @@ class Sellsy
         }
 
         if (!class_exists($collectionName, true)) {
-            $collectionClassName = 'Teknoo\\Sellsy\\Definitions\\' . $collectionName;
+            $collectionClassName = 'Teknoo\\Sellsy\\Definitions\\' . ucfirst($collectionName);
 
             if (!class_exists($collectionClassName, true)) {
                 throw new DomainException("Error, the $collectionName has been not found");
