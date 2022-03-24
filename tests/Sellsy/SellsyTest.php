@@ -133,14 +133,21 @@ class SellsyTest extends \PHPUnit\Framework\TestCase
         $definitionDir = dirname(__DIR__).'/../definitions';
         foreach (scandir($definitionDir) as $item) {
             if ('.' != $item && '..' != $item) {
+                $def_name = str_replace('.php', '', $item);
+
                 self::assertInstanceOf(
                     CollectionInterface::class,
-                    $sellsy->{str_replace('.php', '', $item)}()
+                    $sellsy->{$def_name}()
                 );
 
                 self::assertInstanceOf(
                     CollectionInterface::class,
-                    $sellsy->{str_replace('.php', '', $item)}()
+                    $sellsy->{$def_name}()
+                );
+                
+                self::assertInstanceOf(
+                    CollectionInterface::class,
+                    $sellsy->{lcfirst($def_name)}()
                 );
             }
         }

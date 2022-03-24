@@ -50,7 +50,7 @@ class DefinitionsTest extends \PHPUnit\Framework\TestCase
 
             $collectionName = \str_replace('.php', '', $collectionName);
 
-            $collectionClassName = 'Teknoo\\Sellsy\\Definitions\\'.$collectionName;
+            $collectionClassName = 'Teknoo\\Sellsy\\Definitions\\'.ucfirst($collectionName);
 
             if (!\class_exists($collectionClassName, true)) {
                 $this->fail(
