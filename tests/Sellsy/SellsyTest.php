@@ -132,15 +132,45 @@ class SellsyTest extends \PHPUnit\Framework\TestCase
 
         $definitionDir = dirname(__DIR__).'/../definitions';
         foreach (scandir($definitionDir) as $item) {
-            if ('.' != $item && '..' != $item) {
+            if ('.' !== $item && '..' !== $item) {
+                $definitionName = str_replace('.php', '', $item);
                 self::assertInstanceOf(
                     CollectionInterface::class,
-                    $sellsy->{str_replace('.php', '', $item)}()
+                    $sellsy->{$definitionName}()
                 );
 
                 self::assertInstanceOf(
                     CollectionInterface::class,
-                    $sellsy->{str_replace('.php', '', $item)}()
+                    $sellsy->{$definitionName}()
+                );
+            }
+        }
+    }
+
+    public function testDefinitionsWithCamelCase()
+    {
+        $sellsy = $this->buildSellsy();
+        $sellsy->setTransport($this->createMock(TransportInterface::class));
+
+        $definitionDir = dirname(__DIR__).'/../definitions';
+        foreach (scandir($definitionDir) as $item) {
+            if ('.' !== $item && '..' !== $item) {
+                $definitionName = str_replace('.php', '', $item);
+                $definitionNameInCamel = \lcfirst($definitionName);
+
+                self::assertInstanceOf(
+                    CollectionInterface::class,
+                    $sellsy->{$definitionNameInCamel}()
+                );
+
+                self::assertInstanceOf(
+                    CollectionInterface::class,
+                    $sellsy->{$definitionNameInCamel}()
+                );
+
+                self::assertEquals(
+                    $sellsy->{$definitionName}(),
+                    $sellsy->{$definitionNameInCamel}()
                 );
             }
         }

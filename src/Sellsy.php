@@ -36,6 +36,7 @@ use Teknoo\Sellsy\Transport\TransportInterface;
 
 use function class_exists;
 use function strtolower;
+use function ucfirst;
 
 /**
  * Class helper to create automatically instances needed to dialog with the Sellsy API and interact with it.
@@ -157,7 +158,7 @@ class Sellsy
         }
 
         if (!class_exists($collectionName, true)) {
-            $collectionClassName = 'Teknoo\\Sellsy\\Definitions\\' . $collectionName;
+            $collectionClassName = 'Teknoo\\Sellsy\\Definitions\\' . ucfirst($collectionName);
 
             if (!class_exists($collectionClassName, true)) {
                 throw new DomainException("Error, the $collectionName has been not found");
