@@ -1,5 +1,11 @@
 # Teknoo Software - Sellsy client library - Change Log
 
+## [3.0.17] - 2022-03-28
+### Stable Release
+- Methods's collection can be called in camel case from the client : `$sellsy->Infos()` => `$sellsy->infos()`.
+  Original notation still available
+  Thanks to @tgeorgel for this contribution (PR 28)
+
 ## [3.0.16] - 2022-03-14
 ### Stable Release
 - Support Teknoo Immutable 3.0

@@ -39,7 +39,7 @@ Simple Example
         $sellsy->setTransport($transportBridge);
         
         //Example of request, follow the API documentation of Sellsy API.
-        print $sellsy->Infos()->getInfos()->getResponse()['consumerdatas']['id'];
+        print $sellsy->infos()->getInfos()->getResponse()['consumerdatas']['id'];
         //Show your ConsumerDatas id, like 9001
         
         print $sellsy->Infos()->getInfos()->consumerdatas->id;
