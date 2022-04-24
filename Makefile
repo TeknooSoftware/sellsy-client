@@ -21,7 +21,7 @@ endif
 .PHONY: depend
 
 ### QA
-qa: lint phpstan phpcs phpcpd checkmethods
+qa: lint phpstan phpcs phpcpd composerunsed checkmethods
 
 lint:
 	find ./infrastructures ./src ./definitions ./tools  -name "*.php" -exec ${PHP} -l {} \; | grep "Parse error" > /dev/null && exit 1 || exit 0
@@ -41,7 +41,10 @@ phpcpd:
 checkmethods:
 	${PHP} tools/console.php teknoo:sellsy:checks-methods https://api.sellsy.com/documentation/methods -i Accoundatas,Docrows
 
-.PHONY: qa lint phploc phpmd phpcs phpcpd checkmethods
+composerunsed:
+	${PHP} vendor/bin/composer-unused
+
+.PHONY: qa lint phploc phpmd phpcs phpcpd composerunsed checkmethods
 
 ### Testing
 test:
