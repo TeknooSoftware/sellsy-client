@@ -21,7 +21,7 @@ endif
 .PHONY: depend
 
 ### QA
-qa: lint phpstan phpcs phpcpd composerunsed checkmethods
+qa: lint phpstan phpcs phpcpd composerunsed checkmethods audit
 
 lint:
 	find ./infrastructures ./src ./definitions ./tools  -name "*.php" -exec ${PHP} -l {} \; | grep "Parse error" > /dev/null && exit 1 || exit 0
@@ -44,7 +44,10 @@ checkmethods:
 composerunsed:
 	${PHP} vendor/bin/composer-unused
 
-.PHONY: qa lint phploc phpmd phpcs phpcpd composerunsed checkmethods
+audit:
+	${COMPOSER} audit
+
+.PHONY: qa lint phploc phpmd phpcs phpcpd composerunsed checkmethods audit
 
 ### Testing
 test:
