@@ -22,6 +22,7 @@ endif
 
 ### QA
 qa: lint phpstan phpcs phpcpd composerunsed checkmethods audit
+qa-offline: lint phpstan phpcs phpcpd composerunsed
 
 lint:
 	find ./infrastructures ./src ./definitions ./tools  -name "*.php" -exec ${PHP} -l {} \; | grep "Parse error" > /dev/null && exit 1 || exit 0
@@ -47,7 +48,7 @@ composerunsed:
 audit:
 	${COMPOSER} audit
 
-.PHONY: qa lint phploc phpmd phpcs phpcpd composerunsed checkmethods audit
+.PHONY: qa qa-offline lint phploc phpmd phpcs phpcpd composerunsed checkmethods audit
 
 ### Testing
 test:
