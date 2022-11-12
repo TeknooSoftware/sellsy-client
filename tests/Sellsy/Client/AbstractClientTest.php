@@ -21,6 +21,8 @@
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
 
+declare(strict_types=1);
+
 namespace Teknoo\Tests\Sellsy\Client;
 
 use PHPUnit\Framework\TestCase;
@@ -36,6 +38,9 @@ use Teknoo\Sellsy\Client\ResultInterface;
 use Teknoo\Sellsy\Method\MethodInterface;
 use Teknoo\Sellsy\Transport\PromiseInterface;
 use Teknoo\Sellsy\Transport\TransportInterface;
+use function md5;
+use function random_int;
+use function rawurlencode;
 
 /**
  * Class AbstractClientTest.
@@ -186,17 +191,12 @@ abstract class AbstractClientTest extends TestCase
         $oauth = [
             'oauth_consumer_key' => 'consumerKey',
             'oauth_token' => 'token',
-            'oauth_nonce' => \md5($now->getTimestamp() + \rand(0, 1000)),
+            'oauth_nonce' => md5((string) ($now->getTimestamp() + random_int(0, 1000))),
             'oauth_timestamp' => $now->getTimestamp(),
             'oauth_signature_method' => 'PLAINTEXT',
             'oauth_version' => '1.0',
             'oauth_signature' => 'consumerSecret&tokenSecret',
         ];
-
-        $values = [];
-        foreach ($oauth as $key => &$value) {
-            $values[] = $key.'="'.\rawurlencode($value).'"';
-        }
 
         $request = $this->buildRequest();
         $request->expects(self::atLeastOnce())
@@ -333,17 +333,12 @@ abstract class AbstractClientTest extends TestCase
         $oauth = [
             'oauth_consumer_key' => 'consumerKey',
             'oauth_token' => 'token',
-            'oauth_nonce' => \md5($now->getTimestamp() + \rand(0, 1000)),
+            'oauth_nonce' => md5((string) ($now->getTimestamp() + random_int(0, 1000))),
             'oauth_timestamp' => $now->getTimestamp(),
             'oauth_signature_method' => 'PLAINTEXT',
             'oauth_version' => '1.0',
             'oauth_signature' => 'consumerSecret&tokenSecret',
         ];
-
-        $values = [];
-        foreach ($oauth as $key => &$value) {
-            $values[] = $key.'="'.\rawurlencode($value).'"';
-        }
 
         $this->buildRequest()
             ->expects(self::atLeastOnce())
@@ -477,17 +472,12 @@ abstract class AbstractClientTest extends TestCase
         $oauth = [
             'oauth_consumer_key' => 'consumerKey',
             'oauth_token' => 'token',
-            'oauth_nonce' => \md5($now->getTimestamp() + \rand(0, 1000)),
+            'oauth_nonce' => md5((string) ($now->getTimestamp() + random_int(0, 1000))),
             'oauth_timestamp' => $now->getTimestamp(),
             'oauth_signature_method' => 'PLAINTEXT',
             'oauth_version' => '1.0',
             'oauth_signature' => 'consumerSecret&tokenSecret',
         ];
-
-        $values = [];
-        foreach ($oauth as $key => &$value) {
-            $values[] = $key.'="'.\rawurlencode($value).'"';
-        }
 
         $this->buildRequest()
             ->expects(self::atLeastOnce())
@@ -633,17 +623,12 @@ abstract class AbstractClientTest extends TestCase
         $oauth = [
             'oauth_consumer_key' => 'consumerKey',
             'oauth_token' => 'token',
-            'oauth_nonce' => \md5($now->getTimestamp() + \rand(0, 1000)),
+            'oauth_nonce' => md5((string) ($now->getTimestamp() + random_int(0, 1000))),
             'oauth_timestamp' => $now->getTimestamp(),
             'oauth_signature_method' => 'PLAINTEXT',
             'oauth_version' => '1.0',
             'oauth_signature' => 'consumerSecret&tokenSecret',
         ];
-
-        $values = [];
-        foreach ($oauth as $key => &$value) {
-            $values[] = $key.'="'.\rawurlencode($value).'"';
-        }
 
         $this->buildRequest()
             ->expects(self::atLeastOnce())
@@ -753,17 +738,12 @@ abstract class AbstractClientTest extends TestCase
         $oauth = [
             'oauth_consumer_key' => 'consumerKey',
             'oauth_token' => 'token',
-            'oauth_nonce' => \md5($now->getTimestamp() + \rand(0, 1000)),
+            'oauth_nonce' => md5((string) ($now->getTimestamp() + random_int(0, 1000))),
             'oauth_timestamp' => $now->getTimestamp(),
             'oauth_signature_method' => 'PLAINTEXT',
             'oauth_version' => '1.0',
             'oauth_signature' => 'consumerSecret&tokenSecret',
         ];
-
-        $values = [];
-        foreach ($oauth as $key => &$value) {
-            $values[] = $key.'="'.\rawurlencode($value).'"';
-        }
 
         $this->buildRequest()
             ->expects(self::atLeastOnce())
@@ -897,17 +877,12 @@ abstract class AbstractClientTest extends TestCase
         $oauth = [
             'oauth_consumer_key' => 'consumerKey',
             'oauth_token' => 'token',
-            'oauth_nonce' => \md5($now->getTimestamp() + \rand(0, 1000)),
+            'oauth_nonce' => md5((string) ($now->getTimestamp() + random_int(0, 1000))),
             'oauth_timestamp' => $now->getTimestamp(),
             'oauth_signature_method' => 'PLAINTEXT',
             'oauth_version' => '1.0',
             'oauth_signature' => 'consumerSecret&tokenSecret',
         ];
-
-        $values = [];
-        foreach ($oauth as $key => &$value) {
-            $values[] = $key.'="'.\rawurlencode($value).'"';
-        }
 
         $this->buildRequest()
             ->expects(self::atLeastOnce())
@@ -1043,17 +1018,12 @@ abstract class AbstractClientTest extends TestCase
         $oauth = [
             'oauth_consumer_key' => 'consumerKey',
             'oauth_token' => 'token',
-            'oauth_nonce' => \md5($now->getTimestamp() + \rand(0, 1000)),
+            'oauth_nonce' => md5((string) ($now->getTimestamp() + random_int(0, 1000))),
             'oauth_timestamp' => $now->getTimestamp(),
             'oauth_signature_method' => 'PLAINTEXT',
             'oauth_version' => '1.0',
             'oauth_signature' => 'consumerSecret&tokenSecret',
         ];
-
-        $values = [];
-        foreach ($oauth as $key => &$value) {
-            $values[] = $key.'="'.\rawurlencode($value).'"';
-        }
 
         $this->buildRequest()
             ->expects(self::atLeastOnce())

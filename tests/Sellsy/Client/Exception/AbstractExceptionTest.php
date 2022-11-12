@@ -21,6 +21,8 @@
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
 
+declare(strict_types=1);
+
 namespace Teknoo\Tests\Sellsy\Client\Exception;
 
 use PHPUnit\Framework\TestCase;
