@@ -38,7 +38,7 @@ use Teknoo\Sellsy\Client\ResultInterface;
 use Teknoo\Sellsy\Method\MethodInterface;
 use Teknoo\Sellsy\Transport\PromiseInterface;
 use Teknoo\Sellsy\Transport\TransportInterface;
-use function md5;
+use function hash;
 use function random_int;
 use function rawurlencode;
 
@@ -191,7 +191,7 @@ abstract class AbstractClientTest extends TestCase
         $oauth = [
             'oauth_consumer_key' => 'consumerKey',
             'oauth_token' => 'token',
-            'oauth_nonce' => md5((string) ($now->getTimestamp() + random_int(0, 1000))),
+            'oauth_nonce' => hash('sha256', (string) ($now->getTimestamp() + random_int(0, 1000))),
             'oauth_timestamp' => $now->getTimestamp(),
             'oauth_signature_method' => 'PLAINTEXT',
             'oauth_version' => '1.0',
@@ -333,7 +333,7 @@ abstract class AbstractClientTest extends TestCase
         $oauth = [
             'oauth_consumer_key' => 'consumerKey',
             'oauth_token' => 'token',
-            'oauth_nonce' => md5((string) ($now->getTimestamp() + random_int(0, 1000))),
+            'oauth_nonce' => hash('sha256', (string) ($now->getTimestamp() + random_int(0, 1000))),
             'oauth_timestamp' => $now->getTimestamp(),
             'oauth_signature_method' => 'PLAINTEXT',
             'oauth_version' => '1.0',
@@ -472,7 +472,7 @@ abstract class AbstractClientTest extends TestCase
         $oauth = [
             'oauth_consumer_key' => 'consumerKey',
             'oauth_token' => 'token',
-            'oauth_nonce' => md5((string) ($now->getTimestamp() + random_int(0, 1000))),
+            'oauth_nonce' => hash('sha256', (string) ($now->getTimestamp() + random_int(0, 1000))),
             'oauth_timestamp' => $now->getTimestamp(),
             'oauth_signature_method' => 'PLAINTEXT',
             'oauth_version' => '1.0',
@@ -623,7 +623,7 @@ abstract class AbstractClientTest extends TestCase
         $oauth = [
             'oauth_consumer_key' => 'consumerKey',
             'oauth_token' => 'token',
-            'oauth_nonce' => md5((string) ($now->getTimestamp() + random_int(0, 1000))),
+            'oauth_nonce' => hash('sha256', (string) ($now->getTimestamp() + random_int(0, 1000))),
             'oauth_timestamp' => $now->getTimestamp(),
             'oauth_signature_method' => 'PLAINTEXT',
             'oauth_version' => '1.0',
@@ -738,7 +738,7 @@ abstract class AbstractClientTest extends TestCase
         $oauth = [
             'oauth_consumer_key' => 'consumerKey',
             'oauth_token' => 'token',
-            'oauth_nonce' => md5((string) ($now->getTimestamp() + random_int(0, 1000))),
+            'oauth_nonce' => hash('sha256', (string) ($now->getTimestamp() + random_int(0, 1000))),
             'oauth_timestamp' => $now->getTimestamp(),
             'oauth_signature_method' => 'PLAINTEXT',
             'oauth_version' => '1.0',
@@ -877,7 +877,7 @@ abstract class AbstractClientTest extends TestCase
         $oauth = [
             'oauth_consumer_key' => 'consumerKey',
             'oauth_token' => 'token',
-            'oauth_nonce' => md5((string) ($now->getTimestamp() + random_int(0, 1000))),
+            'oauth_nonce' => hash('sha256', (string) ($now->getTimestamp() + random_int(0, 1000))),
             'oauth_timestamp' => $now->getTimestamp(),
             'oauth_signature_method' => 'PLAINTEXT',
             'oauth_version' => '1.0',
@@ -1018,7 +1018,7 @@ abstract class AbstractClientTest extends TestCase
         $oauth = [
             'oauth_consumer_key' => 'consumerKey',
             'oauth_token' => 'token',
-            'oauth_nonce' => md5((string) ($now->getTimestamp() + random_int(0, 1000))),
+            'oauth_nonce' => hash('sha256', (string) ($now->getTimestamp() + random_int(0, 1000))),
             'oauth_timestamp' => $now->getTimestamp(),
             'oauth_signature_method' => 'PLAINTEXT',
             'oauth_version' => '1.0',
