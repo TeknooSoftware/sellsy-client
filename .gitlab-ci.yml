@@ -33,3 +33,17 @@ test:8.1-upper:
   script:
     - make test
     - make qa
+
+test:8.2-lower:
+  extends: .abstract_tests
+  variables:
+    PHP_VERSION: '8.2'
+    DEPENDENCIES: lowest
+
+test:8.2-upper:
+  extends: .abstract_tests
+  variables:
+    PHP_VERSION: '8.2'
+  script:
+    - make test
+    - make qa
