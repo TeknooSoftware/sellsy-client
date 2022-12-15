@@ -1,5 +1,9 @@
 parameters:
+    reportUnmatchedIgnoredErrors: false
     ignoreErrors:
+        -
+            message: '#more#'
+            path: src/Client/Exception/
         - '#Property [a-zA-Z0-9\\_]+::\$apiUrl \(array<string, string>\) does not accept array<string, int\|string>\|false.#'
         - '#mixed#'
         - '#^Offset#'
