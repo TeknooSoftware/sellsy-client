@@ -1,5 +1,10 @@
 # Teknoo Software - Sellsy client library - Change Log
 
+## [3.0.18] - 2022-11-16
+### Stable Release
+- Remove support of PHP 8.0. But composer.json stell compliant with 7.4+ but no bugfix for theses
+  versions will be released
+
 ## [3.0.17] - 2022-03-28
 ### Stable Release
 - Methods's collection can be called in camel case from the client : `$sellsy->Infos()` => `$sellsy->infos()`.
