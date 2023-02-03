@@ -1,5 +1,9 @@
 # Teknoo Software - Sellsy client library - Change Log
 
+## [3.0.19] - 2023-02-03
+### Stable Release
+- Update dev libs to support PHPUnit 10 and remove unused phploc
+
 ## [3.0.18] - 2022-11-16
 ### Stable Release
 - Remove support of PHP 8.0. But composer.json stell compliant with 7.4+ but no bugfix for theses
