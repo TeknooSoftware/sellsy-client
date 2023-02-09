@@ -27,7 +27,10 @@
         }
     ],
     "config": {
-        "optimize-autoloader": true
+        "optimize-autoloader": true,
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
     },
     "require":{
         "php": "^7.4||^8.0",
