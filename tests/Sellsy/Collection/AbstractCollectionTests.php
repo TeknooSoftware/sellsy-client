@@ -32,7 +32,7 @@ use Teknoo\Sellsy\Collection\CollectionInterface;
 use Teknoo\Sellsy\Method\MethodInterface;
 
 /**
- * Class AbstractCollectionTest.
+ * Class AbstractCollectionTests.
  *
  * @copyright   Copyright (c) EIRL Richard Déloge (richarddeloge@gmail.com)
  * @copyright   Copyright (c) SASU Teknoo Software (https://teknoo.software)
@@ -42,7 +42,7 @@ use Teknoo\Sellsy\Method\MethodInterface;
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
-abstract class AbstractCollectionTest extends TestCase
+abstract class AbstractCollectionTests extends TestCase
 {
     /**
      * @return CollectionInterface

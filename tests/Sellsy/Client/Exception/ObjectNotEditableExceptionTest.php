@@ -40,7 +40,7 @@ use Teknoo\Sellsy\Client\ResultInterface;
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
-class ObjectNotEditableExceptionTest extends AbstractExceptionTest
+class ObjectNotEditableExceptionTest extends AbstractExceptionTests
 {
     protected function buildException(
         string $codeError,

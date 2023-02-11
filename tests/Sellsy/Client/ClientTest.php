@@ -41,7 +41,7 @@ use Teknoo\Sellsy\Client\ClientInterface;
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
-class ClientTest extends AbstractClientTest
+class ClientTest extends AbstractClientTests
 {
     public function buildClient(
         string $uri,

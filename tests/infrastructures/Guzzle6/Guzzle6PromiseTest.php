@@ -27,7 +27,7 @@ namespace Teknoo\Tests\Sellsy\Guzzle6\Transport;
 
 use GuzzleHttp\Promise\PromiseInterface as GuzzlePromiseInterface;
 use Teknoo\Sellsy\Guzzle6\Transport\Guzzle6Promise;
-use Teknoo\Tests\Sellsy\Transport\AbstractPromiseTest;
+use Teknoo\Tests\Sellsy\Transport\AbstractPromiseTests;
 
 /**
  * @covers \Teknoo\Sellsy\Guzzle6\Transport\Guzzle6Promise
@@ -40,7 +40,7 @@ use Teknoo\Tests\Sellsy\Transport\AbstractPromiseTest;
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
-class Guzzle6PromiseTest extends AbstractPromiseTest
+class Guzzle6PromiseTest extends AbstractPromiseTests
 {
     public function buildPromise(): \Teknoo\Sellsy\Transport\PromiseInterface
     {

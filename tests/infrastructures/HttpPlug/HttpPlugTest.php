@@ -35,7 +35,7 @@ use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
 use Teknoo\Sellsy\HttpPlug\Transport\HttpPlug;
 use Teknoo\Sellsy\Transport\TransportInterface;
-use Teknoo\Tests\Sellsy\Transport\AbstractTransportTest;
+use Teknoo\Tests\Sellsy\Transport\AbstractTransportTests;
 
 /**
  * @covers \Teknoo\Sellsy\HttpPlug\Transport\HttpPlug
@@ -48,7 +48,7 @@ use Teknoo\Tests\Sellsy\Transport\AbstractTransportTest;
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
-class HttpPlugTest extends AbstractTransportTest
+class HttpPlugTest extends AbstractTransportTests
 {
     /**
      * @return TransportInterface

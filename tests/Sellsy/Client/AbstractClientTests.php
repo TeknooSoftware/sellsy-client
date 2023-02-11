@@ -43,7 +43,7 @@ use function random_int;
 use function rawurlencode;
 
 /**
- * Class AbstractClientTest.
+ * Class AbstractClientTests.
  *
  * @copyright   Copyright (c) EIRL Richard Déloge (richarddeloge@gmail.com)
  * @copyright   Copyright (c) SASU Teknoo Software (https://teknoo.software)
@@ -53,7 +53,7 @@ use function rawurlencode;
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
-abstract class AbstractClientTest extends TestCase
+abstract class AbstractClientTests extends TestCase
 {
     /**
      * @var string
@@ -201,9 +201,8 @@ abstract class AbstractClientTest extends TestCase
         $request = $this->buildRequest();
         $request->expects(self::atLeastOnce())
             ->method('withHeader')
-            ->withConsecutive(
-                ['Authorization'],
-            )->willReturnSelf();
+            ->with('Authorization')
+            ->willReturnSelf();
 
         $this->buildTransport()
             ->expects(self::once())
@@ -343,9 +342,8 @@ abstract class AbstractClientTest extends TestCase
         $this->buildRequest()
             ->expects(self::atLeastOnce())
             ->method('withHeader')
-            ->withConsecutive(
-                ['Authorization'],
-            )->willReturnSelf();
+            ->with('Authorization')
+            ->willReturnSelf();
 
         $this->buildTransport()
             ->expects(self::once())
@@ -482,9 +480,8 @@ abstract class AbstractClientTest extends TestCase
         $this->buildRequest()
             ->expects(self::atLeastOnce())
             ->method('withHeader')
-            ->withConsecutive(
-                ['Authorization'],
-            )->willReturnSelf();
+            ->with('Authorization')
+            ->willReturnSelf();
 
         $this->buildTransport()
             ->expects(self::once())
@@ -633,9 +630,8 @@ abstract class AbstractClientTest extends TestCase
         $this->buildRequest()
             ->expects(self::atLeastOnce())
             ->method('withHeader')
-            ->withConsecutive(
-                ['Authorization'],
-            )->willReturnSelf();
+            ->with('Authorization')
+            ->willReturnSelf();
 
         $this->buildTransport()
             ->expects(self::once())
@@ -748,9 +744,8 @@ abstract class AbstractClientTest extends TestCase
         $this->buildRequest()
             ->expects(self::atLeastOnce())
             ->method('withHeader')
-            ->withConsecutive(
-                ['Authorization'],
-            )->willReturnSelf();
+            ->with('Authorization')
+            ->willReturnSelf();
 
         $this->buildTransport()
             ->expects(self::once())
@@ -887,9 +882,8 @@ abstract class AbstractClientTest extends TestCase
         $this->buildRequest()
             ->expects(self::atLeastOnce())
             ->method('withHeader')
-            ->withConsecutive(
-                ['Authorization'],
-            )->willReturnSelf();
+            ->with('Authorization')
+            ->willReturnSelf();
 
         $this->buildTransport()
             ->expects(self::once())
@@ -1028,9 +1022,8 @@ abstract class AbstractClientTest extends TestCase
         $this->buildRequest()
             ->expects(self::atLeastOnce())
             ->method('withHeader')
-            ->withConsecutive(
-                ['Authorization'],
-            )->willReturnSelf();
+            ->with('Authorization')
+            ->willReturnSelf();
 
         $this->buildTransport()
             ->expects(self::once())

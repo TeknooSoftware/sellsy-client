@@ -21,8 +21,8 @@ endif
 .PHONY: depend
 
 ### QA
-qa: lint phpstan phpcs phpcpd composerunsed checkmethods audit
-qa-offline: lint phpstan phpcs phpcpd composerunsed
+qa: lint phpstan phpcs composerunsed checkmethods audit
+qa-offline: lint phpstan phpcs composerunsed
 
 lint:
 	find ./infrastructures ./src ./definitions ./tools  -name "*.php" -exec ${PHP} -l {} \; | grep "Parse error" > /dev/null && exit 1 || exit 0
@@ -33,9 +33,6 @@ phpstan:
 phpcs:
 	${PHP} vendor/bin/phpcs --standard=PSR12 --extensions=php src/ infrastructures/ definitions/ tools/
 
-phpcpd:
-	${PHP} vendor/bin/phpcpd src/ tools/ infrastructures/
-
 checkmethods:
 	${PHP} tools/console.php teknoo:sellsy:checks-methods https://api.sellsy.com/documentation/methods -i Accoundatas,Docrows
 
@@ -45,7 +42,7 @@ composerunsed:
 audit:
 	${COMPOSER} audit
 
-.PHONY: qa qa-offline lint phpmd phpcs phpcpd composerunsed checkmethods audit
+.PHONY: qa qa-offline lint phpmd phpcs composerunsed checkmethods audit
 
 ### Testing
 test:

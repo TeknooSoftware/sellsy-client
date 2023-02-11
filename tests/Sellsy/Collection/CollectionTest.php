@@ -42,7 +42,7 @@ use Teknoo\Sellsy\Collection\CollectionInterface;
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
-class CollectionTest extends AbstractCollectionTest
+class CollectionTest extends AbstractCollectionTests
 {
     /**
      * @return CollectionInterface

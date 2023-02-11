@@ -27,7 +27,7 @@ namespace Teknoo\Tests\Sellsy\HttpPlug\Transport;
 
 use Http\Promise\Promise as HttpPLugPromiseInterface;
 use Teknoo\Sellsy\HttpPlug\Transport\HttpPlugPromise;
-use Teknoo\Tests\Sellsy\Transport\AbstractPromiseTest;
+use Teknoo\Tests\Sellsy\Transport\AbstractPromiseTests;
 
 /**
  * @covers \Teknoo\Sellsy\HttpPlug\Transport\HttpPlugPromise
@@ -40,7 +40,7 @@ use Teknoo\Tests\Sellsy\Transport\AbstractPromiseTest;
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
-class HttpPlugPromiseTest extends AbstractPromiseTest
+class HttpPlugPromiseTest extends AbstractPromiseTests
 {
     public function buildPromise(): \Teknoo\Sellsy\Transport\PromiseInterface
     {

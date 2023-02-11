@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
 use Teknoo\Sellsy\Client\ResultInterface;
 
 /**
- * Class AbstractResultTest.
+ * Class AbstractResultTests.
  *
  * @copyright   Copyright (c) EIRL Richard Déloge (richarddeloge@gmail.com)
  * @copyright   Copyright (c) SASU Teknoo Software (https://teknoo.software)
@@ -39,7 +39,7 @@ use Teknoo\Sellsy\Client\ResultInterface;
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
-abstract class AbstractResultTest extends TestCase
+abstract class AbstractResultTests extends TestCase
 {
     /**
      * @return ResultInterface

@@ -34,7 +34,7 @@ use Teknoo\Sellsy\Transport\PromiseInterface;
 use Teknoo\Sellsy\Transport\TransportInterface;
 
 /**
- * Class AbstractTransportTest.
+ * Class AbstractTransportTests.
  *
  * @copyright   Copyright (c) EIRL Richard Déloge (richarddeloge@gmail.com)
  * @copyright   Copyright (c) SASU Teknoo Software (https://teknoo.software)
@@ -44,7 +44,7 @@ use Teknoo\Sellsy\Transport\TransportInterface;
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
-abstract class AbstractTransportTest extends TestCase
+abstract class AbstractTransportTests extends TestCase
 {
     /**
      * @return TransportInterface

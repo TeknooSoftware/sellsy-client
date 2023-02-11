@@ -30,7 +30,7 @@ use GuzzleHttp\Promise\PromiseInterface;
 use Psr\Http\Message\RequestInterface;
 use Teknoo\Sellsy\Guzzle6\Transport\Guzzle6;
 use Teknoo\Sellsy\Transport\TransportInterface;
-use Teknoo\Tests\Sellsy\Transport\AbstractTransportTest;
+use Teknoo\Tests\Sellsy\Transport\AbstractTransportTests;
 
 /**
  * @covers \Teknoo\Sellsy\Guzzle6\Transport\Guzzle6
@@ -43,7 +43,7 @@ use Teknoo\Tests\Sellsy\Transport\AbstractTransportTest;
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
-class Guzzle6Test extends AbstractTransportTest
+class Guzzle6Test extends AbstractTransportTests
 {
     /**
      * @return TransportInterface

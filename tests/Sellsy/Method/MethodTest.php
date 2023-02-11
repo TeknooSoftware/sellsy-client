@@ -41,7 +41,7 @@ use Teknoo\Sellsy\Method\MethodInterface;
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
-class MethodTest extends AbstractMethodTest
+class MethodTest extends AbstractMethodTests
 {
     /**
      * @return MethodInterface
