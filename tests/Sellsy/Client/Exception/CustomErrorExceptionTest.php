@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * Sellsy Client.
  *
  * LICENSE
