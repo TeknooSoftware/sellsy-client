@@ -67,6 +67,7 @@ Simple Example
 How-to
 ------
 Quick How-to to learn how use this library : [Startup](docs/quick-startup.md).
+Manage Sellsy Rate Limiting : [Rate Limiting](docs/rate-limiting.md).
 
 Support this project
 ---------------------
