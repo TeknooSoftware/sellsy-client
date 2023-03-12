@@ -1,5 +1,9 @@
 # Teknoo Software - Sellsy client library - Change Log
 
+## [3.0.21] - 2023-03-12
+### Stable Release
+- Q/A
+
 ## [3.0.20] - 2023-02-11
 ### Stable Release
 - Remove phpcpd and upgrade phpunit.xml

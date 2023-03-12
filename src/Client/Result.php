@@ -27,8 +27,8 @@ namespace Teknoo\Sellsy\Client;
 
 use Arrayy\Arrayy;
 use InvalidArgumentException;
-use RuntimeException;
 use Teknoo\Immutable\ImmutableTrait;
+use Teknoo\Sellsy\Client\Exception\NoResponseException;
 use Throwable;
 
 use function is_array;
@@ -156,7 +156,7 @@ class Result implements ResultInterface
             return $this->decoded['error'];
         }
 
-        throw new RuntimeException('No response available');
+        throw new NoResponseException('No response available');
     }
 
     /**

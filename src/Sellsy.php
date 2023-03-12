@@ -28,10 +28,10 @@ namespace Teknoo\Sellsy;
 use DomainException;
 use ReflectionClass;
 use ReflectionException;
-use RuntimeException;
 use Teknoo\Sellsy\Client\Client as SellsyClient;
 use Teknoo\Sellsy\Collection\CollectionInterface;
 use Teknoo\Sellsy\Collection\DefinitionInterface;
+use Teknoo\Sellsy\Exception\BadTransportException;
 use Teknoo\Sellsy\Transport\TransportInterface;
 
 use function class_exists;
@@ -95,7 +95,7 @@ class Sellsy
     public function getTransport(): TransportInterface
     {
         if (!$this->transport instanceof TransportInterface) {
-            throw new RuntimeException('Missing defined transport');
+            throw new BadTransportException('Missing defined transport');
         }
 
         return $this->transport;
@@ -147,7 +147,7 @@ class Sellsy
      * @param array<mixed, mixed> $arguments
      *
      * @throws DomainException  if the collection does not exist
-     * @throws RuntimeException if the collection's definition does not implementing the good interface
+     * @throws BadTransportException if the collection's definition does not implementing the good interface
      * @throws ReflectionException
      */
     public function __call(string $collectionName, array $arguments): CollectionInterface
@@ -169,7 +169,7 @@ class Sellsy
 
         $reflectionClass = new ReflectionClass($collectionClassName);
         if (!$reflectionClass->implementsInterface(DefinitionInterface::class)) {
-            throw new RuntimeException(
+            throw new BadTransportException(
                 "Error, the definition of $collectionName must implement " . DefinitionInterface::class
             );
         }

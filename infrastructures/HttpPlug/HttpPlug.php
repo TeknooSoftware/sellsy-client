@@ -33,7 +33,7 @@ use Http\Message\UriFactory;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
-use RuntimeException;
+use Teknoo\Sellsy\HttpPlug\Transport\Exception\RequestCreationException;
 use Teknoo\Sellsy\Transport\PromiseInterface;
 use Teknoo\Sellsy\Transport\TransportInterface;
 
@@ -95,7 +95,7 @@ class HttpPlug implements TransportInterface
     public function createStream(array &$elements, ?RequestInterface $request = null): StreamInterface
     {
         if (!$request instanceof RequestInterface) {
-            throw new RuntimeException('Error, missing request, needed to cretate a Multipart Stream');
+            throw new RequestCreationException('Error, missing request, needed to create a Multipart Stream');
         }
 
         $builder = new MultipartStreamBuilder($this->streamFactory);

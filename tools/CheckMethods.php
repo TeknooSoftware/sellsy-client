@@ -26,9 +26,9 @@ declare(strict_types=1);
 namespace Teknoo\Sellsy\Tools;
 
 use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
+use RuntimeException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -37,6 +37,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Teknoo\Sellsy\Sellsy;
 use Teknoo\Sellsy\Transport\PromiseInterface;
 use Teknoo\Sellsy\Transport\TransportInterface;
+
+use function file_get_contents;
+use function preg_last_error;
+use function preg_match_all;
 
 /**
  * To check if all methods available in the api are available here.
@@ -59,12 +63,12 @@ class CheckMethods extends Command
      */
     private function extractMethodsName(string $websiteUrl): array
     {
-        $documentSource = \file_get_contents($websiteUrl);
+        $documentSource = file_get_contents($websiteUrl);
 
         $methods = [];
         $pattern = '#<div class="page-header">.*?<h1><a name="[a-z0-9]+"></a>([a-z0-9]+\.[a-z0-9]+)</h1>#isS';
-        if (false === \preg_match_all($pattern, $documentSource, $methods)) {
-            throw new \RuntimeException(\preg_last_error());
+        if (false === preg_match_all($pattern, $documentSource, $methods)) {
+            throw new RuntimeException(preg_last_error());
         }
 
         return $methods[1];
@@ -84,22 +88,22 @@ class CheckMethods extends Command
         $transport = new class implements TransportInterface {
             public function createUri(string $uri = ''): UriInterface
             {
-                throw new \RuntimeException('Not implemented');
+                throw new RuntimeException('Not implemented');
             }
 
             public function createRequest(string $method, $uri): RequestInterface
             {
-                throw new \RuntimeException('Not implemented');
+                throw new RuntimeException('Not implemented');
             }
 
             public function createStream(array &$elements, ?RequestInterface $request = null): StreamInterface
             {
-                throw new \RuntimeException('Not implemented');
+                throw new RuntimeException('Not implemented');
             }
 
             public function asyncExecute(RequestInterface $request): PromiseInterface
             {
-                throw new \RuntimeException('Not implemented');
+                throw new RuntimeException('Not implemented');
             }
         };
 
