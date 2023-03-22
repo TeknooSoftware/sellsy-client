@@ -35,9 +35,6 @@ use Teknoo\Sellsy\Client\ResultInterface;
  *
  * @copyright   Copyright (c) EIRL Richard Déloge (richarddeloge@gmail.com)
  * @copyright   Copyright (c) SASU Teknoo Software (https://teknoo.software)
- *
- * @link        http://teknoo.software/sellsy-client Project website
- *
  * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
  * @author      Richard Déloge <richarddeloge@gmail.com>
  */
