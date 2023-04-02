@@ -110,8 +110,11 @@ This library requires PHP 7.4 or newer. Some change causes bc breaks :
 - Most methods have been updated to include type hints where applicable. Please check your extension points to make sure the function signatures are correct.
 _ All files use strict typing. Please make sure to not rely on type coercion.
 - Switch to PHPStan in QA Tools and disable PHPMd
-  
-  
+
+Special Thanks
+--------------
+Julien Herr <julien@herr.fr> : RateLimitTransport and documentation about Sellsy's rate limit in its API.
+
 Credits
 -------
 Richard Déloge - <richarddeloge@gmail.com> - Lead developer.

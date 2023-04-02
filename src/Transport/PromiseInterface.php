@@ -27,6 +27,12 @@ namespace Teknoo\Sellsy\Transport;
 
 use LogicException;
 
+/**
+ * @copyright   Copyright (c) EIRL Richard Déloge (richarddeloge@gmail.com)
+ * @copyright   Copyright (c) SASU Teknoo Software (https://teknoo.software)
+ * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
+ * @author      Richard Déloge <richarddeloge@gmail.com>
+ */
 interface PromiseInterface
 {
     /*

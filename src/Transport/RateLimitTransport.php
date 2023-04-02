@@ -28,12 +28,14 @@ namespace Teknoo\Sellsy\Transport;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
-use function intval;
+
 use function microtime;
 use function usleep;
 
 /**
  * Be careful: this class has a blocking behavior because it uses sleep
+ * @license     http://teknoo.software/sellsy-client/license/mit         MIT License
+ * @author      Julien Herr <julien@herr.fr>
  */
 class RateLimitTransport implements TransportInterface
 {
@@ -74,7 +76,7 @@ class RateLimitTransport implements TransportInterface
         $this->cnt++;
         if ($this->cnt === $this->rateLimit) {
             $stop = microtime(true);
-            $sleep = 1000000 - intval(($stop - $this->time) * 1000000);
+            $sleep = 1000000 - (int) (($stop - $this->time) * 1000000);
             if ($sleep > 0) {
                 usleep($sleep);
             }

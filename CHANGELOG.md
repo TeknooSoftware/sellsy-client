@@ -1,5 +1,9 @@
 # Teknoo Software - Sellsy client library - Change Log
 
+## [3.0.22] - 2023-04-02
+### Stable Release
+- Add RateLimitTransport to manage rate limiting system of Sellsy to prevent abuse of the API. Thanks to Julien Herr.
+
 ## [3.0.21] - 2023-03-12
 ### Stable Release
 - Q/A
