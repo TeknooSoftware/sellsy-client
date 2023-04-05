@@ -117,7 +117,7 @@ Julien Herr <julien@herr.fr> : RateLimitTransport and documentation about Sellsy
 
 Credits
 -------
-Richard Déloge - <richarddeloge@gmail.com> - Lead developer.
+Richard Déloge - <richard@teknoo.software> - Lead developer.
 Teknoo Software - <http://teknoo.software>
 
 About Teknoo Software

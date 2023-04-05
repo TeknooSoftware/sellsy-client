@@ -32,7 +32,7 @@ $ ./vendor/bin/phpunit
 Accepted coverage for new contributions is 90%. Any contribution not satisfying this requirement
 won't be merged.
 
-For any questions, contact me : [richarddeloge@gmail.com](richarddeloge@gmail.com) :)
+For any questions, contact me : [richard@teknoo.software](richard@teknoo.software) :)
 
 ## Support this project
 
