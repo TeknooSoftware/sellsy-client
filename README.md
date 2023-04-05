@@ -88,7 +88,7 @@ To use the embedded Guzzle transport
 
 This library requires :
 
-    * PHP 7.4+
+    * PHP 8.1+ (7.4 and 8.0 can works, but there are not supported)
     * A PHP autoloader (Composer is recommended)
     * Teknoo/Immutable.
     * A PSR-7 implementation
