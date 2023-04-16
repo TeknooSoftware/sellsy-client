@@ -1,6 +1,12 @@
 <?xml version="1.0"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" backupGlobals="false" processIsolation="false" stopOnFailure="false" bootstrap="tests/bootstrap.php" colors="true" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.0/phpunit.xsd" cacheDirectory=".phpunit.cache" backupStaticProperties="false">
-  <coverage>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" backupGlobals="false" processIsolation="false" stopOnFailure="false" bootstrap="tests/bootstrap.php" colors="true" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.1/phpunit.xsd" cacheDirectory=".phpunit.cache" backupStaticProperties="false">
+  <coverage/>
+  <testsuites>
+    <testsuite name="Teknoo Software Sellsy Client Test Suite">
+      <directory>tests</directory>
+    </testsuite>
+  </testsuites>
+  <source>
     <include>
       <directory>src</directory>
       <directory>infrastructures</directory>
@@ -12,10 +18,5 @@
       <directory>demo</directory>
       <directory>licences</directory>
     </exclude>
-  </coverage>
-  <testsuites>
-    <testsuite name="Teknoo Software Sellsy Client Test Suite">
-      <directory>tests</directory>
-    </testsuite>
-  </testsuites>
+  </source>
 </phpunit>

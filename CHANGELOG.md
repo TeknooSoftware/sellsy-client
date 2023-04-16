@@ -1,5 +1,11 @@
 # Teknoo Software - Sellsy client library - Change Log
 
+## [3.0.24] - 2023-04-16
+### Stable Release
+- Update dev lib requirements
+- Support PHPUnit 10.1+
+- Migrate phpunit.xml
+
 ## [3.0.23] - 2023-04-11
 ### Stable Release
 - Allow psr/http-message 2
