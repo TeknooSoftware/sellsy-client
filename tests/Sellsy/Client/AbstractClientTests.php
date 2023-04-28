@@ -30,6 +30,7 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
+use ReflectionClass;
 use Teknoo\Sellsy\Client\ClientInterface;
 use Teknoo\Sellsy\Client\Exception\ErrorException;
 use Teknoo\Sellsy\Client\Exception\RequestFailureException;
@@ -689,6 +690,13 @@ abstract class AbstractClientTests extends TestCase
 
     private function privateRunWithNoResponseStream($method)
     {
+        $rc = new ReflectionClass(ResponseInterface::class);
+        $rm = $rc->getMethod('getBody');
+        $rt = $rm->getReturnType();
+        if (!$rt->allowsNull()) {
+            self::markTestSkipped('Not needed with last PSR 7');
+        }
+
         $uri = $this->uriString;
 
         $this->buildUri()
@@ -812,6 +820,13 @@ abstract class AbstractClientTests extends TestCase
 
     public function testPromiseWithNoResponseStream()
     {
+        $rc = new ReflectionClass(ResponseInterface::class);
+        $rm = $rc->getMethod('getBody');
+        $rt = $rm->getReturnType();
+        if (!$rt->allowsNull()) {
+            self::markTestSkipped('Not needed with last PSR 7');
+        }
+
         $this->expectException(RequestFailureException::class);
 
         $method = $this->createMock(MethodInterface::class);
