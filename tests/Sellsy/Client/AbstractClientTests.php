@@ -693,7 +693,7 @@ abstract class AbstractClientTests extends TestCase
         $rc = new ReflectionClass(ResponseInterface::class);
         $rm = $rc->getMethod('getBody');
         $rt = $rm->getReturnType();
-        if (!$rt->allowsNull()) {
+        if (null !== $rt && !$rt->allowsNull()) {
             self::markTestSkipped('Not needed with last PSR 7');
         }
 
@@ -823,7 +823,7 @@ abstract class AbstractClientTests extends TestCase
         $rc = new ReflectionClass(ResponseInterface::class);
         $rm = $rc->getMethod('getBody');
         $rt = $rm->getReturnType();
-        if (!$rt->allowsNull()) {
+        if (null !== $rt && !$rt->allowsNull()) {
             self::markTestSkipped('Not needed with last PSR 7');
         }
 
