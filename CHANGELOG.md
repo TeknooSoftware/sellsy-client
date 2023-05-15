@@ -1,5 +1,10 @@
 # Teknoo Software - Sellsy client library - Change Log
 
+## [3.0.26] - 2023-05-15
+### Stable Release
+- Update dev lib requirements
+- Update copyrights
+
 ## [3.0.25] - 2023-04-28
 ### Stable Release
 - Support of last PSR7

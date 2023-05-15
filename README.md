@@ -117,14 +117,14 @@ Julien Herr <julien@herr.fr> : RateLimitTransport and documentation about Sellsy
 
 Credits
 -------
-Richard Déloge - <richard@teknoo.software> - Lead developer.
-Teknoo Software - <http://teknoo.software>
+EIRL Richard Déloge - <https://deloge.io> - Lead developer.
+SASU Teknoo Software - <https://teknoo.software>
 
 About Teknoo Software
 ---------------------
-**Teknoo Software** is a PHP software editor, founded by Richard Déloge. 
-Teknoo Software's DNA is simple : Provide to our partners and to the community a set of high quality services or software,
- sharing knowledge and skills.
+**Teknoo Software** is a PHP software editor, founded by Richard Déloge, as part of EIRL Richard Déloge.
+Teknoo Software's goals : Provide to our partners and to the community a set of high quality services or software,
+sharing knowledge and skills.
  
 License
 -------
