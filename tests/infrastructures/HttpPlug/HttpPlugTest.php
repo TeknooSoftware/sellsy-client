@@ -26,12 +26,12 @@ declare(strict_types=1);
 namespace Teknoo\Tests\Sellsy\HttpPlug\Transport;
 
 use Http\Client\HttpAsyncClient;
-use Http\Message\RequestFactory;
-use Http\Message\StreamFactory;
-use Http\Message\UriFactory;
 use Http\Promise\Promise;
+use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\StreamInterface;
+use Psr\Http\Message\UriFactoryInterface;
 use Psr\Http\Message\UriInterface;
 use Teknoo\Sellsy\HttpPlug\Transport\HttpPlug;
 use Teknoo\Sellsy\Transport\TransportInterface;
@@ -53,9 +53,9 @@ class HttpPlugTest extends AbstractTransportTests
     public function buildTransport(): TransportInterface
     {
         $client = $this->createMock(HttpAsyncClient::class);
-        $uriFactory = $this->createMock(UriFactory::class);
-        $requestFactory = $this->createMock(RequestFactory::class);
-        $streamFactory = $this->createMock(StreamFactory::class);
+        $uriFactory = $this->createMock(UriFactoryInterface::class);
+        $requestFactory = $this->createMock(RequestFactoryInterface::class);
+        $streamFactory = $this->createMock(StreamFactoryInterface::class);
 
         $uriFactory->expects(self::any())
             ->method('createUri')

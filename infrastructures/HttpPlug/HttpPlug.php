@@ -27,11 +27,11 @@ namespace Teknoo\Sellsy\HttpPlug\Transport;
 
 use Http\Client\HttpAsyncClient;
 use Http\Message\MultipartStream\MultipartStreamBuilder;
-use Http\Message\RequestFactory;
-use Http\Message\StreamFactory;
-use Http\Message\UriFactory;
+use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\StreamInterface;
+use Psr\Http\Message\UriFactoryInterface;
 use Psr\Http\Message\UriInterface;
 use Teknoo\Sellsy\HttpPlug\Transport\Exception\RequestCreationException;
 use Teknoo\Sellsy\Transport\PromiseInterface;
@@ -52,17 +52,17 @@ class HttpPlug implements TransportInterface
 {
     private HttpAsyncClient $client;
 
-    private UriFactory $uriFactory;
+    private UriFactoryInterface $uriFactory;
 
-    private RequestFactory $requestFactory;
+    private RequestFactoryInterface $requestFactory;
 
-    private StreamFactory $streamFactory;
+    private StreamFactoryInterface $streamFactory;
 
     public function __construct(
         HttpAsyncClient $client,
-        UriFactory $uriFactory,
-        RequestFactory $requestFactory,
-        StreamFactory $streamFactory
+        UriFactoryInterface $uriFactory,
+        RequestFactoryInterface $requestFactory,
+        StreamFactoryInterface $streamFactory
     ) {
         $this->client = $client;
         $this->uriFactory = $uriFactory;

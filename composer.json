@@ -36,7 +36,7 @@
         "php": "^7.4||^8.0",
         "ext-json": "*",
         "psr/http-message":"^1.0.1||^2",
-        "psr/http-factory":"^1.0.1",
+        "psr/http-factory":"^1.0.2",
         "teknoo/immutable": "^2.0.9||^3.0",
         "voku/arrayy": "^7.9"
     },
