@@ -27,6 +27,9 @@
         }
     ],
     "config": {
+        "audit": {
+            "abandoned": "report"
+        },
         "optimize-autoloader": true,
         "allow-plugins": {
             "php-http/discovery": true
