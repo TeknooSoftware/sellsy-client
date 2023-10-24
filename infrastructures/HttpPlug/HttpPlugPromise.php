@@ -25,7 +25,7 @@ declare(strict_types=1);
 
 namespace Teknoo\Sellsy\HttpPlug\Transport;
 
-use Http\Promise\Promise as HttpPLugPromiseInterface;
+use Http\Promise\Promise as HttpPlugPromiseInterface;
 use Teknoo\Sellsy\Transport\PromiseInterface;
 
 /**
@@ -36,9 +36,15 @@ use Teknoo\Sellsy\Transport\PromiseInterface;
  */
 class HttpPlugPromise implements PromiseInterface
 {
-    private HttpPLugPromiseInterface $promise;
+    /**
+     * @var HttpPlugPromiseInterface<mixed>
+     */
+    private HttpPlugPromiseInterface $promise;
 
-    public function __construct(HttpPLugPromiseInterface $promise)
+    /**
+     * @param HttpPlugPromiseInterface<mixed> $promise
+     */
+    public function __construct(HttpPlugPromiseInterface $promise)
     {
         $this->promise = $promise;
     }
@@ -55,17 +61,17 @@ class HttpPlugPromise implements PromiseInterface
 
     public function isPending(): bool
     {
-        return HttpPLugPromiseInterface::PENDING === $this->promise->getState();
+        return HttpPlugPromiseInterface::PENDING === $this->promise->getState();
     }
 
     public function isFulfilled(): bool
     {
-        return HttpPLugPromiseInterface::FULFILLED === $this->promise->getState();
+        return HttpPlugPromiseInterface::FULFILLED === $this->promise->getState();
     }
 
     public function isRejected(): bool
     {
-        return HttpPLugPromiseInterface::REJECTED === $this->promise->getState();
+        return HttpPlugPromiseInterface::REJECTED === $this->promise->getState();
     }
 
     public function wait(bool $unwrap = true)
