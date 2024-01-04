@@ -21,7 +21,7 @@ endif
 .PHONY: depend
 
 ### QA
-qa: lint phpstan phpcs composerunsed checkmethods audit
+qa: lint phpstan phpcs composerunsed audit
 qa-offline: lint phpstan phpcs composerunsed
 
 lint:
@@ -42,7 +42,7 @@ composerunsed:
 audit:
 	${COMPOSER} audit
 
-.PHONY: qa qa-offline lint phpmd phpcs composerunsed audit
+.PHONY: qa qa-offline lint phpmd phpcs composerunsed checkmethods audit
 
 ### Testing
 test:
