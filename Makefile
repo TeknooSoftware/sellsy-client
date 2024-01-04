@@ -42,7 +42,7 @@ composerunsed:
 audit:
 	${COMPOSER} audit
 
-.PHONY: qa qa-offline lint phpmd phpcs composerunsed checkmethods audit
+.PHONY: qa qa-offline lint phpmd phpcs composerunsed audit
 
 ### Testing
 test:
