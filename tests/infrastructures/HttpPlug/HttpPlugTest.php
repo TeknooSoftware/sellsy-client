@@ -57,26 +57,26 @@ class HttpPlugTest extends AbstractTransportTests
         $requestFactory = $this->createMock(RequestFactoryInterface::class);
         $streamFactory = $this->createMock(StreamFactoryInterface::class);
 
-        $uriFactory->expects(self::any())
+        $uriFactory->expects($this->any())
             ->method('createUri')
             ->willReturn($this->createMock(UriInterface::class));
 
         $request = $this->createMock(RequestInterface::class);
-        $request->expects(self::any())->method('withHeader')->willReturn($request);
-        $request->expects(self::any())->method('getHeader')->willReturn(['multipart/form-data; boundary="fooBar"']);
+        $request->expects($this->any())->method('withHeader')->willReturn($request);
+        $request->expects($this->any())->method('getHeader')->willReturn(['multipart/form-data; boundary="fooBar"']);
 
-        $requestFactory->expects(self::any())
+        $requestFactory->expects($this->any())
             ->method('createRequest')
             ->willReturn($request);
 
         $stream = $this->createMock(StreamInterface::class);
-        $stream->expects(self::any())->method('getMetadata')->willReturn('foo');
+        $stream->expects($this->any())->method('getMetadata')->willReturn('foo');
 
-        $streamFactory->expects(self::any())
+        $streamFactory->expects($this->any())
             ->method('createStream')
             ->willReturn($stream);
 
-        $client->expects(self::any())
+        $client->expects($this->any())
             ->method('sendAsyncRequest')
             ->with($this->callback(function ($arg) {
                 return $arg instanceof RequestInterface;
@@ -93,8 +93,8 @@ class HttpPlugTest extends AbstractTransportTests
         ];
 
         $request = $this->createMock(RequestInterface::class);
-        $request->expects(self::any())->method('withHeader')->willReturn($request);
-        $request->expects(self::any())->method('getHeader')->willReturn(['multipart/form-data; boundary="fooBar"']);
+        $request->expects($this->any())->method('withHeader')->willReturn($request);
+        $request->expects($this->any())->method('getHeader')->willReturn(['multipart/form-data; boundary="fooBar"']);
 
         self::assertInstanceOf(
             StreamInterface::class,

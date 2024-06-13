@@ -72,10 +72,10 @@ abstract class AbstractCollectionTests extends TestCase
     {
         $collection = $this->buildCollection();
         $method1 = $this->createMock(MethodInterface::class);
-        $method1->expects(self::any())->method('getName')->willReturn('method1');
+        $method1->expects($this->any())->method('getName')->willReturn('method1');
         $collection->registerMethod($method1);
         $method2 = $this->createMock(MethodInterface::class);
-        $method2->expects(self::any())->method('getName')->willReturn('method2');
+        $method2->expects($this->any())->method('getName')->willReturn('method2');
         $collection->registerMethod($method2);
 
         self::assertEquals(
@@ -97,12 +97,12 @@ abstract class AbstractCollectionTests extends TestCase
     {
         $collection = $this->buildCollection();
         $method1 = $this->createMock(MethodInterface::class);
-        $method1->expects(self::any())->method('getName')->willReturn('method1');
-        $method1->expects(self::never())->method('async');
+        $method1->expects($this->any())->method('getName')->willReturn('method1');
+        $method1->expects($this->never())->method('async');
         $collection->registerMethod($method1);
         $method2 = $this->createMock(MethodInterface::class);
-        $method2->expects(self::any())->method('getName')->willReturn('method2');
-        $method2->expects(self::never())->method('async');
+        $method2->expects($this->any())->method('getName')->willReturn('method2');
+        $method2->expects($this->never())->method('async');
         $collection->registerMethod($method2);
 
         self::assertEquals('method1', $collection->method1->getName());
@@ -113,12 +113,12 @@ abstract class AbstractCollectionTests extends TestCase
     {
         $collection = $this->buildCollection();
         $method1 = $this->createMock(MethodInterface::class);
-        $method1->expects(self::any())->method('getName')->willReturn('method1');
-        $method1->expects(self::once())->method('async')->willReturn($method1);
+        $method1->expects($this->any())->method('getName')->willReturn('method1');
+        $method1->expects($this->once())->method('async')->willReturn($method1);
         $collection->registerMethod($method1);
         $method2 = $this->createMock(MethodInterface::class);
-        $method2->expects(self::any())->method('getName')->willReturn('method2');
-        $method2->expects(self::once())->method('async')->willReturn($method2);
+        $method2->expects($this->any())->method('getName')->willReturn('method2');
+        $method2->expects($this->once())->method('async')->willReturn($method2);
         $collection->registerMethod($method2);
 
         self::assertEquals('method1', $collection->async()->method1->getName());
@@ -139,7 +139,7 @@ abstract class AbstractCollectionTests extends TestCase
     {
         $collection = $this->buildCollection();
         $method1 = $this->createMock(MethodInterface::class);
-        $method1->expects(self::any())->method('getName')->willReturn('method1');
+        $method1->expects($this->any())->method('getName')->willReturn('method1');
         $collection->registerMethod($method1);
 
         self::assertTrue(isset($collection->method1));
@@ -150,19 +150,19 @@ abstract class AbstractCollectionTests extends TestCase
     {
         $collection = $this->buildCollection();
         $method1 = $this->createMock(MethodInterface::class);
-        $method1->expects(self::any())
+        $method1->expects($this->any())
             ->method('__invoke')
             ->with([])
             ->willReturn($this->createMock(ResultInterface::class));
-        $method1->expects(self::any())->method('getName')->willReturn('method1');
+        $method1->expects($this->any())->method('getName')->willReturn('method1');
         $collection->registerMethod($method1);
 
         $method2 = $this->createMock(MethodInterface::class);
-        $method2->expects(self::any())
+        $method2->expects($this->any())
             ->method('__invoke')
             ->with(['foo'=>'bar'])
             ->willReturn($this->createMock(ResultInterface::class));
-        $method2->expects(self::any())->method('getName')->willReturn('method2');
+        $method2->expects($this->any())->method('getName')->willReturn('method2');
         $collection->registerMethod($method2);
 
         self::assertInstanceOf(ResultInterface::class, $collection->method1());

@@ -42,10 +42,10 @@ class Guzzle6PromiseTest extends AbstractPromiseTests
     public function buildPromise(): \Teknoo\Sellsy\Transport\PromiseInterface
     {
         $promise = $this->createMock(GuzzlePromiseInterface::class);
-        $promise->expects(self::any())->method('getState')->willReturn(GuzzlePromiseInterface::PENDING);
-        $promise->expects(self::any())->method('then')->willReturn($this->createMock(GuzzlePromiseInterface::class));
-        $promise->expects(self::any())->method('otherwise')->willReturn($this->createMock(GuzzlePromiseInterface::class));
-        $promise->expects(self::any())->method('wait')->willReturn('foo');
+        $promise->expects($this->any())->method('getState')->willReturn(GuzzlePromiseInterface::PENDING);
+        $promise->expects($this->any())->method('then')->willReturn($this->createMock(GuzzlePromiseInterface::class));
+        $promise->expects($this->any())->method('otherwise')->willReturn($this->createMock(GuzzlePromiseInterface::class));
+        $promise->expects($this->any())->method('wait')->willReturn('foo');
 
         return new Guzzle6Promise($promise);
     }
@@ -53,13 +53,13 @@ class Guzzle6PromiseTest extends AbstractPromiseTests
     public function buildFulfilledPromise(): \Teknoo\Sellsy\Transport\PromiseInterface
     {
         $promise = $this->createMock(GuzzlePromiseInterface::class);
-        $promise->expects(self::any())->method('getState')->willReturn(GuzzlePromiseInterface::FULFILLED);
-        $promise->expects(self::any())->method('then')->willReturn($this->createMock(GuzzlePromiseInterface::class));
-        $promise->expects(self::any())->method('otherwise')->willReturn($this->createMock(GuzzlePromiseInterface::class));
-        $promise->expects(self::any())->method('resolve')->willThrowException(new \RuntimeException('foo'));
-        $promise->expects(self::any())->method('reject')->willThrowException(new \RuntimeException('foo'));
-        $promise->expects(self::any())->method('cancel')->willThrowException(new \RuntimeException('foo'));
-        $promise->expects(self::any())->method('wait')->willReturn('foo');
+        $promise->expects($this->any())->method('getState')->willReturn(GuzzlePromiseInterface::FULFILLED);
+        $promise->expects($this->any())->method('then')->willReturn($this->createMock(GuzzlePromiseInterface::class));
+        $promise->expects($this->any())->method('otherwise')->willReturn($this->createMock(GuzzlePromiseInterface::class));
+        $promise->expects($this->any())->method('resolve')->willThrowException(new \RuntimeException('foo'));
+        $promise->expects($this->any())->method('reject')->willThrowException(new \RuntimeException('foo'));
+        $promise->expects($this->any())->method('cancel')->willThrowException(new \RuntimeException('foo'));
+        $promise->expects($this->any())->method('wait')->willReturn('foo');
 
         return new Guzzle6Promise($promise);
     }
@@ -67,13 +67,13 @@ class Guzzle6PromiseTest extends AbstractPromiseTests
     public function buildRejectedPromise(): \Teknoo\Sellsy\Transport\PromiseInterface
     {
         $promise = $this->createMock(GuzzlePromiseInterface::class);
-        $promise->expects(self::any())->method('getState')->willReturn(GuzzlePromiseInterface::REJECTED);
-        $promise->expects(self::any())->method('then')->willReturn($this->createMock(GuzzlePromiseInterface::class));
-        $promise->expects(self::any())->method('otherwise')->willReturn($this->createMock(GuzzlePromiseInterface::class));
-        $promise->expects(self::any())->method('resolve')->willThrowException(new \RuntimeException('foo'));
-        $promise->expects(self::any())->method('reject')->willThrowException(new \RuntimeException('foo'));
-        $promise->expects(self::any())->method('cancel')->willThrowException(new \RuntimeException('foo'));
-        $promise->expects(self::any())->method('wait')->willReturn('foo');
+        $promise->expects($this->any())->method('getState')->willReturn(GuzzlePromiseInterface::REJECTED);
+        $promise->expects($this->any())->method('then')->willReturn($this->createMock(GuzzlePromiseInterface::class));
+        $promise->expects($this->any())->method('otherwise')->willReturn($this->createMock(GuzzlePromiseInterface::class));
+        $promise->expects($this->any())->method('resolve')->willThrowException(new \RuntimeException('foo'));
+        $promise->expects($this->any())->method('reject')->willThrowException(new \RuntimeException('foo'));
+        $promise->expects($this->any())->method('cancel')->willThrowException(new \RuntimeException('foo'));
+        $promise->expects($this->any())->method('wait')->willReturn('foo');
 
         return new Guzzle6Promise($promise);
     }

@@ -43,10 +43,10 @@ class RateLimitTransportTest extends TestCase
     {
         $mock = $this->createMock(TransportInterface::class);
         $result = $this->createMock(UriInterface::class);
-        $mock->expects(self::once())
+        $mock->expects($this->once())
             ->method('createUri')
             ->with('uri')
-            ->will(self::returnValue($result));
+            ->willReturn($result);
 
         $transport = new RateLimitTransport($mock);
         $uri = $transport->createUri('uri');
@@ -57,10 +57,10 @@ class RateLimitTransportTest extends TestCase
     {
         $mock = $this->createMock(TransportInterface::class);
         $result = $this->createMock(RequestInterface::class);
-        $mock->expects(self::once())
+        $mock->expects($this->once())
             ->method('createRequest')
             ->with('method', 'uri')
-            ->will(self::returnValue($result));
+            ->willReturn($result);
 
         $transport = new RateLimitTransport($mock);
         $request = $transport->createRequest('method', 'uri');
@@ -72,10 +72,10 @@ class RateLimitTransportTest extends TestCase
         $mock = $this->createMock(TransportInterface::class);
         $result = $this->createMock(StreamInterface::class);
         $param = [];
-        $mock->expects(self::once())
+        $mock->expects($this->once())
             ->method('createStream')
             ->with($param)
-            ->will(self::returnValue($result));
+            ->willReturn($result);
 
         $transport = new RateLimitTransport($mock);
         $request = $transport->createStream($param);

@@ -72,8 +72,8 @@ abstract class AbstractMethodTests extends TestCase
         if (!$this->collection instanceof CollectionInterface) {
             $this->collection = $this->createMock(CollectionInterface::class);
 
-            $this->collection->expects(self::any())->method('getName')->willReturn('collectionName');
-            $this->collection->expects(self::any())->method('getClient')->willReturn($this->buildClient());
+            $this->collection->expects($this->any())->method('getName')->willReturn('collectionName');
+            $this->collection->expects($this->any())->method('getClient')->willReturn($this->buildClient());
         }
 
         return $this->collection;
@@ -110,11 +110,11 @@ abstract class AbstractMethodTests extends TestCase
         $response = $this->createMock(ResultInterface::class);
 
         $this->buildClient()
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('promise');
 
         $this->buildClient()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('run')
             ->with($method, ['foo' => 'bar'])
             ->willReturn($response);
@@ -132,11 +132,11 @@ abstract class AbstractMethodTests extends TestCase
         $promise = $this->createMock(PromiseInterface::class);
 
         $this->buildClient()
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('run');
 
         $this->buildClient()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('promise')
             ->with($method, ['foo' => 'bar'])
             ->willReturn($promise);

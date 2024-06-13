@@ -46,10 +46,10 @@ class CustomErrorExceptionTest extends AbstractExceptionTests
         $more = null
     ): ErrorException {
         $result = $this->createMock(ResultInterface::class);
-        $result->expects(self::any())->method('getErrorMessage')->willReturn($message);
-        $result->expects(self::any())->method('getErrorCode')->willReturn($codeError);
-        $result->expects(self::any())->method('__isset')->willReturn(null !== $more);
-        $result->expects(self::any())->method('__get')->willReturn($more);
+        $result->expects($this->any())->method('getErrorMessage')->willReturn($message);
+        $result->expects($this->any())->method('getErrorCode')->willReturn($codeError);
+        $result->expects($this->any())->method('__isset')->willReturn(null !== $more);
+        $result->expects($this->any())->method('__get')->willReturn($more);
 
         return new CustomErrorException($result, $previous);
     }

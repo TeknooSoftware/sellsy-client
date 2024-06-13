@@ -122,8 +122,8 @@ abstract class AbstractClientTests extends TestCase
         if (!$this->transport instanceof TransportInterface) {
             $this->transport = $this->createMock(TransportInterface::class);
 
-            $this->transport->expects(self::any())->method('createUri')->willReturn($this->buildUri());
-            $this->transport->expects(self::any())->method('createRequest')->willReturn($this->buildRequest());
+            $this->transport->expects($this->any())->method('createUri')->willReturn($this->buildUri());
+            $this->transport->expects($this->any())->method('createRequest')->willReturn($this->buildRequest());
         }
 
         return $this->transport;
@@ -150,37 +150,37 @@ abstract class AbstractClientTests extends TestCase
         $uri = $this->uriString;
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withScheme')
             ->with('https')
             ->willReturnSelf();
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withHost')
             ->with('foo.bar')
             ->willReturnSelf();
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withPort')
             ->with('8080')
             ->willReturnSelf();
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withPath')
             ->with('/path/api')
             ->willReturnSelf();
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withQuery')
             ->with('method=toCall')
             ->willReturnSelf();
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withFragment')
             ->with('archor=true')
             ->willReturnSelf();
@@ -197,13 +197,13 @@ abstract class AbstractClientTests extends TestCase
         ];
 
         $request = $this->buildRequest();
-        $request->expects(self::atLeastOnce())
+        $request->expects($this->atLeastOnce())
             ->method('withHeader')
             ->with('Authorization')
             ->willReturnSelf();
 
         $this->buildTransport()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('createStream')
             ->with(
                 [
@@ -219,27 +219,27 @@ abstract class AbstractClientTests extends TestCase
             ->willReturn($this->buildStream());
 
         $this->buildRequest()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withBody')
             ->with($this->buildStream())
             ->willReturnSelf();
 
         $stream = $this->createMock(StreamInterface::class);
-        $stream->expects(self::any())->method('getContents')->willReturn(\json_encode(['status' => 'success', 'response' => ['foo' => 'bar']]));
+        $stream->expects($this->any())->method('getContents')->willReturn(\json_encode(['status' => 'success', 'response' => ['foo' => 'bar']]));
 
         $response = $this->createMock(ResponseInterface::class);
-        $response->expects(self::any())->method('getBody')->willReturn($stream);
+        $response->expects($this->any())->method('getBody')->willReturn($stream);
 
         $cb = null;
         $promise = $this->createMock(PromiseInterface::class);
-        $promise->expects(self::any())->method('then')->willReturnCallback(
+        $promise->expects($this->any())->method('then')->willReturnCallback(
             function (callable $callback) use (&$cb, $promise) {
                 $cb = $callback;
                 return $promise;
             }
         );
 
-        $promise->expects(self::any())->method('wait')->willReturnCallback(
+        $promise->expects($this->any())->method('wait')->willReturnCallback(
             function () use (&$cb, $response) {
                 if (!\is_callable($cb)) {
                     return null;
@@ -250,7 +250,7 @@ abstract class AbstractClientTests extends TestCase
         );
 
         $this->buildTransport()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('asyncExecute')
             ->with($this->buildRequest())
             ->willReturn($promise);
@@ -261,7 +261,7 @@ abstract class AbstractClientTests extends TestCase
     public function testRun()
     {
         $method = $this->createMock(MethodInterface::class);
-        $method->expects(self::any())
+        $method->expects($this->any())
             ->method('__toString')
             ->willReturn('collection.method');
 
@@ -274,7 +274,7 @@ abstract class AbstractClientTests extends TestCase
     public function testPromise()
     {
         $method = $this->createMock(MethodInterface::class);
-        $method->expects(self::any())
+        $method->expects($this->any())
             ->method('__toString')
             ->willReturn('collection.method');
 
@@ -291,37 +291,37 @@ abstract class AbstractClientTests extends TestCase
         $uri = $this->uriString;
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withScheme')
             ->with('https')
             ->willReturnSelf();
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withHost')
             ->with('foo.bar')
             ->willReturnSelf();
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withPort')
             ->with('8080')
             ->willReturnSelf();
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withPath')
             ->with('/path/api')
             ->willReturnSelf();
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withQuery')
             ->with('method=toCall')
             ->willReturnSelf();
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withFragment')
             ->with('archor=true')
             ->willReturnSelf();
@@ -338,13 +338,13 @@ abstract class AbstractClientTests extends TestCase
         ];
 
         $this->buildRequest()
-            ->expects(self::atLeastOnce())
+            ->expects($this->atLeastOnce())
             ->method('withHeader')
             ->with('Authorization')
             ->willReturnSelf();
 
         $this->buildTransport()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('createStream')
             ->with(
                 [
@@ -360,27 +360,27 @@ abstract class AbstractClientTests extends TestCase
             ->willReturn($this->buildStream());
 
         $this->buildRequest()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withBody')
             ->with($this->buildStream())
             ->willReturnSelf();
 
         $stream = $this->createMock(StreamInterface::class);
-        $stream->expects(self::any())->method('getContents')->willReturn(\json_encode(['status' => 'error', 'error' => 'fooBar']));
+        $stream->expects($this->any())->method('getContents')->willReturn(\json_encode(['status' => 'error', 'error' => 'fooBar']));
 
         $response = $this->createMock(ResponseInterface::class);
-        $response->expects(self::any())->method('getBody')->willReturn($stream);
+        $response->expects($this->any())->method('getBody')->willReturn($stream);
 
         $cb = null;
         $promise = $this->createMock(PromiseInterface::class);
-        $promise->expects(self::any())->method('then')->willReturnCallback(
+        $promise->expects($this->any())->method('then')->willReturnCallback(
             function (callable $callback) use (&$cb, $promise) {
                 $cb = $callback;
                 return $promise;
             }
         );
 
-        $promise->expects(self::any())->method('wait')->willReturnCallback(
+        $promise->expects($this->any())->method('wait')->willReturnCallback(
             function () use (&$cb, $response) {
                 if (!\is_callable($cb)) {
                     return null;
@@ -391,7 +391,7 @@ abstract class AbstractClientTests extends TestCase
         );
 
         $this->buildTransport()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('asyncExecute')
             ->with($this->buildRequest())
             ->willReturn($promise);
@@ -403,7 +403,7 @@ abstract class AbstractClientTests extends TestCase
     {
         $this->expectException(ErrorException::class);
         $method = $this->createMock(MethodInterface::class);
-        $method->expects(self::any())
+        $method->expects($this->any())
             ->method('__toString')
             ->willReturn('collection.method');
 
@@ -415,7 +415,7 @@ abstract class AbstractClientTests extends TestCase
     {
         $this->expectException(ErrorException::class);
         $method = $this->createMock(MethodInterface::class);
-        $method->expects(self::any())
+        $method->expects($this->any())
             ->method('__toString')
             ->willReturn('collection.method');
 
@@ -429,37 +429,37 @@ abstract class AbstractClientTests extends TestCase
         $uri = $this->uriString;
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withScheme')
             ->with('https')
             ->willReturnSelf();
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withHost')
             ->with('foo.bar')
             ->willReturnSelf();
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withPort')
             ->with('8080')
             ->willReturnSelf();
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withPath')
             ->with('/path/api')
             ->willReturnSelf();
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withQuery')
             ->with('method=toCall')
             ->willReturnSelf();
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withFragment')
             ->with('archor=true')
             ->willReturnSelf();
@@ -476,13 +476,13 @@ abstract class AbstractClientTests extends TestCase
         ];
 
         $this->buildRequest()
-            ->expects(self::atLeastOnce())
+            ->expects($this->atLeastOnce())
             ->method('withHeader')
             ->with('Authorization')
             ->willReturnSelf();
 
         $this->buildTransport()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('createStream')
             ->with(
                 [
@@ -498,13 +498,13 @@ abstract class AbstractClientTests extends TestCase
             ->willReturn($this->buildStream());
 
         $this->buildRequest()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withBody')
             ->with($this->buildStream())
             ->willReturnSelf();
 
         $stream = $this->createMock(StreamInterface::class);
-        $stream->expects(self::any())->method('getContents')->willReturn(\json_encode(
+        $stream->expects($this->any())->method('getContents')->willReturn(\json_encode(
             [
                 'status' => 'error',
                 'error' => [
@@ -515,18 +515,18 @@ abstract class AbstractClientTests extends TestCase
         ));
 
         $response = $this->createMock(ResponseInterface::class);
-        $response->expects(self::any())->method('getBody')->willReturn($stream);
+        $response->expects($this->any())->method('getBody')->willReturn($stream);
 
         $cb = null;
         $promise = $this->createMock(PromiseInterface::class);
-        $promise->expects(self::any())->method('then')->willReturnCallback(
+        $promise->expects($this->any())->method('then')->willReturnCallback(
             function (callable $callback) use (&$cb, $promise) {
                 $cb = $callback;
                 return $promise;
             }
         );
 
-        $promise->expects(self::any())->method('wait')->willReturnCallback(
+        $promise->expects($this->any())->method('wait')->willReturnCallback(
             function () use (&$cb, $response) {
                 if (!\is_callable($cb)) {
                     return null;
@@ -537,7 +537,7 @@ abstract class AbstractClientTests extends TestCase
         );
 
         $this->buildTransport()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('asyncExecute')
             ->with($this->buildRequest())
             ->willReturn($promise);
@@ -550,7 +550,7 @@ abstract class AbstractClientTests extends TestCase
         $this->expectException(UnknownException::class);
 
         $method = $this->createMock(MethodInterface::class);
-        $method->expects(self::any())
+        $method->expects($this->any())
             ->method('__toString')
             ->willReturn('collection.method');
 
@@ -564,7 +564,7 @@ abstract class AbstractClientTests extends TestCase
         $this->expectException(UnknownException::class);
 
         $method = $this->createMock(MethodInterface::class);
-        $method->expects(self::any())
+        $method->expects($this->any())
             ->method('__toString')
             ->willReturn('collection.method');
 
@@ -579,37 +579,37 @@ abstract class AbstractClientTests extends TestCase
         $uri = $this->uriString;
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withScheme')
             ->with('https')
             ->willReturnSelf();
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withHost')
             ->with('foo.bar')
             ->willReturnSelf();
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withPort')
             ->with('8080')
             ->willReturnSelf();
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withPath')
             ->with('/path/api')
             ->willReturnSelf();
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withQuery')
             ->with('method=toCall')
             ->willReturnSelf();
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withFragment')
             ->with('archor=true')
             ->willReturnSelf();
@@ -626,13 +626,13 @@ abstract class AbstractClientTests extends TestCase
         ];
 
         $this->buildRequest()
-            ->expects(self::atLeastOnce())
+            ->expects($this->atLeastOnce())
             ->method('withHeader')
             ->with('Authorization')
             ->willReturnSelf();
 
         $this->buildTransport()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('createStream')
             ->with(
                 [
@@ -648,13 +648,13 @@ abstract class AbstractClientTests extends TestCase
             ->willReturn($this->buildStream());
 
         $this->buildRequest()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withBody')
             ->with($this->buildStream())
             ->willReturnSelf();
 
         $this->buildTransport()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('asyncExecute')
             ->with($this->buildRequest())
             ->willThrowException(new \Exception('fooBar'));
@@ -667,7 +667,7 @@ abstract class AbstractClientTests extends TestCase
         $this->expectException(RequestFailureException::class);
 
         $method = $this->createMock(MethodInterface::class);
-        $method->expects(self::any())
+        $method->expects($this->any())
             ->method('__toString')
             ->willReturn('collection.method');
 
@@ -680,7 +680,7 @@ abstract class AbstractClientTests extends TestCase
         $this->expectException(RequestFailureException::class);
 
         $method = $this->createMock(MethodInterface::class);
-        $method->expects(self::any())
+        $method->expects($this->any())
             ->method('__toString')
             ->willReturn('collection.method');
 
@@ -700,37 +700,37 @@ abstract class AbstractClientTests extends TestCase
         $uri = $this->uriString;
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withScheme')
             ->with('https')
             ->willReturnSelf();
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withHost')
             ->with('foo.bar')
             ->willReturnSelf();
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withPort')
             ->with('8080')
             ->willReturnSelf();
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withPath')
             ->with('/path/api')
             ->willReturnSelf();
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withQuery')
             ->with('method=toCall')
             ->willReturnSelf();
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withFragment')
             ->with('archor=true')
             ->willReturnSelf();
@@ -747,13 +747,13 @@ abstract class AbstractClientTests extends TestCase
         ];
 
         $this->buildRequest()
-            ->expects(self::atLeastOnce())
+            ->expects($this->atLeastOnce())
             ->method('withHeader')
             ->with('Authorization')
             ->willReturnSelf();
 
         $this->buildTransport()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('createStream')
             ->with(
                 [
@@ -769,24 +769,24 @@ abstract class AbstractClientTests extends TestCase
             ->willReturn($this->buildStream());
 
         $this->buildRequest()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withBody')
             ->with($this->buildStream())
             ->willReturnSelf();
 
         $response = $this->createMock(ResponseInterface::class);
-        $response->expects(self::any())->method('getBody')->willReturn(null);
+        $response->expects($this->any())->method('getBody')->willReturn(null);
 
         $cb = null;
         $promise = $this->createMock(PromiseInterface::class);
-        $promise->expects(self::any())->method('then')->willReturnCallback(
+        $promise->expects($this->any())->method('then')->willReturnCallback(
             function (callable $callback) use (&$cb, $promise) {
                 $cb = $callback;
                 return $promise;
             }
         );
 
-        $promise->expects(self::any())->method('wait')->willReturnCallback(
+        $promise->expects($this->any())->method('wait')->willReturnCallback(
             function () use (&$cb, $response) {
                 if (!\is_callable($cb)) {
                     return null;
@@ -797,7 +797,7 @@ abstract class AbstractClientTests extends TestCase
         );
 
         $this->buildTransport()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('asyncExecute')
             ->with($this->buildRequest())
             ->willReturn($promise);
@@ -810,7 +810,7 @@ abstract class AbstractClientTests extends TestCase
         $this->expectException(RequestFailureException::class);
 
         $method = $this->createMock(MethodInterface::class);
-        $method->expects(self::any())
+        $method->expects($this->any())
             ->method('__toString')
             ->willReturn('collection.method');
 
@@ -830,7 +830,7 @@ abstract class AbstractClientTests extends TestCase
         $this->expectException(RequestFailureException::class);
 
         $method = $this->createMock(MethodInterface::class);
-        $method->expects(self::any())
+        $method->expects($this->any())
             ->method('__toString')
             ->willReturn('collection.method');
 
@@ -845,37 +845,37 @@ abstract class AbstractClientTests extends TestCase
         $uri = $this->uriString;
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withScheme')
             ->with('https')
             ->willReturnSelf();
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withHost')
             ->with('foo.bar')
             ->willReturnSelf();
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withPort')
             ->with('8080')
             ->willReturnSelf();
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withPath')
             ->with('/path/api')
             ->willReturnSelf();
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withQuery')
             ->with('method=toCall')
             ->willReturnSelf();
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withFragment')
             ->with('archor=true')
             ->willReturnSelf();
@@ -892,13 +892,13 @@ abstract class AbstractClientTests extends TestCase
         ];
 
         $this->buildRequest()
-            ->expects(self::atLeastOnce())
+            ->expects($this->atLeastOnce())
             ->method('withHeader')
             ->with('Authorization')
             ->willReturnSelf();
 
         $this->buildTransport()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('createStream')
             ->with(
                 [
@@ -914,27 +914,27 @@ abstract class AbstractClientTests extends TestCase
             ->willReturn($this->buildStream());
 
         $this->buildRequest()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withBody')
             ->with($this->buildStream())
             ->willReturnSelf();
 
         $stream = $this->createMock(StreamInterface::class);
-        $stream->expects(self::any())->method('getContents')->willReturn('oauth_problem=true');
+        $stream->expects($this->any())->method('getContents')->willReturn('oauth_problem=true');
 
         $response = $this->createMock(ResponseInterface::class);
-        $response->expects(self::any())->method('getBody')->willReturn($stream);
+        $response->expects($this->any())->method('getBody')->willReturn($stream);
 
         $cb = null;
         $promise = $this->createMock(PromiseInterface::class);
-        $promise->expects(self::any())->method('then')->willReturnCallback(
+        $promise->expects($this->any())->method('then')->willReturnCallback(
             function (callable $callback) use (&$cb, $promise) {
                 $cb = $callback;
                 return $promise;
             }
         );
 
-        $promise->expects(self::any())->method('wait')->willReturnCallback(
+        $promise->expects($this->any())->method('wait')->willReturnCallback(
             function () use (&$cb, $response) {
                 if (!\is_callable($cb)) {
                     return null;
@@ -945,7 +945,7 @@ abstract class AbstractClientTests extends TestCase
         );
 
         $this->buildTransport()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('asyncExecute')
             ->with($this->buildRequest())
             ->willReturn($promise);
@@ -958,7 +958,7 @@ abstract class AbstractClientTests extends TestCase
         $this->expectException(RequestFailureException::class);
 
         $method = $this->createMock(MethodInterface::class);
-        $method->expects(self::any())
+        $method->expects($this->any())
             ->method('__toString')
             ->willReturn('collection.method');
 
@@ -970,7 +970,7 @@ abstract class AbstractClientTests extends TestCase
     {
         $this->expectException(RequestFailureException::class);
         $method = $this->createMock(MethodInterface::class);
-        $method->expects(self::any())
+        $method->expects($this->any())
             ->method('__toString')
             ->willReturn('collection.method');
 
@@ -985,37 +985,37 @@ abstract class AbstractClientTests extends TestCase
         $uri = $this->uriString;
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withScheme')
             ->with('https')
             ->willReturnSelf();
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withHost')
             ->with('foo.bar')
             ->willReturnSelf();
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withPort')
             ->with('8080')
             ->willReturnSelf();
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withPath')
             ->with('/path/api')
             ->willReturnSelf();
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withQuery')
             ->with('method=toCall')
             ->willReturnSelf();
 
         $this->buildUri()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withFragment')
             ->with('archor=true')
             ->willReturnSelf();
@@ -1032,13 +1032,13 @@ abstract class AbstractClientTests extends TestCase
         ];
 
         $this->buildRequest()
-            ->expects(self::atLeastOnce())
+            ->expects($this->atLeastOnce())
             ->method('withHeader')
             ->with('Authorization')
             ->willReturnSelf();
 
         $this->buildTransport()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('createStream')
             ->with(
                 [
@@ -1054,27 +1054,27 @@ abstract class AbstractClientTests extends TestCase
             ->willReturn($this->buildStream());
 
         $this->buildRequest()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('withBody')
             ->with($this->buildStream())
             ->willReturnSelf();
 
         $stream = $this->createMock(StreamInterface::class);
-        $stream->expects(self::any())->method('getContents')->willReturn('oauth_problem=true');
+        $stream->expects($this->any())->method('getContents')->willReturn('oauth_problem=true');
 
         $response = $this->createMock(ResponseInterface::class);
-        $response->expects(self::any())->method('getBody')->willReturn($stream);
+        $response->expects($this->any())->method('getBody')->willReturn($stream);
 
         $cb = null;
         $promise = $this->createMock(PromiseInterface::class);
-        $promise->expects(self::any())->method('then')->willReturnCallback(
+        $promise->expects($this->any())->method('then')->willReturnCallback(
             function (callable $callback, $errorHandler) use (&$cb, $promise) {
                 $cb = $errorHandler;
                 return $promise;
             }
         );
 
-        $promise->expects(self::any())->method('wait')->willReturnCallback(
+        $promise->expects($this->any())->method('wait')->willReturnCallback(
             function () use (&$cb, $response) {
                 if (!\is_callable($cb)) {
                     return null;
@@ -1085,7 +1085,7 @@ abstract class AbstractClientTests extends TestCase
         );
 
         $this->buildTransport()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('asyncExecute')
             ->with($this->buildRequest())
             ->willReturn($promise);
@@ -1098,7 +1098,7 @@ abstract class AbstractClientTests extends TestCase
         $this->expectException(RequestFailureException::class);
 
         $method = $this->createMock(MethodInterface::class);
-        $method->expects(self::any())
+        $method->expects($this->any())
             ->method('__toString')
             ->willReturn('collection.method');
 
@@ -1110,7 +1110,7 @@ abstract class AbstractClientTests extends TestCase
     {
         $this->expectException(RequestFailureException::class);
         $method = $this->createMock(MethodInterface::class);
-        $method->expects(self::any())
+        $method->expects($this->any())
             ->method('__toString')
             ->willReturn('collection.method');
 

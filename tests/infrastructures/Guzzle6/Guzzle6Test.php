@@ -48,7 +48,7 @@ class Guzzle6Test extends AbstractTransportTests
     public function buildTransport(): TransportInterface
     {
         $guzzle = $this->createMock(Client::class);
-        $guzzle->expects(self::any())
+        $guzzle->expects($this->any())
             ->method('sendAsync')
             ->with($this->callback(function ($arg) {
                 return $arg instanceof RequestInterface;

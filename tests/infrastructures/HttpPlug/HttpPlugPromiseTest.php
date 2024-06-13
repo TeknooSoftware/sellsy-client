@@ -42,9 +42,9 @@ class HttpPlugPromiseTest extends AbstractPromiseTests
     public function buildPromise(): \Teknoo\Sellsy\Transport\PromiseInterface
     {
         $promise = $this->createMock(HttpPLugPromiseInterface::class);
-        $promise->expects(self::any())->method('getState')->willReturn(HttpPLugPromiseInterface::PENDING);
-        $promise->expects(self::any())->method('then')->willReturn($this->createMock(HttpPLugPromiseInterface::class));
-        $promise->expects(self::any())->method('wait')->willReturn('foo');
+        $promise->expects($this->any())->method('getState')->willReturn(HttpPLugPromiseInterface::PENDING);
+        $promise->expects($this->any())->method('then')->willReturn($this->createMock(HttpPLugPromiseInterface::class));
+        $promise->expects($this->any())->method('wait')->willReturn('foo');
 
         return new HttpPlugPromise($promise);
     }
@@ -52,9 +52,9 @@ class HttpPlugPromiseTest extends AbstractPromiseTests
     public function buildFulfilledPromise(): \Teknoo\Sellsy\Transport\PromiseInterface
     {
         $promise = $this->createMock(HttpPLugPromiseInterface::class);
-        $promise->expects(self::any())->method('getState')->willReturn(HttpPLugPromiseInterface::FULFILLED);
-        $promise->expects(self::any())->method('then')->willReturn($this->createMock(HttpPLugPromiseInterface::class));
-        $promise->expects(self::any())->method('wait')->willReturn('foo');
+        $promise->expects($this->any())->method('getState')->willReturn(HttpPLugPromiseInterface::FULFILLED);
+        $promise->expects($this->any())->method('then')->willReturn($this->createMock(HttpPLugPromiseInterface::class));
+        $promise->expects($this->any())->method('wait')->willReturn('foo');
 
         return new HttpPlugPromise($promise);
     }
@@ -62,9 +62,9 @@ class HttpPlugPromiseTest extends AbstractPromiseTests
     public function buildRejectedPromise(): \Teknoo\Sellsy\Transport\PromiseInterface
     {
         $promise = $this->createMock(HttpPLugPromiseInterface::class);
-        $promise->expects(self::any())->method('getState')->willReturn(HttpPLugPromiseInterface::REJECTED);
-        $promise->expects(self::any())->method('then')->willReturn($this->createMock(HttpPLugPromiseInterface::class));
-        $promise->expects(self::any())->method('wait')->willReturn('foo');
+        $promise->expects($this->any())->method('getState')->willReturn(HttpPLugPromiseInterface::REJECTED);
+        $promise->expects($this->any())->method('then')->willReturn($this->createMock(HttpPLugPromiseInterface::class));
+        $promise->expects($this->any())->method('wait')->willReturn('foo');
 
         return new HttpPlugPromise($promise);
     }
