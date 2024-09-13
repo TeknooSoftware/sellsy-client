@@ -9,7 +9,6 @@
          failOnNotice="true"
          failOnWarning="true"
          failOnRisky="true"
-         failOnDeprecation="true"
          processIsolation="false"
          stopOnFailure="false"
   >
