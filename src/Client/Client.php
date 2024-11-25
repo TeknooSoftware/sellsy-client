@@ -139,7 +139,7 @@ class Client implements ClientInterface
         string $userSecret,
         string $consumerKey,
         string $consumerSecret,
-        DateTimeInterface $now = null
+        ?DateTimeInterface $now = null
     ) {
         $this->transport = $transport;
         $this->apiUrl = parse_url($apiUrl);
