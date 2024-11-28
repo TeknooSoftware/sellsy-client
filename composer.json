@@ -3,7 +3,7 @@
     "type": "library",
     "description": "PHP library to connect your applications to your Sellsy account account using the Sellsy API and build your websites and your platforms on the Sellsy technology.",
     "keywords": ["sellsy", "client", "api", "library"],
-    "homepage": "http://teknoo.software/sellsy-client",
+    "homepage": "https://teknoo.software/libraries/sellsy",
     "license": ["MIT"],
     "authors": [
         {
