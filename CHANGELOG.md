@@ -1,5 +1,14 @@
 # Teknoo Software - Sellsy client library - Change Log
 
+## [3.0.29] - 2025-02-07
+### Stable Release
+- Update dev lib requirements
+  - Require Symfony libraries 6.4 or 7.2
+  - Update to PHPUnit 12
+- Drop support of PHP 8.2
+  - The library stay usable with PHP 8.2, without any waranties and tests
+  - In the next major release, Support of PHP 8.2 will be dropped
+
 ## [3.0.28] - 2024-11-25
 ### Stable Release
 - Fix deprecation with PHP 8.4
