@@ -36,7 +36,6 @@ test:8.3-upper:
 
 test:8.4-upper:
   extends: .abstract_tests
-  allow_failure: true
   variables:
     PHP_VERSION: '8.4'
   script:
