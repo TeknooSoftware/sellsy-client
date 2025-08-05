@@ -4,7 +4,7 @@
     "description": "PHP library to connect your applications to your Sellsy account account using the Sellsy API and build your websites and your platforms on the Sellsy technology.",
     "keywords": ["sellsy", "client", "api", "library"],
     "homepage": "https://teknoo.software/libraries/sellsy",
-    "license": ["MIT"],
+    "license": ["BSD-3-Clause"],
     "authors": [
         {
             "name": "Richard Déloge",
@@ -47,7 +47,7 @@
         "roave/security-advisories": "dev-latest",
         "phpunit/phpunit": "^10.5.10||^12",
         "squizlabs/php_codesniffer": "^3.11.3",
-        "phpstan/phpstan": "^1.12.6",
+        "phpstan/phpstan": "^2.1.22",
         "symfony/property-access": "^6.4||^7.2",
         "guzzlehttp/guzzle":"^6.0||^7.9.2",
         "guzzlehttp/psr7":"^1.8||^2.7",

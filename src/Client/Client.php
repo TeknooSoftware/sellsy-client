@@ -5,7 +5,7 @@
  *
  * LICENSE
  *
- * This source file is subject to the MIT license
+ * This source file is subject to the 3-Clause BSD license
  * it is available in LICENSE file at the root of this package
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
@@ -17,7 +17,7 @@
  *
  * @link        https://teknoo.software/libraries/sellsy Project website
  *
- * @license     https://teknoo.software/license/mit         MIT License
+ * @license     http://teknoo.software/license/bsd-3         3-Clause BSD License
  * @author      Richard Déloge <richard@teknoo.software>
  */
 
@@ -72,7 +72,7 @@ use function strpos;
  *
  * @copyright   Copyright (c) EIRL Richard Déloge (https://deloge.io - richard@deloge.io)
  * @copyright   Copyright (c) SASU Teknoo Software (https://teknoo.software - contact@teknoo.software)
- * @license     https://teknoo.software/license/mit         MIT License
+ * @license     http://teknoo.software/license/bsd-3         3-Clause BSD License
  * @author      Richard Déloge <richard@teknoo.software>
  */
 class Client implements ClientInterface
@@ -239,7 +239,7 @@ class Client implements ClientInterface
 
     /**
      * To register method's argument in the request for the Sellsy API.
-     * @param array<string, string> $requestSettings
+     * @param array<string, int|string> $requestSettings
      **/
     private function setBodyRequest(RequestInterface $request, array &$requestSettings): RequestInterface
     {
@@ -290,9 +290,6 @@ class Client implements ClientInterface
     private function parseResponse(ResponseInterface $response): ResultInterface
     {
         $body = $response->getBody();
-        if (!$body instanceof StreamInterface) {
-            throw new RequestFailureException('Bad body response', 500); // @codeCoverageIgnore
-        }
 
         //OAuth issue, throw an exception
         $result = (string) $body->getContents();
@@ -333,7 +330,6 @@ class Client implements ClientInterface
      * {@inheritdoc}
      * @param array<string, mixed> $params
      * @throws RequestFailureException
-     * @throws ErrorException
      */
     public function promise(MethodInterface $method, array $params = []): PromiseInterface
     {
