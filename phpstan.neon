@@ -1,9 +1,8 @@
 parameters:
-    reportUnmatchedIgnoredErrors: false
     ignoreErrors:
         -
-            message: '#more#'
-            path: src/Client/Exception/
+            message: '#will always evaluate to true#'
+            path: src/Client/Client.php
         - '#Property [a-zA-Z0-9\\_]+::\$apiUrl \(array<string, string>\) does not accept array<string, int\|string>\|false.#'
         - '#mixed#'
         - '#^Offset#'
