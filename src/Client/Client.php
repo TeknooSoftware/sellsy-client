@@ -290,6 +290,9 @@ class Client implements ClientInterface
     private function parseResponse(ResponseInterface $response): ResultInterface
     {
         $body = $response->getBody();
+        if (!$body instanceof StreamInterface) {
+            throw new RequestFailureException('Bad body response', 500); // @codeCoverageIgnore
+        }
 
         //OAuth issue, throw an exception
         $result = (string) $body->getContents();
