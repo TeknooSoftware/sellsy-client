@@ -1,4 +1,9 @@
 parameters:
+    level: max
+    paths:
+        - src/
+        - infrastructures/
+        - definitions/
     ignoreErrors:
         -
             message: '#will always evaluate to true#'

@@ -28,7 +28,7 @@ lint:
 	find ./infrastructures ./src ./definitions ./tools  -name "*.php" -exec ${PHP} -l {} \; | grep "Parse error" > /dev/null && exit 1 || exit 0
 
 phpstan:
-	${PHP} -d memory_limit=512M vendor/bin/phpstan analyse src infrastructures definitions --level max
+	${PHP} -d memory_limit=512M vendor/bin/phpstan analyse
 
 phpcs:
 	${PHP} vendor/bin/phpcs --standard=PSR12 --extensions=php src/ infrastructures/ definitions/ tools/
