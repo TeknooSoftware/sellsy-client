@@ -6,9 +6,11 @@
          bootstrap="tests/bootstrap.php"
          cacheDirectory=".phpunit.cache"
          colors="true"
+         displayDetailsOnAllIssues="true"
+         displayDetailsOnTestsThatTriggerDeprecations="true"
          failOnNotice="true"
-         failOnWarning="true"
          failOnRisky="true"
+         failOnWarning="true"
          processIsolation="false"
          stopOnFailure="false"
   >
