@@ -6,40 +6,6 @@ before_script:
   script:
     - make test
 
-test:8.1-lower:
-  extends: .abstract_tests
-  variables:
-    PHP_VERSION: '8.1'
-    DEPENDENCIES: lowest
-
-test:8.1-upper:
-  extends: .abstract_tests
-  variables:
-    PHP_VERSION: '8.1'
-  script:
-    - make test
-    - make qa
-
-test:8.2-lower:
-  extends: .abstract_tests
-  variables:
-    PHP_VERSION: '8.2'
-    DEPENDENCIES: lowest
-
-test:8.2-upper:
-  extends: .abstract_tests
-  variables:
-    PHP_VERSION: '8.2'
-  script:
-    - make test
-    - make qa
-
-test:8.3-lower:
-  extends: .abstract_tests
-  variables:
-    PHP_VERSION: '8.3'
-    DEPENDENCIES: lowest
-
 test:8.4-lower:
   extends: .abstract_tests
   variables:
